@@ -289,7 +289,13 @@ public:
     const unsigned short getMaxCycleTime();
     void setMaxCycleTime(const unsigned short);
 
-    const unsigned shortgettAA();
+    const unsigned int getFrequency();
+    const unsigned int getMT();
+
+    void setCLSupportedDDR5(int cl, bool supported);
+    const bool getCLSupportedDDR5(int cl);
+
+    const unsigned gettAA();
     void settAA(const unsigned short);
     const unsigned short gettRCD();
     void settRCD(const unsigned short);
@@ -376,6 +382,8 @@ public:
 
     const unsigned short getCRC();
     void setCRC(const unsigned short);
+
+    const bool isXMPPresent();
 
     DDR5SPD(QByteArray);
 };

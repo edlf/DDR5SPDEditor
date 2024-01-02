@@ -29,7 +29,23 @@ void DDR5SPD::setMaxCycleTime(const unsigned short value) {
     utilities::Convert16bitUnsignedInteger(rawSpd.maxCycleTime[0], rawSpd.maxCycleTime[1], value);
 }
 
-const unsigned DDR5SPD::shortgettAA() {
+const unsigned int DDR5SPD::getFrequency() {
+    return static_cast<unsigned int>(1.0 / (getMinCycleTime() / 1000000.0));
+}
+
+const unsigned int DDR5SPD::getMT() {
+    return getFrequency() * 2;
+}
+
+void DDR5SPD::setCLSupportedDDR5(const int cl, const bool supported){
+    utilities::SetCLSupportedDDR5(rawSpd.clSupported, cl, supported);
+}
+
+const bool DDR5SPD::getCLSupportedDDR5(const int cl){
+    return utilities::IsCLSupportedDDR5(rawSpd.clSupported, cl);
+}
+
+const unsigned DDR5SPD::gettAA() {
     return utilities::ConvertBytes(rawSpd.tAA[0], rawSpd.tAA[1]);
 }
 
@@ -425,3 +441,8 @@ const unsigned short DDR5SPD::getCRC() {
 void DDR5SPD::setCRC(const unsigned short value) {
     utilities::Convert16bitUnsignedInteger(rawSpd.checksum[0], rawSpd.checksum[1], value);
 }
+
+const bool DDR5SPD::isXMPPresent() {
+    return false;
+}
+

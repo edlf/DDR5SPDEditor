@@ -32,9 +32,14 @@ private slots:
     void exportXMP();
     void exit();
 
+    void reloadUI();
+
 private:
+    void clearUI();
     void disableUI();
     void enableUI();
+
+    unsigned short minCycle;
 
     DDR5SPD* spd = nullptr;
     Ui::MainWindow *ui;
