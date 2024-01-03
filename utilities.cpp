@@ -28,16 +28,16 @@ void Convert16bitUnsignedInteger(unsigned char& lsb, unsigned char& msb, unsigne
     msb = static_cast<unsigned char>((value & 0xff00) >> 8);
 }
 
-unsigned short TimeToTicksDDR5(unsigned int time, unsigned int minCycleTime) {
+unsigned short TimeToTicksDDR5(const unsigned int time, const unsigned int minCycleTime) {
     // 0.30% per the rounding algorithm per JESD400-5B
-    unsigned short correctionFactor = 3;
+    constexpr unsigned int correctionFactor = 3;
 
     // Apply correction factor, scaled by 1000
-    float temp = time * (1000 - correctionFactor);
+    unsigned int temp = time * (1000 - correctionFactor);
     // Initial nCK calculation, scaled by 1000
     float tempNck = temp / minCycleTime;
     // Add 1, scaled by 1000, to effectively round up
-    tempNck += 1000;
+    tempNck += 1000.0;
     // Round down to next integer
     return static_cast<unsigned short>(tempNck / 1000);
 }

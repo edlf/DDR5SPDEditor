@@ -9,7 +9,7 @@ unsigned short ConvertBytes(unsigned char lsb, unsigned char msb);
 
 void Convert16bitUnsignedInteger(unsigned char& lsb, unsigned char& msb, unsigned short value);
 
-unsigned short TimeToTicksDDR5(unsigned int time, unsigned int minCycleTime);
+unsigned short TimeToTicksDDR5(const unsigned int time, const unsigned int minCycleTime);
 
 void SetCLSupportedDDR5(unsigned char clSupported[5], int cl, bool supported);
 

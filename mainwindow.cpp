@@ -92,7 +92,6 @@ void MainWindow::exportXMP(){
 }
 
 void MainWindow::disableUI() {
-    // Tabs
     ui->tabWidget->setCurrentWidget(ui->tabJEDEC);
     ui->tabJEDEC->setDisabled(true);
     ui->tabXMPP1->setDisabled(true);
@@ -103,17 +102,20 @@ void MainWindow::disableUI() {
 }
 
 void MainWindow::enableUI() {
+    if(spd == nullptr) {
+        return;
+    }
+
     ui->tabJEDEC->activateWindow();
     ui->tabJEDEC->setDisabled(false);
-    if(spd != nullptr) {
-        if (spd->isXMPPresent())
-        {
-            ui->tabXMPP1->setDisabled(false);
-            ui->tabXMPP2->setDisabled(false);
-            ui->tabXMPP3->setDisabled(false);
-            ui->tabXMPU1->setDisabled(false);
-            ui->tabXMPU2->setDisabled(false);
-        }
+
+    if (spd->isXMPPresent())
+    {
+        ui->tabXMPP1->setDisabled(false);
+        ui->tabXMPP2->setDisabled(false);
+        ui->tabXMPP3->setDisabled(false);
+        ui->tabXMPU1->setDisabled(false);
+        ui->tabXMPU2->setDisabled(false);
     }
 }
 
@@ -213,7 +215,7 @@ void MainWindow::clearUI() {
 }
 
 void MainWindow::reloadUI(){
-    // TODO
+    // JEDEC
     ui->spinMinCycleTime->setValue(spd->getMinCycleTime());
     ui->spinMaxCycleTime->setValue(spd->getMaxCycleTime());
 
@@ -264,46 +266,50 @@ void MainWindow::reloadUI(){
     ui->cbCL96->setChecked(spd->getCLSupportedDDR5(96));
     ui->cbCL98->setChecked(spd->getCLSupportedDDR5(98));
 
+    unsigned int minCycleTime = spd->getMinCycleTime();
+
     ui->spinBoxtAA->setValue(spd->gettAA());
-    ui->labeltAA_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettAA(), frequency)));
+    ui->labeltAA_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettAA(), minCycleTime)));
     ui->spinBoxtRCD->setValue(spd->gettRCD());
-    ui->labeltRCD_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRCD(), frequency)));
+    ui->labeltRCD_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRCD(), minCycleTime)));
     ui->spinBoxtRP->setValue(spd->gettRP());
-    ui->labeltRP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRP(), frequency)));
+    ui->labeltRP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRP(), minCycleTime)));
     ui->spinBoxtRAS->setValue(spd->gettRAS());
-    ui->labeltRAS_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRAS(), frequency)));
+    ui->labeltRAS_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRAS(), minCycleTime)));
     ui->spinBoxtRC->setValue(spd->gettRC());
-    ui->labeltRC_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRC(), frequency)));
+    ui->labeltRC_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRC(), minCycleTime)));
     ui->spinBoxtWR->setValue(spd->gettWR());
-    ui->labeltWR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettWR(), frequency)));
+    ui->labeltWR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettWR(), minCycleTime)));
     ui->spinBoxtRFC1->setValue(spd->gettRFC1_slr());
-    ui->labeltRFC1_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRFC1_slr(), frequency)));
+    ui->labeltRFC1_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRFC1_slr() * 1000, minCycleTime)));
     ui->spinBoxtRFC2->setValue(spd->gettRFC2_slr());
-    ui->labeltRFC2_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRFC2_slr(), frequency)));
+    ui->labeltRFC2_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRFC2_slr() * 1000, minCycleTime)));
     ui->spinBoxtRFC->setValue(spd->gettRFCsb_slr());
-    ui->labeltRFC_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRFCsb_slr(), frequency)));
+    ui->labeltRFC_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRFCsb_slr() * 1000, minCycleTime)));
     ui->spinBoxtRRD_L->setValue(spd->gettRRD_L());
     ui->spinBoxtRRD_L_LCLK->setValue(spd->gettRRD_L_lowerLimit());
-    ui->labeltRRD_L_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRRD_L(), frequency)));
+    ui->labeltRRD_L_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRRD_L(), minCycleTime)));
     ui->spinBoxtCCD_L->setValue(spd->gettCCD_L());
     ui->spinBoxtCCD_L_LCLK->setValue(spd->gettCCD_L_lowerLimit());
-    ui->labeltCCD_L_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L(), frequency)));
+    ui->labeltCCD_L_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L(), minCycleTime)));
     ui->spinBoxtCCDL_L_WR->setValue(spd->gettCCD_L_WR());
     ui->spinBoxtCCDL_L_WR_LCLK->setValue(spd->gettCCD_L_WR_lowerLimit());
-    ui->labeltCCDL_L_WR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L_WR(), frequency)));
+    ui->labeltCCDL_L_WR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L_WR(), minCycleTime)));
     ui->spinBoxtCCDL_L_WR2->setValue(spd->gettCCD_L_WR2());
     ui->spinBoxtCCDL_L_WR2_LCLK->setValue(spd->gettCCD_L_WR2_lowerLimit());
-    ui->labeltCCDL_L_WR2_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L_WR2(), frequency)));
+    ui->labeltCCDL_L_WR2_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L_WR2(), minCycleTime)));
     ui->spinBoxtFAW->setValue(spd->gettFAW());
     ui->spinBoxtFAW_LCLK->setValue(spd->gettFAW_lowerLimit());
-    ui->labeltFAW_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettFAW(), frequency)));
+    ui->labeltFAW_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettFAW(), minCycleTime)));
     ui->spinBoxtCCD_L_WTR->setValue(spd->gettCCD_L_WTR());
     ui->spinBoxtCCD_L_WTR_LCLK->setValue(spd->gettCCD_L_WTR_lowerLimit());
-    ui->labeltCCD_L_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L_WTR(), frequency)));
+    ui->labeltCCD_L_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L_WTR(), minCycleTime)));
     ui->spinBoxtCCD_S_WTR->setValue(spd->gettCCD_S_WTR());
     ui->spinBoxtCCD_S_WTR_LCLK->setValue(spd->gettCCD_S_WTR_lowerLimit());
-    ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_S_WTR(), frequency)));
+    ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_S_WTR(), minCycleTime)));
     ui->spinBoxtRTP->setValue(spd->gettRTP());
     ui->spinBoxtRTP_LCLK->setValue(spd->gettRTP_lowerLimit());
-    ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRTP(), frequency)));
+    ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRTP(), minCycleTime)));
+
+    // XMP1
 }
