@@ -33,6 +33,12 @@ private slots:
     void exit();
 
     void reloadUI();
+    void reloadJEDECTab();
+    void reloadXMP1Tab();
+    void reloadXMP2Tab();
+    void reloadXMP3Tab();
+    void reloadXMPU1Tab();
+    void reloadXMPU2Tab();
 
 private:
     void clearUI();

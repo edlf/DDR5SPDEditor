@@ -1,5 +1,7 @@
 #include "utilities.h"
 
+#include <string>
+
 namespace utilities {
 
 unsigned short Crc16(unsigned char bytes[], unsigned int length) {
@@ -176,7 +178,7 @@ unsigned char ConvertVoltageToByteDDR5(unsigned char voltage)
     return ((ones << 5) + (hundredths / 5));
 }
 
-unsigned char SetByte(unsigned char bits, unsigned short bitNumber, bool value)
+unsigned char SetBit(unsigned char bits, unsigned short bitNumber, bool value)
 {
     if (value)
     {
@@ -188,6 +190,23 @@ unsigned char SetByte(unsigned char bits, unsigned short bitNumber, bool value)
     }
 
     return bits;
+}
+
+bool GetBit(unsigned char bits, unsigned short bitNumber) {
+    return ((bits & (1 << bitNumber)) != 0);
+}
+
+void SetCString(const std::string value, const size_t maxLength, char* destination) {
+    std::string str = value.substr(0, std::min(maxLength, value.size()));
+
+    for (int i = 0; i < str.size(); ++i)
+    {
+        destination[i] = str[i];
+    }
+    for (int i = str.size(); i < maxLength; ++i)
+    {
+        destination[i] = 0;
+    }
 }
 
 } // namespace utilities

@@ -26,6 +26,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ddr5spd.h ddr5spd.cpp
         utilities.cpp
         utilities.h
+        xmp3.h
+        xmp3.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET DDR5SPDEditor APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

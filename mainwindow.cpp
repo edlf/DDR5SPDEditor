@@ -53,7 +53,15 @@ void MainWindow::openFile(){
         if (spd != nullptr) {
             delete(spd);
         }
-        spd = new DDR5SPD(contents);
+
+        if (contents.length() != DDR5SPD::eepromSize) {
+            // TODO error out
+            return;
+        }
+
+        // TODO: Find proper way to do this
+        DDR5SPD::RawSPD rawSPD = *reinterpret_cast<DDR5SPD::RawSPD*>(contents.data());
+        spd = new DDR5SPD(rawSPD);
 
         enableUI();
         reloadUI();
@@ -129,46 +137,46 @@ void MainWindow::clearUI() {
     ui->labelMTValue->setText(emptyValue);
 
     // CAS
-    ui->cbCL20->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL22->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL24->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL26->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL28->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL30->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL32->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL34->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL36->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL38->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL40->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL42->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL44->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL46->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL48->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL50->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL52->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL54->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL56->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL58->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL60->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL62->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL64->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL66->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL68->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL70->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL72->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL74->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL76->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL78->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL80->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL82->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL84->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL86->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL88->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL90->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL92->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL94->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL96->setChecked(spd->getCLSupportedDDR5(false));
-    ui->cbCL98->setChecked(spd->getCLSupportedDDR5(false));
+    ui->cbCL20->setChecked(spd->getCLSupported(false));
+    ui->cbCL22->setChecked(spd->getCLSupported(false));
+    ui->cbCL24->setChecked(spd->getCLSupported(false));
+    ui->cbCL26->setChecked(spd->getCLSupported(false));
+    ui->cbCL28->setChecked(spd->getCLSupported(false));
+    ui->cbCL30->setChecked(spd->getCLSupported(false));
+    ui->cbCL32->setChecked(spd->getCLSupported(false));
+    ui->cbCL34->setChecked(spd->getCLSupported(false));
+    ui->cbCL36->setChecked(spd->getCLSupported(false));
+    ui->cbCL38->setChecked(spd->getCLSupported(false));
+    ui->cbCL40->setChecked(spd->getCLSupported(false));
+    ui->cbCL42->setChecked(spd->getCLSupported(false));
+    ui->cbCL44->setChecked(spd->getCLSupported(false));
+    ui->cbCL46->setChecked(spd->getCLSupported(false));
+    ui->cbCL48->setChecked(spd->getCLSupported(false));
+    ui->cbCL50->setChecked(spd->getCLSupported(false));
+    ui->cbCL52->setChecked(spd->getCLSupported(false));
+    ui->cbCL54->setChecked(spd->getCLSupported(false));
+    ui->cbCL56->setChecked(spd->getCLSupported(false));
+    ui->cbCL58->setChecked(spd->getCLSupported(false));
+    ui->cbCL60->setChecked(spd->getCLSupported(false));
+    ui->cbCL62->setChecked(spd->getCLSupported(false));
+    ui->cbCL64->setChecked(spd->getCLSupported(false));
+    ui->cbCL66->setChecked(spd->getCLSupported(false));
+    ui->cbCL68->setChecked(spd->getCLSupported(false));
+    ui->cbCL70->setChecked(spd->getCLSupported(false));
+    ui->cbCL72->setChecked(spd->getCLSupported(false));
+    ui->cbCL74->setChecked(spd->getCLSupported(false));
+    ui->cbCL76->setChecked(spd->getCLSupported(false));
+    ui->cbCL78->setChecked(spd->getCLSupported(false));
+    ui->cbCL80->setChecked(spd->getCLSupported(false));
+    ui->cbCL82->setChecked(spd->getCLSupported(false));
+    ui->cbCL84->setChecked(spd->getCLSupported(false));
+    ui->cbCL86->setChecked(spd->getCLSupported(false));
+    ui->cbCL88->setChecked(spd->getCLSupported(false));
+    ui->cbCL90->setChecked(spd->getCLSupported(false));
+    ui->cbCL92->setChecked(spd->getCLSupported(false));
+    ui->cbCL94->setChecked(spd->getCLSupported(false));
+    ui->cbCL96->setChecked(spd->getCLSupported(false));
+    ui->cbCL98->setChecked(spd->getCLSupported(false));
 
     ui->spinBoxtAA->setValue(0);
     ui->labeltAA_Ticks->setText(emptyValue);
@@ -214,8 +222,7 @@ void MainWindow::clearUI() {
     ui->labeltRTP_Ticks->setText(emptyValue);
 }
 
-void MainWindow::reloadUI(){
-    // JEDEC
+void MainWindow::reloadJEDECTab() {
     ui->spinMinCycleTime->setValue(spd->getMinCycleTime());
     ui->spinMaxCycleTime->setValue(spd->getMaxCycleTime());
 
@@ -225,46 +232,46 @@ void MainWindow::reloadUI(){
 
     ui->labelFrequencyValue->setText(frequencyStr);
     ui->labelMTValue->setText(mtStr);
-    ui->cbCL20->setChecked(spd->getCLSupportedDDR5(20));
-    ui->cbCL22->setChecked(spd->getCLSupportedDDR5(22));
-    ui->cbCL24->setChecked(spd->getCLSupportedDDR5(24));
-    ui->cbCL26->setChecked(spd->getCLSupportedDDR5(26));
-    ui->cbCL28->setChecked(spd->getCLSupportedDDR5(28));
-    ui->cbCL30->setChecked(spd->getCLSupportedDDR5(30));
-    ui->cbCL32->setChecked(spd->getCLSupportedDDR5(32));
-    ui->cbCL34->setChecked(spd->getCLSupportedDDR5(34));
-    ui->cbCL36->setChecked(spd->getCLSupportedDDR5(36));
-    ui->cbCL38->setChecked(spd->getCLSupportedDDR5(38));
-    ui->cbCL40->setChecked(spd->getCLSupportedDDR5(40));
-    ui->cbCL42->setChecked(spd->getCLSupportedDDR5(42));
-    ui->cbCL44->setChecked(spd->getCLSupportedDDR5(44));
-    ui->cbCL46->setChecked(spd->getCLSupportedDDR5(46));
-    ui->cbCL48->setChecked(spd->getCLSupportedDDR5(48));
-    ui->cbCL50->setChecked(spd->getCLSupportedDDR5(50));
-    ui->cbCL52->setChecked(spd->getCLSupportedDDR5(52));
-    ui->cbCL54->setChecked(spd->getCLSupportedDDR5(54));
-    ui->cbCL56->setChecked(spd->getCLSupportedDDR5(56));
-    ui->cbCL58->setChecked(spd->getCLSupportedDDR5(58));
-    ui->cbCL60->setChecked(spd->getCLSupportedDDR5(60));
-    ui->cbCL62->setChecked(spd->getCLSupportedDDR5(62));
-    ui->cbCL64->setChecked(spd->getCLSupportedDDR5(64));
-    ui->cbCL66->setChecked(spd->getCLSupportedDDR5(66));
-    ui->cbCL68->setChecked(spd->getCLSupportedDDR5(68));
-    ui->cbCL70->setChecked(spd->getCLSupportedDDR5(70));
-    ui->cbCL72->setChecked(spd->getCLSupportedDDR5(72));
-    ui->cbCL74->setChecked(spd->getCLSupportedDDR5(74));
-    ui->cbCL76->setChecked(spd->getCLSupportedDDR5(76));
-    ui->cbCL78->setChecked(spd->getCLSupportedDDR5(78));
-    ui->cbCL80->setChecked(spd->getCLSupportedDDR5(80));
-    ui->cbCL82->setChecked(spd->getCLSupportedDDR5(82));
-    ui->cbCL84->setChecked(spd->getCLSupportedDDR5(84));
-    ui->cbCL86->setChecked(spd->getCLSupportedDDR5(86));
-    ui->cbCL88->setChecked(spd->getCLSupportedDDR5(88));
-    ui->cbCL90->setChecked(spd->getCLSupportedDDR5(90));
-    ui->cbCL92->setChecked(spd->getCLSupportedDDR5(92));
-    ui->cbCL94->setChecked(spd->getCLSupportedDDR5(94));
-    ui->cbCL96->setChecked(spd->getCLSupportedDDR5(96));
-    ui->cbCL98->setChecked(spd->getCLSupportedDDR5(98));
+    ui->cbCL20->setChecked(spd->getCLSupported(20));
+    ui->cbCL22->setChecked(spd->getCLSupported(22));
+    ui->cbCL24->setChecked(spd->getCLSupported(24));
+    ui->cbCL26->setChecked(spd->getCLSupported(26));
+    ui->cbCL28->setChecked(spd->getCLSupported(28));
+    ui->cbCL30->setChecked(spd->getCLSupported(30));
+    ui->cbCL32->setChecked(spd->getCLSupported(32));
+    ui->cbCL34->setChecked(spd->getCLSupported(34));
+    ui->cbCL36->setChecked(spd->getCLSupported(36));
+    ui->cbCL38->setChecked(spd->getCLSupported(38));
+    ui->cbCL40->setChecked(spd->getCLSupported(40));
+    ui->cbCL42->setChecked(spd->getCLSupported(42));
+    ui->cbCL44->setChecked(spd->getCLSupported(44));
+    ui->cbCL46->setChecked(spd->getCLSupported(46));
+    ui->cbCL48->setChecked(spd->getCLSupported(48));
+    ui->cbCL50->setChecked(spd->getCLSupported(50));
+    ui->cbCL52->setChecked(spd->getCLSupported(52));
+    ui->cbCL54->setChecked(spd->getCLSupported(54));
+    ui->cbCL56->setChecked(spd->getCLSupported(56));
+    ui->cbCL58->setChecked(spd->getCLSupported(58));
+    ui->cbCL60->setChecked(spd->getCLSupported(60));
+    ui->cbCL62->setChecked(spd->getCLSupported(62));
+    ui->cbCL64->setChecked(spd->getCLSupported(64));
+    ui->cbCL66->setChecked(spd->getCLSupported(66));
+    ui->cbCL68->setChecked(spd->getCLSupported(68));
+    ui->cbCL70->setChecked(spd->getCLSupported(70));
+    ui->cbCL72->setChecked(spd->getCLSupported(72));
+    ui->cbCL74->setChecked(spd->getCLSupported(74));
+    ui->cbCL76->setChecked(spd->getCLSupported(76));
+    ui->cbCL78->setChecked(spd->getCLSupported(78));
+    ui->cbCL80->setChecked(spd->getCLSupported(80));
+    ui->cbCL82->setChecked(spd->getCLSupported(82));
+    ui->cbCL84->setChecked(spd->getCLSupported(84));
+    ui->cbCL86->setChecked(spd->getCLSupported(86));
+    ui->cbCL88->setChecked(spd->getCLSupported(88));
+    ui->cbCL90->setChecked(spd->getCLSupported(90));
+    ui->cbCL92->setChecked(spd->getCLSupported(92));
+    ui->cbCL94->setChecked(spd->getCLSupported(94));
+    ui->cbCL96->setChecked(spd->getCLSupported(96));
+    ui->cbCL98->setChecked(spd->getCLSupported(98));
 
     unsigned int minCycleTime = spd->getMinCycleTime();
 
@@ -310,6 +317,157 @@ void MainWindow::reloadUI(){
     ui->spinBoxtRTP->setValue(spd->gettRTP());
     ui->spinBoxtRTP_LCLK->setValue(spd->gettRTP_lowerLimit());
     ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRTP(), minCycleTime)));
+}
 
-    // XMP1
+void MainWindow::reloadXMP1Tab() {
+    ui->leProfileName_XMP1->setText(QString::fromStdString(spd->xmpBundle.getXMP1ProfileName()));
+
+    // spd->xmpBundle.isXMP1Enabled()
+    ui->cbCL20_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(20));
+    ui->cbCL22_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(22));
+    ui->cbCL24_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(24));
+    ui->cbCL26_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(26));
+    ui->cbCL28_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(28));
+    ui->cbCL30_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(30));
+    ui->cbCL32_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(32));
+    ui->cbCL34_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(34));
+    ui->cbCL36_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(36));
+    ui->cbCL38_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(38));
+    ui->cbCL40_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(40));
+    ui->cbCL42_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(42));
+    ui->cbCL44_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(44));
+    ui->cbCL46_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(46));
+    ui->cbCL48_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(48));
+    ui->cbCL50_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(50));
+    ui->cbCL52_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(52));
+    ui->cbCL54_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(54));
+    ui->cbCL56_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(56));
+    ui->cbCL58_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(58));
+    ui->cbCL60_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(60));
+    ui->cbCL62_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(62));
+    ui->cbCL64_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(64));
+    ui->cbCL66_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(66));
+    ui->cbCL68_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(68));
+    ui->cbCL70_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(70));
+    ui->cbCL72_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(72));
+    ui->cbCL74_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(74));
+    ui->cbCL76_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(76));
+    ui->cbCL78_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(78));
+    ui->cbCL80_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(80));
+    ui->cbCL82_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(82));
+    ui->cbCL84_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(84));
+    ui->cbCL86_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(86));
+    ui->cbCL88_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(88));
+    ui->cbCL90_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(90));
+    ui->cbCL92_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(92));
+    ui->cbCL94_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(94));
+    ui->cbCL96_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(96));
+    ui->cbCL98_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(98));
+}
+
+void MainWindow::reloadXMP2Tab() {
+    ui->leProfileName_XMP2->setText(QString::fromStdString(spd->xmpBundle.getXMP2ProfileName()));
+
+    ui->cbCL20_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(20));
+    ui->cbCL22_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(22));
+    ui->cbCL24_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(24));
+    ui->cbCL26_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(26));
+    ui->cbCL28_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(28));
+    ui->cbCL30_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(30));
+    ui->cbCL32_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(32));
+    ui->cbCL34_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(34));
+    ui->cbCL36_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(36));
+    ui->cbCL38_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(38));
+    ui->cbCL40_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(40));
+    ui->cbCL42_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(42));
+    ui->cbCL44_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(44));
+    ui->cbCL46_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(46));
+    ui->cbCL48_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(48));
+    ui->cbCL50_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(50));
+    ui->cbCL52_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(52));
+    ui->cbCL54_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(54));
+    ui->cbCL56_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(56));
+    ui->cbCL58_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(58));
+    ui->cbCL60_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(60));
+    ui->cbCL62_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(62));
+    ui->cbCL64_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(64));
+    ui->cbCL66_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(66));
+    ui->cbCL68_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(68));
+    ui->cbCL70_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(70));
+    ui->cbCL72_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(72));
+    ui->cbCL74_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(74));
+    ui->cbCL76_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(76));
+    ui->cbCL78_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(78));
+    ui->cbCL80_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(80));
+    ui->cbCL82_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(82));
+    ui->cbCL84_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(84));
+    ui->cbCL86_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(86));
+    ui->cbCL88_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(88));
+    ui->cbCL90_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(90));
+    ui->cbCL92_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(92));
+    ui->cbCL94_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(94));
+    ui->cbCL96_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(96));
+    ui->cbCL98_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(98));
+}
+
+void MainWindow::reloadXMP3Tab() {
+    ui->leProfileName_XMP3->setText(QString::fromStdString(spd->xmpBundle.getXMP3ProfileName()));
+
+    ui->cbCL20_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(20));
+    ui->cbCL22_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(22));
+    ui->cbCL24_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(24));
+    ui->cbCL26_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(26));
+    ui->cbCL28_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(28));
+    ui->cbCL30_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(30));
+    ui->cbCL32_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(32));
+    ui->cbCL34_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(34));
+    ui->cbCL36_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(36));
+    ui->cbCL38_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(38));
+    ui->cbCL40_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(40));
+    ui->cbCL42_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(42));
+    ui->cbCL44_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(44));
+    ui->cbCL46_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(46));
+    ui->cbCL48_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(48));
+    ui->cbCL50_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(50));
+    ui->cbCL52_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(52));
+    ui->cbCL54_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(54));
+    ui->cbCL56_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(56));
+    ui->cbCL58_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(58));
+    ui->cbCL60_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(60));
+    ui->cbCL62_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(62));
+    ui->cbCL64_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(64));
+    ui->cbCL66_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(66));
+    ui->cbCL68_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(68));
+    ui->cbCL70_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(70));
+    ui->cbCL72_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(72));
+    ui->cbCL74_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(74));
+    ui->cbCL76_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(76));
+    ui->cbCL78_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(78));
+    ui->cbCL80_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(80));
+    ui->cbCL82_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(82));
+    ui->cbCL84_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(84));
+    ui->cbCL86_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(86));
+    ui->cbCL88_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(88));
+    ui->cbCL90_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(90));
+    ui->cbCL92_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(92));
+    ui->cbCL94_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(94));
+    ui->cbCL96_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(96));
+    ui->cbCL98_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(98));
+}
+
+void MainWindow::reloadXMPU1Tab() {
+
+}
+
+void MainWindow::reloadXMPU2Tab() {
+
+}
+
+void MainWindow::reloadUI(){
+    reloadJEDECTab();
+    reloadXMP1Tab();
+    reloadXMP2Tab();
+    reloadXMP3Tab();
+    reloadXMPU1Tab();
+    reloadXMPU2Tab();
 }

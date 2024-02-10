@@ -1,6 +1,7 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#include <string>
 namespace utilities {
 
 unsigned short Crc16(unsigned char bytes[], unsigned int length);
@@ -19,7 +20,11 @@ unsigned short ConvertByteToVoltageDDR5(unsigned char val);
 
 unsigned char ConvertVoltageToByteDDR5(unsigned char voltage);
 
-unsigned char SetByte(unsigned char bits, unsigned short bitNumber, bool value);
+unsigned char SetBit(unsigned char bits, unsigned short bitNumber, bool value);
+
+bool GetBit(unsigned char bits, unsigned short bitNumber);
+
+void SetCString(const std::string value, const size_t maxLength, char* destination);
 
 } // namespace utilities
 

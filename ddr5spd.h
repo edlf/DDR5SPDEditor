@@ -3,6 +3,7 @@
 
 #include <QByteArray>
 #include <cstddef>
+#include "xmp3.h"
 
 class DDR5SPD
 {
@@ -45,17 +46,21 @@ public:
 
     static const unsigned int eepromSize = 1024;
     static const unsigned int partNumberSize = 30;
-    static const unsigned int maxXmpProfileName = 15;
-    static constexpr unsigned char XMPHeaderMagic[2]{ 0x0C, 0x4A };
+    static const unsigned int jedecBlockSize = 0x200;
     static constexpr std::array<unsigned short, 4> bankGroupsBitsMap{ 1, 2, 4, 8 };
     static constexpr std::array<unsigned short, 3> banksPerBankGroupBitsMap{ 1, 2, 4 };
     static constexpr std::array<unsigned short, 2> columnAddressBitsMap{ 10, 11 };
     static constexpr std::array<unsigned short, 3> rowAddressBitsMap{ 16, 17, 18 };
     static constexpr std::array<unsigned short, 4> deviceWidthMap{ 4, 8, 16, 32 };
 
-    #pragma pack(1)
-    struct RawSPD
-    {
+    #pragma pack(push,1)
+    struct AuxDevice {
+        unsigned char manufacturer[2];
+        unsigned char deviceType;
+        unsigned char revision;
+    };
+
+    struct RawSPD {
         // Start General configuration (0-127, 0x00-0x7F, Block 0,1)
         // Byte 0 to 3 Header/Type
         unsigned char bytesUsed;
@@ -197,29 +202,15 @@ public:
         unsigned char hashingSequence;
 
         // Byte 194-197 SPD
-        unsigned char spdManufacturer[2];
-        unsigned char spdDeviceType;
-        unsigned char spdRevision;
+        AuxDevice spdHub;
 
-        // Byte 198-201 PMIC 0
-        unsigned char pmic0Manufacturer[2];
-        unsigned char pmic0DeviceType;
-        unsigned char pmic0Revision;
-
-        // Byte 202-205 PMIC 1
-        unsigned char pmic1Manufacturer[2];
-        unsigned char pmic1DeviceType;
-        unsigned char pmic1Revision;
-
-        // Byte 206-209 PMIC 2
-        unsigned char pmic2Manufacturer[2];
-        unsigned char pmic2DeviceType;
-        unsigned char pmic2Revision;
+        // Byte 198-201 PMIC 0, 202-205 PMIC 1, 206-209 PMIC 2
+        AuxDevice pmic0;
+        AuxDevice pmic1;
+        AuxDevice pmic2;
 
         // Byte 210-213 Thermal Sensor
-        unsigned char thermalSensorManufacturer[2];
-        unsigned char thermalSensorDeviceType;
-        unsigned char thermalSensorRevision;
+        AuxDevice thermalSensor;
 
         // Byte 214-229 Reserved
         unsigned char reserved_214_229[16];
@@ -255,31 +246,33 @@ public:
 
         // Block 8 - Manufacturing information
         // Byte 512
-        unsigned char moduleManufacturer[2];
+        unsigned char moduleManufacturer[2]; // Mandatory
         // Byte 514
-        unsigned char manufactureLocation;
+        unsigned char manufactureLocation; // Mandatory
         // Byte 515-516
-        unsigned char manufactureDate[2];
+        unsigned char manufactureDate[2]; // Mandatory
         // Bytes 517-520
-        unsigned char serialNumber[4];
+        unsigned char serialNumber[4]; // Mandatory
         // Bytes 521-550
-        unsigned char modulePartnumber[partNumberSize];
+        unsigned char modulePartnumber[partNumberSize]; // Mandatory
         // Byte 551
         unsigned char moduleRevision;
         // Byte 552-553 DRAM Manufacturer ID Code
-        unsigned char dramManufacturer[2];
+        unsigned char dramManufacturer[2]; // Mandatory
         // Byte 554 DRAM stepping
         unsigned char dramStepping;
 
         // Block 9 - Manufacturing information
 
         // Bytes 555~639 (0x22B~27F): Manufacturer’s Specific Data
-        unsigned char reserved_555_639[639 - 555 - 1];
+        unsigned char reserved_555_639[640 - 555];
 
-        // End User bits (XMP/EXPO?)
-        unsigned char endUser[1024 - 640 + 1];
+        // End User bits (XMP/EXPO) 0x280 (1024 - 640)
+        XMPBlock xmpBlock;
     };
-    #pragma pop(1)
+    #pragma pack(pop)
+
+    static_assert(sizeof(RawSPD) == 0x400, "SPD struct size error");
 
     RawSPD rawSpd;
 
@@ -292,10 +285,10 @@ public:
     const unsigned int getFrequency();
     const unsigned int getMT();
 
-    void setCLSupportedDDR5(int cl, bool supported);
-    const bool getCLSupportedDDR5(int cl);
+    void setCLSupported(int cl, bool supported);
+    const bool getCLSupported(int cl);
 
-    const unsigned gettAA();
+    const unsigned short gettAA();
     void settAA(const unsigned short);
     const unsigned short gettRCD();
     void settRCD(const unsigned short);
@@ -382,10 +375,13 @@ public:
 
     const unsigned short getCRC();
     void setCRC(const unsigned short);
+    void fixCRC();
 
     const bool isXMPPresent();
 
-    DDR5SPD(QByteArray);
+    DDR5SPD(RawSPD);
+
+    XMP3_Bundle xmpBundle;
 };
 
 #endif // DDR5SPD_H

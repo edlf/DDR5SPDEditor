@@ -3,14 +3,10 @@
 
 #include <algorithm>
 
-DDR5SPD::DDR5SPD(QByteArray byteArray){
-    if (byteArray.length() != eepromSize) {
-        // TODO error out
-        return;
-    }
-
-    // TODO: Find proper way to do this
-    rawSpd = *reinterpret_cast<RawSPD*>(byteArray.data());
+DDR5SPD::DDR5SPD(RawSPD rawSPDin) :
+    rawSpd(rawSPDin),
+    xmpBundle(rawSpd.xmpBlock)
+{
 }
 
 const unsigned short DDR5SPD::getMinCycleTime() {
@@ -37,15 +33,15 @@ const unsigned int DDR5SPD::getMT() {
     return getFrequency() * 2;
 }
 
-void DDR5SPD::setCLSupportedDDR5(const int cl, const bool supported){
+void DDR5SPD::setCLSupported(const int cl, const bool supported){
     utilities::SetCLSupportedDDR5(rawSpd.clSupported, cl, supported);
 }
 
-const bool DDR5SPD::getCLSupportedDDR5(const int cl){
+const bool DDR5SPD::getCLSupported(const int cl){
     return utilities::IsCLSupportedDDR5(rawSpd.clSupported, cl);
 }
 
-const unsigned DDR5SPD::gettAA() {
+const unsigned short DDR5SPD::gettAA() {
     return utilities::ConvertBytes(rawSpd.tAA[0], rawSpd.tAA[1]);
 }
 
@@ -442,7 +438,13 @@ void DDR5SPD::setCRC(const unsigned short value) {
     utilities::Convert16bitUnsignedInteger(rawSpd.checksum[0], rawSpd.checksum[1], value);
 }
 
+void DDR5SPD::fixCRC() {
+    unsigned int  crc = utilities::Crc16(reinterpret_cast<unsigned char*>(&rawSpd), jedecBlockSize - 2);
+    setCRC(crc);
+}
+
 const bool DDR5SPD::isXMPPresent() {
+    // TODO
     return false;
 }
 
