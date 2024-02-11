@@ -1098,8 +1098,376 @@ void MainWindow::reloadUI(){
     reloadXMPU2Tab();
 }
 
-void MainWindow::on_spinMinCycleTime_editingFinished()
-{
+// JEDEC
+void MainWindow::on_spinMinCycleTime_editingFinished() {
     spd->setMinCycleTime(ui->spinMinCycleTime->value());
 }
 
+void MainWindow::on_spinMaxCycleTime_editingFinished() {
+    spd->setMaxCycleTime(ui->spinMaxCycleTime->value());
+}
+
+void MainWindow::on_cbCL20_toggled(bool value) { spd->setCLSupported(20, value); }
+void MainWindow::on_cbCL22_toggled(bool value) { spd->setCLSupported(22, value); }
+void MainWindow::on_cbCL24_toggled(bool value) { spd->setCLSupported(24, value); }
+void MainWindow::on_cbCL26_toggled(bool value) { spd->setCLSupported(26, value); }
+void MainWindow::on_cbCL28_toggled(bool value) { spd->setCLSupported(28, value); }
+void MainWindow::on_cbCL30_toggled(bool value) { spd->setCLSupported(30, value); }
+void MainWindow::on_cbCL32_toggled(bool value) { spd->setCLSupported(32, value); }
+void MainWindow::on_cbCL34_toggled(bool value) { spd->setCLSupported(34, value); }
+void MainWindow::on_cbCL36_toggled(bool value) { spd->setCLSupported(36, value); }
+void MainWindow::on_cbCL38_toggled(bool value) { spd->setCLSupported(38, value); }
+void MainWindow::on_cbCL40_toggled(bool value) { spd->setCLSupported(40, value); }
+void MainWindow::on_cbCL42_toggled(bool value) { spd->setCLSupported(42, value); }
+void MainWindow::on_cbCL44_toggled(bool value) { spd->setCLSupported(44, value); }
+void MainWindow::on_cbCL46_toggled(bool value) { spd->setCLSupported(46, value); }
+void MainWindow::on_cbCL48_toggled(bool value) { spd->setCLSupported(48, value); }
+void MainWindow::on_cbCL50_toggled(bool value) { spd->setCLSupported(50, value); }
+void MainWindow::on_cbCL52_toggled(bool value) { spd->setCLSupported(52, value); }
+void MainWindow::on_cbCL54_toggled(bool value) { spd->setCLSupported(54, value); }
+void MainWindow::on_cbCL56_toggled(bool value) { spd->setCLSupported(56, value); }
+void MainWindow::on_cbCL58_toggled(bool value) { spd->setCLSupported(58, value); }
+void MainWindow::on_cbCL60_toggled(bool value) { spd->setCLSupported(60, value); }
+void MainWindow::on_cbCL62_toggled(bool value) { spd->setCLSupported(62, value); }
+void MainWindow::on_cbCL64_toggled(bool value) { spd->setCLSupported(64, value); }
+void MainWindow::on_cbCL66_toggled(bool value) { spd->setCLSupported(66, value); }
+void MainWindow::on_cbCL68_toggled(bool value) { spd->setCLSupported(68, value); }
+void MainWindow::on_cbCL70_toggled(bool value) { spd->setCLSupported(70, value); }
+void MainWindow::on_cbCL72_toggled(bool value) { spd->setCLSupported(72, value); }
+void MainWindow::on_cbCL74_toggled(bool value) { spd->setCLSupported(74, value); }
+void MainWindow::on_cbCL76_toggled(bool value) { spd->setCLSupported(76, value); }
+void MainWindow::on_cbCL78_toggled(bool value) { spd->setCLSupported(78, value); }
+void MainWindow::on_cbCL80_toggled(bool value) { spd->setCLSupported(80, value); }
+void MainWindow::on_cbCL82_toggled(bool value) { spd->setCLSupported(82, value); }
+void MainWindow::on_cbCL84_toggled(bool value) { spd->setCLSupported(84, value); }
+void MainWindow::on_cbCL86_toggled(bool value) { spd->setCLSupported(86, value); }
+void MainWindow::on_cbCL88_toggled(bool value) { spd->setCLSupported(88, value); }
+void MainWindow::on_cbCL90_toggled(bool value) { spd->setCLSupported(90, value); }
+void MainWindow::on_cbCL92_toggled(bool value) { spd->setCLSupported(92, value); }
+void MainWindow::on_cbCL94_toggled(bool value) { spd->setCLSupported(94, value); }
+void MainWindow::on_cbCL96_toggled(bool value) { spd->setCLSupported(96, value); }
+void MainWindow::on_cbCL98_toggled(bool value) { spd->setCLSupported(98, value); }
+
+void MainWindow::on_spinBoxtAA_editingFinished() {
+    spd->settAA(ui->spinBoxtAA->value());
+    ui->labeltAA_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettAA(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRCD_editingFinished() {
+    spd->settRCD(ui->spinBoxtRCD->value());
+    ui->labeltRCD_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRCD(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRP_editingFinished() {
+    spd->settRP(ui->spinBoxtRP->value());
+    ui->labeltRP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRP(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRAS_editingFinished() {
+    spd->settRAS(ui->spinBoxtRAS->value());
+    ui->labeltRAS_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRAS(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRC_editingFinished() {
+    spd->settRC(ui->spinBoxtRC->value());
+    ui->labeltRC_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRC(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtWR_editingFinished() {
+    spd->settWR(ui->spinBoxtWR->value());
+    ui->labeltWR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettWR(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRFC1_editingFinished() {
+    spd->settRFC1_slr(ui->spinBoxtRFC1->value());
+    ui->labeltRFC1_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRFC1_slr() * 1000, spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRFC2_editingFinished() {
+    spd->settRFC2_slr(ui->spinBoxtRFC2->value());
+    ui->labeltRFC2_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRFC2_slr() * 1000, spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRFC_editingFinished() {
+    spd->settRFCsb_slr(ui->spinBoxtRFC->value());
+    ui->labeltRFC_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRFCsb_slr() * 1000, spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRRD_L_editingFinished() {
+    spd->settRRD_L(ui->spinBoxtRRD_L->value());
+    ui->labeltRRD_L_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRRD_L(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRRD_L_LCLK_editingFinished() {
+    spd->settRRD_L_lowerLimit(ui->spinBoxtRRD_L_LCLK->value());
+}
+
+void MainWindow::on_spinBoxtCCD_L_editingFinished() {
+    spd->settCCD_L(ui->spinBoxtCCD_L->value());
+    ui->labeltCCD_L_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtCCD_L_LCLK_editingFinished() {
+    spd->settCCD_L_lowerLimit(ui->spinBoxtCCD_L_LCLK->value());
+}
+
+void MainWindow::on_spinBoxtCCDL_L_WR_editingFinished() {
+    spd->settCCD_L_WR(ui->spinBoxtCCDL_L_WR->value());
+    ui->labeltCCDL_L_WR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L_WR(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtCCDL_L_WR_LCLK_editingFinished() {
+    spd->settCCD_L_WR_lowerLimit(ui->spinBoxtCCDL_L_WR_LCLK->value());
+}
+
+void MainWindow::on_spinBoxtCCDL_L_WR2_editingFinished() {
+    spd->settCCD_L_WR2(ui->spinBoxtCCDL_L_WR2->value());
+    ui->labeltCCDL_L_WR2_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L_WR2(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtCCDL_L_WR2_LCLK_editingFinished() {
+    spd->settCCD_L_WR2_lowerLimit(ui->spinBoxtCCDL_L_WR2_LCLK->value());
+}
+
+void MainWindow::on_spinBoxtFAW_editingFinished() {
+    spd->settFAW(ui->spinBoxtFAW->value());
+    ui->labeltFAW_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettFAW(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtFAW_LCLK_editingFinished() {
+    spd->settFAW_lowerLimit(ui->spinBoxtFAW_LCLK->value());
+}
+
+void MainWindow::on_spinBoxtCCD_L_WTR_editingFinished() {
+    spd->settCCD_L_WTR(ui->spinBoxtCCD_L_WTR->value());
+    ui->labeltCCD_L_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_L_WTR(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_editingFinished() {
+    spd->settCCD_L_WTR_lowerLimit(ui->spinBoxtCCD_L_WTR_LCLK->value());
+}
+
+void MainWindow::on_spinBoxtCCD_S_WTR_editingFinished() {
+    spd->settCCD_S_WTR(ui->spinBoxtCCD_S_WTR->value());
+    ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_S_WTR(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtCCD_S_WTR_LCLK_editingFinished() {
+    spd->settCCD_S_WTR_lowerLimit(ui->spinBoxtCCD_S_WTR_LCLK->value());
+    ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettCCD_S_WTR(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRTP_editingFinished() {
+    spd->settRTP(ui->spinBoxtRTP->value());
+    ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->gettRTP(), spd->getMinCycleTime())));
+}
+
+void MainWindow::on_spinBoxtRTP_LCLK_editingFinished() {
+    spd->settRTP_lowerLimit(ui->spinBoxtRTP_LCLK->value());
+}
+
+// XMP1
+void MainWindow::on_cbCL20_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(20, value); }
+void MainWindow::on_cbCL22_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(22, value); }
+void MainWindow::on_cbCL24_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(24, value); }
+void MainWindow::on_cbCL26_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(26, value); }
+void MainWindow::on_cbCL28_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(28, value); }
+void MainWindow::on_cbCL30_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(30, value); }
+void MainWindow::on_cbCL32_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(32, value); }
+void MainWindow::on_cbCL34_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(34, value); }
+void MainWindow::on_cbCL36_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(36, value); }
+void MainWindow::on_cbCL38_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(38, value); }
+void MainWindow::on_cbCL40_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(40, value); }
+void MainWindow::on_cbCL42_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(42, value); }
+void MainWindow::on_cbCL44_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(44, value); }
+void MainWindow::on_cbCL46_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(46, value); }
+void MainWindow::on_cbCL48_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(48, value); }
+void MainWindow::on_cbCL50_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(50, value); }
+void MainWindow::on_cbCL52_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(52, value); }
+void MainWindow::on_cbCL54_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(54, value); }
+void MainWindow::on_cbCL56_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(56, value); }
+void MainWindow::on_cbCL58_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(58, value); }
+void MainWindow::on_cbCL60_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(60, value); }
+void MainWindow::on_cbCL62_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(62, value); }
+void MainWindow::on_cbCL64_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(64, value); }
+void MainWindow::on_cbCL66_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(66, value); }
+void MainWindow::on_cbCL68_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(68, value); }
+void MainWindow::on_cbCL70_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(70, value); }
+void MainWindow::on_cbCL72_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(72, value); }
+void MainWindow::on_cbCL74_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(74, value); }
+void MainWindow::on_cbCL76_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(76, value); }
+void MainWindow::on_cbCL78_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(78, value); }
+void MainWindow::on_cbCL80_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(80, value); }
+void MainWindow::on_cbCL82_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(82, value); }
+void MainWindow::on_cbCL84_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(84, value); }
+void MainWindow::on_cbCL86_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(86, value); }
+void MainWindow::on_cbCL88_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(88, value); }
+void MainWindow::on_cbCL90_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(90, value); }
+void MainWindow::on_cbCL92_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(92, value); }
+void MainWindow::on_cbCL94_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(94, value); }
+void MainWindow::on_cbCL96_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(96, value); }
+void MainWindow::on_cbCL98_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(98, value); }
+
+void MainWindow::on_cbCL20_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(20, value); }
+void MainWindow::on_cbCL22_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(22, value); }
+void MainWindow::on_cbCL24_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(24, value); }
+void MainWindow::on_cbCL26_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(26, value); }
+void MainWindow::on_cbCL28_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(28, value); }
+void MainWindow::on_cbCL30_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(30, value); }
+void MainWindow::on_cbCL32_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(32, value); }
+void MainWindow::on_cbCL34_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(34, value); }
+void MainWindow::on_cbCL36_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(36, value); }
+void MainWindow::on_cbCL38_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(38, value); }
+void MainWindow::on_cbCL40_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(40, value); }
+void MainWindow::on_cbCL42_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(42, value); }
+void MainWindow::on_cbCL44_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(44, value); }
+void MainWindow::on_cbCL46_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(46, value); }
+void MainWindow::on_cbCL48_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(48, value); }
+void MainWindow::on_cbCL50_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(50, value); }
+void MainWindow::on_cbCL52_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(52, value); }
+void MainWindow::on_cbCL54_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(54, value); }
+void MainWindow::on_cbCL56_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(56, value); }
+void MainWindow::on_cbCL58_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(58, value); }
+void MainWindow::on_cbCL60_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(60, value); }
+void MainWindow::on_cbCL62_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(62, value); }
+void MainWindow::on_cbCL64_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(64, value); }
+void MainWindow::on_cbCL66_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(66, value); }
+void MainWindow::on_cbCL68_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(68, value); }
+void MainWindow::on_cbCL70_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(70, value); }
+void MainWindow::on_cbCL72_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(72, value); }
+void MainWindow::on_cbCL74_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(74, value); }
+void MainWindow::on_cbCL76_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(76, value); }
+void MainWindow::on_cbCL78_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(78, value); }
+void MainWindow::on_cbCL80_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(80, value); }
+void MainWindow::on_cbCL82_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(82, value); }
+void MainWindow::on_cbCL84_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(84, value); }
+void MainWindow::on_cbCL86_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(86, value); }
+void MainWindow::on_cbCL88_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(88, value); }
+void MainWindow::on_cbCL90_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(90, value); }
+void MainWindow::on_cbCL92_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(92, value); }
+void MainWindow::on_cbCL94_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(94, value); }
+void MainWindow::on_cbCL96_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(96, value); }
+void MainWindow::on_cbCL98_XMP2_toggled(bool value) { spd->xmpBundle.profile2.setCLSupported(98, value); }
+
+void MainWindow::on_cbCL20_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(20, value); }
+void MainWindow::on_cbCL22_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(22, value); }
+void MainWindow::on_cbCL24_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(24, value); }
+void MainWindow::on_cbCL26_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(26, value); }
+void MainWindow::on_cbCL28_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(28, value); }
+void MainWindow::on_cbCL30_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(30, value); }
+void MainWindow::on_cbCL32_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(32, value); }
+void MainWindow::on_cbCL34_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(34, value); }
+void MainWindow::on_cbCL36_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(36, value); }
+void MainWindow::on_cbCL38_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(38, value); }
+void MainWindow::on_cbCL40_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(40, value); }
+void MainWindow::on_cbCL42_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(42, value); }
+void MainWindow::on_cbCL44_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(44, value); }
+void MainWindow::on_cbCL46_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(46, value); }
+void MainWindow::on_cbCL48_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(48, value); }
+void MainWindow::on_cbCL50_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(50, value); }
+void MainWindow::on_cbCL52_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(52, value); }
+void MainWindow::on_cbCL54_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(54, value); }
+void MainWindow::on_cbCL56_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(56, value); }
+void MainWindow::on_cbCL58_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(58, value); }
+void MainWindow::on_cbCL60_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(60, value); }
+void MainWindow::on_cbCL62_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(62, value); }
+void MainWindow::on_cbCL64_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(64, value); }
+void MainWindow::on_cbCL66_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(66, value); }
+void MainWindow::on_cbCL68_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(68, value); }
+void MainWindow::on_cbCL70_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(70, value); }
+void MainWindow::on_cbCL72_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(72, value); }
+void MainWindow::on_cbCL74_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(74, value); }
+void MainWindow::on_cbCL76_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(76, value); }
+void MainWindow::on_cbCL78_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(78, value); }
+void MainWindow::on_cbCL80_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(80, value); }
+void MainWindow::on_cbCL82_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(82, value); }
+void MainWindow::on_cbCL84_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(84, value); }
+void MainWindow::on_cbCL86_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(86, value); }
+void MainWindow::on_cbCL88_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(88, value); }
+void MainWindow::on_cbCL90_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(90, value); }
+void MainWindow::on_cbCL92_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(92, value); }
+void MainWindow::on_cbCL94_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(94, value); }
+void MainWindow::on_cbCL96_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(96, value); }
+void MainWindow::on_cbCL98_XMP3_toggled(bool value) { spd->xmpBundle.profile3.setCLSupported(98, value); }
+
+void MainWindow::on_cbCL20_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(20, value); }
+void MainWindow::on_cbCL22_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(22, value); }
+void MainWindow::on_cbCL24_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(24, value); }
+void MainWindow::on_cbCL26_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(26, value); }
+void MainWindow::on_cbCL28_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(28, value); }
+void MainWindow::on_cbCL30_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(30, value); }
+void MainWindow::on_cbCL32_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(32, value); }
+void MainWindow::on_cbCL34_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(34, value); }
+void MainWindow::on_cbCL36_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(36, value); }
+void MainWindow::on_cbCL38_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(38, value); }
+void MainWindow::on_cbCL40_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(40, value); }
+void MainWindow::on_cbCL42_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(42, value); }
+void MainWindow::on_cbCL44_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(44, value); }
+void MainWindow::on_cbCL46_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(46, value); }
+void MainWindow::on_cbCL48_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(48, value); }
+void MainWindow::on_cbCL50_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(50, value); }
+void MainWindow::on_cbCL52_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(52, value); }
+void MainWindow::on_cbCL54_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(54, value); }
+void MainWindow::on_cbCL56_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(56, value); }
+void MainWindow::on_cbCL58_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(58, value); }
+void MainWindow::on_cbCL60_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(60, value); }
+void MainWindow::on_cbCL62_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(62, value); }
+void MainWindow::on_cbCL64_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(64, value); }
+void MainWindow::on_cbCL66_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(66, value); }
+void MainWindow::on_cbCL68_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(68, value); }
+void MainWindow::on_cbCL70_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(70, value); }
+void MainWindow::on_cbCL72_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(72, value); }
+void MainWindow::on_cbCL74_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(74, value); }
+void MainWindow::on_cbCL76_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(76, value); }
+void MainWindow::on_cbCL78_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(78, value); }
+void MainWindow::on_cbCL80_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(80, value); }
+void MainWindow::on_cbCL82_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(82, value); }
+void MainWindow::on_cbCL84_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(84, value); }
+void MainWindow::on_cbCL86_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(86, value); }
+void MainWindow::on_cbCL88_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(88, value); }
+void MainWindow::on_cbCL90_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(90, value); }
+void MainWindow::on_cbCL92_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(92, value); }
+void MainWindow::on_cbCL94_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(94, value); }
+void MainWindow::on_cbCL96_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(96, value); }
+void MainWindow::on_cbCL98_XMPU1_toggled(bool value) { spd->xmpBundle.profileUser1.setCLSupported(98, value); }
+
+void MainWindow::on_cbCL20_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(20, value); }
+void MainWindow::on_cbCL22_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(22, value); }
+void MainWindow::on_cbCL24_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(24, value); }
+void MainWindow::on_cbCL26_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(26, value); }
+void MainWindow::on_cbCL28_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(28, value); }
+void MainWindow::on_cbCL30_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(30, value); }
+void MainWindow::on_cbCL32_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(32, value); }
+void MainWindow::on_cbCL34_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(34, value); }
+void MainWindow::on_cbCL36_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(36, value); }
+void MainWindow::on_cbCL38_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(38, value); }
+void MainWindow::on_cbCL40_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(40, value); }
+void MainWindow::on_cbCL42_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(42, value); }
+void MainWindow::on_cbCL44_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(44, value); }
+void MainWindow::on_cbCL46_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(46, value); }
+void MainWindow::on_cbCL48_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(48, value); }
+void MainWindow::on_cbCL50_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(50, value); }
+void MainWindow::on_cbCL52_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(52, value); }
+void MainWindow::on_cbCL54_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(54, value); }
+void MainWindow::on_cbCL56_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(56, value); }
+void MainWindow::on_cbCL58_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(58, value); }
+void MainWindow::on_cbCL60_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(60, value); }
+void MainWindow::on_cbCL62_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(62, value); }
+void MainWindow::on_cbCL64_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(64, value); }
+void MainWindow::on_cbCL66_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(66, value); }
+void MainWindow::on_cbCL68_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(68, value); }
+void MainWindow::on_cbCL70_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(70, value); }
+void MainWindow::on_cbCL72_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(72, value); }
+void MainWindow::on_cbCL74_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(74, value); }
+void MainWindow::on_cbCL76_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(76, value); }
+void MainWindow::on_cbCL78_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(78, value); }
+void MainWindow::on_cbCL80_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(80, value); }
+void MainWindow::on_cbCL82_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(82, value); }
+void MainWindow::on_cbCL84_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(84, value); }
+void MainWindow::on_cbCL86_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(86, value); }
+void MainWindow::on_cbCL88_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(88, value); }
+void MainWindow::on_cbCL90_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(90, value); }
+void MainWindow::on_cbCL92_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(92, value); }
+void MainWindow::on_cbCL94_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(94, value); }
+void MainWindow::on_cbCL96_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(96, value); }
+void MainWindow::on_cbCL98_XMPU2_toggled(bool value) { spd->xmpBundle.profileUser2.setCLSupported(98, value); }
