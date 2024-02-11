@@ -69,6 +69,7 @@ private slots:
     void reloadXMP3Tab();
     void reloadXMPU1Tab();
     void reloadXMPU2Tab();
+    void reloadMiscTab();
 
     // Slots JEDEC
     void on_spinMinCycleTime_editingFinished();

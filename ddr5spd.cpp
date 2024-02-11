@@ -378,11 +378,11 @@ void DDR5SPD::setDeviceWidth(const unsigned short value) {
     }
 }
 
-const unsigned short DDR5SPD::getManufacturingYear(){
+const char DDR5SPD::getManufacturingYear() {
     return spdStruct.manufactureDate[0];   // Year is represented in hex e.g. 0x22 = 2022
 }
 
-void DDR5SPD::setManufacturingYear(const unsigned short value) {
+void DDR5SPD::setManufacturingYear(const char value) {
     // TODO: Check max value
     if (value > 99) {
         spdStruct.manufactureDate[0] = 99;
@@ -391,12 +391,11 @@ void DDR5SPD::setManufacturingYear(const unsigned short value) {
     }
 }
 
-const unsigned short DDR5SPD::getManufacturingWeek() {
+const char DDR5SPD::getManufacturingWeek() {
     return spdStruct.manufactureDate[1];
 }
 
-void DDR5SPD::setManufacturingWeek(const unsigned short value)
-{
+void DDR5SPD::setManufacturingWeek(const char value) {
     // 52 weeks in a year
     if (value > 52) {
         spdStruct.manufactureDate[1] = 52;
@@ -406,7 +405,7 @@ void DDR5SPD::setManufacturingWeek(const unsigned short value)
 }
 
 const std::string DDR5SPD::getPartNumber() {
-    return std::string(spdStruct.modulePartnumber[0], partNumberSize);
+    return std::string(spdStruct.modulePartnumber);
 }
 
 void DDR5SPD::setPartNumber(const std::string partNumber)

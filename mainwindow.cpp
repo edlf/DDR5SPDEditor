@@ -172,20 +172,24 @@ void MainWindow::wipeXMPProfile1() {
     spd->xmpBundle.profile1.wipeProfile();
     reloadXMP1Tab();
 }
+
 void MainWindow::wipeXMPProfile2() {
     spd->xmpBundle.setXMP2Enabled(false);
     spd->xmpBundle.profile2.wipeProfile();
     reloadXMP2Tab();
 }
+
 void MainWindow::wipeXMPProfile3() {
     spd->xmpBundle.setXMP3Enabled(false);
     spd->xmpBundle.profile3.wipeProfile();
     reloadXMP3Tab();
 }
+
 void MainWindow::wipeXMPProfileU1() {
     spd->xmpBundle.profileUser1.wipeProfile();
     reloadXMPU1Tab();
 }
+
 void MainWindow::wipeXMPProfileU2() {
     spd->xmpBundle.profileUser2.wipeProfile();
     reloadXMPU2Tab();
@@ -358,7 +362,6 @@ void MainWindow::importXMPProfileU2(){
     reloadXMPU2Tab();
 }
 
-
 void MainWindow::enableXMPMagicBits() {
     spd->xmpBundle.enableMagic();
 }
@@ -375,7 +378,6 @@ bool MainWindow::closeFileEnabled(){
     return spd != nullptr;
 }
 
-
 void MainWindow::exportXMP(){
     // TODO
 }
@@ -384,11 +386,7 @@ void MainWindow::toggleUI(const bool status) {
     bool disabled = !status;
 
     ui->tabJEDEC->setDisabled(disabled);
-    ui->tabXMPP1->setDisabled(disabled);
-    ui->tabXMPP2->setDisabled(disabled);
-    ui->tabXMPP3->setDisabled(disabled);
-    ui->tabXMPU1->setDisabled(disabled);
-    ui->tabXMPU2->setDisabled(disabled);
+    ui->tabMisc->setDisabled(disabled);
 
     ui->actionSave->setDisabled(disabled);
     ui->actionClose->setDisabled(disabled);
@@ -1269,13 +1267,32 @@ void MainWindow::reloadXMPU2Tab() {
     ui->ltRTP_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
 }
 
+void MainWindow::reloadMiscTab() {
+    // TODO
+    // ui->cbFormFactor->
+    // ui->cdDensity->setCurrentIndex(spd->getDeviceWidth());
+    // ui->cbBankGroup->
+    // ui->cbBanksPerBankGroup->
+    // ui->cbColumnAddresses->
+    // ui->cbRowAddresses->
+    // ui->cdDeviceWidth-> (spd->getDeviceWidth());
+    ui->sbManufacturingYear->setValue(spd->getManufacturingYear());
+    ui->sbManufacturingWeek->setValue(spd->getManufacturingWeek());
+    ui->lePartNumber->setText(QString::fromStdString(spd->getPartNumber()));
+}
+
 void MainWindow::reloadUI(){
+    if (spd == nullptr) {
+            return;
+    }
+
     reloadJEDECTab();
     reloadXMP1Tab();
     reloadXMP2Tab();
     reloadXMP3Tab();
     reloadXMPU1Tab();
     reloadXMPU2Tab();
+    reloadMiscTab();
 }
 
 // JEDEC

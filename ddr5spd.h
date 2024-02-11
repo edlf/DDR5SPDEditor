@@ -250,11 +250,11 @@ public:
         // Byte 514
         unsigned char manufactureLocation; // Mandatory
         // Byte 515-516
-        unsigned char manufactureDate[2]; // Mandatory
+        char manufactureDate[2]; // Mandatory
         // Bytes 517-520
         unsigned char serialNumber[4]; // Mandatory
         // Bytes 521-550
-        unsigned char modulePartnumber[partNumberSize]; // Mandatory
+        char modulePartnumber[partNumberSize]; // Mandatory
         // Byte 551
         unsigned char moduleRevision;
         // Byte 552-553 DRAM Manufacturer ID Code
@@ -366,10 +366,10 @@ public:
     void setRowAddresses(const unsigned short);
     const unsigned short getDeviceWidth();
     void setDeviceWidth(const unsigned short);
-    const unsigned short getManufacturingYear();
-    void setManufacturingYear(const unsigned short);
-    const unsigned short getManufacturingWeek();
-    void setManufacturingWeek(const unsigned short);
+    const char getManufacturingYear();
+    void setManufacturingYear(const char);
+    const char getManufacturingWeek();
+    void setManufacturingWeek(const char);
     const std::string getPartNumber();
     void setPartNumber(const std::string);
 
