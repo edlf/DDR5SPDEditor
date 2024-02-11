@@ -91,6 +91,23 @@ void MainWindow::openFile(){
 
         // TODO: Find proper way to do this
         DDR5SPD::SPD_Struct rawSPD = *reinterpret_cast<DDR5SPD::SPD_Struct*>(contents.data());
+
+        if (rawSPD.memoryType != 0x12) {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Invalid memory type in SPD.") );
+            return;
+        }
+
+        if (!(rawSPD.moduleType == 0x02 || rawSPD.moduleType == 0x03)) {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Invalid module type in SPD, only UDIMM or SODIMM memory is supported.") );
+            return;
+        }
+
         spd = new DDR5SPD(rawSPD);
 
         enableUI();

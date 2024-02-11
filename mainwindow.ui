@@ -604,14 +604,14 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QLabel" name="labelLowerCLK">
+             <widget class="QLabel" name="labelLowerTick">
               <property name="font">
                <font>
                 <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string>Lower CLK Limit</string>
+               <string>Lower Tick Limit</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -2030,14 +2030,14 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QLabel" name="lLowerCLK_XMP1">
+             <widget class="QLabel" name="lLowerTick_XMP1">
               <property name="font">
                <font>
                 <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string>Lower CLK Limit</string>
+               <string>Lower Tick Limit</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -4482,14 +4482,14 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QLabel" name="lLowerCLK_XMP2">
+             <widget class="QLabel" name="lLowerTick_XMP2">
               <property name="font">
                <font>
                 <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string>Lower CLK Limit</string>
+               <string>Lower Tick Limit</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -6421,14 +6421,14 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QLabel" name="lLowerCLK_XMP3">
+             <widget class="QLabel" name="lLowerTick_XMP3">
               <property name="font">
                <font>
                 <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string>Lower CLK Limit</string>
+               <string>Lower Tick Limit</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -8363,14 +8363,14 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QLabel" name="lLowerCLK_XMPU1">
+             <widget class="QLabel" name="lLowerTick_XMPU1">
               <property name="font">
                <font>
                 <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string>Lower CLK Limit</string>
+               <string>Lower Tick Limit</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -10305,14 +10305,14 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QLabel" name="lLowerCLK_XMPU2">
+             <widget class="QLabel" name="lLowerTick_XMPU2">
               <property name="font">
                <font>
                 <bold>true</bold>
                </font>
               </property>
               <property name="text">
-               <string>Lower CLK Limit</string>
+               <string>Lower Tick Limit</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
