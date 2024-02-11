@@ -459,6 +459,10 @@ void XMP3_Bundle::clearMagic() {
     rawXmp.header.magic2 = 0x00;
 }
 
+bool XMP3_Bundle::isMagicPresent() {
+    return (rawXmp.header.magic1 == XMPHeaderMagic[0] && rawXmp.header.magic2 == XMPHeaderMagic[1]);
+}
+
 const unsigned short XMP3_Bundle::getHeaderCRC() {
     return utilities::ConvertBytes(rawXmp.header.checksum[0], rawXmp.header.checksum[1]);
 }

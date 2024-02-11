@@ -31,6 +31,10 @@ void Convert16bitUnsignedInteger(unsigned char& lsb, unsigned char& msb, unsigne
 }
 
 unsigned short TimeToTicksDDR5(const unsigned int time, const unsigned int minCycleTime) {
+    if (minCycleTime == 0) {
+        return 0;
+    }
+
     // 0.30% per the rounding algorithm per JESD400-5B
     constexpr unsigned int correctionFactor = 3;
 

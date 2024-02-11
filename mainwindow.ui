@@ -1818,6 +1818,20 @@
               </property>
              </widget>
             </item>
+            <item row="1" column="2">
+             <widget class="QLabel" name="labelMT_XMP1">
+              <property name="text">
+               <string>Megatransfers:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLabel" name="lMTValue_XMP1">
+              <property name="text">
+               <string>0 MT/s</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </widget>
@@ -2626,7 +2640,7 @@
              </widget>
             </item>
             <item row="6" column="3">
-             <widget class="QLabel" name="lhltCCD_L_WTR_XMP1">
+             <widget class="QLabel" name="ltCCD_L_WTR_XMP1">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -2778,7 +2792,7 @@
              </widget>
             </item>
             <item row="6" column="4">
-             <widget class="QSpinBox" name="sbhltCCD_L_WTR_XMP1">
+             <widget class="QSpinBox" name="sbtCCD_L_WTR_XMP1">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -2915,7 +2929,7 @@
              </widget>
             </item>
             <item row="6" column="5">
-             <widget class="QSpinBox" name="sbhltCCD_L_WTR_LCLK_XMP1">
+             <widget class="QSpinBox" name="sbtCCD_L_WTR_LCLK_XMP1">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -3073,7 +3087,7 @@
              </widget>
             </item>
             <item row="6" column="6">
-             <widget class="QLabel" name="lhltCCD_L_WTR_Ticks_XMP1">
+             <widget class="QLabel" name="ltCCD_L_WTR_Ticks_XMP1">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -3590,13 +3604,43 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QSpinBox" name="sbVDPP_XMP1"/>
+             <widget class="QSpinBox" name="sbVPP_XMP1">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QSpinBox" name="sbVDDQ_XMP1"/>
+             <widget class="QSpinBox" name="sbVDDQ_XMP1">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QSpinBox" name="sbVDD_XMP1"/>
+             <widget class="QSpinBox" name="sbVDD_XMP1">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="6">
              <widget class="QLabel" name="lVMEMCTRL_XMP1">
@@ -3606,7 +3650,17 @@
              </widget>
             </item>
             <item row="0" column="7">
-             <widget class="QSpinBox" name="sbVmemctrl_XMP1"/>
+             <widget class="QSpinBox" name="sbVmemctrl_XMP1">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -3754,13 +3808,43 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QSpinBox" name="sbVDPP_XMP2"/>
+             <widget class="QSpinBox" name="sbVPP_XMP2">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QSpinBox" name="sbVDDQ_XMP2"/>
+             <widget class="QSpinBox" name="sbVDDQ_XMP2">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QSpinBox" name="sbVDD_XMP2"/>
+             <widget class="QSpinBox" name="sbVDD_XMP2">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="6">
              <widget class="QLabel" name="lVMEMCTRL_XMP2">
@@ -3770,7 +3854,17 @@
              </widget>
             </item>
             <item row="0" column="7">
-             <widget class="QSpinBox" name="sbVmemctrl_XMP2"/>
+             <widget class="QSpinBox" name="sbVmemctrl_XMP2">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -4146,6 +4240,20 @@
              <widget class="QLabel" name="lFrequency_XMP2">
               <property name="text">
                <string>Frequency</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLabel" name="labelMT_XMP2">
+              <property name="text">
+               <string>Megatransfers:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLabel" name="lMTValue_XMP2">
+              <property name="text">
+               <string>0 MT/s</string>
               </property>
              </widget>
             </item>
@@ -4957,7 +5065,7 @@
              </widget>
             </item>
             <item row="6" column="3">
-             <widget class="QLabel" name="lhltCCD_L_WTR_XMP2">
+             <widget class="QLabel" name="ltCCD_L_WTR_XMP2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -5109,7 +5217,7 @@
              </widget>
             </item>
             <item row="6" column="4">
-             <widget class="QSpinBox" name="sbhltCCD_L_WTR_XMP2">
+             <widget class="QSpinBox" name="sbtCCD_L_WTR_XMP2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -5246,7 +5354,7 @@
              </widget>
             </item>
             <item row="6" column="5">
-             <widget class="QSpinBox" name="sbhltCCD_L_WTR_LCLK_XMP2">
+             <widget class="QSpinBox" name="sbtCCD_L_WTR_LCLK_XMP2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -5404,7 +5512,7 @@
              </widget>
             </item>
             <item row="6" column="6">
-             <widget class="QLabel" name="lhltCCD_L_WTR_Ticks_XMP2">
+             <widget class="QLabel" name="ltCCD_L_WTR_Ticks_XMP2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -5615,13 +5723,43 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QSpinBox" name="sbVDPP_XMP3"/>
+             <widget class="QSpinBox" name="sbVPP_XMP3">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QSpinBox" name="sbVDDQ_XMP3"/>
+             <widget class="QSpinBox" name="sbVDDQ_XMP3">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QSpinBox" name="sbVDD_XMP3"/>
+             <widget class="QSpinBox" name="sbVDD_XMP3">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="6">
              <widget class="QLabel" name="lVMEMCTRL_XMP3">
@@ -5631,7 +5769,17 @@
              </widget>
             </item>
             <item row="0" column="7">
-             <widget class="QSpinBox" name="sbVmemctrl_XMP3"/>
+             <widget class="QSpinBox" name="sbVmemctrl_XMP3">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -6007,6 +6155,20 @@
              <widget class="QLabel" name="lFrequency_XMP3">
               <property name="text">
                <string>Frequency</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLabel" name="labelMT_XMP3">
+              <property name="text">
+               <string>Megatransfers:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLabel" name="lMTValue_XMP3">
+              <property name="text">
+               <string>0 MT/s</string>
               </property>
              </widget>
             </item>
@@ -6818,7 +6980,7 @@
              </widget>
             </item>
             <item row="6" column="3">
-             <widget class="QLabel" name="lhltCCD_L_WTR_XMP3">
+             <widget class="QLabel" name="ltCCD_L_WTR_XMP3">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -6970,7 +7132,7 @@
              </widget>
             </item>
             <item row="6" column="4">
-             <widget class="QSpinBox" name="sbhltCCD_L_WTR_XMP3">
+             <widget class="QSpinBox" name="sbtCCD_L_WTR_XMP3">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -7107,7 +7269,7 @@
              </widget>
             </item>
             <item row="6" column="5">
-             <widget class="QSpinBox" name="sbhltCCD_L_WTR_LCLK_XMP3">
+             <widget class="QSpinBox" name="sbtCCD_L_WTR_LCLK_XMP3">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -7265,7 +7427,7 @@
              </widget>
             </item>
             <item row="6" column="6">
-             <widget class="QLabel" name="lhltCCD_L_WTR_Ticks_XMP3">
+             <widget class="QLabel" name="ltCCD_L_WTR_Ticks_XMP3">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -7476,13 +7638,43 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QSpinBox" name="sbVDPP_XMPU1"/>
+             <widget class="QSpinBox" name="sbVPP_XMPU1">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QSpinBox" name="sbVDDQ_XMPU1"/>
+             <widget class="QSpinBox" name="sbVDDQ_XMPU1">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QSpinBox" name="sbVDD_XMPU1"/>
+             <widget class="QSpinBox" name="sbVDD_XMPU1">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="6">
              <widget class="QLabel" name="lVMEMCTRL_XMPU1">
@@ -7492,7 +7684,17 @@
              </widget>
             </item>
             <item row="0" column="7">
-             <widget class="QSpinBox" name="sbVmemctrl_XMPU1"/>
+             <widget class="QSpinBox" name="sbVmemctrl_XMPU1">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -7868,6 +8070,20 @@
              <widget class="QLabel" name="lFrequency_XMPU1">
               <property name="text">
                <string>Frequency</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLabel" name="labelMT_XMPU1">
+              <property name="text">
+               <string>Megatransfers:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLabel" name="lMTValue_XMPU1">
+              <property name="text">
+               <string>0 MT/s</string>
               </property>
              </widget>
             </item>
@@ -8679,7 +8895,7 @@
              </widget>
             </item>
             <item row="6" column="3">
-             <widget class="QLabel" name="lhltCCD_L_WTR_XMPU1">
+             <widget class="QLabel" name="ltCCD_L_WTR_XMPU1">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -8831,7 +9047,7 @@
              </widget>
             </item>
             <item row="6" column="4">
-             <widget class="QSpinBox" name="sbhltCCD_L_WTR_XMPU1">
+             <widget class="QSpinBox" name="sbtCCD_L_WTR_XMPU1">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -8968,7 +9184,7 @@
              </widget>
             </item>
             <item row="6" column="5">
-             <widget class="QSpinBox" name="sbhltCCD_L_WTR_LCLK_XMPU1">
+             <widget class="QSpinBox" name="sbtCCD_L_WTR_LCLK_XMPU1">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -9126,7 +9342,7 @@
              </widget>
             </item>
             <item row="6" column="6">
-             <widget class="QLabel" name="lhltCCD_L_WTR_Ticks_XMPU1">
+             <widget class="QLabel" name="ltCCD_L_WTR_Ticks_XMPU1">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -9337,13 +9553,43 @@
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QSpinBox" name="sbVDPP_XMPU2"/>
+             <widget class="QSpinBox" name="sbVPP_XMPU2">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QSpinBox" name="sbVDDQ_XMPU2"/>
+             <widget class="QSpinBox" name="sbVDDQ_XMPU2">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QSpinBox" name="sbVDD_XMPU2"/>
+             <widget class="QSpinBox" name="sbVDD_XMPU2">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
             <item row="0" column="6">
              <widget class="QLabel" name="lVMEMCTRL_XMPU2">
@@ -9353,7 +9599,17 @@
              </widget>
             </item>
             <item row="0" column="7">
-             <widget class="QSpinBox" name="sbVmemctrl_XMPU2"/>
+             <widget class="QSpinBox" name="sbVmemctrl_XMPU2">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -9729,6 +9985,20 @@
              <widget class="QLabel" name="lFrequency_XMPU2">
               <property name="text">
                <string>Frequency</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLabel" name="labelMT_XMPU2">
+              <property name="text">
+               <string>Megatransfers:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QLabel" name="lMTValue_XMPU2">
+              <property name="text">
+               <string>0 MT/s</string>
               </property>
              </widget>
             </item>
@@ -10540,7 +10810,7 @@
              </widget>
             </item>
             <item row="6" column="3">
-             <widget class="QLabel" name="lhltCCD_L_WTR_XMPU2">
+             <widget class="QLabel" name="ltCCD_L_WTR_XMPU2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -10692,7 +10962,7 @@
              </widget>
             </item>
             <item row="6" column="4">
-             <widget class="QSpinBox" name="sbhltCCD_L_WTR_XMPU2">
+             <widget class="QSpinBox" name="sbtCCD_L_WTR_XMPU2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -10829,7 +11099,7 @@
              </widget>
             </item>
             <item row="6" column="5">
-             <widget class="QSpinBox" name="sbhltCCD_L_WTR_LCLK_XMPU2">
+             <widget class="QSpinBox" name="sbtCCD_L_WTR_LCLK_XMPU2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -10987,7 +11257,7 @@
              </widget>
             </item>
             <item row="6" column="6">
-             <widget class="QLabel" name="lhltCCD_L_WTR_Ticks_XMPU2">
+             <widget class="QLabel" name="ltCCD_L_WTR_Ticks_XMPU2">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>

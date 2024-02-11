@@ -444,7 +444,6 @@ void DDR5SPD::fixCRC() {
 }
 
 const bool DDR5SPD::isXMPPresent() {
-    // TODO
-    return false;
+    return xmpBundle.isMagicPresent();
 }
 

@@ -320,147 +320,554 @@ void MainWindow::reloadJEDECTab() {
 }
 
 void MainWindow::reloadXMP1Tab() {
+    // XMP Header
     ui->leProfileName_XMP1->setText(QString::fromStdString(spd->xmpBundle.getXMP1ProfileName()));
+    ui->cbEnabled_XMP1->setChecked(spd->xmpBundle.isXMP1Enabled());
 
-    // spd->xmpBundle.isXMP1Enabled()
-    ui->cbCL20_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(20));
-    ui->cbCL22_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(22));
-    ui->cbCL24_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(24));
-    ui->cbCL26_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(26));
-    ui->cbCL28_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(28));
-    ui->cbCL30_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(30));
-    ui->cbCL32_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(32));
-    ui->cbCL34_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(34));
-    ui->cbCL36_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(36));
-    ui->cbCL38_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(38));
-    ui->cbCL40_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(40));
-    ui->cbCL42_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(42));
-    ui->cbCL44_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(44));
-    ui->cbCL46_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(46));
-    ui->cbCL48_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(48));
-    ui->cbCL50_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(50));
-    ui->cbCL52_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(52));
-    ui->cbCL54_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(54));
-    ui->cbCL56_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(56));
-    ui->cbCL58_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(58));
-    ui->cbCL60_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(60));
-    ui->cbCL62_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(62));
-    ui->cbCL64_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(64));
-    ui->cbCL66_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(66));
-    ui->cbCL68_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(68));
-    ui->cbCL70_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(70));
-    ui->cbCL72_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(72));
-    ui->cbCL74_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(74));
-    ui->cbCL76_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(76));
-    ui->cbCL78_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(78));
-    ui->cbCL80_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(80));
-    ui->cbCL82_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(82));
-    ui->cbCL84_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(84));
-    ui->cbCL86_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(86));
-    ui->cbCL88_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(88));
-    ui->cbCL90_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(90));
-    ui->cbCL92_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(92));
-    ui->cbCL94_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(94));
-    ui->cbCL96_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(96));
-    ui->cbCL98_XMP1->setChecked(spd->xmpBundle.profile1.getCLSupported(98));
+    // XMP Profile
+    auto& xmp_profile = spd->xmpBundle.profile1;
+
+    const unsigned int minCycleTime = xmp_profile.getMinCycleTime();
+    ui->spinMinCycleTime_XMP1->setValue(minCycleTime);
+    QString frequencyStr = QString::number(xmp_profile.getFrequency()) + " MHz";
+    QString mtStr = QString::number(xmp_profile.getMT()) + " MT/s";
+    ui->lFrequencyValue_XMP1->setText(frequencyStr);
+    ui->lMTValue_XMP1->setText(mtStr);
+
+    ui->cbDynamicMemBoost_XMP1->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
+    ui->cbRealTimeMemOC_XMP1->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
+    // ui->cbCommandRate_XMP1->setCurrentIndex(xmp_profile.getCommandRate());
+
+    // Voltages
+    ui->sbVDD_XMP1->setValue(xmp_profile.getVDD());
+    ui->sbVDDQ_XMP1->setValue(xmp_profile.getVDDQ());
+    ui->sbVPP_XMP1->setValue(xmp_profile.getVPP());
+    ui->sbVmemctrl_XMP1->setValue(xmp_profile.getVMEMCtrl());
+
+    // CAS
+    ui->cbCL20_XMP1->setChecked(xmp_profile.getCLSupported(20));
+    ui->cbCL22_XMP1->setChecked(xmp_profile.getCLSupported(22));
+    ui->cbCL24_XMP1->setChecked(xmp_profile.getCLSupported(24));
+    ui->cbCL26_XMP1->setChecked(xmp_profile.getCLSupported(26));
+    ui->cbCL28_XMP1->setChecked(xmp_profile.getCLSupported(28));
+    ui->cbCL30_XMP1->setChecked(xmp_profile.getCLSupported(30));
+    ui->cbCL32_XMP1->setChecked(xmp_profile.getCLSupported(32));
+    ui->cbCL34_XMP1->setChecked(xmp_profile.getCLSupported(34));
+    ui->cbCL36_XMP1->setChecked(xmp_profile.getCLSupported(36));
+    ui->cbCL38_XMP1->setChecked(xmp_profile.getCLSupported(38));
+    ui->cbCL40_XMP1->setChecked(xmp_profile.getCLSupported(40));
+    ui->cbCL42_XMP1->setChecked(xmp_profile.getCLSupported(42));
+    ui->cbCL44_XMP1->setChecked(xmp_profile.getCLSupported(44));
+    ui->cbCL46_XMP1->setChecked(xmp_profile.getCLSupported(46));
+    ui->cbCL48_XMP1->setChecked(xmp_profile.getCLSupported(48));
+    ui->cbCL50_XMP1->setChecked(xmp_profile.getCLSupported(50));
+    ui->cbCL52_XMP1->setChecked(xmp_profile.getCLSupported(52));
+    ui->cbCL54_XMP1->setChecked(xmp_profile.getCLSupported(54));
+    ui->cbCL56_XMP1->setChecked(xmp_profile.getCLSupported(56));
+    ui->cbCL58_XMP1->setChecked(xmp_profile.getCLSupported(58));
+    ui->cbCL60_XMP1->setChecked(xmp_profile.getCLSupported(60));
+    ui->cbCL62_XMP1->setChecked(xmp_profile.getCLSupported(62));
+    ui->cbCL64_XMP1->setChecked(xmp_profile.getCLSupported(64));
+    ui->cbCL66_XMP1->setChecked(xmp_profile.getCLSupported(66));
+    ui->cbCL68_XMP1->setChecked(xmp_profile.getCLSupported(68));
+    ui->cbCL70_XMP1->setChecked(xmp_profile.getCLSupported(70));
+    ui->cbCL72_XMP1->setChecked(xmp_profile.getCLSupported(72));
+    ui->cbCL74_XMP1->setChecked(xmp_profile.getCLSupported(74));
+    ui->cbCL76_XMP1->setChecked(xmp_profile.getCLSupported(76));
+    ui->cbCL78_XMP1->setChecked(xmp_profile.getCLSupported(78));
+    ui->cbCL80_XMP1->setChecked(xmp_profile.getCLSupported(80));
+    ui->cbCL82_XMP1->setChecked(xmp_profile.getCLSupported(82));
+    ui->cbCL84_XMP1->setChecked(xmp_profile.getCLSupported(84));
+    ui->cbCL86_XMP1->setChecked(xmp_profile.getCLSupported(86));
+    ui->cbCL88_XMP1->setChecked(xmp_profile.getCLSupported(88));
+    ui->cbCL90_XMP1->setChecked(xmp_profile.getCLSupported(90));
+    ui->cbCL92_XMP1->setChecked(xmp_profile.getCLSupported(92));
+    ui->cbCL94_XMP1->setChecked(xmp_profile.getCLSupported(94));
+    ui->cbCL96_XMP1->setChecked(xmp_profile.getCLSupported(96));
+    ui->cbCL98_XMP1->setChecked(xmp_profile.getCLSupported(98));
+
+    ui->sbtAA_XMP1->setValue(xmp_profile.gettAA());
+    ui->ltAA_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettAA(), minCycleTime)));
+    ui->sbtRCD_XMP1->setValue(xmp_profile.gettRCD());
+    ui->ltRCD_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRCD(), minCycleTime)));
+    ui->sbtRP_XMP1->setValue(xmp_profile.gettRP());
+    ui->ltRP_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRP(), minCycleTime)));
+    ui->sbtRAS_XMP1->setValue(xmp_profile.gettRAS());
+    ui->ltRAS_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRAS(), minCycleTime)));
+    ui->sbtRC_XMP1->setValue(xmp_profile.gettRC());
+    ui->ltRC_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRC(), minCycleTime)));
+    ui->sbtWR_XMP1->setValue(xmp_profile.gettWR());
+    ui->ltWR_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettWR(), minCycleTime)));
+    ui->sbtRFC1_XMP1->setValue(xmp_profile.gettRFC1());
+    ui->ltRFC1_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC1() * 1000, minCycleTime)));
+    ui->sbtRFC2_XMP1->setValue(xmp_profile.gettRFC2());
+    ui->ltRFC2_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC2() * 1000, minCycleTime)));
+    ui->sbtRFC_XMP1->setValue(xmp_profile.gettRFC());
+    ui->ltRFC_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC() * 1000, minCycleTime)));
+    ui->sbtRRD_L_XMP1->setValue(xmp_profile.gettRRD_L());
+    ui->sbtRRD_L_LCLK_XMP1->setValue(xmp_profile.gettRRD_L_lowerLimit());
+    ui->ltRRD_L_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRRD_L(), minCycleTime)));
+    ui->sbtCCD_L_XMP1->setValue(xmp_profile.gettCCD_L());
+    ui->sbtCCD_L_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_lowerLimit());
+    ui->ltCCD_L_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L(), minCycleTime)));
+    ui->sbtCCDL_L_WR_XMP1->setValue(xmp_profile.gettCCD_L_WR());
+    ui->sbtCCDL_L_WR_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
+    ui->ltCCDL_L_WR_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR(), minCycleTime)));
+    ui->sbtCCDL_L_WR2_XMP1->setValue(xmp_profile.gettCCD_L_WR2());
+    ui->sbtCCDL_L_WR2_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+    ui->ltCCDL_L_WR2_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR2(), minCycleTime)));
+    ui->sbtFAW_XMP1->setValue(xmp_profile.gettFAW());
+    ui->sbtFAW_LCLK_XMP1->setValue(xmp_profile.gettFAW_lowerLimit());
+    ui->ltFAW_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettFAW(), minCycleTime)));
+    ui->sbtCCD_L_WTR_XMP1->setValue(xmp_profile.gettCCD_L_WTR());
+    ui->sbtCCD_L_WTR_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_WTR_lowerLimit());
+    ui->ltCCD_L_WTR_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WTR(), minCycleTime)));
+    ui->sbtCCD_S_WTR_XMP1->setValue(xmp_profile.gettCCD_S_WTR());
+    ui->sbtCCD_S_WTR_LCLK_XMP1->setValue(xmp_profile.gettCCD_S_WTR_lowerLimit());
+    ui->ltCCD_S_WTR_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_S_WTR(), minCycleTime)));
+    ui->sbtRTP_XMP1->setValue(xmp_profile.gettRTP());
+    ui->sbtRTP_LCLK_XMP1->setValue(xmp_profile.gettRTP_lowerLimit());
+    ui->ltRTP_Ticks_XMP1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
 }
 
 void MainWindow::reloadXMP2Tab() {
+    // XMP Header
     ui->leProfileName_XMP2->setText(QString::fromStdString(spd->xmpBundle.getXMP2ProfileName()));
+    ui->cbEnabled_XMP2->setChecked(spd->xmpBundle.isXMP2Enabled());
 
-    ui->cbCL20_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(20));
-    ui->cbCL22_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(22));
-    ui->cbCL24_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(24));
-    ui->cbCL26_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(26));
-    ui->cbCL28_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(28));
-    ui->cbCL30_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(30));
-    ui->cbCL32_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(32));
-    ui->cbCL34_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(34));
-    ui->cbCL36_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(36));
-    ui->cbCL38_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(38));
-    ui->cbCL40_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(40));
-    ui->cbCL42_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(42));
-    ui->cbCL44_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(44));
-    ui->cbCL46_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(46));
-    ui->cbCL48_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(48));
-    ui->cbCL50_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(50));
-    ui->cbCL52_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(52));
-    ui->cbCL54_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(54));
-    ui->cbCL56_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(56));
-    ui->cbCL58_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(58));
-    ui->cbCL60_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(60));
-    ui->cbCL62_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(62));
-    ui->cbCL64_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(64));
-    ui->cbCL66_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(66));
-    ui->cbCL68_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(68));
-    ui->cbCL70_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(70));
-    ui->cbCL72_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(72));
-    ui->cbCL74_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(74));
-    ui->cbCL76_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(76));
-    ui->cbCL78_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(78));
-    ui->cbCL80_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(80));
-    ui->cbCL82_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(82));
-    ui->cbCL84_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(84));
-    ui->cbCL86_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(86));
-    ui->cbCL88_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(88));
-    ui->cbCL90_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(90));
-    ui->cbCL92_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(92));
-    ui->cbCL94_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(94));
-    ui->cbCL96_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(96));
-    ui->cbCL98_XMP2->setChecked(spd->xmpBundle.profile2.getCLSupported(98));
+    // XMP Profile
+    auto& xmp_profile = spd->xmpBundle.profile2;
+
+    const unsigned int minCycleTime = xmp_profile.getMinCycleTime();
+    ui->spinMinCycleTime_XMP2->setValue(minCycleTime);
+    QString frequencyStr = QString::number(xmp_profile.getFrequency()) + " MHz";
+    QString mtStr = QString::number(xmp_profile.getMT()) + " MT/s";
+    ui->lFrequencyValue_XMP2->setText(frequencyStr);
+    ui->lMTValue_XMP2->setText(mtStr);
+
+    ui->cbDynamicMemBoost_XMP2->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
+    ui->cbRealTimeMemOC_XMP2->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
+    // ui->cbCommandRate_XMP2->setCurrentIndex(xmp_profile.getCommandRate());
+
+    // Voltages
+    ui->sbVDD_XMP2->setValue(xmp_profile.getVDD());
+    ui->sbVDDQ_XMP2->setValue(xmp_profile.getVDDQ());
+    ui->sbVPP_XMP2->setValue(xmp_profile.getVPP());
+    ui->sbVmemctrl_XMP2->setValue(xmp_profile.getVMEMCtrl());
+
+    // CAS
+    ui->cbCL20_XMP2->setChecked(xmp_profile.getCLSupported(20));
+    ui->cbCL22_XMP2->setChecked(xmp_profile.getCLSupported(22));
+    ui->cbCL24_XMP2->setChecked(xmp_profile.getCLSupported(24));
+    ui->cbCL26_XMP2->setChecked(xmp_profile.getCLSupported(26));
+    ui->cbCL28_XMP2->setChecked(xmp_profile.getCLSupported(28));
+    ui->cbCL30_XMP2->setChecked(xmp_profile.getCLSupported(30));
+    ui->cbCL32_XMP2->setChecked(xmp_profile.getCLSupported(32));
+    ui->cbCL34_XMP2->setChecked(xmp_profile.getCLSupported(34));
+    ui->cbCL36_XMP2->setChecked(xmp_profile.getCLSupported(36));
+    ui->cbCL38_XMP2->setChecked(xmp_profile.getCLSupported(38));
+    ui->cbCL40_XMP2->setChecked(xmp_profile.getCLSupported(40));
+    ui->cbCL42_XMP2->setChecked(xmp_profile.getCLSupported(42));
+    ui->cbCL44_XMP2->setChecked(xmp_profile.getCLSupported(44));
+    ui->cbCL46_XMP2->setChecked(xmp_profile.getCLSupported(46));
+    ui->cbCL48_XMP2->setChecked(xmp_profile.getCLSupported(48));
+    ui->cbCL50_XMP2->setChecked(xmp_profile.getCLSupported(50));
+    ui->cbCL52_XMP2->setChecked(xmp_profile.getCLSupported(52));
+    ui->cbCL54_XMP2->setChecked(xmp_profile.getCLSupported(54));
+    ui->cbCL56_XMP2->setChecked(xmp_profile.getCLSupported(56));
+    ui->cbCL58_XMP2->setChecked(xmp_profile.getCLSupported(58));
+    ui->cbCL60_XMP2->setChecked(xmp_profile.getCLSupported(60));
+    ui->cbCL62_XMP2->setChecked(xmp_profile.getCLSupported(62));
+    ui->cbCL64_XMP2->setChecked(xmp_profile.getCLSupported(64));
+    ui->cbCL66_XMP2->setChecked(xmp_profile.getCLSupported(66));
+    ui->cbCL68_XMP2->setChecked(xmp_profile.getCLSupported(68));
+    ui->cbCL70_XMP2->setChecked(xmp_profile.getCLSupported(70));
+    ui->cbCL72_XMP2->setChecked(xmp_profile.getCLSupported(72));
+    ui->cbCL74_XMP2->setChecked(xmp_profile.getCLSupported(74));
+    ui->cbCL76_XMP2->setChecked(xmp_profile.getCLSupported(76));
+    ui->cbCL78_XMP2->setChecked(xmp_profile.getCLSupported(78));
+    ui->cbCL80_XMP2->setChecked(xmp_profile.getCLSupported(80));
+    ui->cbCL82_XMP2->setChecked(xmp_profile.getCLSupported(82));
+    ui->cbCL84_XMP2->setChecked(xmp_profile.getCLSupported(84));
+    ui->cbCL86_XMP2->setChecked(xmp_profile.getCLSupported(86));
+    ui->cbCL88_XMP2->setChecked(xmp_profile.getCLSupported(88));
+    ui->cbCL90_XMP2->setChecked(xmp_profile.getCLSupported(90));
+    ui->cbCL92_XMP2->setChecked(xmp_profile.getCLSupported(92));
+    ui->cbCL94_XMP2->setChecked(xmp_profile.getCLSupported(94));
+    ui->cbCL96_XMP2->setChecked(xmp_profile.getCLSupported(96));
+    ui->cbCL98_XMP2->setChecked(xmp_profile.getCLSupported(98));
+
+    ui->sbtAA_XMP2->setValue(xmp_profile.gettAA());
+    ui->ltAA_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettAA(), minCycleTime)));
+    ui->sbtRCD_XMP2->setValue(xmp_profile.gettRCD());
+    ui->ltRCD_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRCD(), minCycleTime)));
+    ui->sbtRP_XMP2->setValue(xmp_profile.gettRP());
+    ui->ltRP_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRP(), minCycleTime)));
+    ui->sbtRAS_XMP2->setValue(xmp_profile.gettRAS());
+    ui->ltRAS_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRAS(), minCycleTime)));
+    ui->sbtRC_XMP2->setValue(xmp_profile.gettRC());
+    ui->ltRC_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRC(), minCycleTime)));
+    ui->sbtWR_XMP2->setValue(xmp_profile.gettWR());
+    ui->ltWR_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettWR(), minCycleTime)));
+    ui->sbtRFC1_XMP2->setValue(xmp_profile.gettRFC1());
+    ui->ltRFC1_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC1() * 1000, minCycleTime)));
+    ui->sbtRFC2_XMP2->setValue(xmp_profile.gettRFC2());
+    ui->ltRFC2_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC2() * 1000, minCycleTime)));
+    ui->sbtRFC_XMP2->setValue(xmp_profile.gettRFC());
+    ui->ltRFC_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC() * 1000, minCycleTime)));
+    ui->sbtRRD_L_XMP2->setValue(xmp_profile.gettRRD_L());
+    ui->sbtRRD_L_LCLK_XMP2->setValue(xmp_profile.gettRRD_L_lowerLimit());
+    ui->ltRRD_L_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRRD_L(), minCycleTime)));
+    ui->sbtCCD_L_XMP2->setValue(xmp_profile.gettCCD_L());
+    ui->sbtCCD_L_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_lowerLimit());
+    ui->ltCCD_L_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L(), minCycleTime)));
+    ui->sbtCCDL_L_WR_XMP2->setValue(xmp_profile.gettCCD_L_WR());
+    ui->sbtCCDL_L_WR_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
+    ui->ltCCDL_L_WR_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR(), minCycleTime)));
+    ui->sbtCCDL_L_WR2_XMP2->setValue(xmp_profile.gettCCD_L_WR2());
+    ui->sbtCCDL_L_WR2_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+    ui->ltCCDL_L_WR2_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR2(), minCycleTime)));
+    ui->sbtFAW_XMP2->setValue(xmp_profile.gettFAW());
+    ui->sbtFAW_LCLK_XMP2->setValue(xmp_profile.gettFAW_lowerLimit());
+    ui->ltFAW_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettFAW(), minCycleTime)));
+    ui->sbtCCD_L_WTR_XMP2->setValue(xmp_profile.gettCCD_L_WTR());
+    ui->sbtCCD_L_WTR_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_WTR_lowerLimit());
+    ui->ltCCD_L_WTR_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WTR(), minCycleTime)));
+    ui->sbtCCD_S_WTR_XMP2->setValue(xmp_profile.gettCCD_S_WTR());
+    ui->sbtCCD_S_WTR_LCLK_XMP2->setValue(xmp_profile.gettCCD_S_WTR_lowerLimit());
+    ui->ltCCD_S_WTR_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_S_WTR(), minCycleTime)));
+    ui->sbtRTP_XMP2->setValue(xmp_profile.gettRTP());
+    ui->sbtRTP_LCLK_XMP2->setValue(xmp_profile.gettRTP_lowerLimit());
+    ui->ltRTP_Ticks_XMP2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
 }
 
 void MainWindow::reloadXMP3Tab() {
+    // XMP Header
     ui->leProfileName_XMP3->setText(QString::fromStdString(spd->xmpBundle.getXMP3ProfileName()));
+    ui->cbEnabled_XMP3->setChecked(spd->xmpBundle.isXMP3Enabled());
 
-    ui->cbCL20_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(20));
-    ui->cbCL22_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(22));
-    ui->cbCL24_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(24));
-    ui->cbCL26_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(26));
-    ui->cbCL28_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(28));
-    ui->cbCL30_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(30));
-    ui->cbCL32_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(32));
-    ui->cbCL34_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(34));
-    ui->cbCL36_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(36));
-    ui->cbCL38_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(38));
-    ui->cbCL40_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(40));
-    ui->cbCL42_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(42));
-    ui->cbCL44_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(44));
-    ui->cbCL46_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(46));
-    ui->cbCL48_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(48));
-    ui->cbCL50_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(50));
-    ui->cbCL52_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(52));
-    ui->cbCL54_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(54));
-    ui->cbCL56_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(56));
-    ui->cbCL58_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(58));
-    ui->cbCL60_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(60));
-    ui->cbCL62_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(62));
-    ui->cbCL64_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(64));
-    ui->cbCL66_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(66));
-    ui->cbCL68_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(68));
-    ui->cbCL70_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(70));
-    ui->cbCL72_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(72));
-    ui->cbCL74_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(74));
-    ui->cbCL76_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(76));
-    ui->cbCL78_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(78));
-    ui->cbCL80_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(80));
-    ui->cbCL82_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(82));
-    ui->cbCL84_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(84));
-    ui->cbCL86_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(86));
-    ui->cbCL88_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(88));
-    ui->cbCL90_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(90));
-    ui->cbCL92_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(92));
-    ui->cbCL94_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(94));
-    ui->cbCL96_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(96));
-    ui->cbCL98_XMP3->setChecked(spd->xmpBundle.profile3.getCLSupported(98));
+    // XMP Profile
+    auto& xmp_profile = spd->xmpBundle.profile3;
+
+    const unsigned int minCycleTime = xmp_profile.getMinCycleTime();
+    ui->spinMinCycleTime_XMP3->setValue(minCycleTime);
+    QString frequencyStr = QString::number(xmp_profile.getFrequency()) + " MHz";
+    QString mtStr = QString::number(xmp_profile.getMT()) + " MT/s";
+    ui->lFrequencyValue_XMP3->setText(frequencyStr);
+    ui->lMTValue_XMP3->setText(mtStr);
+
+    ui->cbDynamicMemBoost_XMP3->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
+    ui->cbRealTimeMemOC_XMP3->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
+    // ui->cbCommandRate_XMP3->setCurrentIndex(xmp_profile.getCommandRate());
+
+    // Voltages
+    ui->sbVDD_XMP3->setValue(xmp_profile.getVDD());
+    ui->sbVDDQ_XMP3->setValue(xmp_profile.getVDDQ());
+    ui->sbVPP_XMP3->setValue(xmp_profile.getVPP());
+    ui->sbVmemctrl_XMP3->setValue(xmp_profile.getVMEMCtrl());
+
+    // CAS
+    ui->cbCL20_XMP3->setChecked(xmp_profile.getCLSupported(20));
+    ui->cbCL22_XMP3->setChecked(xmp_profile.getCLSupported(22));
+    ui->cbCL24_XMP3->setChecked(xmp_profile.getCLSupported(24));
+    ui->cbCL26_XMP3->setChecked(xmp_profile.getCLSupported(26));
+    ui->cbCL28_XMP3->setChecked(xmp_profile.getCLSupported(28));
+    ui->cbCL30_XMP3->setChecked(xmp_profile.getCLSupported(30));
+    ui->cbCL32_XMP3->setChecked(xmp_profile.getCLSupported(32));
+    ui->cbCL34_XMP3->setChecked(xmp_profile.getCLSupported(34));
+    ui->cbCL36_XMP3->setChecked(xmp_profile.getCLSupported(36));
+    ui->cbCL38_XMP3->setChecked(xmp_profile.getCLSupported(38));
+    ui->cbCL40_XMP3->setChecked(xmp_profile.getCLSupported(40));
+    ui->cbCL42_XMP3->setChecked(xmp_profile.getCLSupported(42));
+    ui->cbCL44_XMP3->setChecked(xmp_profile.getCLSupported(44));
+    ui->cbCL46_XMP3->setChecked(xmp_profile.getCLSupported(46));
+    ui->cbCL48_XMP3->setChecked(xmp_profile.getCLSupported(48));
+    ui->cbCL50_XMP3->setChecked(xmp_profile.getCLSupported(50));
+    ui->cbCL52_XMP3->setChecked(xmp_profile.getCLSupported(52));
+    ui->cbCL54_XMP3->setChecked(xmp_profile.getCLSupported(54));
+    ui->cbCL56_XMP3->setChecked(xmp_profile.getCLSupported(56));
+    ui->cbCL58_XMP3->setChecked(xmp_profile.getCLSupported(58));
+    ui->cbCL60_XMP3->setChecked(xmp_profile.getCLSupported(60));
+    ui->cbCL62_XMP3->setChecked(xmp_profile.getCLSupported(62));
+    ui->cbCL64_XMP3->setChecked(xmp_profile.getCLSupported(64));
+    ui->cbCL66_XMP3->setChecked(xmp_profile.getCLSupported(66));
+    ui->cbCL68_XMP3->setChecked(xmp_profile.getCLSupported(68));
+    ui->cbCL70_XMP3->setChecked(xmp_profile.getCLSupported(70));
+    ui->cbCL72_XMP3->setChecked(xmp_profile.getCLSupported(72));
+    ui->cbCL74_XMP3->setChecked(xmp_profile.getCLSupported(74));
+    ui->cbCL76_XMP3->setChecked(xmp_profile.getCLSupported(76));
+    ui->cbCL78_XMP3->setChecked(xmp_profile.getCLSupported(78));
+    ui->cbCL80_XMP3->setChecked(xmp_profile.getCLSupported(80));
+    ui->cbCL82_XMP3->setChecked(xmp_profile.getCLSupported(82));
+    ui->cbCL84_XMP3->setChecked(xmp_profile.getCLSupported(84));
+    ui->cbCL86_XMP3->setChecked(xmp_profile.getCLSupported(86));
+    ui->cbCL88_XMP3->setChecked(xmp_profile.getCLSupported(88));
+    ui->cbCL90_XMP3->setChecked(xmp_profile.getCLSupported(90));
+    ui->cbCL92_XMP3->setChecked(xmp_profile.getCLSupported(92));
+    ui->cbCL94_XMP3->setChecked(xmp_profile.getCLSupported(94));
+    ui->cbCL96_XMP3->setChecked(xmp_profile.getCLSupported(96));
+    ui->cbCL98_XMP3->setChecked(xmp_profile.getCLSupported(98));
+
+    ui->sbtAA_XMP3->setValue(xmp_profile.gettAA());
+    ui->ltAA_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettAA(), minCycleTime)));
+    ui->sbtRCD_XMP3->setValue(xmp_profile.gettRCD());
+    ui->ltRCD_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRCD(), minCycleTime)));
+    ui->sbtRP_XMP3->setValue(xmp_profile.gettRP());
+    ui->ltRP_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRP(), minCycleTime)));
+    ui->sbtRAS_XMP3->setValue(xmp_profile.gettRAS());
+    ui->ltRAS_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRAS(), minCycleTime)));
+    ui->sbtRC_XMP3->setValue(xmp_profile.gettRC());
+    ui->ltRC_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRC(), minCycleTime)));
+    ui->sbtWR_XMP3->setValue(xmp_profile.gettWR());
+    ui->ltWR_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettWR(), minCycleTime)));
+    ui->sbtRFC1_XMP3->setValue(xmp_profile.gettRFC1());
+    ui->ltRFC1_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC1() * 1000, minCycleTime)));
+    ui->sbtRFC2_XMP3->setValue(xmp_profile.gettRFC2());
+    ui->ltRFC2_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC2() * 1000, minCycleTime)));
+    ui->sbtRFC_XMP3->setValue(xmp_profile.gettRFC());
+    ui->ltRFC_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC() * 1000, minCycleTime)));
+    ui->sbtRRD_L_XMP3->setValue(xmp_profile.gettRRD_L());
+    ui->sbtRRD_L_LCLK_XMP3->setValue(xmp_profile.gettRRD_L_lowerLimit());
+    ui->ltRRD_L_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRRD_L(), minCycleTime)));
+    ui->sbtCCD_L_XMP3->setValue(xmp_profile.gettCCD_L());
+    ui->sbtCCD_L_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_lowerLimit());
+    ui->ltCCD_L_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L(), minCycleTime)));
+    ui->sbtCCDL_L_WR_XMP3->setValue(xmp_profile.gettCCD_L_WR());
+    ui->sbtCCDL_L_WR_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
+    ui->ltCCDL_L_WR_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR(), minCycleTime)));
+    ui->sbtCCDL_L_WR2_XMP3->setValue(xmp_profile.gettCCD_L_WR2());
+    ui->sbtCCDL_L_WR2_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+    ui->ltCCDL_L_WR2_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR2(), minCycleTime)));
+    ui->sbtFAW_XMP3->setValue(xmp_profile.gettFAW());
+    ui->sbtFAW_LCLK_XMP3->setValue(xmp_profile.gettFAW_lowerLimit());
+    ui->ltFAW_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettFAW(), minCycleTime)));
+    ui->sbtCCD_L_WTR_XMP3->setValue(xmp_profile.gettCCD_L_WTR());
+    ui->sbtCCD_L_WTR_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_WTR_lowerLimit());
+    ui->ltCCD_L_WTR_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WTR(), minCycleTime)));
+    ui->sbtCCD_S_WTR_XMP3->setValue(xmp_profile.gettCCD_S_WTR());
+    ui->sbtCCD_S_WTR_LCLK_XMP3->setValue(xmp_profile.gettCCD_S_WTR_lowerLimit());
+    ui->ltCCD_S_WTR_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_S_WTR(), minCycleTime)));
+    ui->sbtRTP_XMP3->setValue(xmp_profile.gettRTP());
+    ui->sbtRTP_LCLK_XMP3->setValue(xmp_profile.gettRTP_lowerLimit());
+    ui->ltRTP_Ticks_XMP3->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
 }
 
 void MainWindow::reloadXMPU1Tab() {
+    // ui->cbEnabled_XMPU1->setChecked(spd->xmpBundle.isXMP1Enabled());
 
+    // XMP Profile
+    auto& xmp_profile = spd->xmpBundle.profileUser1;
+
+    const unsigned int minCycleTime = xmp_profile.getMinCycleTime();
+    ui->spinMinCycleTime_XMPU1->setValue(minCycleTime);
+    QString frequencyStr = QString::number(xmp_profile.getFrequency()) + " MHz";
+    QString mtStr = QString::number(xmp_profile.getMT()) + " MT/s";
+    ui->lFrequencyValue_XMPU1->setText(frequencyStr);
+    ui->lMTValue_XMPU1->setText(mtStr);
+
+    ui->cbDynamicMemBoost_XMPU1->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
+    ui->cbRealTimeMemOC_XMPU1->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
+    // ui->cbCommandRate_XMPU1->setCurrentIndex(xmp_profile.getCommandRate());
+
+    // Voltages
+    ui->sbVDD_XMPU1->setValue(xmp_profile.getVDD());
+    ui->sbVDDQ_XMPU1->setValue(xmp_profile.getVDDQ());
+    ui->sbVPP_XMPU1->setValue(xmp_profile.getVPP());
+    ui->sbVmemctrl_XMPU1->setValue(xmp_profile.getVMEMCtrl());
+
+    // CAS
+    ui->cbCL20_XMPU1->setChecked(xmp_profile.getCLSupported(20));
+    ui->cbCL22_XMPU1->setChecked(xmp_profile.getCLSupported(22));
+    ui->cbCL24_XMPU1->setChecked(xmp_profile.getCLSupported(24));
+    ui->cbCL26_XMPU1->setChecked(xmp_profile.getCLSupported(26));
+    ui->cbCL28_XMPU1->setChecked(xmp_profile.getCLSupported(28));
+    ui->cbCL30_XMPU1->setChecked(xmp_profile.getCLSupported(30));
+    ui->cbCL32_XMPU1->setChecked(xmp_profile.getCLSupported(32));
+    ui->cbCL34_XMPU1->setChecked(xmp_profile.getCLSupported(34));
+    ui->cbCL36_XMPU1->setChecked(xmp_profile.getCLSupported(36));
+    ui->cbCL38_XMPU1->setChecked(xmp_profile.getCLSupported(38));
+    ui->cbCL40_XMPU1->setChecked(xmp_profile.getCLSupported(40));
+    ui->cbCL42_XMPU1->setChecked(xmp_profile.getCLSupported(42));
+    ui->cbCL44_XMPU1->setChecked(xmp_profile.getCLSupported(44));
+    ui->cbCL46_XMPU1->setChecked(xmp_profile.getCLSupported(46));
+    ui->cbCL48_XMPU1->setChecked(xmp_profile.getCLSupported(48));
+    ui->cbCL50_XMPU1->setChecked(xmp_profile.getCLSupported(50));
+    ui->cbCL52_XMPU1->setChecked(xmp_profile.getCLSupported(52));
+    ui->cbCL54_XMPU1->setChecked(xmp_profile.getCLSupported(54));
+    ui->cbCL56_XMPU1->setChecked(xmp_profile.getCLSupported(56));
+    ui->cbCL58_XMPU1->setChecked(xmp_profile.getCLSupported(58));
+    ui->cbCL60_XMPU1->setChecked(xmp_profile.getCLSupported(60));
+    ui->cbCL62_XMPU1->setChecked(xmp_profile.getCLSupported(62));
+    ui->cbCL64_XMPU1->setChecked(xmp_profile.getCLSupported(64));
+    ui->cbCL66_XMPU1->setChecked(xmp_profile.getCLSupported(66));
+    ui->cbCL68_XMPU1->setChecked(xmp_profile.getCLSupported(68));
+    ui->cbCL70_XMPU1->setChecked(xmp_profile.getCLSupported(70));
+    ui->cbCL72_XMPU1->setChecked(xmp_profile.getCLSupported(72));
+    ui->cbCL74_XMPU1->setChecked(xmp_profile.getCLSupported(74));
+    ui->cbCL76_XMPU1->setChecked(xmp_profile.getCLSupported(76));
+    ui->cbCL78_XMPU1->setChecked(xmp_profile.getCLSupported(78));
+    ui->cbCL80_XMPU1->setChecked(xmp_profile.getCLSupported(80));
+    ui->cbCL82_XMPU1->setChecked(xmp_profile.getCLSupported(82));
+    ui->cbCL84_XMPU1->setChecked(xmp_profile.getCLSupported(84));
+    ui->cbCL86_XMPU1->setChecked(xmp_profile.getCLSupported(86));
+    ui->cbCL88_XMPU1->setChecked(xmp_profile.getCLSupported(88));
+    ui->cbCL90_XMPU1->setChecked(xmp_profile.getCLSupported(90));
+    ui->cbCL92_XMPU1->setChecked(xmp_profile.getCLSupported(92));
+    ui->cbCL94_XMPU1->setChecked(xmp_profile.getCLSupported(94));
+    ui->cbCL96_XMPU1->setChecked(xmp_profile.getCLSupported(96));
+    ui->cbCL98_XMPU1->setChecked(xmp_profile.getCLSupported(98));
+
+    ui->sbtAA_XMPU1->setValue(xmp_profile.gettAA());
+    ui->ltAA_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettAA(), minCycleTime)));
+    ui->sbtRCD_XMPU1->setValue(xmp_profile.gettRCD());
+    ui->ltRCD_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRCD(), minCycleTime)));
+    ui->sbtRP_XMPU1->setValue(xmp_profile.gettRP());
+    ui->ltRP_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRP(), minCycleTime)));
+    ui->sbtRAS_XMPU1->setValue(xmp_profile.gettRAS());
+    ui->ltRAS_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRAS(), minCycleTime)));
+    ui->sbtRC_XMPU1->setValue(xmp_profile.gettRC());
+    ui->ltRC_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRC(), minCycleTime)));
+    ui->sbtWR_XMPU1->setValue(xmp_profile.gettWR());
+    ui->ltWR_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettWR(), minCycleTime)));
+    ui->sbtRFC1_XMPU1->setValue(xmp_profile.gettRFC1());
+    ui->ltRFC1_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC1() * 1000, minCycleTime)));
+    ui->sbtRFC2_XMPU1->setValue(xmp_profile.gettRFC2());
+    ui->ltRFC2_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC2() * 1000, minCycleTime)));
+    ui->sbtRFC_XMPU1->setValue(xmp_profile.gettRFC());
+    ui->ltRFC_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC() * 1000, minCycleTime)));
+    ui->sbtRRD_L_XMPU1->setValue(xmp_profile.gettRRD_L());
+    ui->sbtRRD_L_LCLK_XMPU1->setValue(xmp_profile.gettRRD_L_lowerLimit());
+    ui->ltRRD_L_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRRD_L(), minCycleTime)));
+    ui->sbtCCD_L_XMPU1->setValue(xmp_profile.gettCCD_L());
+    ui->sbtCCD_L_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_lowerLimit());
+    ui->ltCCD_L_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L(), minCycleTime)));
+    ui->sbtCCDL_L_WR_XMPU1->setValue(xmp_profile.gettCCD_L_WR());
+    ui->sbtCCDL_L_WR_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
+    ui->ltCCDL_L_WR_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR(), minCycleTime)));
+    ui->sbtCCDL_L_WR2_XMPU1->setValue(xmp_profile.gettCCD_L_WR2());
+    ui->sbtCCDL_L_WR2_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+    ui->ltCCDL_L_WR2_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR2(), minCycleTime)));
+    ui->sbtFAW_XMPU1->setValue(xmp_profile.gettFAW());
+    ui->sbtFAW_LCLK_XMPU1->setValue(xmp_profile.gettFAW_lowerLimit());
+    ui->ltFAW_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettFAW(), minCycleTime)));
+    ui->sbtCCD_L_WTR_XMPU1->setValue(xmp_profile.gettCCD_L_WTR());
+    ui->sbtCCD_L_WTR_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_WTR_lowerLimit());
+    ui->ltCCD_L_WTR_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WTR(), minCycleTime)));
+    ui->sbtCCD_S_WTR_XMPU1->setValue(xmp_profile.gettCCD_S_WTR());
+    ui->sbtCCD_S_WTR_LCLK_XMPU1->setValue(xmp_profile.gettCCD_S_WTR_lowerLimit());
+    ui->ltCCD_S_WTR_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_S_WTR(), minCycleTime)));
+    ui->sbtRTP_XMPU1->setValue(xmp_profile.gettRTP());
+    ui->sbtRTP_LCLK_XMPU1->setValue(xmp_profile.gettRTP_lowerLimit());
+    ui->ltRTP_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
 }
 
 void MainWindow::reloadXMPU2Tab() {
+    // ui->cbEnabled_XMPU2->setChecked(spd->xmpBundle.isXMP1Enabled());
 
+    // XMP Profile
+    auto& xmp_profile = spd->xmpBundle.profileUser2;
+
+    const unsigned int minCycleTime = xmp_profile.getMinCycleTime();
+    ui->spinMinCycleTime_XMPU2->setValue(minCycleTime);
+    QString frequencyStr = QString::number(xmp_profile.getFrequency()) + " MHz";
+    QString mtStr = QString::number(xmp_profile.getMT()) + " MT/s";
+    ui->lFrequencyValue_XMPU2->setText(frequencyStr);
+    ui->lMTValue_XMPU2->setText(mtStr);
+
+    ui->cbDynamicMemBoost_XMPU2->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
+    ui->cbRealTimeMemOC_XMPU2->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
+    // ui->cbCommandRate_XMPU2->setCurrentIndex(xmp_profile.getCommandRate());
+
+    // Voltages
+    ui->sbVDD_XMPU2->setValue(xmp_profile.getVDD());
+    ui->sbVDDQ_XMPU2->setValue(xmp_profile.getVDDQ());
+    ui->sbVPP_XMPU2->setValue(xmp_profile.getVPP());
+    ui->sbVmemctrl_XMPU2->setValue(xmp_profile.getVMEMCtrl());
+
+    // CAS
+    ui->cbCL20_XMPU2->setChecked(xmp_profile.getCLSupported(20));
+    ui->cbCL22_XMPU2->setChecked(xmp_profile.getCLSupported(22));
+    ui->cbCL24_XMPU2->setChecked(xmp_profile.getCLSupported(24));
+    ui->cbCL26_XMPU2->setChecked(xmp_profile.getCLSupported(26));
+    ui->cbCL28_XMPU2->setChecked(xmp_profile.getCLSupported(28));
+    ui->cbCL30_XMPU2->setChecked(xmp_profile.getCLSupported(30));
+    ui->cbCL32_XMPU2->setChecked(xmp_profile.getCLSupported(32));
+    ui->cbCL34_XMPU2->setChecked(xmp_profile.getCLSupported(34));
+    ui->cbCL36_XMPU2->setChecked(xmp_profile.getCLSupported(36));
+    ui->cbCL38_XMPU2->setChecked(xmp_profile.getCLSupported(38));
+    ui->cbCL40_XMPU2->setChecked(xmp_profile.getCLSupported(40));
+    ui->cbCL42_XMPU2->setChecked(xmp_profile.getCLSupported(42));
+    ui->cbCL44_XMPU2->setChecked(xmp_profile.getCLSupported(44));
+    ui->cbCL46_XMPU2->setChecked(xmp_profile.getCLSupported(46));
+    ui->cbCL48_XMPU2->setChecked(xmp_profile.getCLSupported(48));
+    ui->cbCL50_XMPU2->setChecked(xmp_profile.getCLSupported(50));
+    ui->cbCL52_XMPU2->setChecked(xmp_profile.getCLSupported(52));
+    ui->cbCL54_XMPU2->setChecked(xmp_profile.getCLSupported(54));
+    ui->cbCL56_XMPU2->setChecked(xmp_profile.getCLSupported(56));
+    ui->cbCL58_XMPU2->setChecked(xmp_profile.getCLSupported(58));
+    ui->cbCL60_XMPU2->setChecked(xmp_profile.getCLSupported(60));
+    ui->cbCL62_XMPU2->setChecked(xmp_profile.getCLSupported(62));
+    ui->cbCL64_XMPU2->setChecked(xmp_profile.getCLSupported(64));
+    ui->cbCL66_XMPU2->setChecked(xmp_profile.getCLSupported(66));
+    ui->cbCL68_XMPU2->setChecked(xmp_profile.getCLSupported(68));
+    ui->cbCL70_XMPU2->setChecked(xmp_profile.getCLSupported(70));
+    ui->cbCL72_XMPU2->setChecked(xmp_profile.getCLSupported(72));
+    ui->cbCL74_XMPU2->setChecked(xmp_profile.getCLSupported(74));
+    ui->cbCL76_XMPU2->setChecked(xmp_profile.getCLSupported(76));
+    ui->cbCL78_XMPU2->setChecked(xmp_profile.getCLSupported(78));
+    ui->cbCL80_XMPU2->setChecked(xmp_profile.getCLSupported(80));
+    ui->cbCL82_XMPU2->setChecked(xmp_profile.getCLSupported(82));
+    ui->cbCL84_XMPU2->setChecked(xmp_profile.getCLSupported(84));
+    ui->cbCL86_XMPU2->setChecked(xmp_profile.getCLSupported(86));
+    ui->cbCL88_XMPU2->setChecked(xmp_profile.getCLSupported(88));
+    ui->cbCL90_XMPU2->setChecked(xmp_profile.getCLSupported(90));
+    ui->cbCL92_XMPU2->setChecked(xmp_profile.getCLSupported(92));
+    ui->cbCL94_XMPU2->setChecked(xmp_profile.getCLSupported(94));
+    ui->cbCL96_XMPU2->setChecked(xmp_profile.getCLSupported(96));
+    ui->cbCL98_XMPU2->setChecked(xmp_profile.getCLSupported(98));
+
+    ui->sbtAA_XMPU2->setValue(xmp_profile.gettAA());
+    ui->ltAA_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettAA(), minCycleTime)));
+    ui->sbtRCD_XMPU2->setValue(xmp_profile.gettRCD());
+    ui->ltRCD_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRCD(), minCycleTime)));
+    ui->sbtRP_XMPU2->setValue(xmp_profile.gettRP());
+    ui->ltRP_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRP(), minCycleTime)));
+    ui->sbtRAS_XMPU2->setValue(xmp_profile.gettRAS());
+    ui->ltRAS_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRAS(), minCycleTime)));
+    ui->sbtRC_XMPU2->setValue(xmp_profile.gettRC());
+    ui->ltRC_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRC(), minCycleTime)));
+    ui->sbtWR_XMPU2->setValue(xmp_profile.gettWR());
+    ui->ltWR_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettWR(), minCycleTime)));
+    ui->sbtRFC1_XMPU2->setValue(xmp_profile.gettRFC1());
+    ui->ltRFC1_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC1() * 1000, minCycleTime)));
+    ui->sbtRFC2_XMPU2->setValue(xmp_profile.gettRFC2());
+    ui->ltRFC2_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC2() * 1000, minCycleTime)));
+    ui->sbtRFC_XMPU2->setValue(xmp_profile.gettRFC());
+    ui->ltRFC_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRFC() * 1000, minCycleTime)));
+    ui->sbtRRD_L_XMPU2->setValue(xmp_profile.gettRRD_L());
+    ui->sbtRRD_L_LCLK_XMPU2->setValue(xmp_profile.gettRRD_L_lowerLimit());
+    ui->ltRRD_L_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRRD_L(), minCycleTime)));
+    ui->sbtCCD_L_XMPU2->setValue(xmp_profile.gettCCD_L());
+    ui->sbtCCD_L_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_lowerLimit());
+    ui->ltCCD_L_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L(), minCycleTime)));
+    ui->sbtCCDL_L_WR_XMPU2->setValue(xmp_profile.gettCCD_L_WR());
+    ui->sbtCCDL_L_WR_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
+    ui->ltCCDL_L_WR_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR(), minCycleTime)));
+    ui->sbtCCDL_L_WR2_XMPU2->setValue(xmp_profile.gettCCD_L_WR2());
+    ui->sbtCCDL_L_WR2_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+    ui->ltCCDL_L_WR2_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR2(), minCycleTime)));
+    ui->sbtFAW_XMPU2->setValue(xmp_profile.gettFAW());
+    ui->sbtFAW_LCLK_XMPU2->setValue(xmp_profile.gettFAW_lowerLimit());
+    ui->ltFAW_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettFAW(), minCycleTime)));
+    ui->sbtCCD_L_WTR_XMPU2->setValue(xmp_profile.gettCCD_L_WTR());
+    ui->sbtCCD_L_WTR_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_WTR_lowerLimit());
+    ui->ltCCD_L_WTR_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WTR(), minCycleTime)));
+    ui->sbtCCD_S_WTR_XMPU2->setValue(xmp_profile.gettCCD_S_WTR());
+    ui->sbtCCD_S_WTR_LCLK_XMPU2->setValue(xmp_profile.gettCCD_S_WTR_lowerLimit());
+    ui->ltCCD_S_WTR_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettCCD_S_WTR(), minCycleTime)));
+    ui->sbtRTP_XMPU2->setValue(xmp_profile.gettRTP());
+    ui->sbtRTP_LCLK_XMPU2->setValue(xmp_profile.gettRTP_lowerLimit());
+    ui->ltRTP_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
 }
 
 void MainWindow::reloadUI(){

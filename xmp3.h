@@ -259,6 +259,7 @@ public:
 
     void enableMagic();
     void clearMagic();
+    bool isMagicPresent();
 
     const unsigned short getHeaderCRC();
     void setHeaderCRC(const unsigned short);
