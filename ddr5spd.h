@@ -379,6 +379,7 @@ public:
 
     const bool isXMPPresent();
 
+    const char * const getPointerToStruct();
     DDR5SPD(SPD_Struct);
 
     XMP3_Bundle xmpBundle;

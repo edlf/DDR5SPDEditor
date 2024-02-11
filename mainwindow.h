@@ -56,6 +56,8 @@ private slots:
     void reloadXMPU1Tab();
     void reloadXMPU2Tab();
 
+    void on_spinMinCycleTime_editingFinished();
+
 private:
     void clearUI();
     void disableUI();

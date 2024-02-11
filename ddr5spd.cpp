@@ -446,3 +446,7 @@ void DDR5SPD::fixCRC() {
 const bool DDR5SPD::isXMPPresent() {
     return xmpBundle.isMagicPresent();
 }
+
+const char * const DDR5SPD::getPointerToStruct() {
+    return reinterpret_cast<char*>(&spdStruct);
+}

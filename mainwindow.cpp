@@ -88,9 +88,34 @@ void MainWindow::openFile(){
 
 void MainWindow::saveFile(){
     if (spd != nullptr) {
+        // Fix Checksums
+        spd->fixCRC();
+        if (spd->isXMPPresent()) {
+            spd->xmpBundle.fixCRCs();
+        }
+
+        // Actually save
         QString fileName = QFileDialog::getSaveFileName(this, "Save File", QDir::currentPath(), "SPD Files (*.spd, *.bin);;All Files (*.*)");
         if (!fileName.isEmpty()) {
             // save contents to the selected file
+            QFile file(fileName);
+
+            if (!file.open(QIODevice::WriteOnly)) {
+                QMessageBox::critical(
+                    this,
+                    appName,
+                    tr("Failed to save file.") );
+            }
+
+            if (file.isWritable()) {
+                file.write(spd->getPointerToStruct(), DDR5SPD::eepromSize);
+                file.close();
+            } else {
+                QMessageBox::critical(
+                    this,
+                    appName,
+                    tr("Failed to save file (read only?).") );
+            }
         }
     }
 }
@@ -1072,3 +1097,9 @@ void MainWindow::reloadUI(){
     reloadXMPU1Tab();
     reloadXMPU2Tab();
 }
+
+void MainWindow::on_spinMinCycleTime_editingFinished()
+{
+    spd->setMinCycleTime(ui->spinMinCycleTime->value());
+}
+
