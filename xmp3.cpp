@@ -403,7 +403,7 @@ void XMP3_Profile::resetProfile() {
 
 // XMP Bundle methods
 XMP3_Bundle::XMP3_Bundle(XMP_Struct& xmpBlockRef) :
-    rawXmp(xmpBlockRef),
+    xmpStruct(xmpBlockRef),
     profile1(xmpBlockRef.profile1),
     profile2(xmpBlockRef.profile2),
     profile3(xmpBlockRef.profile3),
@@ -412,80 +412,80 @@ XMP3_Bundle::XMP3_Bundle(XMP_Struct& xmpBlockRef) :
 }
 
 const bool XMP3_Bundle::isXMP1Enabled() {
-    return utilities::GetBit(rawXmp.header.profileEnBits, xmpProfile1EnableBit);
+    return utilities::GetBit(xmpStruct.header.profileEnBits, xmpProfile1EnableBit);
 }
 
 void XMP3_Bundle::setXMP1Enabled(const bool value) {
-    utilities::SetBit(rawXmp.header.profileEnBits, xmpProfile1EnableBit, value);
+    utilities::SetBit(xmpStruct.header.profileEnBits, xmpProfile1EnableBit, value);
 }
 
 const bool XMP3_Bundle::isXMP2Enabled() {
-    return utilities::GetBit(rawXmp.header.profileEnBits, xmpProfile2EnableBit);
+    return utilities::GetBit(xmpStruct.header.profileEnBits, xmpProfile2EnableBit);
 }
 
 void XMP3_Bundle::setXMP2Enabled(const bool value) {
-    utilities::SetBit(rawXmp.header.profileEnBits, xmpProfile2EnableBit, value);
+    utilities::SetBit(xmpStruct.header.profileEnBits, xmpProfile2EnableBit, value);
 }
 
 const bool XMP3_Bundle::isXMP3Enabled() {
-    return utilities::GetBit(rawXmp.header.profileEnBits, xmpProfile3EnableBit);
+    return utilities::GetBit(xmpStruct.header.profileEnBits, xmpProfile3EnableBit);
 }
 
 void XMP3_Bundle::setXMP3Enabled(const bool value) {
-    utilities::SetBit(rawXmp.header.profileEnBits, xmpProfile3EnableBit, value);
+    utilities::SetBit(xmpStruct.header.profileEnBits, xmpProfile3EnableBit, value);
 }
 
 const std::string XMP3_Bundle::getXMP1ProfileName() {
-    char* profileName = &(rawXmp.header.profileName1[0]);
+    char* profileName = &(xmpStruct.header.profileName1[0]);
     return std::string(profileName);
 }
 
 void XMP3_Bundle::setXMP1ProfileName(const std::string value) {
-    utilities::SetCString(value, maxXmpProfileName, &(rawXmp.header.profileName1[0]));
+    utilities::SetCString(value, maxXmpProfileName, &(xmpStruct.header.profileName1[0]));
 }
 
 const std::string XMP3_Bundle::getXMP2ProfileName() {
-    char* profileName = &(rawXmp.header.profileName2[0]);
+    char* profileName = &(xmpStruct.header.profileName2[0]);
     return std::string(profileName);
 }
 
 void XMP3_Bundle::setXMP2ProfileName(const std::string value) {
-    utilities::SetCString(value, maxXmpProfileName, &(rawXmp.header.profileName2[0]));
+    utilities::SetCString(value, maxXmpProfileName, &(xmpStruct.header.profileName2[0]));
 }
 
 const std::string XMP3_Bundle::getXMP3ProfileName() {
-    char* profileName = &(rawXmp.header.profileName3[0]);
+    char* profileName = &(xmpStruct.header.profileName3[0]);
     return std::string(profileName);
 }
 
 void XMP3_Bundle::setXMP3ProfileName(const std::string value) {
-    utilities::SetCString(value, maxXmpProfileName, &(rawXmp.header.profileName3[0]));
+    utilities::SetCString(value, maxXmpProfileName, &(xmpStruct.header.profileName3[0]));
 }
 
 void XMP3_Bundle::enableMagic() {
-    rawXmp.header.magic1 = XMPHeaderMagic[0];
-    rawXmp.header.magic2 = XMPHeaderMagic[1];
+    xmpStruct.header.magic1 = XMPHeaderMagic[0];
+    xmpStruct.header.magic2 = XMPHeaderMagic[1];
 }
 
 void XMP3_Bundle::clearMagic() {
-    rawXmp.header.magic1 = 0x00;
-    rawXmp.header.magic2 = 0x00;
+    xmpStruct.header.magic1 = 0x00;
+    xmpStruct.header.magic2 = 0x00;
 }
 
 bool XMP3_Bundle::isMagicPresent() {
-    return (rawXmp.header.magic1 == XMPHeaderMagic[0] && rawXmp.header.magic2 == XMPHeaderMagic[1]);
+    return (xmpStruct.header.magic1 == XMPHeaderMagic[0] && xmpStruct.header.magic2 == XMPHeaderMagic[1]);
 }
 
 const unsigned short XMP3_Bundle::getHeaderCRC() {
-    return utilities::ConvertBytes(rawXmp.header.checksum[0], rawXmp.header.checksum[1]);
+    return utilities::ConvertBytes(xmpStruct.header.checksum[0], xmpStruct.header.checksum[1]);
 }
 
 void XMP3_Bundle::setHeaderCRC(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(rawXmp.header.checksum[0], rawXmp.header.checksum[1], value);
+    utilities::Convert16bitUnsignedInteger(xmpStruct.header.checksum[0], xmpStruct.header.checksum[1], value);
 }
 
 void XMP3_Bundle::fixHeaderCRC() {
-    unsigned int  crc = utilities::Crc16(reinterpret_cast<unsigned char*>(&rawXmp.header), sizeof(XMP_HeaderStruct) - 2);
+    unsigned int  crc = utilities::Crc16(reinterpret_cast<unsigned char*>(&xmpStruct.header), sizeof(XMP_HeaderStruct) - 2);
     setHeaderCRC(crc);
 }
 
@@ -495,5 +495,5 @@ void XMP3_Bundle::fixCRCs() {
 }
 
 void XMP3_Bundle::wipe() {
-    std::memset(&rawXmp, 0x0, sizeof (XMP_Struct));
+    std::memset(&xmpStruct, 0x0, sizeof (XMP_Struct));
 }

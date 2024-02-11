@@ -78,7 +78,7 @@ void MainWindow::openFile(){
         }
 
         // TODO: Find proper way to do this
-        DDR5SPD::RawSPD rawSPD = *reinterpret_cast<DDR5SPD::RawSPD*>(contents.data());
+        DDR5SPD::SPD_Struct rawSPD = *reinterpret_cast<DDR5SPD::SPD_Struct*>(contents.data());
         spd = new DDR5SPD(rawSPD);
 
         enableUI();

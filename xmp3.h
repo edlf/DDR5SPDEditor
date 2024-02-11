@@ -277,7 +277,7 @@ public:
     XMP3_Profile profileUser2;
 
 private:
-    XMP_Struct& rawXmp;
+    XMP_Struct& xmpStruct;
 };
 
 #endif // XMP3_H

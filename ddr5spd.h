@@ -60,7 +60,7 @@ public:
         unsigned char revision;
     };
 
-    struct RawSPD {
+    struct SPD_Struct {
         // Start General configuration (0-127, 0x00-0x7F, Block 0,1)
         // Byte 0 to 3 Header/Type
         unsigned char bytesUsed;
@@ -272,9 +272,9 @@ public:
     };
     #pragma pack(pop)
 
-    static_assert(sizeof(RawSPD) == 0x400, "SPD struct size error");
+    static_assert(sizeof(SPD_Struct) == 0x400, "SPD struct size error");
 
-    RawSPD rawSpd;
+    SPD_Struct spdStruct;
 
     // Raw SPD getters/setters
     const unsigned short getMinCycleTime();
@@ -379,7 +379,7 @@ public:
 
     const bool isXMPPresent();
 
-    DDR5SPD(RawSPD);
+    DDR5SPD(SPD_Struct);
 
     XMP3_Bundle xmpBundle;
 };
