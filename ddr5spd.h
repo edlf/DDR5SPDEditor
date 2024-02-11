@@ -268,7 +268,7 @@ public:
         unsigned char reserved_555_639[640 - 555];
 
         // End User bits (XMP/EXPO) 0x280 (1024 - 640)
-        XMPBlock xmpBlock;
+        XMP_Struct xmpBlock;
     };
     #pragma pack(pop)
 

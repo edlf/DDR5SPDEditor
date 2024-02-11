@@ -12,12 +12,30 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->statusbar->showMessage("Welcome", 0);
 
+    // File menu
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::openFile);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::saveFile);
     connect(ui->actionSave, &QAction::enabledChanged, this, &MainWindow::saveFileEnabled);
     connect(ui->actionClose, &QAction::triggered, this, &MainWindow::closeFile);
     connect(ui->actionClose, &QAction::enabledChanged, this, &MainWindow::closeFileEnabled);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
+
+    // XMP menu
+    connect(ui->actionEnableXMPmagic, &QAction::triggered, this, &MainWindow::enableXMPMagicBits);
+    connect(ui->actionDisableXMPmagic, &QAction::triggered, this, &MainWindow::disableXMPMagicBits);
+    connect(ui->actionWipeXMPregion, &QAction::triggered, this, &MainWindow::wipeXMP);
+
+    connect(ui->actionWipeProfile1, &QAction::triggered, this, &MainWindow::wipeXMPProfile1);
+    connect(ui->actionWipeProfile2, &QAction::triggered, this, &MainWindow::wipeXMPProfile2);
+    connect(ui->actionWipeProfile3, &QAction::triggered, this, &MainWindow::wipeXMPProfile3);
+    connect(ui->actionWipeProfileU1, &QAction::triggered, this, &MainWindow::wipeXMPProfileU1);
+    connect(ui->actionWipeProfileU2, &QAction::triggered, this, &MainWindow::wipeXMPProfileU2);
+
+    connect(ui->actionLoadSampleProfile1, &QAction::triggered, this, &MainWindow::loadSampleXMPProfile1);
+    connect(ui->actionLoadSampleProfile2, &QAction::triggered, this, &MainWindow::loadSampleXMPProfile2);
+    connect(ui->actionLoadSampleProfile3, &QAction::triggered, this, &MainWindow::loadSampleXMPProfile3);
+    connect(ui->actionLoadSampleProfileU1, &QAction::triggered, this, &MainWindow::loadSampleXMPProfileU1);
+    connect(ui->actionLoadSampleProfileU2, &QAction::triggered, this, &MainWindow::loadSampleXMPProfileU2);
 }
 
 MainWindow::~MainWindow()
@@ -86,6 +104,75 @@ void MainWindow::closeFile(){
     }
 }
 
+void MainWindow::wipeXMP() {
+    spd->xmpBundle.wipe();
+    reloadXMP1Tab();
+    reloadXMP2Tab();
+    reloadXMP3Tab();
+    reloadXMPU1Tab();
+    reloadXMPU2Tab();
+}
+
+void MainWindow::wipeXMPProfile1() {
+    spd->xmpBundle.setXMP1Enabled(false);
+    spd->xmpBundle.profile1.wipeProfile();
+    reloadXMP1Tab();
+}
+void MainWindow::wipeXMPProfile2() {
+    spd->xmpBundle.setXMP2Enabled(false);
+    spd->xmpBundle.profile2.wipeProfile();
+    reloadXMP2Tab();
+}
+void MainWindow::wipeXMPProfile3() {
+    spd->xmpBundle.setXMP3Enabled(false);
+    spd->xmpBundle.profile3.wipeProfile();
+    reloadXMP3Tab();
+}
+void MainWindow::wipeXMPProfileU1() {
+    spd->xmpBundle.profileUser1.wipeProfile();
+    reloadXMPU1Tab();
+}
+void MainWindow::wipeXMPProfileU2() {
+    spd->xmpBundle.profileUser2.wipeProfile();
+    reloadXMPU2Tab();
+}
+
+void MainWindow::loadSampleXMPProfile1() {
+    spd->xmpBundle.setXMP1Enabled(true);
+    spd->xmpBundle.profile1.resetProfile();
+    reloadXMP1Tab();
+}
+
+void MainWindow::loadSampleXMPProfile2() {
+    spd->xmpBundle.setXMP2Enabled(true);
+    spd->xmpBundle.profile2.resetProfile();
+    reloadXMP2Tab();
+}
+
+void MainWindow::loadSampleXMPProfile3() {
+    spd->xmpBundle.setXMP3Enabled(true);
+    spd->xmpBundle.profile3.resetProfile();
+    reloadXMP3Tab();
+}
+
+void MainWindow::loadSampleXMPProfileU1() {
+    spd->xmpBundle.profileUser1.resetProfile();
+    reloadXMPU1Tab();
+}
+
+void MainWindow::loadSampleXMPProfileU2() {
+    spd->xmpBundle.profileUser2.resetProfile();
+    reloadXMP2Tab();
+}
+
+void MainWindow::enableXMPMagicBits() {
+    spd->xmpBundle.enableMagic();
+}
+
+void MainWindow::disableXMPMagicBits() {
+    spd->xmpBundle.clearMagic();
+}
+
 bool MainWindow::saveFileEnabled(){
     return spd != nullptr;
 }
@@ -99,14 +186,48 @@ void MainWindow::exportXMP(){
     // TODO
 }
 
+void MainWindow::toggleUI(const bool status) {
+    bool disabled = !status;
+
+    ui->tabJEDEC->setDisabled(disabled);
+    ui->tabXMPP1->setDisabled(disabled);
+    ui->tabXMPP2->setDisabled(disabled);
+    ui->tabXMPP3->setDisabled(disabled);
+    ui->tabXMPU1->setDisabled(disabled);
+    ui->tabXMPU2->setDisabled(disabled);
+
+    ui->actionSave->setDisabled(disabled);
+    ui->actionClose->setDisabled(disabled);
+    ui->actionEnableXMPmagic->setDisabled(disabled);
+    ui->actionDisableXMPmagic->setDisabled(disabled);
+    ui->actionWipeXMPregion->setDisabled(disabled);
+}
+
+void MainWindow::toggleXMPUI(const bool status) {
+    bool disabled = !status;
+
+    ui->actionWipeProfile1->setDisabled(disabled);
+    ui->actionWipeProfile2->setDisabled(disabled);
+    ui->actionWipeProfile3->setDisabled(disabled);
+    ui->actionWipeProfileU1->setDisabled(disabled);
+    ui->actionWipeProfileU2->setDisabled(disabled);
+    ui->actionLoadSampleProfile1->setDisabled(disabled);
+    ui->actionLoadSampleProfile2->setDisabled(disabled);
+    ui->actionLoadSampleProfile3->setDisabled(disabled);
+    ui->actionLoadSampleProfileU1->setDisabled(disabled);
+    ui->actionLoadSampleProfileU2->setDisabled(disabled);
+
+    ui->tabXMPP1->setDisabled(disabled);
+    ui->tabXMPP2->setDisabled(disabled);
+    ui->tabXMPP3->setDisabled(disabled);
+    ui->tabXMPU1->setDisabled(disabled);
+    ui->tabXMPU2->setDisabled(disabled);
+}
+
 void MainWindow::disableUI() {
     ui->tabWidget->setCurrentWidget(ui->tabJEDEC);
-    ui->tabJEDEC->setDisabled(true);
-    ui->tabXMPP1->setDisabled(true);
-    ui->tabXMPP2->setDisabled(true);
-    ui->tabXMPP3->setDisabled(true);
-    ui->tabXMPU1->setDisabled(true);
-    ui->tabXMPU2->setDisabled(true);
+    toggleUI(false);
+    toggleXMPUI(false);
 }
 
 void MainWindow::enableUI() {
@@ -114,17 +235,16 @@ void MainWindow::enableUI() {
         return;
     }
 
-    ui->tabJEDEC->activateWindow();
-    ui->tabJEDEC->setDisabled(false);
+    // Menus
+    toggleUI(true);
 
     if (spd->isXMPPresent())
     {
-        ui->tabXMPP1->setDisabled(false);
-        ui->tabXMPP2->setDisabled(false);
-        ui->tabXMPP3->setDisabled(false);
-        ui->tabXMPU1->setDisabled(false);
-        ui->tabXMPU2->setDisabled(false);
+        toggleXMPUI(true);
     }
+
+    // Go to JEDEC tab
+    ui->tabJEDEC->activateWindow();
 }
 
 void MainWindow::clearUI() {
@@ -336,7 +456,21 @@ void MainWindow::reloadXMP1Tab() {
 
     ui->cbDynamicMemBoost_XMP1->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
     ui->cbRealTimeMemOC_XMP1->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
-    // ui->cbCommandRate_XMP1->setCurrentIndex(xmp_profile.getCommandRate());
+
+    switch (xmp_profile.getCommandRate()) {
+        default:
+        case CommandRate::_1n:
+            ui->cbCommandRate_XMP1->setCurrentIndex(1);
+            break;
+
+        case CommandRate::_2n:
+            ui->cbCommandRate_XMP1->setCurrentIndex(2);
+            break;
+
+        case CommandRate::_3n:
+            ui->cbCommandRate_XMP1->setCurrentIndex(3);
+            break;
+    }
 
     // Voltages
     ui->sbVDD_XMP1->setValue(xmp_profile.getVDD());
@@ -449,6 +583,21 @@ void MainWindow::reloadXMP2Tab() {
     ui->cbRealTimeMemOC_XMP2->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
     // ui->cbCommandRate_XMP2->setCurrentIndex(xmp_profile.getCommandRate());
 
+    switch (xmp_profile.getCommandRate()) {
+    default:
+    case CommandRate::_1n:
+            ui->cbCommandRate_XMP2->setCurrentIndex(1);
+            break;
+
+    case CommandRate::_2n:
+            ui->cbCommandRate_XMP2->setCurrentIndex(2);
+            break;
+
+    case CommandRate::_3n:
+            ui->cbCommandRate_XMP2->setCurrentIndex(3);
+            break;
+    }
+
     // Voltages
     ui->sbVDD_XMP2->setValue(xmp_profile.getVDD());
     ui->sbVDDQ_XMP2->setValue(xmp_profile.getVDDQ());
@@ -560,6 +709,21 @@ void MainWindow::reloadXMP3Tab() {
     ui->cbRealTimeMemOC_XMP3->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
     // ui->cbCommandRate_XMP3->setCurrentIndex(xmp_profile.getCommandRate());
 
+    switch (xmp_profile.getCommandRate()) {
+    default:
+    case CommandRate::_1n:
+            ui->cbCommandRate_XMP3->setCurrentIndex(1);
+            break;
+
+    case CommandRate::_2n:
+            ui->cbCommandRate_XMP3->setCurrentIndex(2);
+            break;
+
+    case CommandRate::_3n:
+            ui->cbCommandRate_XMP3->setCurrentIndex(3);
+            break;
+    }
+
     // Voltages
     ui->sbVDD_XMP3->setValue(xmp_profile.getVDD());
     ui->sbVDDQ_XMP3->setValue(xmp_profile.getVDDQ());
@@ -669,6 +833,21 @@ void MainWindow::reloadXMPU1Tab() {
     ui->cbRealTimeMemOC_XMPU1->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
     // ui->cbCommandRate_XMPU1->setCurrentIndex(xmp_profile.getCommandRate());
 
+    switch (xmp_profile.getCommandRate()) {
+    default:
+    case CommandRate::_1n:
+            ui->cbCommandRate_XMPU1->setCurrentIndex(1);
+            break;
+
+    case CommandRate::_2n:
+            ui->cbCommandRate_XMPU1->setCurrentIndex(2);
+            break;
+
+    case CommandRate::_3n:
+            ui->cbCommandRate_XMPU1->setCurrentIndex(3);
+            break;
+    }
+
     // Voltages
     ui->sbVDD_XMPU1->setValue(xmp_profile.getVDD());
     ui->sbVDDQ_XMPU1->setValue(xmp_profile.getVDDQ());
@@ -777,6 +956,21 @@ void MainWindow::reloadXMPU2Tab() {
     ui->cbDynamicMemBoost_XMPU2->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
     ui->cbRealTimeMemOC_XMPU2->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
     // ui->cbCommandRate_XMPU2->setCurrentIndex(xmp_profile.getCommandRate());
+
+    switch (xmp_profile.getCommandRate()) {
+    default:
+    case CommandRate::_1n:
+            ui->cbCommandRate_XMPU2->setCurrentIndex(1);
+            break;
+
+    case CommandRate::_2n:
+            ui->cbCommandRate_XMPU2->setCurrentIndex(2);
+            break;
+
+    case CommandRate::_3n:
+            ui->cbCommandRate_XMPU2->setCurrentIndex(3);
+            break;
+    }
 
     // Voltages
     ui->sbVDD_XMPU2->setValue(xmp_profile.getVDD());

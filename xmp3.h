@@ -22,7 +22,7 @@ constexpr unsigned int xmpProfile2EnableBit = 1;
 constexpr unsigned int xmpProfile3EnableBit = 2;
 
 #pragma pack(push,1)
-struct RawXMP_Header {
+struct XMP_HeaderStruct {
     unsigned char magic1;
     unsigned char magic2;
     unsigned char version;
@@ -48,7 +48,7 @@ struct RawXMP_Header {
     unsigned char checksum[2];
 };
 
-struct RawXMP_Profile {
+struct XMP_ProfileStruct {
     unsigned char vpp;
     unsigned char vdd;
     unsigned char vddq;
@@ -94,23 +94,23 @@ struct RawXMP_Profile {
     unsigned char checksum[2];
 };
 
-struct XMPBlock {
-    RawXMP_Header header;
-    RawXMP_Profile profile1;
-    RawXMP_Profile profile2;
-    RawXMP_Profile profile3;
-    RawXMP_Profile user_profile1;
-    RawXMP_Profile user_profile2;
+struct XMP_Struct {
+    XMP_HeaderStruct header;
+    XMP_ProfileStruct profile1;
+    XMP_ProfileStruct profile2;
+    XMP_ProfileStruct profile3;
+    XMP_ProfileStruct user_profile1;
+    XMP_ProfileStruct user_profile2;
 };
 #pragma pack(pop)
 
-static_assert(sizeof(XMPBlock) == (sizeof(RawXMP_Header) + 5*sizeof(RawXMP_Profile)), "XMP Block size is incorrect");
-static_assert(sizeof(RawXMP_Header) == 0x40, "XMP Header has to be 64 bytes in size");
-static_assert(sizeof(RawXMP_Profile) == 0x40, "XMP Profile has to be 64 bytes in size");
+static_assert(sizeof(XMP_Struct) == (sizeof(XMP_HeaderStruct) + 5*sizeof(XMP_ProfileStruct)), "XMP Block size is incorrect");
+static_assert(sizeof(XMP_HeaderStruct) == 0x40, "XMP Header has to be 64 bytes in size");
+static_assert(sizeof(XMP_ProfileStruct) == 0x40, "XMP Profile has to be 64 bytes in size");
 
 class XMP3_Profile {
 public:
-    XMP3_Profile(RawXMP_Profile&);
+    XMP3_Profile(XMP_ProfileStruct&);
 
     // Voltages
     const unsigned short getVPP();
@@ -232,12 +232,12 @@ public:
     void resetProfile();
 
 private:
-    RawXMP_Profile& rawXMP;
+    XMP_ProfileStruct& xmpProfileStruct;
 };
 
 class XMP3_Bundle {
 public:
-    XMP3_Bundle(XMPBlock&);
+    XMP3_Bundle(XMP_Struct&);
 
     const bool isXMP1Enabled();
     void setXMP1Enabled(const bool);
@@ -268,6 +268,8 @@ public:
 
     void fixCRCs();
 
+    void wipe();
+
     XMP3_Profile profile1;
     XMP3_Profile profile2;
     XMP3_Profile profile3;
@@ -275,7 +277,7 @@ public:
     XMP3_Profile profileUser2;
 
 private:
-    XMPBlock& rawXmp;
+    XMP_Struct& rawXmp;
 };
 
 #endif // XMP3_H

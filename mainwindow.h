@@ -32,6 +32,22 @@ private slots:
     void exportXMP();
     void exit();
 
+    void wipeXMP();
+    void wipeXMPProfile1();
+    void wipeXMPProfile2();
+    void wipeXMPProfile3();
+    void wipeXMPProfileU1();
+    void wipeXMPProfileU2();
+
+    void loadSampleXMPProfile1();
+    void loadSampleXMPProfile2();
+    void loadSampleXMPProfile3();
+    void loadSampleXMPProfileU1();
+    void loadSampleXMPProfileU2();
+
+    void enableXMPMagicBits();
+    void disableXMPMagicBits();
+
     void reloadUI();
     void reloadJEDECTab();
     void reloadXMP1Tab();
@@ -44,6 +60,8 @@ private:
     void clearUI();
     void disableUI();
     void enableUI();
+    void toggleUI(const bool);
+    void toggleXMPUI(const bool);
 
     unsigned short minCycle;
 
