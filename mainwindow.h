@@ -113,6 +113,7 @@ private slots:
     void on_cbCL94_toggled(bool);
     void on_cbCL96_toggled(bool);
     void on_cbCL98_toggled(bool);
+
     void on_spinBoxtAA_editingFinished();
     void on_spinBoxtRCD_editingFinished();
     void on_spinBoxtRP_editingFinished();
@@ -141,6 +142,15 @@ private slots:
 
     // Slots XMP1
     void on_leProfileName_XMP1_editingFinished();
+    void on_cbDynamicMemBoost_XMP1_toggled(bool);
+    void on_cbRealTimeMemOC_XMP1_toggled(bool);
+    void on_sbVDD_XMP1_editingFinished();
+    void on_sbVDDQ_XMP1_editingFinished();
+    void on_sbVPP_XMP1_editingFinished();
+    void on_sbVmemctrl_XMP1_editingFinished();
+    void on_spinMinCycleTime_XMP1_editingFinished();
+    void on_cbCommandRate_XMP1_currentIndexChanged(int);
+
     void on_cbCL20_XMP1_toggled(bool);
     void on_cbCL22_XMP1_toggled(bool);
     void on_cbCL24_XMP1_toggled(bool);
@@ -182,7 +192,43 @@ private slots:
     void on_cbCL96_XMP1_toggled(bool);
     void on_cbCL98_XMP1_toggled(bool);
 
+    void on_sbtAA_XMP1_editingFinished();
+    void on_sbtRCD_XMP1_editingFinished();
+    void on_sbtRP_XMP1_editingFinished();
+    void on_sbtRAS_XMP1_editingFinished();
+    void on_sbtRC_XMP1_editingFinished();
+    void on_sbtWR_XMP1_editingFinished();
+    void on_sbtRFC1_XMP1_editingFinished();
+    void on_sbtRFC2_XMP1_editingFinished();
+    void on_sbtRFC_XMP1_editingFinished();
+    void on_sbtRRD_L_XMP1_editingFinished();
+    void on_sbtRRD_L_LCLK_XMP1_editingFinished();
+    void on_sbtCCD_L_XMP1_editingFinished();
+    void on_sbtCCD_L_LCLK_XMP1_editingFinished();
+    void on_sbtCCDL_L_WR_XMP1_editingFinished();
+    void on_sbtCCDL_L_WR_LCLK_XMP1_editingFinished();
+    void on_sbtCCDL_L_WR2_XMP1_editingFinished();
+    void on_sbtCCDL_L_WR2_LCLK_XMP1_editingFinished();
+    void on_sbtFAW_XMP1_editingFinished();
+    void on_sbtFAW_LCLK_XMP1_editingFinished();
+    void on_sbtCCD_L_WTR_XMP1_editingFinished();
+    void on_sbtCCD_L_WTR_LCLK_XMP1_editingFinished();
+    void on_sbtCCD_S_WTR_XMP1_editingFinished();
+    void on_sbtCCD_S_WTR_LCLK_XMP1_editingFinished();
+    void on_sbtRTP_XMP1_editingFinished();
+    void on_sbtRTP_LCLK_XMP1_editingFinished();
+
     // Slots XMP2
+    void on_leProfileName_XMP2_editingFinished();
+    void on_cbDynamicMemBoost_XMP2_toggled(bool);
+    void on_cbRealTimeMemOC_XMP2_toggled(bool);
+    void on_sbVDD_XMP2_editingFinished();
+    void on_sbVDDQ_XMP2_editingFinished();
+    void on_sbVPP_XMP2_editingFinished();
+    void on_sbVmemctrl_XMP2_editingFinished();
+    void on_spinMinCycleTime_XMP2_editingFinished();
+    void on_cbCommandRate_XMP2_currentIndexChanged(int);
+
     void on_cbCL20_XMP2_toggled(bool);
     void on_cbCL22_XMP2_toggled(bool);
     void on_cbCL24_XMP2_toggled(bool);
@@ -224,7 +270,43 @@ private slots:
     void on_cbCL96_XMP2_toggled(bool);
     void on_cbCL98_XMP2_toggled(bool);
 
+    void on_sbtAA_XMP2_editingFinished();
+    void on_sbtRCD_XMP2_editingFinished();
+    void on_sbtRP_XMP2_editingFinished();
+    void on_sbtRAS_XMP2_editingFinished();
+    void on_sbtRC_XMP2_editingFinished();
+    void on_sbtWR_XMP2_editingFinished();
+    void on_sbtRFC1_XMP2_editingFinished();
+    void on_sbtRFC2_XMP2_editingFinished();
+    void on_sbtRFC_XMP2_editingFinished();
+    void on_sbtRRD_L_XMP2_editingFinished();
+    void on_sbtRRD_L_LCLK_XMP2_editingFinished();
+    void on_sbtCCD_L_XMP2_editingFinished();
+    void on_sbtCCD_L_LCLK_XMP2_editingFinished();
+    void on_sbtCCDL_L_WR_XMP2_editingFinished();
+    void on_sbtCCDL_L_WR_LCLK_XMP2_editingFinished();
+    void on_sbtCCDL_L_WR2_XMP2_editingFinished();
+    void on_sbtCCDL_L_WR2_LCLK_XMP2_editingFinished();
+    void on_sbtFAW_XMP2_editingFinished();
+    void on_sbtFAW_LCLK_XMP2_editingFinished();
+    void on_sbtCCD_L_WTR_XMP2_editingFinished();
+    void on_sbtCCD_L_WTR_LCLK_XMP2_editingFinished();
+    void on_sbtCCD_S_WTR_XMP2_editingFinished();
+    void on_sbtCCD_S_WTR_LCLK_XMP2_editingFinished();
+    void on_sbtRTP_XMP2_editingFinished();
+    void on_sbtRTP_LCLK_XMP2_editingFinished();
+
     // Slots XMP3
+    void on_leProfileName_XMP3_editingFinished();
+    void on_cbDynamicMemBoost_XMP3_toggled(bool);
+    void on_cbRealTimeMemOC_XMP3_toggled(bool);
+    void on_sbVDD_XMP3_editingFinished();
+    void on_sbVDDQ_XMP3_editingFinished();
+    void on_sbVPP_XMP3_editingFinished();
+    void on_sbVmemctrl_XMP3_editingFinished();
+    void on_spinMinCycleTime_XMP3_editingFinished();
+    void on_cbCommandRate_XMP3_currentIndexChanged(int);
+
     void on_cbCL20_XMP3_toggled(bool);
     void on_cbCL22_XMP3_toggled(bool);
     void on_cbCL24_XMP3_toggled(bool);
@@ -266,7 +348,42 @@ private slots:
     void on_cbCL96_XMP3_toggled(bool);
     void on_cbCL98_XMP3_toggled(bool);
 
+    void on_sbtAA_XMP3_editingFinished();
+    void on_sbtRCD_XMP3_editingFinished();
+    void on_sbtRP_XMP3_editingFinished();
+    void on_sbtRAS_XMP3_editingFinished();
+    void on_sbtRC_XMP3_editingFinished();
+    void on_sbtWR_XMP3_editingFinished();
+    void on_sbtRFC1_XMP3_editingFinished();
+    void on_sbtRFC2_XMP3_editingFinished();
+    void on_sbtRFC_XMP3_editingFinished();
+    void on_sbtRRD_L_XMP3_editingFinished();
+    void on_sbtRRD_L_LCLK_XMP3_editingFinished();
+    void on_sbtCCD_L_XMP3_editingFinished();
+    void on_sbtCCD_L_LCLK_XMP3_editingFinished();
+    void on_sbtCCDL_L_WR_XMP3_editingFinished();
+    void on_sbtCCDL_L_WR_LCLK_XMP3_editingFinished();
+    void on_sbtCCDL_L_WR2_XMP3_editingFinished();
+    void on_sbtCCDL_L_WR2_LCLK_XMP3_editingFinished();
+    void on_sbtFAW_XMP3_editingFinished();
+    void on_sbtFAW_LCLK_XMP3_editingFinished();
+    void on_sbtCCD_L_WTR_XMP3_editingFinished();
+    void on_sbtCCD_L_WTR_LCLK_XMP3_editingFinished();
+    void on_sbtCCD_S_WTR_XMP3_editingFinished();
+    void on_sbtCCD_S_WTR_LCLK_XMP3_editingFinished();
+    void on_sbtRTP_XMP3_editingFinished();
+    void on_sbtRTP_LCLK_XMP3_editingFinished();
+
     // Slots XMP User 1
+    void on_cbDynamicMemBoost_XMPU1_toggled(bool);
+    void on_cbRealTimeMemOC_XMPU1_toggled(bool);
+    void on_sbVDD_XMPU1_editingFinished();
+    void on_sbVDDQ_XMPU1_editingFinished();
+    void on_sbVPP_XMPU1_editingFinished();
+    void on_sbVmemctrl_XMPU1_editingFinished();
+    void on_spinMinCycleTime_XMPU1_editingFinished();
+    void on_cbCommandRate_XMPU1_currentIndexChanged(int);
+
     void on_cbCL20_XMPU1_toggled(bool);
     void on_cbCL22_XMPU1_toggled(bool);
     void on_cbCL24_XMPU1_toggled(bool);
@@ -308,7 +425,42 @@ private slots:
     void on_cbCL96_XMPU1_toggled(bool);
     void on_cbCL98_XMPU1_toggled(bool);
 
+    void on_sbtAA_XMPU1_editingFinished();
+    void on_sbtRCD_XMPU1_editingFinished();
+    void on_sbtRP_XMPU1_editingFinished();
+    void on_sbtRAS_XMPU1_editingFinished();
+    void on_sbtRC_XMPU1_editingFinished();
+    void on_sbtWR_XMPU1_editingFinished();
+    void on_sbtRFC1_XMPU1_editingFinished();
+    void on_sbtRFC2_XMPU1_editingFinished();
+    void on_sbtRFC_XMPU1_editingFinished();
+    void on_sbtRRD_L_XMPU1_editingFinished();
+    void on_sbtRRD_L_LCLK_XMPU1_editingFinished();
+    void on_sbtCCD_L_XMPU1_editingFinished();
+    void on_sbtCCD_L_LCLK_XMPU1_editingFinished();
+    void on_sbtCCDL_L_WR_XMPU1_editingFinished();
+    void on_sbtCCDL_L_WR_LCLK_XMPU1_editingFinished();
+    void on_sbtCCDL_L_WR2_XMPU1_editingFinished();
+    void on_sbtCCDL_L_WR2_LCLK_XMPU1_editingFinished();
+    void on_sbtFAW_XMPU1_editingFinished();
+    void on_sbtFAW_LCLK_XMPU1_editingFinished();
+    void on_sbtCCD_L_WTR_XMPU1_editingFinished();
+    void on_sbtCCD_L_WTR_LCLK_XMPU1_editingFinished();
+    void on_sbtCCD_S_WTR_XMPU1_editingFinished();
+    void on_sbtCCD_S_WTR_LCLK_XMPU1_editingFinished();
+    void on_sbtRTP_XMPU1_editingFinished();
+    void on_sbtRTP_LCLK_XMPU1_editingFinished();
+
     // Slots XMP User 2
+    void on_cbDynamicMemBoost_XMPU2_toggled(bool);
+    void on_cbRealTimeMemOC_XMPU2_toggled(bool);
+    void on_sbVDD_XMPU2_editingFinished();
+    void on_sbVDDQ_XMPU2_editingFinished();
+    void on_sbVPP_XMPU2_editingFinished();
+    void on_sbVmemctrl_XMPU2_editingFinished();
+    void on_spinMinCycleTime_XMPU2_editingFinished();
+    void on_cbCommandRate_XMPU2_currentIndexChanged(int);
+
     void on_cbCL20_XMPU2_toggled(bool);
     void on_cbCL22_XMPU2_toggled(bool);
     void on_cbCL24_XMPU2_toggled(bool);
@@ -349,6 +501,32 @@ private slots:
     void on_cbCL94_XMPU2_toggled(bool);
     void on_cbCL96_XMPU2_toggled(bool);
     void on_cbCL98_XMPU2_toggled(bool);
+
+    void on_sbtAA_XMPU2_editingFinished();
+    void on_sbtRCD_XMPU2_editingFinished();
+    void on_sbtRP_XMPU2_editingFinished();
+    void on_sbtRAS_XMPU2_editingFinished();
+    void on_sbtRC_XMPU2_editingFinished();
+    void on_sbtWR_XMPU2_editingFinished();
+    void on_sbtRFC1_XMPU2_editingFinished();
+    void on_sbtRFC2_XMPU2_editingFinished();
+    void on_sbtRFC_XMPU2_editingFinished();
+    void on_sbtRRD_L_XMPU2_editingFinished();
+    void on_sbtRRD_L_LCLK_XMPU2_editingFinished();
+    void on_sbtCCD_L_XMPU2_editingFinished();
+    void on_sbtCCD_L_LCLK_XMPU2_editingFinished();
+    void on_sbtCCDL_L_WR_XMPU2_editingFinished();
+    void on_sbtCCDL_L_WR_LCLK_XMPU2_editingFinished();
+    void on_sbtCCDL_L_WR2_XMPU2_editingFinished();
+    void on_sbtCCDL_L_WR2_LCLK_XMPU2_editingFinished();
+    void on_sbtFAW_XMPU2_editingFinished();
+    void on_sbtFAW_LCLK_XMPU2_editingFinished();
+    void on_sbtCCD_L_WTR_XMPU2_editingFinished();
+    void on_sbtCCD_L_WTR_LCLK_XMPU2_editingFinished();
+    void on_sbtCCD_S_WTR_XMPU2_editingFinished();
+    void on_sbtCCD_S_WTR_LCLK_XMPU2_editingFinished();
+    void on_sbtRTP_XMPU2_editingFinished();
+    void on_sbtRTP_LCLK_XMPU2_editingFinished();
 
 private:
     void clearUI();
