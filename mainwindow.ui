@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>DDR5 SPD Editor</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -3528,6 +3528,9 @@
               <property name="text">
                <string/>
               </property>
+              <property name="maxLength">
+               <number>15</number>
+              </property>
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -3731,6 +3734,9 @@
              <widget class="QLineEdit" name="leProfileName_XMP2">
               <property name="text">
                <string/>
+              </property>
+              <property name="maxLength">
+               <number>15</number>
               </property>
               <property name="readOnly">
                <bool>false</bool>
@@ -5668,6 +5674,9 @@
               <property name="text">
                <string/>
               </property>
+              <property name="maxLength">
+               <number>15</number>
+              </property>
               <property name="readOnly">
                <bool>false</bool>
               </property>
@@ -7585,27 +7594,10 @@
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_XMPU1">
-            <item row="0" column="3">
-             <widget class="QCheckBox" name="cbEnabled_XMPU1">
-              <property name="text">
-               <string>Enabled</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="1">
              <widget class="QCheckBox" name="cbDynamicMemBoost_XMPU1">
               <property name="text">
                <string>Intel Dynamic Memory Boost</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLineEdit" name="leProfileName_XMPU1">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="readOnly">
-               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -7652,6 +7644,29 @@
                 <string>4 DIMM</string>
                </property>
               </item>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLineEdit" name="leProfileName_XMPU1">
+              <property name="text">
+               <string>User Profile 1</string>
+              </property>
+              <property name="maxLength">
+               <number>15</number>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="cbEnabled_XMPU1">
+              <property name="text">
+               <string>Enabled</string>
+              </property>
+              <property name="checkable">
+               <bool>false</bool>
+              </property>
              </widget>
             </item>
            </layout>
@@ -9521,44 +9536,6 @@
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_XMPU2">
-            <item row="0" column="3">
-             <widget class="QCheckBox" name="cbEnabled_XMPU2">
-              <property name="text">
-               <string>Enabled</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="cbDynamicMemBoost_XMPU2">
-              <property name="text">
-               <string>Intel Dynamic Memory Boost</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLineEdit" name="leProfileName_XMPU2">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="readOnly">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="lProfileName_XMPU2">
-              <property name="text">
-               <string>Profile Name</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="cbRealTimeMemOC_XMPU2">
-              <property name="text">
-               <string>Realtime Memory Frequency OC</string>
-              </property>
-             </widget>
-            </item>
             <item row="3" column="1">
              <widget class="QLabel" name="lDMMc_XMPU2">
               <property name="text">
@@ -9588,6 +9565,50 @@
                 <string>4 DIMM</string>
                </property>
               </item>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLineEdit" name="leProfileName_XMPU2">
+              <property name="text">
+               <string>User Profile 2</string>
+              </property>
+              <property name="maxLength">
+               <number>15</number>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="cbDynamicMemBoost_XMPU2">
+              <property name="text">
+               <string>Intel Dynamic Memory Boost</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="lProfileName_XMPU2">
+              <property name="text">
+               <string>Profile Name</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="cbRealTimeMemOC_XMPU2">
+              <property name="text">
+               <string>Realtime Memory Frequency OC</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="cbEnabled_XMPU2">
+              <property name="text">
+               <string>Enabled</string>
+              </property>
+              <property name="checkable">
+               <bool>false</bool>
+              </property>
              </widget>
             </item>
            </layout>
@@ -11479,6 +11500,26 @@
      <addaction name="actionLoadSampleProfileU1"/>
      <addaction name="actionLoadSampleProfileU2"/>
     </widget>
+    <widget class="QMenu" name="menuImport_XMP_profile_to">
+     <property name="title">
+      <string>Import XMP profile to</string>
+     </property>
+     <addaction name="actionInportProfile1"/>
+     <addaction name="actionInportProfile2"/>
+     <addaction name="actionInportProfile3"/>
+     <addaction name="actionInportUserProfile1"/>
+     <addaction name="actionInportUserProfile2"/>
+    </widget>
+    <widget class="QMenu" name="menuExport_XMP_profile">
+     <property name="title">
+      <string>Export XMP profile</string>
+     </property>
+     <addaction name="actionExportProfile1"/>
+     <addaction name="actionExportProfile2"/>
+     <addaction name="actionExportProfile3"/>
+     <addaction name="actionExportUserProfile1"/>
+     <addaction name="actionExportUserProfile2"/>
+    </widget>
     <addaction name="separator"/>
     <addaction name="actionEnableXMPmagic"/>
     <addaction name="actionDisableXMPmagic"/>
@@ -11487,6 +11528,8 @@
     <addaction name="menuWipe_profile"/>
     <addaction name="separator"/>
     <addaction name="menuLoad_sample_profile"/>
+    <addaction name="menuImport_XMP_profile_to"/>
+    <addaction name="menuExport_XMP_profile"/>
    </widget>
    <addaction name="menuasdas"/>
    <addaction name="menuXMP"/>
@@ -11573,6 +11616,56 @@
    </property>
   </action>
   <action name="actionLoadSampleProfileU2">
+   <property name="text">
+    <string>User profile 2</string>
+   </property>
+  </action>
+  <action name="actionInportProfile1">
+   <property name="text">
+    <string>Profile 1</string>
+   </property>
+  </action>
+  <action name="actionInportProfile2">
+   <property name="text">
+    <string>Profile 2</string>
+   </property>
+  </action>
+  <action name="actionInportProfile3">
+   <property name="text">
+    <string>Profile 3</string>
+   </property>
+  </action>
+  <action name="actionInportUserProfile1">
+   <property name="text">
+    <string>User profile 1</string>
+   </property>
+  </action>
+  <action name="actionInportUserProfile2">
+   <property name="text">
+    <string>User profile 2</string>
+   </property>
+  </action>
+  <action name="actionExportProfile1">
+   <property name="text">
+    <string>Profile 1</string>
+   </property>
+  </action>
+  <action name="actionExportProfile2">
+   <property name="text">
+    <string>Profile 2</string>
+   </property>
+  </action>
+  <action name="actionExportProfile3">
+   <property name="text">
+    <string>Profile 3</string>
+   </property>
+  </action>
+  <action name="actionExportUserProfile1">
+   <property name="text">
+    <string>User profile 1</string>
+   </property>
+  </action>
+  <action name="actionExportUserProfile2">
    <property name="text">
     <string>User profile 2</string>
    </property>

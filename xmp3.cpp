@@ -401,6 +401,14 @@ void XMP3_Profile::resetProfile() {
     setCLSupported(54, true);
 }
 
+XMP_ProfileStruct XMP3_Profile::getCopy(){
+    return xmpProfileStruct;
+}
+
+void XMP3_Profile::import(const XMP_ProfileStruct in) {
+    xmpProfileStruct = in;
+}
+
 // XMP Bundle methods
 XMP3_Bundle::XMP3_Bundle(XMP_Struct& xmpBlockRef) :
     xmpStruct(xmpBlockRef),

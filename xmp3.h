@@ -12,6 +12,7 @@ enum class CommandRate
     _3n
 };
 
+constexpr size_t XMPHeaderSize = 0x40;
 constexpr size_t XMPProfileSize = 0x40;
 constexpr size_t maxXmpProfileName = 15;
 constexpr unsigned int IntelDynamicMemoryBoostBit = 0;
@@ -104,9 +105,9 @@ struct XMP_Struct {
 };
 #pragma pack(pop)
 
+static_assert(sizeof(XMP_HeaderStruct) == XMPHeaderSize, "XMP Header has to be 64 bytes in size");
+static_assert(sizeof(XMP_ProfileStruct) == XMPProfileSize, "XMP Profile has to be 64 bytes in size");
 static_assert(sizeof(XMP_Struct) == (sizeof(XMP_HeaderStruct) + 5*sizeof(XMP_ProfileStruct)), "XMP Block size is incorrect");
-static_assert(sizeof(XMP_HeaderStruct) == 0x40, "XMP Header has to be 64 bytes in size");
-static_assert(sizeof(XMP_ProfileStruct) == 0x40, "XMP Profile has to be 64 bytes in size");
 
 class XMP3_Profile {
 public:
@@ -230,6 +231,9 @@ public:
 
     void wipeProfile();
     void resetProfile();
+
+    XMP_ProfileStruct getCopy();
+    void import(const XMP_ProfileStruct);
 
 private:
     XMP_ProfileStruct& xmpProfileStruct;

@@ -36,6 +36,18 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionLoadSampleProfile3, &QAction::triggered, this, &MainWindow::loadSampleXMPProfile3);
     connect(ui->actionLoadSampleProfileU1, &QAction::triggered, this, &MainWindow::loadSampleXMPProfileU1);
     connect(ui->actionLoadSampleProfileU2, &QAction::triggered, this, &MainWindow::loadSampleXMPProfileU2);
+
+    connect(ui->actionExportProfile1, &QAction::triggered, this, &MainWindow::exportXMPProfile1);
+    connect(ui->actionExportProfile2, &QAction::triggered, this, &MainWindow::exportXMPProfile2);
+    connect(ui->actionExportProfile3, &QAction::triggered, this, &MainWindow::exportXMPProfile3);
+    connect(ui->actionExportUserProfile1, &QAction::triggered, this, &MainWindow::exportXMPProfileU1);
+    connect(ui->actionExportUserProfile2, &QAction::triggered, this, &MainWindow::exportXMPProfileU2);
+
+    connect(ui->actionInportProfile1, &QAction::triggered, this, &MainWindow::importXMPProfile1);
+    connect(ui->actionInportProfile2, &QAction::triggered, this, &MainWindow::importXMPProfile2);
+    connect(ui->actionInportProfile3, &QAction::triggered, this, &MainWindow::importXMPProfile3);
+    connect(ui->actionInportUserProfile1, &QAction::triggered, this, &MainWindow::importXMPProfileU1);
+    connect(ui->actionInportUserProfile2, &QAction::triggered, this, &MainWindow::importXMPProfileU2);
 }
 
 MainWindow::~MainWindow()
@@ -190,6 +202,146 @@ void MainWindow::loadSampleXMPProfileU2() {
     reloadXMP2Tab();
 }
 
+void MainWindow::exportXMPProfile(const XMP_ProfileStruct& xmpProfile) {
+    // Actually save
+    QString fileName = QFileDialog::getSaveFileName(this, "Save XMP File", QDir::currentPath(), "XMP Files (*.xmp, *.bin);;All Files (*.*)");
+
+    if (!fileName.isEmpty()) {
+        // save contents to the selected file
+        QFile file(fileName);
+
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Failed to save file.") );
+        }
+
+        if (file.isWritable()) {
+            file.write(reinterpret_cast<const char*>(&xmpProfile), XMPProfileSize);
+            file.close();
+        } else {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Failed to save file (read only?).") );
+        }
+    }
+}
+
+void MainWindow::exportXMPProfile1(){
+    if (spd != nullptr) {
+        exportXMPProfile(spd->xmpBundle.profile1.getCopy());
+    }
+}
+
+void MainWindow::exportXMPProfile2(){
+    if (spd != nullptr) {
+        exportXMPProfile(spd->xmpBundle.profile2.getCopy());
+    }
+}
+
+void MainWindow::exportXMPProfile3(){
+    if (spd != nullptr) {
+        exportXMPProfile(spd->xmpBundle.profile3.getCopy());
+    }
+}
+
+void MainWindow::exportXMPProfileU1(){
+    if (spd != nullptr) {
+        exportXMPProfile(spd->xmpBundle.profileUser1.getCopy());
+    }
+}
+
+void MainWindow::exportXMPProfileU2(){
+    if (spd != nullptr) {
+        exportXMPProfile(spd->xmpBundle.profileUser2.getCopy());
+    }
+}
+
+XMP_ProfileStruct MainWindow::importXMPProfile() {
+    QString fileName = QFileDialog::getOpenFileName(this, "Open File", QDir::currentPath(), "XMP Profile Files (*.xmp, *.bin);;All Files (*.*)");
+
+    if (!fileName.isEmpty()) {
+        // do something with the selected file
+        QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Failed to load file.") );
+        }
+
+        if (file.size() != XMPProfileSize) {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Invalid XMP 3.0 profile file size.") );
+        }
+
+        QByteArray contents = file.readAll();
+
+        if (contents.length() != XMPProfileSize) {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Invalid XMP 3.0 profile file size.") );
+        } else {
+            XMP_ProfileStruct readProfile = *reinterpret_cast<XMP_ProfileStruct*>(contents.data());
+            return readProfile;
+        }
+    }
+
+    XMP_ProfileStruct empty{};
+    return empty;
+}
+
+void MainWindow::importXMPProfile1(){
+    if (spd == nullptr) {
+        return;
+    }
+
+    spd->xmpBundle.profile1.import(importXMPProfile());
+    reloadXMP1Tab();
+}
+
+void MainWindow::importXMPProfile2(){
+    if (spd == nullptr) {
+        return;
+    }
+
+    spd->xmpBundle.profile2.import(importXMPProfile());
+    reloadXMP2Tab();
+}
+
+void MainWindow::importXMPProfile3(){
+    if (spd == nullptr) {
+        return;
+    }
+
+    spd->xmpBundle.profile3.import(importXMPProfile());
+    reloadXMP3Tab();
+}
+
+void MainWindow::importXMPProfileU1(){
+    if (spd == nullptr) {
+        return;
+    }
+
+    spd->xmpBundle.profileUser1.import(importXMPProfile());
+    reloadXMPU1Tab();
+}
+
+void MainWindow::importXMPProfileU2(){
+    if (spd == nullptr) {
+        return;
+    }
+
+    spd->xmpBundle.profileUser2.import(importXMPProfile());
+    reloadXMPU2Tab();
+}
+
+
 void MainWindow::enableXMPMagicBits() {
     spd->xmpBundle.enableMagic();
 }
@@ -241,6 +393,18 @@ void MainWindow::toggleXMPUI(const bool status) {
     ui->actionLoadSampleProfile3->setDisabled(disabled);
     ui->actionLoadSampleProfileU1->setDisabled(disabled);
     ui->actionLoadSampleProfileU2->setDisabled(disabled);
+
+    ui->actionExportProfile1->setDisabled(disabled);
+    ui->actionExportProfile2->setDisabled(disabled);
+    ui->actionExportProfile3->setDisabled(disabled);
+    ui->actionExportUserProfile1->setDisabled(disabled);
+    ui->actionExportUserProfile2->setDisabled(disabled);
+
+    ui->actionInportProfile1->setDisabled(disabled);
+    ui->actionInportProfile2->setDisabled(disabled);
+    ui->actionInportProfile3->setDisabled(disabled);
+    ui->actionInportUserProfile1->setDisabled(disabled);
+    ui->actionInportUserProfile2->setDisabled(disabled);
 
     ui->tabXMPP1->setDisabled(disabled);
     ui->tabXMPP2->setDisabled(disabled);
@@ -371,7 +535,6 @@ void MainWindow::reloadJEDECTab() {
     ui->spinMinCycleTime->setValue(spd->getMinCycleTime());
     ui->spinMaxCycleTime->setValue(spd->getMaxCycleTime());
 
-    const unsigned int frequency = spd->getFrequency();
     QString frequencyStr = QString::number(spd->getFrequency()) + " MHz";
     QString mtStr = QString::number(spd->getMT()) + " MT/s";
 
@@ -1267,6 +1430,11 @@ void MainWindow::on_spinBoxtRTP_LCLK_editingFinished() {
 }
 
 // XMP1
+void MainWindow::on_leProfileName_XMP1_editingFinished()
+{
+    spd->xmpBundle.setXMP1ProfileName(ui->leProfileName_XMP1->text().toStdString());
+}
+
 void MainWindow::on_cbCL20_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(20, value); }
 void MainWindow::on_cbCL22_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(22, value); }
 void MainWindow::on_cbCL24_XMP1_toggled(bool value) { spd->xmpBundle.profile1.setCLSupported(24, value); }

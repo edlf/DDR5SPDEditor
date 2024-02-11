@@ -45,6 +45,20 @@ private slots:
     void loadSampleXMPProfileU1();
     void loadSampleXMPProfileU2();
 
+    void exportXMPProfile(const XMP_ProfileStruct&);
+    void exportXMPProfile1();
+    void exportXMPProfile2();
+    void exportXMPProfile3();
+    void exportXMPProfileU1();
+    void exportXMPProfileU2();
+
+    XMP_ProfileStruct importXMPProfile();
+    void importXMPProfile1();
+    void importXMPProfile2();
+    void importXMPProfile3();
+    void importXMPProfileU1();
+    void importXMPProfileU2();
+
     void enableXMPMagicBits();
     void disableXMPMagicBits();
 
@@ -126,6 +140,7 @@ private slots:
     void on_spinBoxtRTP_LCLK_editingFinished();
 
     // Slots XMP1
+    void on_leProfileName_XMP1_editingFinished();
     void on_cbCL20_XMP1_toggled(bool);
     void on_cbCL22_XMP1_toggled(bool);
     void on_cbCL24_XMP1_toggled(bool);
