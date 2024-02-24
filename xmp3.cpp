@@ -39,11 +39,11 @@ void XMP3_Profile::setVMEMCtrl(const unsigned short vmem) {
 }
 
 const unsigned short XMP3_Profile::getMinCycleTime() {
-    return utilities::ConvertBytes(xmpProfileStruct.minCycleTime[0], xmpProfileStruct.minCycleTime[1]);
+    return xmpProfileStruct.minCycleTime;
 }
 
 void XMP3_Profile::setMinCycleTime(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.minCycleTime[0], xmpProfileStruct.minCycleTime[1], value);
+    xmpProfileStruct.minCycleTime = value;
 }
 
 const unsigned int XMP3_Profile::getFrequency() {
@@ -63,83 +63,83 @@ const bool XMP3_Profile::getCLSupported(const int cl){
 }
 
 const unsigned short XMP3_Profile::gettAA() {
-    return utilities::ConvertBytes(xmpProfileStruct.tAA[0], xmpProfileStruct.tAA[1]);
+    return xmpProfileStruct.tAA;
 }
 
 void XMP3_Profile::settAA(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tAA[0], xmpProfileStruct.tAA[1], value);
+    xmpProfileStruct.tAA = value;
 }
 
 const unsigned short XMP3_Profile::gettRCD() {
-    return utilities::ConvertBytes(xmpProfileStruct.tRCD[0], xmpProfileStruct.tRCD[1]);
+    return xmpProfileStruct.tRCD;
 }
 
 void XMP3_Profile::settRCD(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tRCD[0], xmpProfileStruct.tRCD[1], value);
+    xmpProfileStruct.tRCD = value;
 }
 
 const unsigned short XMP3_Profile::gettRP() {
-    return utilities::ConvertBytes(xmpProfileStruct.tRP[0], xmpProfileStruct.tRP[1]);
+    return xmpProfileStruct.tRP;
 }
 
 void XMP3_Profile::settRP(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tRP[0], xmpProfileStruct.tRP[1], value);
+    xmpProfileStruct.tRP = value;
 }
 
 const unsigned short XMP3_Profile::gettRAS() {
-    return utilities::ConvertBytes(xmpProfileStruct.tRAS[0], xmpProfileStruct.tRAS[1]);
+    return xmpProfileStruct.tRAS;
 }
 
 void XMP3_Profile::settRAS(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tRAS[0], xmpProfileStruct.tRAS[1], value);
+    xmpProfileStruct.tRAS = value;
 }
 
 const unsigned short XMP3_Profile::gettRC() {
-    return utilities::ConvertBytes(xmpProfileStruct.tRC[0], xmpProfileStruct.tRC[1]);
+    return xmpProfileStruct.tRC;
 }
 
 void XMP3_Profile::settRC(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tRC[0], xmpProfileStruct.tRC[1], value);
+    xmpProfileStruct.tRC = value;
 }
 
 const unsigned short XMP3_Profile::gettWR() {
-    return utilities::ConvertBytes(xmpProfileStruct.tWR[0], xmpProfileStruct.tWR[1]);
+    return xmpProfileStruct.tWR;
 }
 
 void XMP3_Profile::settWR(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tWR[0], xmpProfileStruct.tWR[1], value);
+    xmpProfileStruct.tWR = value;
 }
 
 const unsigned short XMP3_Profile::gettRFC1() {
-    return utilities::ConvertBytes(xmpProfileStruct.tRFC1[0], xmpProfileStruct.tRFC1[1]);
+    return xmpProfileStruct.tRFC1;
 }
 
 void XMP3_Profile::settRFC1(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tRFC1[0], xmpProfileStruct.tRFC1[1], value);
+    xmpProfileStruct.tRFC1 = value;
 }
 
 const unsigned short XMP3_Profile::gettRFC2() {
-    return utilities::ConvertBytes(xmpProfileStruct.tRFC2[0], xmpProfileStruct.tRFC2[1]);
+    return xmpProfileStruct.tRFC2;
 }
 
 void XMP3_Profile::settRFC2(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tRFC2[0], xmpProfileStruct.tRFC2[1], value);
+    xmpProfileStruct.tRFC2 = value;
 }
 
 const unsigned short XMP3_Profile::gettRFC() {
-    return utilities::ConvertBytes(xmpProfileStruct.tRFC[0], xmpProfileStruct.tRFC[1]);
+    return xmpProfileStruct.tRFC;
 }
 
 void XMP3_Profile::settRFC(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tRFC[0], xmpProfileStruct.tRFC[1], value);
+    xmpProfileStruct.tRFC = value;
 }
 
 const unsigned short XMP3_Profile::gettRRD_L() {
-    return utilities::ConvertBytes(xmpProfileStruct.tRRD_L[0], xmpProfileStruct.tRRD_L[1]);
+    return xmpProfileStruct.tRRD_L;
 }
 
 void XMP3_Profile::settRRD_L(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tRRD_L[0], xmpProfileStruct.tRRD_L[1], value);
+    xmpProfileStruct.tRRD_L = value;
 }
 
 const unsigned short XMP3_Profile::gettRRD_L_lowerLimit() {
@@ -151,11 +151,11 @@ void XMP3_Profile::settRRD_L_lowerLimit(const unsigned short value) {
 }
 
 const unsigned short XMP3_Profile::gettCCD_L_WR() {
-    return utilities::ConvertBytes(xmpProfileStruct.tCCD_L_WR[0], xmpProfileStruct.tCCD_L_WR[1]);
+    return xmpProfileStruct.tCCD_L_WR;
 }
 
 void XMP3_Profile::settCCD_L_WR(unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tCCD_L_WR[0], xmpProfileStruct.tCCD_L_WR[1], value);
+    xmpProfileStruct.tCCD_L_WR = value;
 }
 
 const unsigned short XMP3_Profile::gettCCD_L_WR_lowerLimit() {
@@ -167,11 +167,11 @@ void XMP3_Profile::settCCD_L_WR_lowerLimit(unsigned short value) {
 }
 
 const unsigned short XMP3_Profile::gettCCD_L_WR2() {
-    return utilities::ConvertBytes(xmpProfileStruct.tCCD_L_WR2[0], xmpProfileStruct.tCCD_L_WR2[1]);
+    return xmpProfileStruct.tCCD_L_WR2;
 }
 
 void XMP3_Profile::settCCD_L_WR2(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tCCD_L_WR2[0], xmpProfileStruct.tCCD_L_WR2[1], value);
+    xmpProfileStruct.tCCD_L_WR2 = value;
 }
 
 const unsigned short XMP3_Profile::gettCCD_L_WR2_lowerLimit() {
@@ -183,11 +183,11 @@ void XMP3_Profile::settCCD_L_WR2_lowerLimit(const unsigned short value) {
 }
 
 const unsigned short XMP3_Profile::gettCCD_L_WTR() {
-    return utilities::ConvertBytes(xmpProfileStruct.tCCD_L_WTR[0], xmpProfileStruct.tCCD_L_WTR[1]);
+    return xmpProfileStruct.tCCD_L_WTR;
 }
 
 void XMP3_Profile::settCCD_L_WTR(unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tCCD_L_WTR[0], xmpProfileStruct.tCCD_L_WTR[1], value);
+    xmpProfileStruct.tCCD_L_WTR = value;
 }
 
 const unsigned short XMP3_Profile::gettCCD_L_WTR_lowerLimit() {
@@ -199,11 +199,11 @@ void XMP3_Profile::settCCD_L_WTR_lowerLimit(unsigned short value) {
 }
 
 const unsigned short XMP3_Profile::gettCCD_S_WTR() {
-    return utilities::ConvertBytes(xmpProfileStruct.tCCD_S_WTR[0], xmpProfileStruct.tCCD_S_WTR[1]);
+    return xmpProfileStruct.tCCD_S_WTR;
 }
 
 void XMP3_Profile::settCCD_S_WTR(unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tCCD_S_WTR[0], xmpProfileStruct.tCCD_S_WTR[1], value);
+    xmpProfileStruct.tCCD_S_WTR = value;
 }
 
 const unsigned short XMP3_Profile::gettCCD_S_WTR_lowerLimit() {
@@ -215,11 +215,11 @@ void XMP3_Profile::settCCD_S_WTR_lowerLimit(unsigned short value) {
 }
 
 const unsigned short XMP3_Profile::gettCCD_L() {
-    return utilities::ConvertBytes(xmpProfileStruct.tCCD_L[0], xmpProfileStruct.tCCD_L[1]);
+    return xmpProfileStruct.tCCD_L;
 }
 
 void XMP3_Profile::settCCD_L(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tCCD_L[0], xmpProfileStruct.tCCD_L[1], value);
+    xmpProfileStruct.tCCD_L = value;
 }
 
 const unsigned short XMP3_Profile::gettCCD_L_lowerLimit() {
@@ -231,11 +231,11 @@ void XMP3_Profile::settCCD_L_lowerLimit(const unsigned short value) {
 }
 
 const unsigned short XMP3_Profile::gettRTP() {
-    return utilities::ConvertBytes(xmpProfileStruct.tRTP[0], xmpProfileStruct.tRTP[1]);
+    return xmpProfileStruct.tRTP;
 }
 
 void XMP3_Profile::settRTP(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tRTP[0], xmpProfileStruct.tRTP[1], value);
+    xmpProfileStruct.tRTP = value;
 }
 
 const unsigned short XMP3_Profile::gettRTP_lowerLimit() {
@@ -247,11 +247,11 @@ void XMP3_Profile::settRTP_lowerLimit(const unsigned short value) {
 }
 
 const unsigned short XMP3_Profile::gettFAW() {
-    return utilities::ConvertBytes(xmpProfileStruct.tFAW[0], xmpProfileStruct.tFAW[1]);
+    return xmpProfileStruct.tFAW;
 }
 
 void XMP3_Profile::settFAW(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.tFAW[0], xmpProfileStruct.tFAW[1], value);
+    xmpProfileStruct.tFAW = value;
 }
 
 const unsigned short XMP3_Profile::gettFAW_lowerLimit() {
@@ -332,11 +332,11 @@ void XMP3_Profile::setCommandRate(const CommandRate cr) {
 }
 
 const unsigned short XMP3_Profile::getCRC() {
-    return utilities::ConvertBytes(xmpProfileStruct.checksum[0], xmpProfileStruct.checksum[1]);
+    return xmpProfileStruct.checksum;
 }
 
 void XMP3_Profile::setCRC(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpProfileStruct.checksum[0], xmpProfileStruct.checksum[1], value);
+    xmpProfileStruct.checksum = value;
 }
 
 void XMP3_Profile::fixCRC() {
@@ -485,11 +485,11 @@ bool XMP3_Bundle::isMagicPresent() {
 }
 
 const unsigned short XMP3_Bundle::getHeaderCRC() {
-    return utilities::ConvertBytes(xmpStruct.header.checksum[0], xmpStruct.header.checksum[1]);
+    return xmpStruct.header.checksum;
 }
 
 void XMP3_Bundle::setHeaderCRC(const unsigned short value) {
-    utilities::Convert16bitUnsignedInteger(xmpStruct.header.checksum[0], xmpStruct.header.checksum[1], value);
+    xmpStruct.header.checksum = value;
 }
 
 void XMP3_Bundle::fixHeaderCRC() {

@@ -2,9 +2,12 @@
 #define DDR5SPD_STRUCTS_H
 
 #include <stddef.h>
+#include <type_traits>
+#include <bit>
 
 namespace ddr5_structs {
 
+// JEDEC
 constexpr size_t eepromSize = 1024;
 constexpr size_t partNumberSize = 30;
 constexpr size_t jedecBlockSize = 0x200;
@@ -13,12 +16,14 @@ constexpr size_t jedecBlockSize = 0x200;
 constexpr size_t XMPHeaderSize = 0x40;
 constexpr size_t XMPProfileSize = 0x40;
 constexpr size_t maxXmpProfileName = 15;
-constexpr unsigned int IntelDynamicMemoryBoostBit = 0;
-constexpr unsigned int RealTimeMemoryFrequencyOCBit = 1 ;
+
 constexpr char XMPHeaderMagic[] = { 0x0C, 0x4A };
 constexpr unsigned int xmpProfile1EnableBit = 0;
 constexpr unsigned int xmpProfile2EnableBit = 1;
 constexpr unsigned int xmpProfile3EnableBit = 2;
+
+constexpr unsigned int IntelDynamicMemoryBoostBit = 0;
+constexpr unsigned int RealTimeMemoryFrequencyOCBit = 1 ;
 
 enum class FormFactor
 {
@@ -101,7 +106,7 @@ struct XMP_HeaderStruct {
     unsigned char spacer2;
     char profileName3[maxXmpProfileName];
     unsigned char spacer3;
-    unsigned char checksum[2];
+    unsigned short checksum;
 };
 
 struct XMP_ProfileStruct {
@@ -110,33 +115,33 @@ struct XMP_ProfileStruct {
     unsigned char vddq;
     unsigned char unknown_03;
     unsigned char vmemctrl;
-    unsigned char minCycleTime[2];
+    unsigned short minCycleTime;
     CAS clSupported;
     unsigned char unkown_0A;
-    unsigned char tAA[2];
-    unsigned char tRCD[2];
-    unsigned char tRP[2];
-    unsigned char tRAS[2];
-    unsigned char tRC[2];
-    unsigned char tWR[2];
-    unsigned char tRFC1[2];
-    unsigned char tRFC2[2];
-    unsigned char tRFC[2];
-    unsigned char tRRD_L[2];
+    unsigned short tAA;
+    unsigned short tRCD;
+    unsigned short tRP;
+    unsigned short tRAS;
+    unsigned short tRC;
+    unsigned short tWR;
+    unsigned short tRFC1;
+    unsigned short tRFC2;
+    unsigned short tRFC;
+    unsigned short tRRD_L;
     unsigned char tRRD_L_lowerLimit;
-    unsigned char tCCD_L_WR[2];
+    unsigned short tCCD_L_WR;
     unsigned char tCCD_L_WR_lowerLimit;
-    unsigned char tCCD_L_WR2[2];
+    unsigned short tCCD_L_WR2;
     unsigned char tCCD_L_WR2_lowerLimit;
-    unsigned char tCCD_L_WTR[2];
+    unsigned short tCCD_L_WTR;
     unsigned char tCCD_L_WTR_lowerLimit;
-    unsigned char tCCD_S_WTR[2];
+    unsigned short tCCD_S_WTR;
     unsigned char tCCD_S_WTR_lowerLimit;
-    unsigned char tCCD_L[2];
+    unsigned short tCCD_L;
     unsigned char tCCD_L_lowerLimit;
-    unsigned char tRTP[2];
+    unsigned short tRTP;
     unsigned char tRTP_lowerLimit;
-    unsigned char tFAW[2];
+    unsigned short tFAW;
     unsigned char tFAW_lowerLimit;
     unsigned char unknown_07;
     unsigned char unknown_08;
@@ -147,7 +152,7 @@ struct XMP_ProfileStruct {
     unsigned char unknown_0D;
 
     // Byte 0x3E-0x4F
-    unsigned char checksum[2];
+    unsigned short checksum;
 };
 
 struct XMP_Struct {
@@ -188,99 +193,99 @@ struct SPD_Struct {
     // Byte 19
     unsigned char sdramTimming; // Should be 0x00 for JEDEC standard timmings
     // Byte 20-21
-    unsigned char minCycleTime[2];
+    unsigned short minCycleTime;
     // Byte 22-23
-    unsigned char maxCycleTime[2];
+    unsigned short maxCycleTime;
     // Byte 24-28 Cas Latencies supported
     CAS clSupported;
     unsigned char reserved_29;
     // Byte 30-31 tAA
-    unsigned char tAA[2];
+    unsigned short tAA;
     // Byte 32-33 tRCD
-    unsigned char tRCD[2];
+    unsigned short tRCD;
     // Byte 34-35 tRP
-    unsigned char tRP[2];
+    unsigned short tRP;
     // Byte 36-37 tRAS
-    unsigned char tRAS[2];
+    unsigned short tRAS;
     // Byte 38-39 tRC
-    unsigned char tRC[2];
+    unsigned short tRC;
     // Byte 40-41 tWR
-    unsigned char tWR[2];
+    unsigned short tWR;
 
     // Same logical bank
     // Byte 42-43 tRFC1 (Normal Refresh Recovery Time)
-    unsigned char tRFC1_slr[2];
+    unsigned short tRFC1_slr;
     // Byte 44-45 tRFC2 (Fine Granularity Refresh Recovery Time)
-    unsigned char tRFC2_slr[2];
+    unsigned short tRFC2_slr;
     // Byte 46-47 tRFCsb (Same Bank Refresh Recovery Time)
-    unsigned char tRFCsb_slr[2];
+    unsigned short tRFCsb_slr;
 
     // Different logical bank
     // Byte 48-49 tRFC1 (Normal Refresh Recovery Time)
-    unsigned char tRFC1_dlr[2];
+    unsigned short tRFC1_dlr;
     // Byte 50-51 tRFC2 (Fine Granularity Refresh Recovery Time)
-    unsigned char tRFC2_dlr[2];
+    unsigned short tRFC2_dlr;
     // Byte 52-53 tRFCsb (Same Bank Refresh Recovery Time)
-    unsigned char tRFCsb_dlr[2];
+    unsigned short tRFCsb_dlr;
 
     // Byte 54-57 SDRAM Refresh Management
-    unsigned char refreshManagementFirst[2];
-    unsigned char refreshManagementSecond[2];
+    unsigned short refreshManagementFirst;
+    unsigned short refreshManagementSecond;
 
     // Byte 58-61 Adaptive Refresh Management Level A
-    unsigned char adaptiveRefreshManagementAFirst[2];
-    unsigned char adaptiveRefreshManagementASecond[2];
+    unsigned short adaptiveRefreshManagementAFirst;
+    unsigned short adaptiveRefreshManagementASecond;
 
     // Byte 62-65 Adaptive Refresh Management Level B
-    unsigned char adaptiveRefreshManagementBFirst[2];
-    unsigned char adaptiveRefreshManagementBSecond[2];
+    unsigned short adaptiveRefreshManagementBFirst;
+    unsigned short adaptiveRefreshManagementBSecond;
 
     // Byte 66-69 Adaptive Refresh Management Level C
-    unsigned char adaptiveRefreshManagementCFirst[2];
-    unsigned char adaptiveRefreshManagementCSecond[2];
+    unsigned short adaptiveRefreshManagementCFirst;
+    unsigned short adaptiveRefreshManagementCSecond;
 
     // Byte 70-72 Activate to Activate Command Delay for Same Bank Group
-    unsigned char tRRD_L[2];
+    unsigned short tRRD_L;
     unsigned char tRRD_L_lowerLimit;
 
     // Byte 73-75 Read to Read Command Delay for Same Bank Group
-    unsigned char tCCD_L[2];
+    unsigned short tCCD_L;
     unsigned char tCCD_L_lowerLimit;
 
     // Byte 76-78 Write to Write Command Delay for Same Bank Group
-    unsigned char tCCD_L_WR[2];
+    unsigned short tCCD_L_WR;
     unsigned char tCCD_L_WR_lowerLimit;
 
     // Byte 79-81 Write to Write Command Delay for Same Bank Group, Second Write not RMW
-    unsigned char tCCD_L_WR2[2];
+    unsigned short tCCD_L_WR2;
     unsigned char tCCD_L_WR2_lowerLimit;
 
     // Byte 82-84 Four Activate Window
-    unsigned char tFAW[2];
+    unsigned short tFAW;
     unsigned char tFAW_lowerLimit;
 
     // Byte 85-87 Write to Read Command Delay for Same Bank Group
-    unsigned char tCCD_L_WTR[2];
+    unsigned short tCCD_L_WTR;
     unsigned char tCCD_L_WTR_lowerLimit;
 
     // Byte 88-90 Write to Read Command Delay for Different Bank Group
-    unsigned char tCCD_S_WTR[2];
+    unsigned short tCCD_S_WTR;
     unsigned char tCCD_S_WTR_lowerLimit;
 
     // Byte 91-93 Read to Precharge Command Delay
-    unsigned char tRTP[2];
+    unsigned short tRTP;
     unsigned char tRTP_lowerLimit;
 
     // Byte 94-96 Read to Read Command Delay for Different Bank in Same Bank
-    unsigned char tCCD_M[2];
+    unsigned short tCCD_M;
     unsigned char tCCD_M_lowerLimit;
 
     // Byte 97-99 Write to Write Command Delay for Different Bank in Same Bank Group
-    unsigned char tCCD_M_WR[2];
+    unsigned short tCCD_M_WR;
     unsigned char tCCD_M_WR_lowerLimit;
 
     // Byte 100-102 Write to Read Command Delay for Same Bank Group
-    unsigned char tCCD_M_WTR[2];
+    unsigned short tCCD_M_WTR;
     unsigned char tCCD_M_WTR_lowerLimit;
 
     // Byte 103-127 Reserved
@@ -340,16 +345,16 @@ struct SPD_Struct {
     unsigned char reserved_448_509[62];
 
     // Byte 510-511 Checksum (for bytes 0-509)
-    unsigned char checksum[2];
+    unsigned short checksum;
     // ---------------------- End block 7 ----------------------
 
     // Block 8 - Manufacturing information
     // Byte 512
-    unsigned char moduleManufacturer[2]; // Mandatory
+    unsigned short moduleManufacturer; // Mandatory
     // Byte 514
     unsigned char manufactureLocation; // Mandatory
     // Byte 515-516
-    char manufactureDate[2]; // Mandatory
+    unsigned char manufactureDate[2]; // Mandatory
     // Bytes 517-520
     unsigned char serialNumber[4]; // Mandatory
     // Bytes 521-550
@@ -357,7 +362,7 @@ struct SPD_Struct {
     // Byte 551
     unsigned char moduleRevision;
     // Byte 552-553 DRAM Manufacturer ID Code
-    unsigned char dramManufacturer[2]; // Mandatory
+    unsigned short dramManufacturer; // Mandatory
     // Byte 554 DRAM stepping
     unsigned char dramStepping;
 
@@ -371,6 +376,8 @@ struct SPD_Struct {
 };
 #pragma pack(pop)
 
+// static_assert(std::endian::native == std::endian::little, "Endianess"); // Requires C++20
+static_assert(sizeof(unsigned short) == 0x2, "Unsigned shorts must be 16 bits!");
 static_assert(sizeof(SPD_Struct) == 0x400, "SPD struct size error");
 static_assert(sizeof(XMP_HeaderStruct) == XMPHeaderSize, "XMP Header has to be 64 bytes in size");
 static_assert(sizeof(XMP_ProfileStruct) == XMPProfileSize, "XMP Profile has to be 64 bytes in size");

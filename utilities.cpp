@@ -21,15 +21,6 @@ unsigned short Crc16(unsigned char bytes[], unsigned int length) {
     return (crc & 0xFFFF);
 }
 
-unsigned short ConvertBytes(unsigned char lsb, unsigned char msb) {
-    return (msb << 8) + lsb;
-}
-
-void Convert16bitUnsignedInteger(unsigned char& lsb, unsigned char& msb, unsigned short value) {
-    lsb = static_cast<unsigned char>(value & 0xff);
-    msb = static_cast<unsigned char>((value & 0xff00) >> 8);
-}
-
 unsigned short TimeToTicksDDR5(const unsigned int time, const unsigned int minCycleTime) {
     if (minCycleTime == 0) {
         return 0;

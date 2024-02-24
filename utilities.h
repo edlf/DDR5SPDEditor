@@ -8,10 +8,6 @@ namespace utilities {
 
 unsigned short Crc16(unsigned char bytes[], unsigned int length);
 
-unsigned short ConvertBytes(unsigned char lsb, unsigned char msb);
-
-void Convert16bitUnsignedInteger(unsigned char& lsb, unsigned char& msb, unsigned short value);
-
 unsigned short TimeToTicksDDR5(const unsigned int time, const unsigned int minCycleTime);
 
 void SetCLSupportedDDR5(ddr5_structs::CAS&, unsigned short cl, bool supported);
