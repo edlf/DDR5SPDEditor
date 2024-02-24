@@ -24,6 +24,10 @@ bool GetBit(unsigned char bits, unsigned short bitNumber);
 
 void SetCString(const std::string value, const size_t maxLength, char* destination);
 
+unsigned short convert_date_byte(const unsigned char);
+
+unsigned char convert_to_date_byte(const unsigned short);
+
 } // namespace utilities
 
 #endif // UTILITIES_H

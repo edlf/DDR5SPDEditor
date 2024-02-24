@@ -529,6 +529,11 @@ private slots:
     void on_sbtRTP_XMPU2_editingFinished();
     void on_sbtRTP_LCLK_XMPU2_editingFinished();
 
+    // Misc tab
+    void on_sbManufacturingYear_editingFinished();
+    void on_sbManufacturingWeek_editingFinished();
+    void on_lePartNumber_editingFinished();
+
 private:
     void clearUI();
     void disableUI();

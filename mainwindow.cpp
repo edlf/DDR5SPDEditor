@@ -2142,20 +2142,20 @@ void MainWindow::on_spinMinCycleTime_XMPU1_editingFinished()
 void MainWindow::on_cbCommandRate_XMPU1_currentIndexChanged(int index)
 {
     switch (index) {
-    default:
-    case 0:
+        default:
+        case 0:
             spd->xmpBundle.profileUser1.setCommandRate(CommandRate::Undefined);
             break;
 
-    case 1:
+        case 1:
             spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_1n);
             break;
 
-    case 2:
+        case 2:
             spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_2n);
             break;
 
-    case 3:
+        case 3:
             spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_3n);
             break;
     }
@@ -2529,4 +2529,22 @@ void MainWindow::on_sbtRTP_XMPU2_editingFinished() {
 
 void MainWindow::on_sbtRTP_LCLK_XMPU2_editingFinished() {
     spd->xmpBundle.profileUser2.settRTP_lowerLimit(ui->sbtRTP_LCLK_XMPU2->value());
+}
+
+// Misc
+void MainWindow::on_sbManufacturingYear_editingFinished() {
+    spd->setManufacturingYear(ui->sbManufacturingYear->value());
+    ui->sbManufacturingYear->setValue(spd->getManufacturingYear());
+}
+
+void MainWindow::on_sbManufacturingWeek_editingFinished() {
+    spd->setManufacturingWeek(ui->sbManufacturingWeek->value());
+    ui->sbManufacturingWeek->setValue(spd->getManufacturingWeek());
+}
+
+void MainWindow::on_lePartNumber_editingFinished() {
+    QString val = ui->lePartNumber->text();
+    spd->setPartNumber(val.toStdString());
+    val = QString::fromStdString(spd->getPartNumber());
+    ui->lePartNumber->setText(val);
 }
