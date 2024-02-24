@@ -2530,3 +2530,15 @@ void MainWindow::on_sbtRTP_XMPU2_editingFinished() {
 void MainWindow::on_sbtRTP_LCLK_XMPU2_editingFinished() {
     spd->xmpBundle.profileUser2.settRTP_lowerLimit(ui->sbtRTP_LCLK_XMPU2->value());
 }
+
+// Misc
+void MainWindow::on_sbManufacturingYear_editingFinished() {
+    spd->setManufacturingYear(ui->sbManufacturingYear->value());
+    ui->sbManufacturingYear->setValue(spd->getManufacturingYear());
+}
+
+void MainWindow::on_sbManufacturingWeek_editingFinished() {
+    spd->setManufacturingWeek(ui->sbManufacturingWeek->value());
+    ui->sbManufacturingWeek->setValue(spd->getManufacturingWeek());
+}
+

@@ -1,6 +1,8 @@
 #include "utilities.h"
 
 #include <string>
+#include <sstream>
+#include <format>
 
 namespace utilities {
 
@@ -202,6 +204,17 @@ void SetCString(const std::string value, const size_t maxLength, char* destinati
     {
         destination[i] = 0;
     }
+}
+
+unsigned short convert_date_byte(const unsigned char byte)
+{
+    std::string temp = std::format("{:x}", byte);
+    return stoi(temp);
+}
+
+unsigned char convert_to_date_byte(const unsigned short value) {
+    std::string temp = std::to_string(value);
+    return std::stoul(temp.c_str(), nullptr, 16);
 }
 
 } // namespace utilities

@@ -379,28 +379,28 @@ void DDR5SPD::setDeviceWidth(const unsigned short value) {
 }
 
 const char DDR5SPD::getManufacturingYear() {
-    return spdStruct.manufactureDate[0];   // Year is represented in hex e.g. 0x22 = 2022
+    // Year is represented in hex e.g. 0x22 = 2022
+    return utilities::convert_date_byte(spdStruct.manufactureDate[0]);
 }
 
 void DDR5SPD::setManufacturingYear(const char value) {
-    // TODO: Check max value
     if (value > 99) {
-        spdStruct.manufactureDate[0] = 99;
+        spdStruct.manufactureDate[0] = utilities::convert_to_date_byte(99);
     } else {
-        spdStruct.manufactureDate[0] = value;
+        spdStruct.manufactureDate[0] = utilities::convert_to_date_byte(value);
     }
 }
 
 const char DDR5SPD::getManufacturingWeek() {
-    return spdStruct.manufactureDate[1];
+    return utilities::convert_date_byte(spdStruct.manufactureDate[1]);
 }
 
 void DDR5SPD::setManufacturingWeek(const char value) {
     // 52 weeks in a year
     if (value > 52) {
-        spdStruct.manufactureDate[1] = 52;
+        spdStruct.manufactureDate[1] = utilities::convert_to_date_byte(52);
     } else {
-        spdStruct.manufactureDate[1] = value;
+        spdStruct.manufactureDate[1] = utilities::convert_to_date_byte(value);
     }
 }
 
