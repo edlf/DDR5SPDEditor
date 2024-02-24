@@ -376,7 +376,7 @@ struct SPD_Struct {
 };
 #pragma pack(pop)
 
-// static_assert(std::endian::native == std::endian::little, "Endianess"); // Requires C++20
+static_assert(std::endian::native == std::endian::little, "Little endian only"); // Requires C++20
 static_assert(sizeof(unsigned short) == 0x2, "Unsigned shorts must be 16 bits!");
 static_assert(sizeof(SPD_Struct) == 0x400, "SPD struct size error");
 static_assert(sizeof(XMP_HeaderStruct) == XMPHeaderSize, "XMP Header has to be 64 bytes in size");
