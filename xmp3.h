@@ -129,6 +129,8 @@ public:
     void wipeProfile();
     void resetProfile();
 
+    const bool hasData();
+
     XMP_ProfileStruct getCopy();
     void import(const XMP_ProfileStruct);
 
@@ -148,6 +150,10 @@ public:
 
     const bool isXMP3Enabled();
     void setXMP3Enabled(const bool);
+
+    const bool isXMPUser1Present();
+
+    const bool isXMPUser2Present();
 
     const std::string getXMP1ProfileName();
     void setXMP1ProfileName(const std::string);

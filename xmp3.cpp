@@ -401,6 +401,11 @@ void XMP3_Profile::resetProfile() {
     setCLSupported(54, true);
 }
 
+const bool XMP3_Profile::hasData() {
+    unsigned int  crc = utilities::Crc16(reinterpret_cast<unsigned char*>(&xmpProfileStruct), sizeof(XMP_ProfileStruct) - 2);
+    return crc != 0x0;
+}
+
 XMP_ProfileStruct XMP3_Profile::getCopy(){
     return xmpProfileStruct;
 }
@@ -441,6 +446,14 @@ const bool XMP3_Bundle::isXMP3Enabled() {
 
 void XMP3_Bundle::setXMP3Enabled(const bool value) {
     utilities::SetBit(xmpStruct.header.profileEnBits, xmpProfile3EnableBit, value);
+}
+
+const bool XMP3_Bundle::isXMPUser1Present() {
+    return profileUser1.hasData();
+}
+
+const bool XMP3_Bundle::isXMPUser2Present() {
+    return profileUser2.hasData();
 }
 
 const std::string XMP3_Bundle::getXMP1ProfileName() {
@@ -499,7 +512,26 @@ void XMP3_Bundle::fixHeaderCRC() {
 
 void XMP3_Bundle::fixCRCs() {
     fixHeaderCRC();
-    // TODO: fix profile crcs
+
+    if (isXMP1Enabled()) {
+        profile1.fixCRC();
+    }
+
+    if (isXMP2Enabled()) {
+        profile2.fixCRC();
+    }
+
+    if (isXMP3Enabled()) {
+        profile3.fixCRC();
+    }
+
+    if (isXMPUser1Present()) {
+        profileUser1.fixCRC();
+    }
+
+    if (isXMPUser2Present()) {
+        profileUser2.fixCRC();
+    }
 }
 
 void XMP3_Bundle::wipe() {
