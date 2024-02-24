@@ -2,6 +2,8 @@
 #define UTILITIES_H
 
 #include <string>
+#include "ddr5spd_structs.h"
+
 namespace utilities {
 
 unsigned short Crc16(unsigned char bytes[], unsigned int length);
@@ -12,9 +14,9 @@ void Convert16bitUnsignedInteger(unsigned char& lsb, unsigned char& msb, unsigne
 
 unsigned short TimeToTicksDDR5(const unsigned int time, const unsigned int minCycleTime);
 
-void SetCLSupportedDDR5(unsigned char clSupported[5], int cl, bool supported);
+void SetCLSupportedDDR5(ddr5_structs::CAS&, unsigned short cl, bool supported);
 
-bool IsCLSupportedDDR5(unsigned char clSupported[5], int cl);
+bool IsCLSupportedDDR5(const ddr5_structs::CAS&, unsigned short cl);
 
 unsigned short ConvertByteToVoltageDDR5(unsigned char val);
 

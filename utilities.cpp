@@ -48,7 +48,7 @@ unsigned short TimeToTicksDDR5(const unsigned int time, const unsigned int minCy
     return static_cast<unsigned short>(tempNck / 1000);
 }
 
-void SetCLSupportedDDR5(unsigned char clSupported[5], int cl, bool supported)
+void SetCLSupportedDDR5(ddr5_structs::CAS& clSupported, unsigned short cl, bool supported)
 {
     // All valid CAS latencies are even numbers between 20 and 98
     if (cl < 20 || cl > 98 || (cl % 2 != 0))
@@ -66,11 +66,11 @@ void SetCLSupportedDDR5(unsigned char clSupported[5], int cl, bool supported)
         int index = bit;
         if (supported)
         {
-            clSupported[0] |= mask[index];
+            clSupported.byte1 |= mask[index];
         }
         else
         {
-            clSupported[0] &= ~mask[index];
+            clSupported.byte1 &= ~mask[index];
         }
     }
     else if (cl >= 36 && cl <= 50)
@@ -78,11 +78,11 @@ void SetCLSupportedDDR5(unsigned char clSupported[5], int cl, bool supported)
         int index = bit - 8;
         if (supported)
         {
-            clSupported[1] |= mask[index];
+            clSupported.byte2 |= mask[index];
         }
         else
         {
-            clSupported[1] &= ~mask[index];
+            clSupported.byte2 &= ~mask[index];
         }
     }
     else if (cl >= 52 && cl <= 66)
@@ -90,11 +90,11 @@ void SetCLSupportedDDR5(unsigned char clSupported[5], int cl, bool supported)
         int index = bit - 16;
         if (supported)
         {
-            clSupported[2] |= mask[index];
+            clSupported.byte3 |= mask[index];
         }
         else
         {
-            clSupported[2] &= ~mask[index];
+            clSupported.byte3 &= ~mask[index];
         }
     }
     else if (cl >= 68 && cl <= 82)
@@ -102,11 +102,11 @@ void SetCLSupportedDDR5(unsigned char clSupported[5], int cl, bool supported)
         int index = bit - 24;
         if (supported)
         {
-            clSupported[3] |= mask[index];
+            clSupported.byte4 |= mask[index];
         }
         else
         {
-            clSupported[3] &= ~mask[index];
+            clSupported.byte4 &= ~mask[index];
         }
     }
     else if (cl >= 84 && cl <= 98)
@@ -114,16 +114,16 @@ void SetCLSupportedDDR5(unsigned char clSupported[5], int cl, bool supported)
         int index = bit - 32;
         if (supported)
         {
-            clSupported[4] |= mask[index];
+            clSupported.byte5 |= mask[index];
         }
         else
         {
-            clSupported[4] &= ~mask[index];
+            clSupported.byte5 &= ~mask[index];
         }
     }
 }
 
-bool IsCLSupportedDDR5(unsigned char clSupported[5], int cl)
+bool IsCLSupportedDDR5(const ddr5_structs::CAS& clSupported, unsigned short cl)
 {
     unsigned int mask[] = { 1, 2, 4, 8, 16, 32, 64, 128 };
 
@@ -139,27 +139,27 @@ bool IsCLSupportedDDR5(unsigned char clSupported[5], int cl)
     if (cl >= 20 && cl <= 34)
     {
         int index = bit;
-        return (clSupported[0] & mask[index]) == mask[index];
+        return (clSupported.byte1 & mask[index]) == mask[index];
     }
     else if (cl >= 36 && cl <= 50)
     {
         int index = bit - 8;
-        return (clSupported[1] & mask[index]) == mask[index];
+        return (clSupported.byte2 & mask[index]) == mask[index];
     }
     else if (cl >= 52 && cl <= 66)
     {
         int index = bit - 16;
-        return (clSupported[2] & mask[index]) == mask[index];
+        return (clSupported.byte3 & mask[index]) == mask[index];
     }
     else if (cl >= 68 && cl <= 82)
     {
         int index = bit - 24;
-        return (clSupported[3] & mask[index]) == mask[index];
+        return (clSupported.byte4 & mask[index]) == mask[index];
     }
     else if (cl >= 84 && cl <= 98)
     {
         int index = bit - 32;
-        return (clSupported[4] & mask[index]) == mask[index];
+        return (clSupported.byte5 & mask[index]) == mask[index];
     }
 
     // Should never reach this point

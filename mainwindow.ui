@@ -26,7 +26,7 @@
          <bool>false</bool>
         </property>
         <property name="currentIndex">
-         <number>6</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tabJEDEC">
          <property name="toolTip">

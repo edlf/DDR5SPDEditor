@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "utilities.h"
+#include "ddr5spd_structs.h"
 #include "./ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -71,7 +72,7 @@ void MainWindow::openFile(){
                 tr("Failed to load file.") );
         }
 
-        if (file.size() != DDR5SPD::eepromSize) {
+        if (file.size() != ddr5_structs::eepromSize) {
             QMessageBox::critical(
                 this,
                 appName,
@@ -84,13 +85,13 @@ void MainWindow::openFile(){
             delete(spd);
         }
 
-        if (contents.length() != DDR5SPD::eepromSize) {
+        if (contents.length() != ddr5_structs::eepromSize) {
             // TODO error out
             return;
         }
 
         // TODO: Find proper way to do this
-        DDR5SPD::SPD_Struct rawSPD = *reinterpret_cast<DDR5SPD::SPD_Struct*>(contents.data());
+        ddr5_structs::SPD_Struct rawSPD = *reinterpret_cast<ddr5_structs::SPD_Struct*>(contents.data());
 
         if (rawSPD.memoryType != 0x12) {
             QMessageBox::critical(
@@ -137,7 +138,7 @@ void MainWindow::saveFile(){
             }
 
             if (file.isWritable()) {
-                file.write(spd->getPointerToStruct(), DDR5SPD::eepromSize);
+                file.write(spd->getPointerToStruct(), ddr5_structs::eepromSize);
                 file.close();
             } else {
                 QMessageBox::critical(
