@@ -429,6 +429,10 @@ void DDR5SPD::setPartNumber(const std::string partNumber)
     }
 }
 
+const unsigned short DDR5SPD::calculateJedecCRC() {
+    return utilities::Crc16(reinterpret_cast<unsigned char*>(&spdStruct), jedecBlockSize - 2);
+}
+
 const unsigned short DDR5SPD::getCRC() {
     return spdStruct.checksum;
 }
@@ -438,14 +442,43 @@ void DDR5SPD::setCRC(const unsigned short value) {
 }
 
 void DDR5SPD::fixCRC() {
-    unsigned int  crc = utilities::Crc16(reinterpret_cast<unsigned char*>(&spdStruct), jedecBlockSize - 2);
-    setCRC(crc);
+    setCRC(calculateJedecCRC());
 }
 
 const bool DDR5SPD::isXMPPresent() {
     return xmpBundle.isMagicPresent();
 }
 
+const bool DDR5SPD::isCRCValid(){
+    return (calculateJedecCRC() == spdStruct.checksum);
+}
+
 const char * const DDR5SPD::getPointerToStruct() {
     return reinterpret_cast<char*>(&spdStruct);
+}
+
+const FormFactor DDR5SPD::getFormFactor() {
+    return formFactorMap[spdStruct.moduleType & 0xF];
+}
+
+void DDR5SPD::setFormFactor(const FormFactor value) {
+    int val = std::distance(formFactorMap.begin(),
+                            std::find(formFactorMap.begin(), formFactorMap.end(), value));
+
+    spdStruct.moduleType = ((spdStruct.moduleType & 0xF0) | (val & 0xF));
+}
+
+const Density DDR5SPD::getDensity() {
+    if ((spdStruct.firstDensityPackage & 0xF) < 9) {
+        return densityMap[spdStruct.firstDensityPackage & 0xF];
+    }
+
+    return Density::_0Gb;
+}
+
+void DDR5SPD::setDensity(const Density value) {
+    int val = std::distance(densityMap.begin(),
+                            std::find(densityMap.begin(), densityMap.end(), value));
+
+    spdStruct.firstDensityPackage = ((spdStruct.firstDensityPackage & 0xF0) | (val & 0xF));
 }

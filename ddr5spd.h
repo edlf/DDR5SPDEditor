@@ -10,12 +10,6 @@ class DDR5SPD
 {
 
 public:
-    static constexpr std::array<unsigned short, 4> bankGroupsBitsMap{ 1, 2, 4, 8 };
-    static constexpr std::array<unsigned short, 3> banksPerBankGroupBitsMap{ 1, 2, 4 };
-    static constexpr std::array<unsigned short, 2> columnAddressBitsMap{ 10, 11 };
-    static constexpr std::array<unsigned short, 3> rowAddressBitsMap{ 16, 17, 18 };
-    static constexpr std::array<unsigned short, 4> deviceWidthMap{ 4, 8, 16, 32 };
-
     SPD_Struct spdStruct;
 
     // Raw SPD getters/setters
@@ -114,12 +108,18 @@ public:
     void setManufacturingWeek(const char);
     const std::string getPartNumber();
     void setPartNumber(const std::string);
+    const FormFactor getFormFactor();
+    void setFormFactor(const FormFactor);
+    const Density getDensity();
+    void setDensity(const Density);
 
+    const unsigned short calculateJedecCRC();
     const unsigned short getCRC();
     void setCRC(const unsigned short);
     void fixCRC();
 
     const bool isXMPPresent();
+    const bool isCRCValid();
 
     const char * const getPointerToStruct();
     DDR5SPD(SPD_Struct);

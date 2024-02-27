@@ -1,6 +1,7 @@
 #ifndef DDR5SPD_STRUCTS_H
 #define DDR5SPD_STRUCTS_H
 
+#include <array>
 #include <stddef.h>
 #include <type_traits>
 #include <bit>
@@ -42,11 +43,10 @@ enum class FormFactor
     Reserved_12,
     Reserved_13,
     Reserved_14,
-    Reserved_15,
-    Count
+    Reserved_15
 };
 
-enum class Densities
+enum class Density
 {
     _0Gb,
     _4Gb,
@@ -68,9 +68,53 @@ enum class CommandRate
     _3n
 };
 
+static constexpr std::array<Density, 9> densityMap {
+    Density::_0Gb,
+    Density::_4Gb,
+    Density::_8Gb,
+    Density::_12Gb,
+    Density::_16Gb,
+    Density::_24Gb,
+    Density::_32Gb,
+    Density::_48Gb,
+    Density::_64Gb
+};
+
+static constexpr std::array<CommandRate, 4> commandRateMap {
+    CommandRate::Undefined,
+    CommandRate::_1n,
+    CommandRate::_2n,
+    CommandRate::_3n
+};
+
+static constexpr std::array<FormFactor, 16> formFactorMap {
+    FormFactor::Reserved,
+    FormFactor::RDIMM,
+    FormFactor::UDIMM,
+    FormFactor::SODIMM,
+    FormFactor::LRDIMM,
+    FormFactor::CUDIMM,
+    FormFactor::CSODIMM,
+    FormFactor::MRDIMM,
+    FormFactor::CAMM2,
+    FormFactor::Reserved_9,
+    FormFactor::DDIMM,
+    FormFactor::Solder_down,
+    FormFactor::Reserved_12,
+    FormFactor::Reserved_13,
+    FormFactor::Reserved_14,
+    FormFactor::Reserved_15
+};
+
+static constexpr std::array<unsigned short, 4> bankGroupsBitsMap{ 1, 2, 4, 8 };
+static constexpr std::array<unsigned short, 3> banksPerBankGroupBitsMap{ 1, 2, 4 };
+static constexpr std::array<unsigned short, 2> columnAddressBitsMap{ 10, 11 };
+static constexpr std::array<unsigned short, 3> rowAddressBitsMap{ 16, 17, 18 };
+static constexpr std::array<unsigned short, 4> deviceWidthMap{ 4, 8, 16, 32 };
+
 #pragma pack(push,1)
 struct AuxDevice {
-    unsigned char manufacturer[2];
+    unsigned short manufacturer;
     unsigned char deviceType;
     unsigned char revision;
 };

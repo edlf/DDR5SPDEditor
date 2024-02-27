@@ -11472,12 +11472,52 @@
              <widget class="QComboBox" name="cbFormFactor">
               <item>
                <property name="text">
+                <string>RDIMM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
                 <string>UDIMM</string>
                </property>
               </item>
               <item>
                <property name="text">
                 <string>SODIMM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>LRDIMM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>CUDIMM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>CSODIMM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>MRDIMM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>CAMM2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>DDIMM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Solder down</string>
                </property>
               </item>
              </widget>
@@ -11884,12 +11924,12 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
    <property name="text">
-    <string>Open</string>
+    <string>Open...</string>
    </property>
   </action>
   <action name="actionSave">
    <property name="text">
-    <string>Save</string>
+    <string>Save...</string>
    </property>
   </action>
   <action name="actionExit">

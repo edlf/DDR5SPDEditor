@@ -530,6 +530,15 @@ private slots:
     void on_sbtRTP_LCLK_XMPU2_editingFinished();
 
     // Misc tab
+    void update_cbFormFactor();
+    void update_cbDensity();
+    void on_cbFormFactor_currentIndexChanged(int);
+    void on_cdDensity_currentIndexChanged(int);
+    void on_cbBankGroup_currentIndexChanged(int);
+    void on_cbBanksPerBankGroup_currentIndexChanged(int);
+    void on_cbColumnAddresses_currentIndexChanged(int);
+    void on_cbRowAddresses_currentIndexChanged(int);
+    void on_cdDeviceWidth_currentIndexChanged(int);
     void on_sbManufacturingYear_editingFinished();
     void on_sbManufacturingWeek_editingFinished();
     void on_lePartNumber_editingFinished();
