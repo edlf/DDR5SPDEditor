@@ -29,7 +29,6 @@ private slots:
     bool saveFileEnabled();
     void closeFile();
     bool closeFileEnabled();
-    void exportXMP();
     void exit();
 
     void wipeXMP();
@@ -532,6 +531,11 @@ private slots:
     // Misc tab
     void update_cbFormFactor();
     void update_cbDensity();
+    void update_cbBankGroup();
+    void update_cbBanksPerBankGroup();
+    void update_cbColumnAddresses();
+    void update_cbRowAddresses();
+    void update_cdDeviceWidth();
     void on_cbFormFactor_currentIndexChanged(int);
     void on_cdDensity_currentIndexChanged(int);
     void on_cbBankGroup_currentIndexChanged(int);
@@ -542,6 +546,7 @@ private slots:
     void on_sbManufacturingYear_editingFinished();
     void on_sbManufacturingWeek_editingFinished();
     void on_lePartNumber_editingFinished();
+    void setDensity(const unsigned int val);
 
 private:
     void clearUI();
