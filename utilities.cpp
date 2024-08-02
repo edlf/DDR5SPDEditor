@@ -44,7 +44,7 @@ unsigned short TimeToTicksDDR5(const unsigned int time, const unsigned int minCy
 void SetCLSupportedDDR5(ddr5_structs::CAS& clSupported, unsigned short cl, bool supported)
 {
     // All valid CAS latencies are even numbers between 20 and 98
-    if (cl < 20 || cl > 98 || (cl % 2 != 0))
+    if ((cl < 20) || (cl > 98) || (cl % 2 != 0))
     {
         return;
     }

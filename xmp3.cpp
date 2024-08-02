@@ -2,8 +2,15 @@
 #include "utilities.h"
 #include <cstring>
 
+// TODO: Remove hack
+XMP_ProfileStruct dummyXMPProfile;
+
 XMP3_Profile::XMP3_Profile(XMP_ProfileStruct& rawXmpProfileIn) :
     xmpProfileStruct(rawXmpProfileIn) {
+}
+
+XMP3_Profile::XMP3_Profile() :
+    xmpProfileStruct(dummyXMPProfile) {
 }
 
 const unsigned short XMP3_Profile::getVPP() {
@@ -421,7 +428,18 @@ XMP3_Bundle::XMP3_Bundle(XMP_Struct& xmpBlockRef) :
     profile2(xmpBlockRef.profile2),
     profile3(xmpBlockRef.profile3),
     profileUser1(xmpBlockRef.user_profile1),
-    profileUser2(xmpBlockRef.user_profile2) {
+    profileUser2(xmpBlockRef.user_profile2),
+    expoCoexistence(false) {
+}
+
+XMP3_Bundle::XMP3_Bundle(XMP_Struct& xmpBlockRef, bool expo) :
+    xmpStruct(xmpBlockRef),
+    profile1(xmpBlockRef.profile1),
+    profile2(xmpBlockRef.profile2),
+    profile3(xmpBlockRef.profile3),
+    profileUser1(xmpBlockRef.user_profile1),
+    profileUser2(xmpBlockRef.user_profile2),
+    expoCoexistence(expo) {
 }
 
 const bool XMP3_Bundle::isXMP1Enabled() {
@@ -445,10 +463,18 @@ const bool XMP3_Bundle::isXMP3Enabled() {
 }
 
 void XMP3_Bundle::setXMP3Enabled(const bool value) {
-    utilities::SetBit(xmpStruct.header.profileEnBits, xmpProfile3EnableBit, value);
+    if (expoCoexistence) {
+        utilities::SetBit(xmpStruct.header.profileEnBits, xmpProfile3EnableBit, false);
+    } else {
+        utilities::SetBit(xmpStruct.header.profileEnBits, xmpProfile3EnableBit, value);
+    }
 }
 
 const bool XMP3_Bundle::isXMPUser1Present() {
+    if (expoCoexistence) {
+        return false;
+    }
+
     return profileUser1.hasData();
 }
 
@@ -475,12 +501,18 @@ void XMP3_Bundle::setXMP2ProfileName(const std::string value) {
 }
 
 const std::string XMP3_Bundle::getXMP3ProfileName() {
-    char* profileName = &(xmpStruct.header.profileName3[0]);
-    return std::string(profileName);
+    if (expoCoexistence) {
+        return std::string("EXPO");
+    } else {
+        char* profileName = &(xmpStruct.header.profileName3[0]);
+        return std::string(profileName);
+    }
 }
 
 void XMP3_Bundle::setXMP3ProfileName(const std::string value) {
-    utilities::SetCString(value, maxXmpProfileName, &(xmpStruct.header.profileName3[0]));
+    if (!expoCoexistence) {
+        utilities::SetCString(value, maxXmpProfileName, &(xmpStruct.header.profileName3[0]));
+    }
 }
 
 void XMP3_Bundle::enableMagic() {
@@ -521,12 +553,14 @@ void XMP3_Bundle::fixCRCs() {
         profile2.fixCRC();
     }
 
-    if (isXMP3Enabled()) {
-        profile3.fixCRC();
-    }
+    if (~!expoCoexistence) {
+        if (isXMP3Enabled()) {
+            profile3.fixCRC();
+        }
 
-    if (isXMPUser1Present()) {
-        profileUser1.fixCRC();
+        if (isXMPUser1Present()) {
+            profileUser1.fixCRC();
+        }
     }
 
     if (isXMPUser2Present()) {
@@ -535,5 +569,12 @@ void XMP3_Bundle::fixCRCs() {
 }
 
 void XMP3_Bundle::wipe() {
-    std::memset(&xmpStruct, 0x0, sizeof (XMP_Struct));
+    if (expoCoexistence) {
+        std::memset(&xmpStruct.header, 0x0, sizeof (XMP_HeaderStruct));
+        std::memset(&xmpStruct.profile1, 0x0, sizeof (XMP_ProfileStruct));
+        std::memset(&xmpStruct.profile2, 0x0, sizeof (XMP_ProfileStruct));
+        std::memset(&xmpStruct.user_profile2, 0x0, sizeof (XMP_ProfileStruct));
+    } else {
+        std::memset(&xmpStruct, 0x0, sizeof (XMP_Struct));
+    }
 }

@@ -5,6 +5,7 @@
 #include <cstddef>
 #include "ddr5spd_structs.h"
 #include "xmp3.h"
+#include "expo.h"
 
 class DDR5SPD
 {
@@ -119,12 +120,18 @@ public:
     void fixCRC();
 
     const bool isXMPPresent();
+    const bool isEXPOPresent();
     const bool isCRCValid();
+
+    // Static methods
+    static bool isXMPPresentStatic(const SPD_Struct&);
+    static bool isEXPOPresentStatic(const SPD_Struct&);
 
     const char * const getPointerToStruct();
     DDR5SPD(SPD_Struct);
 
     XMP3_Bundle xmpBundle;
+    EXPO_Bundle expoBundle;
 };
 
 #endif // DDR5SPD_H

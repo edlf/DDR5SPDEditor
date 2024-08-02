@@ -9,7 +9,7 @@
 namespace ddr5_structs {
 
 // JEDEC
-constexpr size_t eepromSize = 1024;
+constexpr size_t eepromSize = 0x400;
 constexpr size_t partNumberSize = 30;
 constexpr size_t jedecBlockSize = 0x200;
 
@@ -24,7 +24,13 @@ constexpr unsigned int xmpProfile2EnableBit = 1;
 constexpr unsigned int xmpProfile3EnableBit = 2;
 
 constexpr unsigned int IntelDynamicMemoryBoostBit = 0;
-constexpr unsigned int RealTimeMemoryFrequencyOCBit = 1 ;
+constexpr unsigned int RealTimeMemoryFrequencyOCBit = 1;
+
+// EXPO
+constexpr size_t EXPOHeaderSize = 0xA;
+constexpr size_t EXPOSize = 0x80;
+constexpr size_t EXPOProfileSize = 0x18;
+constexpr char EXPOHeaderMagic[] = { 0x45, 0x58, 0x50, 0x4F };
 
 enum class FormFactor
 {
@@ -68,6 +74,19 @@ enum class CommandRate
     _3n
 };
 
+enum class OperatingTemperatureRange
+{
+    A1T,
+    A2T,
+    A3T,
+    IT,
+    ST,
+    ET,
+    RT,
+    NT,
+    XT
+};
+
 static constexpr std::array<Density, 9> densityMap {
     Density::_0Gb,
     Density::_4Gb,
@@ -104,6 +123,18 @@ static constexpr std::array<FormFactor, 16> formFactorMap {
     FormFactor::Reserved_13,
     FormFactor::Reserved_14,
     FormFactor::Reserved_15
+};
+
+static constexpr std::array<OperatingTemperatureRange, 9> operatingTemperatureRangeMap {
+    OperatingTemperatureRange::A1T,
+    OperatingTemperatureRange::A2T,
+    OperatingTemperatureRange::A3T,
+    OperatingTemperatureRange::IT,
+    OperatingTemperatureRange::ST,
+    OperatingTemperatureRange::ET,
+    OperatingTemperatureRange::RT,
+    OperatingTemperatureRange::NT,
+    OperatingTemperatureRange::XT
 };
 
 static constexpr std::array<unsigned short, 4> bankGroupsBitsMap{ 1, 2, 4, 8 };
@@ -206,6 +237,58 @@ struct XMP_Struct {
     XMP_ProfileStruct profile3;
     XMP_ProfileStruct user_profile1;
     XMP_ProfileStruct user_profile2;
+};
+
+struct EXPO_HeaderStruct {
+    unsigned char magic[4];
+    unsigned char unk1;
+    unsigned char unk2;
+    unsigned char zero_6;
+    unsigned char zero_7;
+    unsigned char zero_8;
+    unsigned char zero_9;
+};
+
+struct EXPO_ProfileStruct {
+    unsigned char vdd;
+    unsigned char vddq;
+    unsigned char vpp;
+    unsigned char unk1;
+    unsigned short minCycleTime;
+    unsigned short tAA;
+    unsigned short tRCD;
+    unsigned short tRP;
+    unsigned short tRAS;
+    unsigned short tRC;
+    unsigned short tWR;
+    unsigned short tRFC1;
+    unsigned short tRFC2;
+    unsigned short tRFC;
+};
+
+struct EXPO_Struct {
+    EXPO_HeaderStruct header;
+    EXPO_ProfileStruct profile1;
+
+    // TODO: Figure out second profile + voltages
+    unsigned char filler[0x5C];
+
+    // Byte 0x7E-0x7F
+    unsigned short checksum;
+};
+
+// Hybrid XMP3/EXPO
+struct XMP_EXPO_Hybrid_Struct {
+    XMP_HeaderStruct header;
+    XMP_ProfileStruct profile1;
+    XMP_ProfileStruct profile2;
+    EXPO_Struct expo_struct;
+    XMP_ProfileStruct user_profile2;
+};
+
+union XMP_EXPO_Union {
+    XMP_EXPO_Hybrid_Struct hybrid;
+    XMP_Struct xmpOnly;
 };
 
 struct SPD_Struct {
@@ -416,16 +499,19 @@ struct SPD_Struct {
     unsigned char reserved_555_639[640 - 555];
 
     // End User bits (XMP/EXPO) 0x280 (1024 - 640)
-    XMP_Struct xmpBlock;
+    // XMP_Struct xmpBlock;
+    XMP_EXPO_Union xmpExpoBlock;
 };
 #pragma pack(pop)
 
 static_assert(std::endian::native == std::endian::little, "Little endian only"); // Requires C++20
 static_assert(sizeof(unsigned short) == 0x2, "Unsigned shorts must be 16 bits!");
-static_assert(sizeof(SPD_Struct) == 0x400, "SPD struct size error");
+static_assert(sizeof(SPD_Struct) == eepromSize, "SPD struct size error");
 static_assert(sizeof(XMP_HeaderStruct) == XMPHeaderSize, "XMP Header has to be 64 bytes in size");
 static_assert(sizeof(XMP_ProfileStruct) == XMPProfileSize, "XMP Profile has to be 64 bytes in size");
 static_assert(sizeof(XMP_Struct) == (sizeof(XMP_HeaderStruct) + 5*sizeof(XMP_ProfileStruct)), "XMP Block size is incorrect");
+static_assert(sizeof(EXPO_Struct) == EXPOSize, "EXPO block has to be 128 bytes in size");
+static_assert(sizeof(EXPO_ProfileStruct) == EXPOProfileSize, "EXPO profile has to be 24 bytes in size");
 
 }; // namespace
 

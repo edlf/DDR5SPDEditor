@@ -49,6 +49,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionInportProfile3, &QAction::triggered, this, &MainWindow::importXMPProfile3);
     connect(ui->actionInportUserProfile1, &QAction::triggered, this, &MainWindow::importXMPProfileU1);
     connect(ui->actionInportUserProfile2, &QAction::triggered, this, &MainWindow::importXMPProfileU2);
+
+    // EXPO menu
+    connect(ui->actionWipeEXPOregion, &QAction::triggered, this, &MainWindow::wipeEXPO);
 }
 
 MainWindow::~MainWindow()
@@ -86,7 +89,10 @@ void MainWindow::openFile(){
         }
 
         if (contents.length() != ddr5_structs::eepromSize) {
-            // TODO error out
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Failed to fully load file.") );
             return;
         }
 
@@ -115,7 +121,7 @@ void MainWindow::openFile(){
             QMessageBox::warning(
                 this,
                 appName,
-                tr("Jedec section checksum error, will be fixed by saving.") );
+                tr("JEDEC section checksum error, will be fixed by saving.") );
             return;
         }
 
@@ -169,11 +175,33 @@ void MainWindow::closeFile(){
 
 void MainWindow::wipeXMP() {
     spd->xmpBundle.wipe();
+
+    // Reload SPD
+    spd = new DDR5SPD(spd->spdStruct);
+
     reloadXMP1Tab();
     reloadXMP2Tab();
     reloadXMP3Tab();
     reloadXMPU1Tab();
     reloadXMPU2Tab();
+
+    toggleXMPUI(true, spd->isEXPOPresent());
+}
+
+void MainWindow::wipeEXPO() {
+    spd->expoBundle.wipe();
+
+    // Reload SPD
+    spd = new DDR5SPD(spd->spdStruct);
+
+    reloadXMP1Tab();
+    reloadXMP2Tab();
+    reloadXMP3Tab();
+    reloadXMPU1Tab();
+    reloadXMPU2Tab();
+    reloadEXPO1Tab();
+
+    toggleXMPUI(true, spd->isEXPOPresent());
 }
 
 void MainWindow::wipeXMPProfile1() {
@@ -272,13 +300,13 @@ void MainWindow::exportXMPProfile2(){
 }
 
 void MainWindow::exportXMPProfile3(){
-    if (spd != nullptr) {
+    if ((spd != nullptr) && (!spd->isEXPOPresent())) {
         exportXMPProfile(spd->xmpBundle.profile3.getCopy());
     }
 }
 
 void MainWindow::exportXMPProfileU1(){
-    if (spd != nullptr) {
+    if ((spd != nullptr) && (!spd->isEXPOPresent())) {
         exportXMPProfile(spd->xmpBundle.profileUser1.getCopy());
     }
 }
@@ -345,7 +373,7 @@ void MainWindow::importXMPProfile2(){
 }
 
 void MainWindow::importXMPProfile3(){
-    if (spd == nullptr) {
+    if ((spd == nullptr) ||  (spd->isEXPOPresent())) {
         return;
     }
 
@@ -354,7 +382,7 @@ void MainWindow::importXMPProfile3(){
 }
 
 void MainWindow::importXMPProfileU1(){
-    if (spd == nullptr) {
+    if ((spd == nullptr) ||  (spd->isEXPOPresent())) {
         return;
     }
 
@@ -398,49 +426,62 @@ void MainWindow::toggleUI(const bool status) {
     ui->actionEnableXMPmagic->setDisabled(disabled);
     ui->actionDisableXMPmagic->setDisabled(disabled);
     ui->actionWipeXMPregion->setDisabled(disabled);
+    ui->actionWipeEXPOregion->setDisabled(disabled);
 }
 
-void MainWindow::toggleXMPUI(const bool status) {
+void MainWindow::toggleXMPUI(const bool status, const bool expoPresent) {
     bool disabled = !status;
 
     ui->actionWipeProfile1->setDisabled(disabled);
-    ui->actionWipeProfile2->setDisabled(disabled);
-    ui->actionWipeProfile3->setDisabled(disabled);
-    ui->actionWipeProfileU1->setDisabled(disabled);
-    ui->actionWipeProfileU2->setDisabled(disabled);
     ui->actionLoadSampleProfile1->setDisabled(disabled);
-    ui->actionLoadSampleProfile2->setDisabled(disabled);
-    ui->actionLoadSampleProfile3->setDisabled(disabled);
-    ui->actionLoadSampleProfileU1->setDisabled(disabled);
-    ui->actionLoadSampleProfileU2->setDisabled(disabled);
-
     ui->actionExportProfile1->setDisabled(disabled);
-    ui->actionExportProfile2->setDisabled(disabled);
-    ui->actionExportProfile3->setDisabled(disabled);
-    ui->actionExportUserProfile1->setDisabled(disabled);
-    ui->actionExportUserProfile2->setDisabled(disabled);
-
     ui->actionInportProfile1->setDisabled(disabled);
-    ui->actionInportProfile2->setDisabled(disabled);
-    ui->actionInportProfile3->setDisabled(disabled);
-    ui->actionInportUserProfile1->setDisabled(disabled);
-    ui->actionInportUserProfile2->setDisabled(disabled);
-
     ui->tabXMPP1->setDisabled(disabled);
+
+    ui->actionWipeProfile2->setDisabled(disabled);
+    ui->actionLoadSampleProfile2->setDisabled(disabled);
+    ui->actionExportProfile2->setDisabled(disabled);
+    ui->actionInportProfile2->setDisabled(disabled);
     ui->tabXMPP2->setDisabled(disabled);
-    ui->tabXMPP3->setDisabled(disabled);
-    ui->tabXMPU1->setDisabled(disabled);
+
+
+    if (!expoPresent) {
+        ui->actionWipeProfile3->setDisabled(disabled);
+        ui->actionLoadSampleProfile3->setDisabled(disabled);
+        ui->actionExportProfile3->setDisabled(disabled);
+        ui->actionInportProfile3->setDisabled(disabled);
+        ui->tabXMPP3->setDisabled(disabled);
+
+        ui->actionWipeProfileU1->setDisabled(disabled);
+        ui->actionLoadSampleProfileU1->setDisabled(disabled);
+        ui->actionExportUserProfile1->setDisabled(disabled);
+        ui->actionInportUserProfile1->setDisabled(disabled);
+        ui->tabXMPU1->setDisabled(disabled);
+    }
+
+    ui->actionWipeProfileU2->setDisabled(disabled);
+    ui->actionLoadSampleProfileU2->setDisabled(disabled);
+    ui->actionExportUserProfile2->setDisabled(disabled);
+    ui->actionInportUserProfile2->setDisabled(disabled);
     ui->tabXMPU2->setDisabled(disabled);
+}
+
+void MainWindow::toggleEXPOUI(const bool status) {
+    bool disabled = !status;
+
+    ui->tabEXPO1->setDisabled(disabled);
+    ui->actionWipeEXPOregion->setDisabled(disabled);
 }
 
 void MainWindow::disableUI() {
     ui->tabWidget->setCurrentWidget(ui->tabJEDEC);
     toggleUI(false);
-    toggleXMPUI(false);
+    toggleXMPUI(false, false);
+    toggleEXPOUI(false);
 }
 
 void MainWindow::enableUI() {
-    if(spd == nullptr) {
+    if (spd == nullptr) {
         return;
     }
 
@@ -449,7 +490,12 @@ void MainWindow::enableUI() {
 
     if (spd->isXMPPresent())
     {
-        toggleXMPUI(true);
+        toggleXMPUI(true, spd->isEXPOPresent());
+    }
+
+    if (spd->isEXPOPresent())
+    {
+        toggleEXPOUI(true);
     }
 
     // Go to JEDEC tab
@@ -664,7 +710,6 @@ void MainWindow::reloadXMP1Tab() {
 
     ui->cbDynamicMemBoost_XMP1->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
     ui->cbRealTimeMemOC_XMP1->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
-    // TODO: ui->cbCommandRate_XMP1->setCurrentIndex(xmp_profile.getCommandRate());
 
     switch (xmp_profile.getCommandRate()) {
         default:
@@ -790,7 +835,6 @@ void MainWindow::reloadXMP2Tab() {
 
     ui->cbDynamicMemBoost_XMP2->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
     ui->cbRealTimeMemOC_XMP2->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
-    // TODO: ui->cbCommandRate_XMP2->setCurrentIndex(xmp_profile.getCommandRate());
 
     switch (xmp_profile.getCommandRate()) {
     default:
@@ -900,6 +944,10 @@ void MainWindow::reloadXMP2Tab() {
 }
 
 void MainWindow::reloadXMP3Tab() {
+    if (spd->isEXPOPresent()) {
+        return;
+    }
+
     // XMP Header
     ui->leProfileName_XMP3->setText(QString::fromStdString(spd->xmpBundle.getXMP3ProfileName()));
     ui->cbEnabled_XMP3->setChecked(spd->xmpBundle.isXMP3Enabled());
@@ -916,7 +964,6 @@ void MainWindow::reloadXMP3Tab() {
 
     ui->cbDynamicMemBoost_XMP3->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
     ui->cbRealTimeMemOC_XMP3->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
-    // TODO: ui->cbCommandRate_XMP3->setCurrentIndex(xmp_profile.getCommandRate());
 
     switch (xmp_profile.getCommandRate()) {
     default:
@@ -1026,7 +1073,9 @@ void MainWindow::reloadXMP3Tab() {
 }
 
 void MainWindow::reloadXMPU1Tab() {
-    // ui->cbEnabled_XMPU1->setChecked(spd->xmpBundle.isXMP1Enabled());
+    if (spd->isEXPOPresent()) {
+        return;
+    }
 
     // XMP Profile
     auto& xmp_profile = spd->xmpBundle.profileUser1;
@@ -1040,7 +1089,6 @@ void MainWindow::reloadXMPU1Tab() {
 
     ui->cbDynamicMemBoost_XMPU1->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
     ui->cbRealTimeMemOC_XMPU1->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
-    // TODO: ui->cbCommandRate_XMPU1->setCurrentIndex(xmp_profile.getCommandRate());
 
     switch (xmp_profile.getCommandRate()) {
     default:
@@ -1150,8 +1198,6 @@ void MainWindow::reloadXMPU1Tab() {
 }
 
 void MainWindow::reloadXMPU2Tab() {
-    // ui->cbEnabled_XMPU2->setChecked(spd->xmpBundle.isXMP1Enabled());
-
     // XMP Profile
     auto& xmp_profile = spd->xmpBundle.profileUser2;
 
@@ -1164,7 +1210,6 @@ void MainWindow::reloadXMPU2Tab() {
 
     ui->cbDynamicMemBoost_XMPU2->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
     ui->cbRealTimeMemOC_XMPU2->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
-    // TODO: ui->cbCommandRate_XMPU2->setCurrentIndex(xmp_profile.getCommandRate());
 
     switch (xmp_profile.getCommandRate()) {
     default:
@@ -1273,6 +1318,44 @@ void MainWindow::reloadXMPU2Tab() {
     ui->ltRTP_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
 }
 
+void MainWindow::reloadEXPO1Tab() {
+    EXPO_Profile dummy;
+
+    // EXPO
+    EXPO_Profile& expo_profile = spd->isEXPOPresent() ? spd->expoBundle.profile1 : dummy;
+
+    const unsigned int minCycleTime = expo_profile.getMinCycleTime();
+    ui->spinMinCycleTime_EXPO1->setValue(minCycleTime);
+    QString frequencyStr = QString::number(expo_profile.getFrequency()) + " MHz";
+    QString mtStr = QString::number(expo_profile.getMT()) + " MT/s";
+    ui->lFrequencyValue_EXPO1->setText(frequencyStr);
+    ui->lMTValue_EXPO1->setText(mtStr);
+
+    // Voltages
+    ui->sbVDD_EXPO1->setValue(expo_profile.getVDD());
+    ui->sbVDDQ_EXPO1->setValue(expo_profile.getVDDQ());
+    ui->sbVPP_EXPO1->setValue(expo_profile.getVPP());
+
+    ui->sbtAA_EXPO1->setValue(expo_profile.gettAA());
+    ui->ltAA_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettAA(), minCycleTime)));
+    ui->sbtRCD_EXPO1->setValue(expo_profile.gettRCD());
+    ui->ltRCD_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRCD(), minCycleTime)));
+    ui->sbtRP_EXPO1->setValue(expo_profile.gettRP());
+    ui->ltRP_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRP(), minCycleTime)));
+    ui->sbtRAS_EXPO1->setValue(expo_profile.gettRAS());
+    ui->ltRAS_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRAS(), minCycleTime)));
+    ui->sbtRC_EXPO1->setValue(expo_profile.gettRC());
+    ui->ltRC_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRC(), minCycleTime)));
+    ui->sbtWR_EXPO1->setValue(expo_profile.gettWR());
+    ui->ltWR_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettWR(), minCycleTime)));
+    ui->sbtRFC1_EXPO1->setValue(expo_profile.gettRFC1());
+    ui->ltRFC1_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRFC1() * 1000, minCycleTime)));
+    ui->sbtRFC2_EXPO1->setValue(expo_profile.gettRFC2());
+    ui->ltRFC2_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRFC2() * 1000, minCycleTime)));
+    ui->sbtRFC_EXPO1->setValue(expo_profile.gettRFC());
+    ui->ltRFC_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRFC() * 1000, minCycleTime)));
+}
+
 void MainWindow::reloadMiscTab() {
     update_cbFormFactor();
     update_cbDensity();
@@ -1289,7 +1372,7 @@ void MainWindow::reloadMiscTab() {
 
 void MainWindow::reloadUI(){
     if (spd == nullptr) {
-            return;
+        return;
     }
 
     reloadJEDECTab();
@@ -1298,6 +1381,7 @@ void MainWindow::reloadUI(){
     reloadXMP3Tab();
     reloadXMPU1Tab();
     reloadXMPU2Tab();
+    reloadEXPO1Tab();
     reloadMiscTab();
 }
 

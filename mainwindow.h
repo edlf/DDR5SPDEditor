@@ -61,6 +61,8 @@ private slots:
     void enableXMPMagicBits();
     void disableXMPMagicBits();
 
+    void wipeEXPO();
+
     void reloadUI();
     void reloadJEDECTab();
     void reloadXMP1Tab();
@@ -68,6 +70,7 @@ private slots:
     void reloadXMP3Tab();
     void reloadXMPU1Tab();
     void reloadXMPU2Tab();
+    void reloadEXPO1Tab();
     void reloadMiscTab();
 
     // Slots JEDEC
@@ -553,7 +556,8 @@ private:
     void disableUI();
     void enableUI();
     void toggleUI(const bool);
-    void toggleXMPUI(const bool);
+    void toggleXMPUI(const bool, const bool);
+    void toggleEXPOUI(const bool);
 
     unsigned short minCycle;
 

@@ -9,6 +9,7 @@ using namespace ddr5_structs;
 class XMP3_Profile {
 public:
     XMP3_Profile(ddr5_structs::XMP_ProfileStruct&);
+    XMP3_Profile();
 
     // Voltages
     const unsigned short getVPP();
@@ -141,6 +142,7 @@ private:
 class XMP3_Bundle {
 public:
     XMP3_Bundle(XMP_Struct&);
+    XMP3_Bundle(XMP_Struct&, bool);
 
     const bool isXMP1Enabled();
     void setXMP1Enabled(const bool);
@@ -185,6 +187,7 @@ public:
 
 private:
     XMP_Struct& xmpStruct;
+    bool expoCoexistence;
 };
 
 #endif // XMP3_H

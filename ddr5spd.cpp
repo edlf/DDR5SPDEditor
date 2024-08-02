@@ -5,7 +5,8 @@
 
 DDR5SPD::DDR5SPD(SPD_Struct value) :
     spdStruct(value),
-    xmpBundle(spdStruct.xmpBlock)
+    expoBundle(spdStruct.xmpExpoBlock.hybrid.expo_struct),
+    xmpBundle(spdStruct.xmpExpoBlock.xmpOnly, isEXPOPresentStatic(value))
 {
 }
 
@@ -449,6 +450,10 @@ const bool DDR5SPD::isXMPPresent() {
     return xmpBundle.isMagicPresent();
 }
 
+const bool DDR5SPD::isEXPOPresent() {
+    return expoBundle.isMagicPresent();
+}
+
 const bool DDR5SPD::isCRCValid(){
     return (calculateJedecCRC() == spdStruct.checksum);
 }
@@ -482,3 +487,17 @@ void DDR5SPD::setDensity(const Density value) {
 
     spdStruct.firstDensityPackage = ((spdStruct.firstDensityPackage & 0xF0) | (val & 0xF));
 }
+
+// Static methods
+bool DDR5SPD::isXMPPresentStatic(const SPD_Struct& spd) {
+    return (spd.xmpExpoBlock.xmpOnly.header.magic1 == XMPHeaderMagic[0] &&
+            spd.xmpExpoBlock.xmpOnly.header.magic2 == XMPHeaderMagic[1]);
+}
+
+bool DDR5SPD::isEXPOPresentStatic(const SPD_Struct& spd) {
+    return (spd.xmpExpoBlock.hybrid.expo_struct.header.magic[0] == EXPOHeaderMagic[0] &&
+            spd.xmpExpoBlock.hybrid.expo_struct.header.magic[1] == EXPOHeaderMagic[1] &&
+            spd.xmpExpoBlock.hybrid.expo_struct.header.magic[2] == EXPOHeaderMagic[2] &&
+            spd.xmpExpoBlock.hybrid.expo_struct.header.magic[3] == EXPOHeaderMagic[3]);
+}
+
