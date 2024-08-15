@@ -246,7 +246,7 @@ void EXPO_Profile::import(const EXPO_ProfileStruct in) {
 EXPO_Bundle::EXPO_Bundle(EXPO_Struct& expoBlockRef) :
     expoStruct(expoBlockRef),
     profile1(expoBlockRef.profile1),
-    profile2(expoBlockRef.profile2){
+    profile2(expoBlockRef.profile2) {
 }
 
 void EXPO_Bundle::enableMagic() {

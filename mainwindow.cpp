@@ -52,6 +52,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     // EXPO menu
     connect(ui->actionWipeEXPOregion, &QAction::triggered, this, &MainWindow::wipeEXPO);
+    connect(ui->actionExportEXPOProfile1, &QAction::triggered, this, &MainWindow::exportEXPOProfile1);
+    connect(ui->actionExportEXPOProfile2, &QAction::triggered, this, &MainWindow::exportEXPOProfile2);
+    connect(ui->actionImportEXPOProfile1, &QAction::triggered, this, &MainWindow::importEXPOProfile1);
+    connect(ui->actionImportEXPOProfile2, &QAction::triggered, this, &MainWindow::importEXPOProfile2);
 }
 
 MainWindow::~MainWindow()
@@ -64,7 +68,7 @@ void MainWindow::exit(){
 }
 
 void MainWindow::openFile(){
-    QString fileName = QFileDialog::getOpenFileName(this, "Open File", QDir::currentPath(), "SPD Files (*.spd, *.bin);;All Files (*.*)");
+    QString fileName = QFileDialog::getOpenFileName(this, "Open File", QDir::currentPath(), "SPD Files (*.spd *.bin);;All Files (*.*)");
     if (!fileName.isEmpty()) {
         // do something with the selected file
         QFile file(fileName);
@@ -137,9 +141,12 @@ void MainWindow::saveFile(){
         if (spd->isXMPPresent()) {
             spd->xmpBundle.fixCRCs();
         }
+        if (spd->isEXPOPresent()) {
+            spd->expoBundle.fixCRC();
+        }
 
         // Actually save
-        QString fileName = QFileDialog::getSaveFileName(this, "Save File", QDir::currentPath(), "SPD Files (*.spd, *.bin);;All Files (*.*)");
+        QString fileName = QFileDialog::getSaveFileName(this, "Save File", QDir::currentPath(), "SPD Files (*.spd *.bin);;All Files (*.*)");
         if (!fileName.isEmpty()) {
             // save contents to the selected file
             QFile file(fileName);
@@ -205,6 +212,101 @@ void MainWindow::wipeEXPO() {
     toggleXMPUI(true, spd->isEXPOPresent());
 }
 
+EXPO_ProfileStruct MainWindow::importEXPOProfile() {
+    QString fileName = QFileDialog::getOpenFileName(this, "Open File", QDir::currentPath(), "EXPO Files (*.expo *.bin);;All Files (*.*)");
+
+    if (!fileName.isEmpty()) {
+        // do something with the selected file
+        QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Failed to load file.") );
+        }
+
+        if (file.size() != EXPOProfileSize) {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Invalid EXPO profile file size.") );
+        }
+
+        QByteArray contents = file.readAll();
+
+        if (contents.length() != EXPOProfileSize) {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Invalid EXPO profile file size.") );
+        } else {
+            EXPO_ProfileStruct readProfile = *reinterpret_cast<EXPO_ProfileStruct*>(contents.data());
+            return readProfile;
+        }
+    }
+
+    EXPO_ProfileStruct empty{};
+    return empty;
+}
+
+void MainWindow::exportEXPOProfile(const EXPO_ProfileStruct& expoProfile) {
+    // Actually save
+    QString fileName = QFileDialog::getSaveFileName(this, "Save EXPO File", QDir::currentPath(), "EXPO Files (*.expo *.bin);;All Files (*.*)");
+
+    if (!fileName.isEmpty()) {
+        // save contents to the selected file
+        QFile file(fileName);
+
+        if (!file.open(QIODevice::WriteOnly)) {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Failed to save file.") );
+        }
+
+        if (file.isWritable()) {
+            file.write(reinterpret_cast<const char*>(&expoProfile), EXPOProfileSize);
+            file.close();
+        } else {
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Failed to save file (read only?).") );
+        }
+    }
+}
+
+void MainWindow::exportEXPOProfile1() {
+    if (spd != nullptr) {
+        exportEXPOProfile(spd->expoBundle.profile1.getCopy());
+    }
+}
+
+void MainWindow::exportEXPOProfile2() {
+    if (spd != nullptr) {
+        exportEXPOProfile(spd->expoBundle.profile2.getCopy());
+    }
+}
+
+void MainWindow::importEXPOProfile1() {
+    if (spd == nullptr) {
+        return;
+    }
+
+    spd->expoBundle.profile1.import(importEXPOProfile());
+    reloadEXPO1Tab();
+}
+
+void MainWindow::importEXPOProfile2() {
+    if (spd == nullptr) {
+        return;
+    }
+
+    spd->expoBundle.profile2.import(importEXPOProfile());
+    reloadEXPO2Tab();
+}
+
+
 void MainWindow::wipeXMPProfile1() {
     spd->xmpBundle.setXMP1Enabled(false);
     spd->xmpBundle.profile1.wipeProfile();
@@ -263,7 +365,7 @@ void MainWindow::loadSampleXMPProfileU2() {
 
 void MainWindow::exportXMPProfile(const XMP_ProfileStruct& xmpProfile) {
     // Actually save
-    QString fileName = QFileDialog::getSaveFileName(this, "Save XMP File", QDir::currentPath(), "XMP Files (*.xmp, *.bin);;All Files (*.*)");
+    QString fileName = QFileDialog::getSaveFileName(this, "Save XMP File", QDir::currentPath(), "XMP Files (*.xmp *.bin);;All Files (*.*)");
 
     if (!fileName.isEmpty()) {
         // save contents to the selected file
@@ -319,7 +421,7 @@ void MainWindow::exportXMPProfileU2(){
 }
 
 XMP_ProfileStruct MainWindow::importXMPProfile() {
-    QString fileName = QFileDialog::getOpenFileName(this, "Open File", QDir::currentPath(), "XMP Profile Files (*.xmp, *.bin);;All Files (*.*)");
+    QString fileName = QFileDialog::getOpenFileName(this, "Open File", QDir::currentPath(), "XMP Profile Files (*.xmp *.bin);;All Files (*.*)");
 
     if (!fileName.isEmpty()) {
         // do something with the selected file

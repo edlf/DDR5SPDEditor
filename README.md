@@ -1,10 +1,12 @@
 # DDR5SPDEditor
-DDR5 SPD + XMP 3.0 Editor in QT
+DDR5 SPD + XMP 3.0 + EXPO Editor in QT
 
 Only for regular, non buffered/non ECC DDR5 UDIMMS/SODIMMS.
 
+# Screenshots
 ![SPD Editor](Images/jedec.png)
 ![XMP 3.0 Editor](Images/xmp.png)
+![EXPO Editor](Images/expo.png)
 
 # Usage
 1. Dump the SPD using [SPD-Reader-Writer](https://github.com/1a2m3/SPD-Reader-Writer).

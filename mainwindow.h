@@ -62,6 +62,12 @@ private slots:
     void disableXMPMagicBits();
 
     void wipeEXPO();
+    void exportEXPOProfile(const EXPO_ProfileStruct&);
+    EXPO_ProfileStruct importEXPOProfile();
+    void exportEXPOProfile1();
+    void exportEXPOProfile2();
+    void importEXPOProfile1();
+    void importEXPOProfile2();
 
     void reloadUI();
     void reloadJEDECTab();
