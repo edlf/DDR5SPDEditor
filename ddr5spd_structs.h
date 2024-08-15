@@ -16,7 +16,7 @@ constexpr size_t jedecBlockSize = 0x200;
 // XMP 3.0
 constexpr size_t XMPHeaderSize = 0x40;
 constexpr size_t XMPProfileSize = 0x40;
-constexpr size_t maxXmpProfileName = 15;
+constexpr size_t maxXmpProfileName = 16;
 
 constexpr char XMPHeaderMagic[] = { 0x0C, 0x4A };
 constexpr unsigned int xmpProfile1EnableBit = 0;
@@ -29,7 +29,7 @@ constexpr unsigned int RealTimeMemoryFrequencyOCBit = 1;
 // EXPO
 constexpr size_t EXPOHeaderSize = 0xA;
 constexpr size_t EXPOSize = 0x80;
-constexpr size_t EXPOProfileSize = 0x18;
+constexpr size_t EXPOProfileSize = 0x28;
 constexpr char EXPOHeaderMagic[] = { 0x45, 0x58, 0x50, 0x4F };
 
 enum class FormFactor
@@ -176,11 +176,8 @@ struct XMP_HeaderStruct {
     unsigned char unknown_0D; // 0x00
 
     char profileName1[maxXmpProfileName];
-    unsigned char spacer1;
     char profileName2[maxXmpProfileName];
-    unsigned char spacer2;
     char profileName3[maxXmpProfileName];
-    unsigned char spacer3;
     unsigned short checksum;
 };
 
@@ -264,14 +261,23 @@ struct EXPO_ProfileStruct {
     unsigned short tRFC1;
     unsigned short tRFC2;
     unsigned short tRFC;
+    unsigned short tRRD_L;
+    unsigned short tCCD_L;
+    unsigned short tCCD_L_WR;
+    unsigned short tCCD_L_WR2;
+    unsigned short tFAW;
+    unsigned short tCCD_L_WTR;
+    unsigned short tCCD_S_WTR;
+    unsigned short tRTP;
 };
 
 struct EXPO_Struct {
     EXPO_HeaderStruct header;
     EXPO_ProfileStruct profile1;
+    EXPO_ProfileStruct profile2;
 
     // TODO: Figure out second profile + voltages
-    unsigned char filler[0x5C];
+    unsigned char filler[0x24];
 
     // Byte 0x7E-0x7F
     unsigned short checksum;
@@ -511,7 +517,7 @@ static_assert(sizeof(XMP_HeaderStruct) == XMPHeaderSize, "XMP Header has to be 6
 static_assert(sizeof(XMP_ProfileStruct) == XMPProfileSize, "XMP Profile has to be 64 bytes in size");
 static_assert(sizeof(XMP_Struct) == (sizeof(XMP_HeaderStruct) + 5*sizeof(XMP_ProfileStruct)), "XMP Block size is incorrect");
 static_assert(sizeof(EXPO_Struct) == EXPOSize, "EXPO block has to be 128 bytes in size");
-static_assert(sizeof(EXPO_ProfileStruct) == EXPOProfileSize, "EXPO profile has to be 24 bytes in size");
+static_assert(sizeof(EXPO_ProfileStruct) == EXPOProfileSize, "EXPO profile has to be 40 bytes in size");
 
 }; // namespace
 

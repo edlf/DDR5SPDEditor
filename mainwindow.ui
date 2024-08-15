@@ -3535,7 +3535,7 @@
                <string/>
               </property>
               <property name="maxLength">
-               <number>15</number>
+               <number>16</number>
               </property>
               <property name="readOnly">
                <bool>false</bool>
@@ -3742,7 +3742,7 @@
                <string/>
               </property>
               <property name="maxLength">
-               <number>15</number>
+               <number>16</number>
               </property>
               <property name="readOnly">
                <bool>false</bool>
@@ -5681,7 +5681,7 @@
                <string/>
               </property>
               <property name="maxLength">
-               <number>15</number>
+               <number>16</number>
               </property>
               <property name="readOnly">
                <bool>false</bool>
