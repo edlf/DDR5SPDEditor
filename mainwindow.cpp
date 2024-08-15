@@ -44,11 +44,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionExportUserProfile1, &QAction::triggered, this, &MainWindow::exportXMPProfileU1);
     connect(ui->actionExportUserProfile2, &QAction::triggered, this, &MainWindow::exportXMPProfileU2);
 
-    connect(ui->actionInportProfile1, &QAction::triggered, this, &MainWindow::importXMPProfile1);
-    connect(ui->actionInportProfile2, &QAction::triggered, this, &MainWindow::importXMPProfile2);
-    connect(ui->actionInportProfile3, &QAction::triggered, this, &MainWindow::importXMPProfile3);
-    connect(ui->actionInportUserProfile1, &QAction::triggered, this, &MainWindow::importXMPProfileU1);
-    connect(ui->actionInportUserProfile2, &QAction::triggered, this, &MainWindow::importXMPProfileU2);
+    connect(ui->actionImportProfile1, &QAction::triggered, this, &MainWindow::importXMPProfile1);
+    connect(ui->actionImportProfile2, &QAction::triggered, this, &MainWindow::importXMPProfile2);
+    connect(ui->actionImportProfile3, &QAction::triggered, this, &MainWindow::importXMPProfile3);
+    connect(ui->actionImportUserProfile1, &QAction::triggered, this, &MainWindow::importXMPProfileU1);
+    connect(ui->actionImportUserProfile2, &QAction::triggered, this, &MainWindow::importXMPProfileU2);
 
     // EXPO menu
     connect(ui->actionWipeEXPOregion, &QAction::triggered, this, &MainWindow::wipeEXPO);
@@ -538,13 +538,13 @@ void MainWindow::toggleXMPUI(const bool status, const bool expoPresent) {
     ui->actionWipeProfile1->setDisabled(disabled);
     ui->actionLoadSampleProfile1->setDisabled(disabled);
     ui->actionExportProfile1->setDisabled(disabled);
-    ui->actionInportProfile1->setDisabled(disabled);
+    ui->actionImportProfile1->setDisabled(disabled);
     ui->tabXMPP1->setDisabled(disabled);
 
     ui->actionWipeProfile2->setDisabled(disabled);
     ui->actionLoadSampleProfile2->setDisabled(disabled);
     ui->actionExportProfile2->setDisabled(disabled);
-    ui->actionInportProfile2->setDisabled(disabled);
+    ui->actionImportProfile2->setDisabled(disabled);
     ui->tabXMPP2->setDisabled(disabled);
 
 
@@ -552,20 +552,20 @@ void MainWindow::toggleXMPUI(const bool status, const bool expoPresent) {
         ui->actionWipeProfile3->setDisabled(disabled);
         ui->actionLoadSampleProfile3->setDisabled(disabled);
         ui->actionExportProfile3->setDisabled(disabled);
-        ui->actionInportProfile3->setDisabled(disabled);
+        ui->actionImportProfile3->setDisabled(disabled);
         ui->tabXMPP3->setDisabled(disabled);
 
         ui->actionWipeProfileU1->setDisabled(disabled);
         ui->actionLoadSampleProfileU1->setDisabled(disabled);
         ui->actionExportUserProfile1->setDisabled(disabled);
-        ui->actionInportUserProfile1->setDisabled(disabled);
+        ui->actionImportUserProfile1->setDisabled(disabled);
         ui->tabXMPU1->setDisabled(disabled);
     }
 
     ui->actionWipeProfileU2->setDisabled(disabled);
     ui->actionLoadSampleProfileU2->setDisabled(disabled);
     ui->actionExportUserProfile2->setDisabled(disabled);
-    ui->actionInportUserProfile2->setDisabled(disabled);
+    ui->actionImportUserProfile2->setDisabled(disabled);
     ui->tabXMPU2->setDisabled(disabled);
 }
 
@@ -575,6 +575,11 @@ void MainWindow::toggleEXPOUI(const bool status) {
     ui->tabEXPO1->setDisabled(disabled);
     ui->tabEXPO2->setDisabled(disabled);
     ui->actionWipeEXPOregion->setDisabled(disabled);
+
+    ui->actionExportEXPOProfile1->setDisabled(disabled);
+    ui->actionImportEXPOProfile1->setDisabled(disabled);
+    ui->actionExportEXPOProfile2->setDisabled(disabled);
+    ui->actionImportEXPOProfile2->setDisabled(disabled);
 }
 
 void MainWindow::disableUI() {
@@ -3001,6 +3006,81 @@ void MainWindow::on_sbtCCD_S_WTR_EXPO2_editingFinished() {
 void MainWindow::on_sbtRTP_EXPO2_editingFinished() {
     spd->expoBundle.profile2.settRTP(ui->sbtRTP_EXPO2->value());
     ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRTP(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+// EXPO <-> Conversion
+XMP_ProfileStruct MainWindow::importXMPProfileFromEXPO(const EXPO_ProfileStruct& expo) {
+    XMP_ProfileStruct result;
+    result.vdd = expo.vdd;
+    result.vddq = expo.vddq;
+    result.vpp = expo.vpp;
+    result.vmemctrl = utilities::ConvertVoltageToByteDDR5(110);
+    result.minCycleTime = expo.minCycleTime;
+
+    // Attempt to guess right CL
+    unsigned short CL = utilities::TimeToTicksDDR5(expo.tAA, expo.minCycleTime);
+
+    if (CL % 2 != 0) {
+        CL++;
+    }
+
+    result.tAA = expo.tAA;
+    result.tRCD = expo.tRCD;
+    result.tRP = expo.tRP;
+    result.tRAS = expo.tRAS;
+    result.tRC = expo.tRC;
+    result.tWR = expo.tWR;
+    result.tRFC1 = expo.tRFC1;
+    result.tRFC2 = expo.tRFC2;
+    result.tRFC = expo.tRFC;
+    result.tRRD_L = expo.tRRD_L;
+    result.tCCD_L = expo.tCCD_L;
+    result.tCCD_L_WR = expo.tCCD_L_WR;
+    result.tCCD_L_WR2 = expo.tCCD_L_WR2;
+    result.tFAW = expo.tFAW;
+    result.tCCD_L_WTR = expo.tCCD_L_WTR;
+    result.tCCD_S_WTR = expo.tCCD_S_WTR;
+    result.tRTP = expo.tRTP;
+
+    // Load default values
+    result.tRRD_L_lowerLimit = 8;
+    result.tCCD_L_WR_lowerLimit = 32;
+    result.tCCD_L_WR2_lowerLimit = 16;
+    result.tCCD_L_WTR_lowerLimit = 16;
+    result.tCCD_S_WTR_lowerLimit = 4;
+    result.tCCD_L_lowerLimit = 8;
+    result.tRTP_lowerLimit = 12;
+    result.tFAW_lowerLimit = 32;
+    // setDimmsChannel(1);
+    // result.commandRate = CommandRate::_2n;
+
+    return result;
+}
+
+EXPO_ProfileStruct MainWindow::importEXPOProfileFromXMP(const XMP_ProfileStruct& xmp) {
+    EXPO_ProfileStruct result;
+    result.vdd = xmp.vdd;
+    result.vddq = xmp.vddq;
+    result.vpp = xmp.vpp;
+    result.minCycleTime = xmp.minCycleTime;
+    result.tAA = xmp.tAA;
+    result.tRCD = xmp.tRCD;
+    result.tRP = xmp.tRP;
+    result.tRAS = xmp.tRAS;
+    result.tRC = xmp.tRC;
+    result.tWR = xmp.tWR;
+    result.tRFC1 = xmp.tRFC1;
+    result.tRFC2 = xmp.tRFC2;
+    result.tRFC = xmp.tRFC;
+    result.tRRD_L = xmp.tRRD_L;
+    result.tCCD_L = xmp.tCCD_L;
+    result.tCCD_L_WR = xmp.tCCD_L_WR;
+    result.tCCD_L_WR2 = xmp.tCCD_L_WR2;
+    result.tFAW = xmp.tFAW;
+    result.tCCD_L_WTR = xmp.tCCD_L_WTR;
+    result.tCCD_S_WTR = xmp.tCCD_S_WTR;
+    result.tRTP = xmp.tRTP;
+    return result;
 }
 
 // Misc

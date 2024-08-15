@@ -52,6 +52,7 @@ private slots:
     void exportXMPProfileU2();
 
     XMP_ProfileStruct importXMPProfile();
+    XMP_ProfileStruct importXMPProfileFromEXPO(const EXPO_ProfileStruct&);
     void importXMPProfile1();
     void importXMPProfile2();
     void importXMPProfile3();
@@ -64,6 +65,7 @@ private slots:
     void wipeEXPO();
     void exportEXPOProfile(const EXPO_ProfileStruct&);
     EXPO_ProfileStruct importEXPOProfile();
+    EXPO_ProfileStruct importEXPOProfileFromXMP(const XMP_ProfileStruct&);
     void exportEXPOProfile1();
     void exportEXPOProfile2();
     void importEXPOProfile1();

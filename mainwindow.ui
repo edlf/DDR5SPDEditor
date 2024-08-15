@@ -14683,11 +14683,11 @@
      <property name="title">
       <string>Import XMP profile to</string>
      </property>
-     <addaction name="actionInportProfile1"/>
-     <addaction name="actionInportProfile2"/>
-     <addaction name="actionInportProfile3"/>
-     <addaction name="actionInportUserProfile1"/>
-     <addaction name="actionInportUserProfile2"/>
+     <addaction name="actionImportProfile1"/>
+     <addaction name="actionImportProfile2"/>
+     <addaction name="actionImportProfile3"/>
+     <addaction name="actionImportUserProfile1"/>
+     <addaction name="actionImportUserProfile2"/>
     </widget>
     <widget class="QMenu" name="menuExport_XMP_profile">
      <property name="title">
@@ -14822,27 +14822,27 @@
     <string>User profile 2</string>
    </property>
   </action>
-  <action name="actionInportProfile1">
+  <action name="actionImportProfile1">
    <property name="text">
     <string>Profile 1</string>
    </property>
   </action>
-  <action name="actionInportProfile2">
+  <action name="actionImportProfile2">
    <property name="text">
     <string>Profile 2</string>
    </property>
   </action>
-  <action name="actionInportProfile3">
+  <action name="actionImportProfile3">
    <property name="text">
     <string>Profile 3</string>
    </property>
   </action>
-  <action name="actionInportUserProfile1">
+  <action name="actionImportUserProfile1">
    <property name="text">
     <string>User profile 1</string>
    </property>
   </action>
-  <action name="actionInportUserProfile2">
+  <action name="actionImportUserProfile2">
    <property name="text">
     <string>User profile 2</string>
    </property>
