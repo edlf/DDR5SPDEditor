@@ -124,6 +124,70 @@ void EXPO_Profile::settRFC(const unsigned short value) {
     expoProfileStruct.tRFC = value;
 }
 
+const unsigned short EXPO_Profile::gettRRD_L() {
+    return expoProfileStruct.tRRD_L;
+}
+
+void EXPO_Profile::settRRD_L(const unsigned short value) {
+    expoProfileStruct.tRRD_L = value;
+}
+
+const unsigned short EXPO_Profile::gettCCD_L_WR() {
+    return expoProfileStruct.tCCD_L_WR;
+}
+
+void EXPO_Profile::settCCD_L_WR(unsigned short value) {
+    expoProfileStruct.tCCD_L_WR = value;
+}
+
+const unsigned short EXPO_Profile::gettCCD_L_WR2() {
+    return expoProfileStruct.tCCD_L_WR2;
+}
+
+void EXPO_Profile::settCCD_L_WR2(const unsigned short value) {
+    expoProfileStruct.tCCD_L_WR2 = value;
+}
+
+const unsigned short EXPO_Profile::gettCCD_L_WTR() {
+    return expoProfileStruct.tCCD_L_WTR;
+}
+
+void EXPO_Profile::settCCD_L_WTR(unsigned short value) {
+    expoProfileStruct.tCCD_L_WTR = value;
+}
+
+const unsigned short EXPO_Profile::gettCCD_S_WTR() {
+    return expoProfileStruct.tCCD_S_WTR;
+}
+
+void EXPO_Profile::settCCD_S_WTR(unsigned short value) {
+    expoProfileStruct.tCCD_S_WTR = value;
+}
+
+const unsigned short EXPO_Profile::gettCCD_L() {
+    return expoProfileStruct.tCCD_L;
+}
+
+void EXPO_Profile::settCCD_L(const unsigned short value) {
+    expoProfileStruct.tCCD_L = value;
+}
+
+const unsigned short EXPO_Profile::gettRTP() {
+    return expoProfileStruct.tRTP;
+}
+
+void EXPO_Profile::settRTP(const unsigned short value) {
+    expoProfileStruct.tRTP = value;
+}
+
+const unsigned short EXPO_Profile::gettFAW() {
+    return expoProfileStruct.tFAW;
+}
+
+void EXPO_Profile::settFAW(const unsigned short value) {
+    expoProfileStruct.tFAW = value;
+}
+
 const unsigned short EXPO_Profile::getDimmsChannel(){
     // TODO
     return 1;
@@ -154,6 +218,14 @@ void EXPO_Profile::resetProfile() {
     settRFC1(295);
     settRFC2(160);
     settRFC(130);
+    settRRD_L(5000);
+    settCCD_L_WR(20000);
+    settCCD_L_WR2(10000);
+    settCCD_L_WTR(10000);
+    settCCD_S_WTR(2500);
+    settCCD_L(5000);
+    settRTP(7500);
+    settFAW(10666);
     setDimmsChannel(1);
 }
 
@@ -173,7 +245,8 @@ void EXPO_Profile::import(const EXPO_ProfileStruct in) {
 // EXPO Bundle methods
 EXPO_Bundle::EXPO_Bundle(EXPO_Struct& expoBlockRef) :
     expoStruct(expoBlockRef),
-    profile1(expoBlockRef.profile1) {
+    profile1(expoBlockRef.profile1),
+    profile2(expoBlockRef.profile2){
 }
 
 void EXPO_Bundle::enableMagic() {

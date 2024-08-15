@@ -55,6 +55,30 @@ public:
     const unsigned short gettRFC();
     void settRFC(const unsigned short);
 
+    const unsigned short gettRRD_L();
+    void settRRD_L(const unsigned short);
+
+    const unsigned short gettCCD_L_WR();
+    void settCCD_L_WR(unsigned short);
+
+    const unsigned short gettCCD_L_WR2();
+    void settCCD_L_WR2(const unsigned short);
+
+    const unsigned short gettCCD_L_WTR();
+    void settCCD_L_WTR(unsigned short);
+
+    const unsigned short gettCCD_S_WTR();
+    void settCCD_S_WTR(unsigned short);
+
+    const unsigned short gettCCD_L();
+    void settCCD_L(const unsigned short);
+
+    const unsigned short gettRTP();
+    void settRTP(const unsigned short);
+
+    const unsigned short gettFAW();
+    void settFAW(const unsigned short);
+
     const unsigned short getDimmsChannel();
     void setDimmsChannel(unsigned short);
 
@@ -89,6 +113,7 @@ public:
     void wipe();
 
     EXPO_Profile profile1;
+    EXPO_Profile profile2;
 
 private:
     EXPO_Struct& expoStruct;

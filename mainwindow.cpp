@@ -200,6 +200,7 @@ void MainWindow::wipeEXPO() {
     reloadXMPU1Tab();
     reloadXMPU2Tab();
     reloadEXPO1Tab();
+    reloadEXPO2Tab();
 
     toggleXMPUI(true, spd->isEXPOPresent());
 }
@@ -470,6 +471,7 @@ void MainWindow::toggleEXPOUI(const bool status) {
     bool disabled = !status;
 
     ui->tabEXPO1->setDisabled(disabled);
+    ui->tabEXPO2->setDisabled(disabled);
     ui->actionWipeEXPOregion->setDisabled(disabled);
 }
 
@@ -1354,6 +1356,78 @@ void MainWindow::reloadEXPO1Tab() {
     ui->ltRFC2_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRFC2() * 1000, minCycleTime)));
     ui->sbtRFC_EXPO1->setValue(expo_profile.gettRFC());
     ui->ltRFC_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRFC() * 1000, minCycleTime)));
+    // Enhanced timings
+    ui->sbtRRD_L_EXPO1->setValue(expo_profile.gettRRD_L());
+    ui->ltRRD_L_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRRD_L(), minCycleTime)));
+    ui->sbtCCD_L_EXPO1->setValue(expo_profile.gettCCD_L());
+    ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettCCD_L(), minCycleTime)));
+    ui->sbtCCDL_L_WR_EXPO1->setValue(expo_profile.gettCCD_L_WR());
+    ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WR(), minCycleTime)));
+    ui->sbtCCDL_L_WR2_EXPO1->setValue(expo_profile.gettCCD_L_WR2());
+    ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WR2(), minCycleTime)));
+    ui->sbtFAW_EXPO1->setValue(expo_profile.gettFAW());
+    ui->ltFAW_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettFAW(), minCycleTime)));
+    ui->sbtCCD_L_WTR_EXPO1->setValue(expo_profile.gettCCD_L_WTR());
+    ui->ltCCD_L_WTR_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WTR(), minCycleTime)));
+    ui->sbtCCD_S_WTR_EXPO1->setValue(expo_profile.gettCCD_S_WTR());
+    ui->ltCCD_S_WTR_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettCCD_S_WTR(), minCycleTime)));
+    ui->sbtRTP_EXPO1->setValue(expo_profile.gettRTP());
+    ui->ltRTP_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRTP(), minCycleTime)));
+}
+
+void MainWindow::reloadEXPO2Tab() {
+    EXPO_Profile dummy;
+
+    // EXPO
+    EXPO_Profile& expo_profile = spd->isEXPOPresent() ? spd->expoBundle.profile2 : dummy;
+
+    const unsigned int minCycleTime = expo_profile.getMinCycleTime();
+    ui->spinMinCycleTime_EXPO2->setValue(minCycleTime);
+    QString frequencyStr = QString::number(expo_profile.getFrequency()) + " MHz";
+    QString mtStr = QString::number(expo_profile.getMT()) + " MT/s";
+    ui->lFrequencyValue_EXPO2->setText(frequencyStr);
+    ui->lMTValue_EXPO2->setText(mtStr);
+
+    // Voltages
+    ui->sbVDD_EXPO2->setValue(expo_profile.getVDD());
+    ui->sbVDDQ_EXPO2->setValue(expo_profile.getVDDQ());
+    ui->sbVPP_EXPO2->setValue(expo_profile.getVPP());
+
+    ui->sbtAA_EXPO2->setValue(expo_profile.gettAA());
+    ui->ltAA_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettAA(), minCycleTime)));
+    ui->sbtRCD_EXPO2->setValue(expo_profile.gettRCD());
+    ui->ltRCD_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRCD(), minCycleTime)));
+    ui->sbtRP_EXPO2->setValue(expo_profile.gettRP());
+    ui->ltRP_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRP(), minCycleTime)));
+    ui->sbtRAS_EXPO2->setValue(expo_profile.gettRAS());
+    ui->ltRAS_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRAS(), minCycleTime)));
+    ui->sbtRC_EXPO2->setValue(expo_profile.gettRC());
+    ui->ltRC_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRC(), minCycleTime)));
+    ui->sbtWR_EXPO2->setValue(expo_profile.gettWR());
+    ui->ltWR_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettWR(), minCycleTime)));
+    ui->sbtRFC1_EXPO2->setValue(expo_profile.gettRFC1());
+    ui->ltRFC1_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRFC1() * 1000, minCycleTime)));
+    ui->sbtRFC2_EXPO2->setValue(expo_profile.gettRFC2());
+    ui->ltRFC2_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRFC2() * 1000, minCycleTime)));
+    ui->sbtRFC_EXPO2->setValue(expo_profile.gettRFC());
+    ui->ltRFC_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRFC() * 1000, minCycleTime)));
+    // Enhanced timings
+    ui->sbtRRD_L_EXPO2->setValue(expo_profile.gettRRD_L());
+    ui->ltRRD_L_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRRD_L(), minCycleTime)));
+    ui->sbtCCD_L_EXPO2->setValue(expo_profile.gettCCD_L());
+    ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettCCD_L(), minCycleTime)));
+    ui->sbtCCDL_L_WR_EXPO2->setValue(expo_profile.gettCCD_L_WR());
+    ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WR(), minCycleTime)));
+    ui->sbtCCDL_L_WR2_EXPO2->setValue(expo_profile.gettCCD_L_WR2());
+    ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WR2(), minCycleTime)));
+    ui->sbtFAW_EXPO2->setValue(expo_profile.gettFAW());
+    ui->ltFAW_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettFAW(), minCycleTime)));
+    ui->sbtCCD_L_WTR_EXPO2->setValue(expo_profile.gettCCD_L_WTR());
+    ui->ltCCD_L_WTR_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WTR(), minCycleTime)));
+    ui->sbtCCD_S_WTR_EXPO2->setValue(expo_profile.gettCCD_S_WTR());
+    ui->ltCCD_S_WTR_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettCCD_S_WTR(), minCycleTime)));
+    ui->sbtRTP_EXPO2->setValue(expo_profile.gettRTP());
+    ui->ltRTP_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(expo_profile.gettRTP(), minCycleTime)));
 }
 
 void MainWindow::reloadMiscTab() {
@@ -1382,6 +1456,7 @@ void MainWindow::reloadUI(){
     reloadXMPU1Tab();
     reloadXMPU2Tab();
     reloadEXPO1Tab();
+    reloadEXPO2Tab();
     reloadMiscTab();
 }
 
@@ -2618,6 +2693,212 @@ void MainWindow::on_sbtRTP_XMPU2_editingFinished() {
 
 void MainWindow::on_sbtRTP_LCLK_XMPU2_editingFinished() {
     spd->xmpBundle.profileUser2.settRTP_lowerLimit(ui->sbtRTP_LCLK_XMPU2->value());
+}
+
+// EXPO1
+void MainWindow::on_sbVDD_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.setVDD(ui->sbVDD_EXPO1->value());
+}
+
+void MainWindow::on_sbVDDQ_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.setVDDQ(ui->sbVDDQ_EXPO1->value());
+}
+
+void MainWindow::on_sbVPP_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.setVPP(ui->sbVPP_EXPO1->value());
+}
+
+void MainWindow::on_spinMinCycleTime_EXPO1_editingFinished()
+{
+    spd->expoBundle.profile1.setMinCycleTime(ui->spinMinCycleTime_EXPO1->value());
+}
+
+void MainWindow::on_sbtAA_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settAA(ui->sbtAA_EXPO1->value());
+    ui->ltAA_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettAA(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRCD_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settRCD(ui->sbtRCD_EXPO1->value());
+    ui->ltRCD_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRCD(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRP_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settRP(ui->sbtRP_EXPO1->value());
+    ui->ltRP_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRP(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRAS_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settRAS(ui->sbtRAS_EXPO1->value());
+    ui->ltRAS_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRAS(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRC_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settRC(ui->sbtRC_EXPO1->value());
+    ui->ltRC_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRC(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtWR_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settWR(ui->sbtWR_EXPO1->value());
+    ui->ltWR_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettWR(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRFC1_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settRFC1(ui->sbtRFC1_EXPO1->value());
+    ui->ltRFC1_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRFC1() * 1000, spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRFC2_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settRFC2(ui->sbtRFC2_EXPO1->value());
+    ui->ltRFC2_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRFC2() * 1000, spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRFC_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settRFC(ui->sbtRFC_EXPO1->value());
+    ui->ltRFC_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRFC() * 1000, spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRRD_L_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settRRD_L(ui->sbtRRD_L_EXPO1->value());
+    ui->ltRRD_L_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRRD_L(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtCCD_L_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settCCD_L(ui->sbtCCD_L_EXPO1->value());
+    ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtCCDL_L_WR_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settCCD_L_WR(ui->sbtCCDL_L_WR_EXPO1->value());
+    ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L_WR(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtCCDL_L_WR2_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settCCD_L_WR2(ui->sbtCCDL_L_WR2_EXPO1->value());
+    ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L_WR2(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtFAW_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settFAW(ui->sbtFAW_EXPO1->value());
+    ui->ltFAW_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettFAW(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtCCD_L_WTR_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settCCD_L_WTR(ui->sbtCCD_L_WTR_EXPO1->value());
+    ui->labeltCCD_L_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L_WTR(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtCCD_S_WTR_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settCCD_S_WTR(ui->sbtCCD_S_WTR_EXPO1->value());
+    ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_S_WTR(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRTP_EXPO1_editingFinished() {
+    spd->expoBundle.profile1.settRTP(ui->sbtRTP_EXPO1->value());
+    ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRTP(), spd->expoBundle.profile1.getMinCycleTime())));
+}
+
+// EXPO2
+void MainWindow::on_sbVDD_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.setVDD(ui->sbVDD_EXPO2->value());
+}
+
+void MainWindow::on_sbVDDQ_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.setVDDQ(ui->sbVDDQ_EXPO2->value());
+}
+
+void MainWindow::on_sbVPP_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.setVPP(ui->sbVPP_EXPO2->value());
+}
+
+void MainWindow::on_spinMinCycleTime_EXPO2_editingFinished()
+{
+    spd->expoBundle.profile2.setMinCycleTime(ui->spinMinCycleTime_EXPO2->value());
+}
+
+void MainWindow::on_sbtAA_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settAA(ui->sbtAA_EXPO2->value());
+    ui->ltAA_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettAA(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRCD_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settRCD(ui->sbtRCD_EXPO2->value());
+    ui->ltRCD_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRCD(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRP_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settRP(ui->sbtRP_EXPO2->value());
+    ui->ltRP_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRP(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRAS_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settRAS(ui->sbtRAS_EXPO2->value());
+    ui->ltRAS_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRAS(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRC_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settRC(ui->sbtRC_EXPO2->value());
+    ui->ltRC_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRC(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtWR_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settWR(ui->sbtWR_EXPO2->value());
+    ui->ltWR_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettWR(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRFC1_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settRFC1(ui->sbtRFC1_EXPO2->value());
+    ui->ltRFC1_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRFC1() * 1000, spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRFC2_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settRFC2(ui->sbtRFC2_EXPO2->value());
+    ui->ltRFC2_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRFC2() * 1000, spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRFC_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settRFC(ui->sbtRFC_EXPO2->value());
+    ui->ltRFC_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRFC() * 1000, spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRRD_L_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settRRD_L(ui->sbtRRD_L_EXPO2->value());
+    ui->ltRRD_L_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRRD_L(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtCCD_L_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settCCD_L(ui->sbtCCD_L_EXPO2->value());
+    ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtCCDL_L_WR_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settCCD_L_WR(ui->sbtCCDL_L_WR_EXPO2->value());
+    ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L_WR(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtCCDL_L_WR2_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settCCD_L_WR2(ui->sbtCCDL_L_WR2_EXPO2->value());
+    ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L_WR2(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtFAW_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settFAW(ui->sbtFAW_EXPO2->value());
+    ui->ltFAW_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettFAW(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtCCD_L_WTR_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settCCD_L_WTR(ui->sbtCCD_L_WTR_EXPO2->value());
+    ui->labeltCCD_L_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L_WTR(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtCCD_S_WTR_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settCCD_S_WTR(ui->sbtCCD_S_WTR_EXPO2->value());
+    ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_S_WTR(), spd->expoBundle.profile2.getMinCycleTime())));
+}
+
+void MainWindow::on_sbtRTP_EXPO2_editingFinished() {
+    spd->expoBundle.profile2.settRTP(ui->sbtRTP_EXPO2->value());
+    ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRTP(), spd->expoBundle.profile2.getMinCycleTime())));
 }
 
 // Misc

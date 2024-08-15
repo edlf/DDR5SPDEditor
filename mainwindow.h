@@ -71,6 +71,7 @@ private slots:
     void reloadXMPU1Tab();
     void reloadXMPU2Tab();
     void reloadEXPO1Tab();
+    void reloadEXPO2Tab();
     void reloadMiscTab();
 
     // Slots JEDEC
@@ -530,6 +531,54 @@ private slots:
     void on_sbtCCD_S_WTR_LCLK_XMPU2_editingFinished();
     void on_sbtRTP_XMPU2_editingFinished();
     void on_sbtRTP_LCLK_XMPU2_editingFinished();
+
+    // Slots EXPO1
+    void on_sbVDD_EXPO1_editingFinished();
+    void on_sbVDDQ_EXPO1_editingFinished();
+    void on_sbVPP_EXPO1_editingFinished();
+    void on_spinMinCycleTime_EXPO1_editingFinished();
+
+    void on_sbtAA_EXPO1_editingFinished();
+    void on_sbtRCD_EXPO1_editingFinished();
+    void on_sbtRP_EXPO1_editingFinished();
+    void on_sbtRAS_EXPO1_editingFinished();
+    void on_sbtRC_EXPO1_editingFinished();
+    void on_sbtWR_EXPO1_editingFinished();
+    void on_sbtRFC1_EXPO1_editingFinished();
+    void on_sbtRFC2_EXPO1_editingFinished();
+    void on_sbtRFC_EXPO1_editingFinished();
+    void on_sbtRRD_L_EXPO1_editingFinished();
+    void on_sbtCCD_L_EXPO1_editingFinished();
+    void on_sbtCCDL_L_WR_EXPO1_editingFinished();
+    void on_sbtCCDL_L_WR2_EXPO1_editingFinished();
+    void on_sbtFAW_EXPO1_editingFinished();
+    void on_sbtCCD_L_WTR_EXPO1_editingFinished();
+    void on_sbtCCD_S_WTR_EXPO1_editingFinished();
+    void on_sbtRTP_EXPO1_editingFinished();
+
+    // Slots EXPO2
+    void on_sbVDD_EXPO2_editingFinished();
+    void on_sbVDDQ_EXPO2_editingFinished();
+    void on_sbVPP_EXPO2_editingFinished();
+    void on_spinMinCycleTime_EXPO2_editingFinished();
+
+    void on_sbtAA_EXPO2_editingFinished();
+    void on_sbtRCD_EXPO2_editingFinished();
+    void on_sbtRP_EXPO2_editingFinished();
+    void on_sbtRAS_EXPO2_editingFinished();
+    void on_sbtRC_EXPO2_editingFinished();
+    void on_sbtWR_EXPO2_editingFinished();
+    void on_sbtRFC1_EXPO2_editingFinished();
+    void on_sbtRFC2_EXPO2_editingFinished();
+    void on_sbtRFC_EXPO2_editingFinished();
+    void on_sbtRRD_L_EXPO2_editingFinished();
+    void on_sbtCCD_L_EXPO2_editingFinished();
+    void on_sbtCCDL_L_WR_EXPO2_editingFinished();
+    void on_sbtCCDL_L_WR2_EXPO2_editingFinished();
+    void on_sbtFAW_EXPO2_editingFinished();
+    void on_sbtCCD_L_WTR_EXPO2_editingFinished();
+    void on_sbtCCD_S_WTR_EXPO2_editingFinished();
+    void on_sbtRTP_EXPO2_editingFinished();
 
     // Misc tab
     void update_cbFormFactor();
