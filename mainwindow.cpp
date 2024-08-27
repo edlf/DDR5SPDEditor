@@ -126,7 +126,6 @@ void MainWindow::openFile(){
                 this,
                 appName,
                 tr("JEDEC section checksum error, will be fixed by saving.") );
-            return;
         }
 
         enableUI();
