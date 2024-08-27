@@ -20,8 +20,12 @@ XMP 3.0
 - Wipe individual profiles/complete XMP block
 - Import/Export XMP 3.0 profiles
 
+Preliminary EXPO support
+
 # TODO
 - Finish Misc Tab
 - Add default JEDEC profiles
 - Figure out some bits that are still missing (like DIMMs per channel)
-- Provide binaries
+
+# Acknowledgements
+- N-Storm (https://github.com/N-Storm)
