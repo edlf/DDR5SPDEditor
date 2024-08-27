@@ -11,16 +11,18 @@ on:
 
 jobs:
   build:
+    permissions:
+      contents: write
+
     runs-on: ${{ matrix.sys.os }}
     container: ${{ matrix.sys.container }}
 
     strategy:
       # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
-      fail-fast: false
+      fail-fast: true
 
       matrix:
         sys:
-          # - { os: ubuntu-20.04  , shell: bash           , cxx: g++-13, release_name: DDR5SPDEditor-linux-qt5-x86_64 }
           - { os: ubuntu-latest , shell: bash           , cxx: g++-13, release_name: DDR5SPDEditor-linux-x86_64-qt6 }
           - { os: ubuntu-latest , shell: 'alpine.sh {0}', cxx: g++   , release_name: DDR5SPDEditor-linux-x86_64-qt6-alpine }
           - { os: windows-latest, shell: 'msys2 {0}'    , cxx: g++   , release_name: DDR5SPDEditor-win-x86_64-qt6.7z }
