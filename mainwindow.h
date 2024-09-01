@@ -154,6 +154,7 @@ private slots:
 
     // Slots XMP1
     void on_leProfileName_XMP1_editingFinished();
+    void on_cbEnabled_XMP1_toggled(bool);
     void on_cbDynamicMemBoost_XMP1_toggled(bool);
     void on_cbRealTimeMemOC_XMP1_toggled(bool);
     void on_sbVDD_XMP1_editingFinished();
@@ -232,6 +233,7 @@ private slots:
 
     // Slots XMP2
     void on_leProfileName_XMP2_editingFinished();
+    void on_cbEnabled_XMP2_toggled(bool);
     void on_cbDynamicMemBoost_XMP2_toggled(bool);
     void on_cbRealTimeMemOC_XMP2_toggled(bool);
     void on_sbVDD_XMP2_editingFinished();
@@ -310,6 +312,7 @@ private slots:
 
     // Slots XMP3
     void on_leProfileName_XMP3_editingFinished();
+    void on_cbEnabled_XMP3_toggled(bool);
     void on_cbDynamicMemBoost_XMP3_toggled(bool);
     void on_cbRealTimeMemOC_XMP3_toggled(bool);
     void on_sbVDD_XMP3_editingFinished();
@@ -541,6 +544,7 @@ private slots:
     void on_sbtRTP_LCLK_XMPU2_editingFinished();
 
     // Slots EXPO1
+    void on_cbEnabled_EXPO1_toggled(bool);
     void on_sbVDD_EXPO1_editingFinished();
     void on_sbVDDQ_EXPO1_editingFinished();
     void on_sbVPP_EXPO1_editingFinished();
@@ -565,6 +569,7 @@ private slots:
     void on_sbtRTP_EXPO1_editingFinished();
 
     // Slots EXPO2
+    void on_cbEnabled_EXPO2_toggled(bool);
     void on_sbVDD_EXPO2_editingFinished();
     void on_sbVDDQ_EXPO2_editingFinished();
     void on_sbVPP_EXPO2_editingFinished();

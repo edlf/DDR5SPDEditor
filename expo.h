@@ -105,6 +105,12 @@ public:
     void clearMagic();
     bool isMagicPresent();
 
+    const bool isEXPO1Enabled();
+    void setEXPO1Enabled(const bool);
+
+    const bool isEXPO2Enabled();
+    void setEXPO2Enabled(const bool);
+
     const unsigned short getCRC();
     void setCRC(const unsigned short);
 

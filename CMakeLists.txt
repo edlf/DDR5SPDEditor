@@ -12,6 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+set(Qt6_USE_STATIC_LIBS ON)
+set(Qt6_USE_STATIC_RUNTIME ON)
+
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp

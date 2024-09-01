@@ -1429,9 +1429,11 @@ void MainWindow::reloadXMPU2Tab() {
 void MainWindow::reloadEXPO1Tab() {
     EXPO_Profile dummy;
 
-    // EXPO
+    // EXPO Header
     EXPO_Profile& expo_profile = spd->isEXPOPresent() ? spd->expoBundle.profile1 : dummy;
+    ui->cbEnabled_EXPO1->setChecked(spd->expoBundle.isEXPO1Enabled());
 
+    // EXPO Profile
     const unsigned int minCycleTime = expo_profile.getMinCycleTime();
     ui->spinMinCycleTime_EXPO1->setValue(minCycleTime);
     QString frequencyStr = QString::number(expo_profile.getFrequency()) + " MHz";
@@ -1484,9 +1486,11 @@ void MainWindow::reloadEXPO1Tab() {
 void MainWindow::reloadEXPO2Tab() {
     EXPO_Profile dummy;
 
-    // EXPO
+    // EXPO Header
     EXPO_Profile& expo_profile = spd->isEXPOPresent() ? spd->expoBundle.profile2 : dummy;
+    ui->cbEnabled_EXPO2->setChecked(spd->expoBundle.isEXPO2Enabled());
 
+    // EXPO Profile
     const unsigned int minCycleTime = expo_profile.getMinCycleTime();
     ui->spinMinCycleTime_EXPO2->setValue(minCycleTime);
     QString frequencyStr = QString::number(expo_profile.getFrequency()) + " MHz";
@@ -1739,6 +1743,10 @@ void MainWindow::on_leProfileName_XMP1_editingFinished() {
     spd->xmpBundle.setXMP1ProfileName(ui->leProfileName_XMP1->text().toStdString());
 }
 
+void MainWindow::on_cbEnabled_XMP1_toggled(bool val) {
+    spd->xmpBundle.setXMP1Enabled(val);
+}
+
 void MainWindow::on_cbDynamicMemBoost_XMP1_toggled(bool value) {
     spd->xmpBundle.profile1.setIntelDynamicMemoryBoost(value);
 }
@@ -1954,6 +1962,10 @@ void MainWindow::on_leProfileName_XMP2_editingFinished() {
     spd->xmpBundle.setXMP2ProfileName(ui->leProfileName_XMP2->text().toStdString());
 }
 
+void MainWindow::on_cbEnabled_XMP2_toggled(bool val) {
+    spd->xmpBundle.setXMP2Enabled(val);
+}
+
 void MainWindow::on_cbDynamicMemBoost_XMP2_toggled(bool value) {
     spd->xmpBundle.profile2.setIntelDynamicMemoryBoost(value);
 }
@@ -2167,6 +2179,10 @@ void MainWindow::on_sbtRTP_LCLK_XMP2_editingFinished() {
 // XMP3
 void MainWindow::on_leProfileName_XMP3_editingFinished() {
     spd->xmpBundle.setXMP3ProfileName(ui->leProfileName_XMP3->text().toStdString());
+}
+
+void MainWindow::on_cbEnabled_XMP3_toggled(bool val) {
+    spd->xmpBundle.setXMP3Enabled(val);
 }
 
 void MainWindow::on_cbDynamicMemBoost_XMP3_toggled(bool value) {
@@ -2802,6 +2818,10 @@ void MainWindow::on_sbtRTP_LCLK_XMPU2_editingFinished() {
 }
 
 // EXPO1
+void MainWindow::on_cbEnabled_EXPO1_toggled(bool val) {
+    spd->expoBundle.setEXPO1Enabled(val);
+}
+
 void MainWindow::on_sbVDD_EXPO1_editingFinished() {
     spd->expoBundle.profile1.setVDD(ui->sbVDD_EXPO1->value());
 }
@@ -2905,6 +2925,10 @@ void MainWindow::on_sbtRTP_EXPO1_editingFinished() {
 }
 
 // EXPO2
+void MainWindow::on_cbEnabled_EXPO2_toggled(bool val) {
+    spd->expoBundle.setEXPO2Enabled(val);
+}
+
 void MainWindow::on_sbVDD_EXPO2_editingFinished() {
     spd->expoBundle.profile2.setVDD(ui->sbVDD_EXPO2->value());
 }

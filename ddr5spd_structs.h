@@ -31,6 +31,12 @@ constexpr size_t EXPOHeaderSize = 0xA;
 constexpr size_t EXPOSize = 0x80;
 constexpr size_t EXPOProfileSize = 0x28;
 constexpr char EXPOHeaderMagic[] = { 0x45, 0x58, 0x50, 0x4F };
+constexpr char EXPORevision = 0x10;
+constexpr unsigned int expoProfile1EnableBit = 0;
+constexpr unsigned int expoProfile2EnableBit = 4;
+// Unkown bits, always seem enabled when the respective profile is enabled
+constexpr unsigned int expoProfile1UnkBit = 1;
+constexpr unsigned int expoProfile2UnkBit = 5;
 
 enum class FormFactor
 {
@@ -238,9 +244,9 @@ struct XMP_Struct {
 
 struct EXPO_HeaderStruct {
     unsigned char magic[4];
+    unsigned char revision; // 0x10
+    unsigned char profileEnableBits;
     unsigned char unk1;
-    unsigned char unk2;
-    unsigned char zero_6;
     unsigned char zero_7;
     unsigned char zero_8;
     unsigned char zero_9;

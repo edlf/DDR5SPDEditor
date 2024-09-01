@@ -254,6 +254,7 @@ void EXPO_Bundle::enableMagic() {
     expoStruct.header.magic[1] = EXPOHeaderMagic[1];
     expoStruct.header.magic[2] = EXPOHeaderMagic[2];
     expoStruct.header.magic[3] = EXPOHeaderMagic[3];
+    expoStruct.header.revision = EXPORevision;
 }
 
 void EXPO_Bundle::clearMagic() {
@@ -261,13 +262,33 @@ void EXPO_Bundle::clearMagic() {
     expoStruct.header.magic[1] = 0x00;
     expoStruct.header.magic[2] = 0x00;
     expoStruct.header.magic[3] = 0x00;
+    expoStruct.header.revision = 0x00;
 }
 
 bool EXPO_Bundle::isMagicPresent() {
     return (expoStruct.header.magic[0] == EXPOHeaderMagic[0] &&
             expoStruct.header.magic[1] == EXPOHeaderMagic[1] &&
             expoStruct.header.magic[2] == EXPOHeaderMagic[2] &&
-            expoStruct.header.magic[3] == EXPOHeaderMagic[3]);
+            expoStruct.header.magic[3] == EXPOHeaderMagic[3] &&
+            expoStruct.header.revision == EXPORevision);
+}
+
+const bool EXPO_Bundle::isEXPO1Enabled() {
+    return utilities::GetBit(expoStruct.header.profileEnableBits, expoProfile1EnableBit);
+}
+
+void EXPO_Bundle::setEXPO1Enabled(const bool value) {
+    utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile1EnableBit, value);
+    utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile1UnkBit, value);
+}
+
+const bool EXPO_Bundle::isEXPO2Enabled() {
+    return utilities::GetBit(expoStruct.header.profileEnableBits, expoProfile2EnableBit);
+}
+
+void EXPO_Bundle::setEXPO2Enabled(const bool value) {
+    utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile2EnableBit, value);
+    utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile2UnkBit, value);
 }
 
 const unsigned short EXPO_Bundle::getCRC() {

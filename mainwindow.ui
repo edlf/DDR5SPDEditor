@@ -11549,6 +11549,13 @@
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_EXPO1">
+            <item row="0" column="1">
+             <widget class="QLabel" name="lDMMc_EXPO1">
+              <property name="text">
+               <string>DIMMs per channel</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="2">
              <widget class="QComboBox" name="cbDimmPChannel_EXPO1">
               <item>
@@ -11573,10 +11580,10 @@
               </item>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="lDMMc_EXPO1">
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="cbEnabled_EXPO1">
               <property name="text">
-               <string>DIMMs per channel</string>
+               <string>Enabled</string>
               </property>
              </widget>
             </item>
@@ -12942,6 +12949,13 @@
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_EXPO2">
+            <item row="0" column="1">
+             <widget class="QLabel" name="lDMMc_EXPO2">
+              <property name="text">
+               <string>DIMMs per channel</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="2">
              <widget class="QComboBox" name="cbDimmPChannel_EXPO2">
               <item>
@@ -12966,10 +12980,10 @@
               </item>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="lDMMc_EXPO2">
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="cbEnabled_EXPO2">
               <property name="text">
-               <string>DIMMs per channel</string>
+               <string>Enabled</string>
               </property>
              </widget>
             </item>
