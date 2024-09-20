@@ -518,15 +518,28 @@ void XMP3_Bundle::setXMP3ProfileName(const std::string value) {
 void XMP3_Bundle::enableMagic() {
     xmpStruct.header.magic1 = XMPHeaderMagic[0];
     xmpStruct.header.magic2 = XMPHeaderMagic[1];
+    xmpStruct.header.version = XMPHeaderVersion;
 }
 
 void XMP3_Bundle::clearMagic() {
     xmpStruct.header.magic1 = 0x00;
     xmpStruct.header.magic2 = 0x00;
+    xmpStruct.header.version = 0x00;
 }
 
 bool XMP3_Bundle::isMagicPresent() {
-    return (xmpStruct.header.magic1 == XMPHeaderMagic[0] && xmpStruct.header.magic2 == XMPHeaderMagic[1]);
+    return ((xmpStruct.header.magic1 == XMPHeaderMagic[0]) &&
+            (xmpStruct.header.magic2 == XMPHeaderMagic[1]) &&
+            (xmpStruct.header.version == XMPHeaderVersion));
+}
+
+void XMP3_Bundle::resetXMPtoSample() {
+    wipe();
+    enableMagic();
+    profile1.resetProfile();
+    setXMP1ProfileName("Profile 1");
+    setXMP1Enabled(true);
+    fixCRCs();
 }
 
 const unsigned short XMP3_Bundle::getHeaderCRC() {

@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
 
     // XMP menu
+    connect(ui->actionCreate_XMP_Block, &QAction::triggered, this, &MainWindow::createXMPBlock);
     connect(ui->actionEnableXMPmagic, &QAction::triggered, this, &MainWindow::enableXMPMagicBits);
     connect(ui->actionDisableXMPmagic, &QAction::triggered, this, &MainWindow::disableXMPMagicBits);
     connect(ui->actionWipeXMPregion, &QAction::triggered, this, &MainWindow::wipeXMP);
@@ -56,6 +57,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionExportEXPOProfile2, &QAction::triggered, this, &MainWindow::exportEXPOProfile2);
     connect(ui->actionImportEXPOProfile1, &QAction::triggered, this, &MainWindow::importEXPOProfile1);
     connect(ui->actionImportEXPOProfile2, &QAction::triggered, this, &MainWindow::importEXPOProfile2);
+    connect(ui->actionCreate_EXPO_block, &QAction::triggered, this, &MainWindow::createEXPOBlock);
+    connect(ui->actionCopyXMP1ToExpo1, &QAction::triggered, this, &MainWindow::importEXPOProfile1FromXMP1);
+    connect(ui->actionCopyXMP2ToExpo1, &QAction::triggered, this, &MainWindow::importEXPOProfile1FromXMP2);
+    connect(ui->actionCopyXMPU2ToExpo1, &QAction::triggered, this, &MainWindow::importEXPOProfile1FromXMPU2);
+    connect(ui->actionCopyXMP1ToExpo2, &QAction::triggered, this, &MainWindow::importEXPOProfile2FromXMP1);
+    connect(ui->actionCopyXMP2ToExpo2, &QAction::triggered, this, &MainWindow::importEXPOProfile2FromXMP2);
+    connect(ui->actionCopyXMPU2ToExpo2, &QAction::triggered, this, &MainWindow::importEXPOProfile2FromXMPU2);
 }
 
 MainWindow::~MainWindow()
@@ -179,6 +187,12 @@ void MainWindow::closeFile(){
     }
 }
 
+void MainWindow::createXMPBlock() {
+    spd->xmpBundle.resetXMPtoSample();
+    reloadSPD();
+    reloadUI();
+}
+
 void MainWindow::wipeXMP() {
     spd->xmpBundle.wipe();
 
@@ -194,21 +208,16 @@ void MainWindow::wipeXMP() {
     toggleXMPUI(true, spd->isEXPOPresent());
 }
 
+void MainWindow::createEXPOBlock() {
+    spd->expoBundle.resetAndCreateSample();
+    reloadSPD();
+    reloadUI();
+}
+
 void MainWindow::wipeEXPO() {
     spd->expoBundle.wipe();
-
-    // Reload SPD
-    spd = new DDR5SPD(spd->spdStruct);
-
-    reloadXMP1Tab();
-    reloadXMP2Tab();
-    reloadXMP3Tab();
-    reloadXMPU1Tab();
-    reloadXMPU2Tab();
-    reloadEXPO1Tab();
-    reloadEXPO2Tab();
-
-    toggleXMPUI(true, spd->isEXPOPresent());
+    reloadSPD();
+    reloadUI();
 }
 
 EXPO_ProfileStruct MainWindow::importEXPOProfile() {
@@ -273,6 +282,132 @@ void MainWindow::exportEXPOProfile(const EXPO_ProfileStruct& expoProfile) {
                 tr("Failed to save file (read only?).") );
         }
     }
+}
+
+void MainWindow::importEXPOProfile1FromXMP1() {
+    if (spd == nullptr) {
+        return;
+    }
+
+    if (!spd->isEXPOPresent()) {
+        QMessageBox::critical(
+            this,
+            appName,
+            tr("EXPO is not present, please create EXPO block first.") );
+        return;
+    }
+
+    if (spd->xmpBundle.isXMP1Enabled()) {
+        spd->expoBundle.profile1.copyFromXMP(spd->xmpBundle.profile1.getCopy());
+    }
+
+    reloadSPD();
+    reloadUI();
+}
+
+void MainWindow::importEXPOProfile1FromXMP2() {
+    if (spd == nullptr) {
+        return;
+    }
+
+    if (!spd->isEXPOPresent()) {
+        QMessageBox::critical(
+            this,
+            appName,
+            tr("EXPO is not present, please create EXPO block first.") );
+        return;
+    }
+
+    if (spd->xmpBundle.isXMP2Enabled()) {
+        spd->expoBundle.profile1.copyFromXMP(spd->xmpBundle.profile2.getCopy());
+    }
+
+    reloadSPD();
+    reloadUI();
+}
+
+void MainWindow::importEXPOProfile1FromXMPU2() {
+    if (spd == nullptr) {
+        return;
+    }
+
+    if (!spd->isEXPOPresent()) {
+        QMessageBox::critical(
+            this,
+            appName,
+            tr("EXPO is not present, please create EXPO block first.") );
+        return;
+    }
+
+    if (spd->xmpBundle.isXMPUser2Present()) {
+        spd->expoBundle.profile1.copyFromXMP(spd->xmpBundle.profileUser2.getCopy());
+    }
+
+    reloadSPD();
+    reloadUI();
+}
+
+void MainWindow::importEXPOProfile2FromXMP1() {
+    if (spd == nullptr) {
+        return;
+    }
+
+    if (!spd->isEXPOPresent()) {
+        QMessageBox::critical(
+            this,
+            appName,
+            tr("EXPO is not present, please create EXPO block first.") );
+        return;
+    }
+
+    if (spd->xmpBundle.isXMP1Enabled()) {
+        spd->expoBundle.profile1.copyFromXMP(spd->xmpBundle.profile1.getCopy());
+    }
+
+    reloadSPD();
+    reloadUI();
+}
+
+void MainWindow::importEXPOProfile2FromXMP2() {
+    if (spd == nullptr) {
+        return;
+    }
+
+    if (!spd->isEXPOPresent()) {
+        QMessageBox::critical(
+            this,
+            appName,
+            tr("EXPO is not present, please create EXPO block first.") );
+        return;
+    }
+
+    if (spd->xmpBundle.isXMP2Enabled()) {
+        spd->expoBundle.profile1.copyFromXMP(spd->xmpBundle.profile2.getCopy());
+    }
+
+    reloadSPD();
+    reloadUI();
+}
+
+void MainWindow::importEXPOProfile2FromXMPU2() {
+    if (spd == nullptr) {
+        return;
+    }
+
+    if (!spd->isEXPOPresent()) {
+        QMessageBox::critical(
+            this,
+            appName,
+            tr("EXPO is not present, please create EXPO block first.") );
+        return;
+    }
+
+    if (spd->xmpBundle.isXMPUser2Present()) {
+        spd->expoBundle.profile1.copyFromXMP(spd->xmpBundle.profileUser2.getCopy());
+    }
+
+    reloadSPD();
+    reloadUI();
 }
 
 void MainWindow::exportEXPOProfile1() {
@@ -503,10 +638,14 @@ void MainWindow::importXMPProfileU2(){
 
 void MainWindow::enableXMPMagicBits() {
     spd->xmpBundle.enableMagic();
+    reloadSPD();
+    reloadUI();
 }
 
 void MainWindow::disableXMPMagicBits() {
     spd->xmpBundle.clearMagic();
+    reloadSPD();
+    reloadUI();
 }
 
 bool MainWindow::saveFileEnabled(){
@@ -529,6 +668,7 @@ void MainWindow::toggleUI(const bool status) {
     ui->actionDisableXMPmagic->setDisabled(disabled);
     ui->actionWipeXMPregion->setDisabled(disabled);
     ui->actionWipeEXPOregion->setDisabled(disabled);
+    ui->actionCreate_XMP_Block->setDisabled(disabled);
 }
 
 void MainWindow::toggleXMPUI(const bool status, const bool expoPresent) {
@@ -579,6 +719,13 @@ void MainWindow::toggleEXPOUI(const bool status) {
     ui->actionImportEXPOProfile1->setDisabled(disabled);
     ui->actionExportEXPOProfile2->setDisabled(disabled);
     ui->actionImportEXPOProfile2->setDisabled(disabled);
+
+    ui->actionCopyXMP1ToExpo1->setDisabled(disabled);
+    ui->actionCopyXMP2ToExpo1->setDisabled(disabled);
+    ui->actionCopyXMPU2ToExpo1->setDisabled(disabled);
+    ui->actionCopyXMP1ToExpo2->setDisabled(disabled);
+    ui->actionCopyXMP2ToExpo2->setDisabled(disabled);
+    ui->actionCopyXMPU2ToExpo2->setDisabled(disabled);
 }
 
 void MainWindow::disableUI() {
@@ -596,6 +743,26 @@ void MainWindow::enableUI() {
     // Menus
     toggleUI(true);
 
+    reloadXMP_EXPO();
+
+    // Go to JEDEC tab
+    ui->tabJEDEC->activateWindow();
+}
+
+void MainWindow::reloadSPD() {
+    if (spd == nullptr) {
+        return;
+    }
+
+    // Reload SPD
+    spd = new DDR5SPD(spd->spdStruct);
+}
+
+void MainWindow::reloadXMP_EXPO() {
+    if (spd == nullptr) {
+        return;
+    }
+
     if (spd->isXMPPresent())
     {
         toggleXMPUI(true, spd->isEXPOPresent());
@@ -605,9 +772,6 @@ void MainWindow::enableUI() {
     {
         toggleEXPOUI(true);
     }
-
-    // Go to JEDEC tab
-    ui->tabJEDEC->activateWindow();
 }
 
 void MainWindow::clearUI() {
@@ -1558,6 +1722,8 @@ void MainWindow::reloadUI(){
     if (spd == nullptr) {
         return;
     }
+
+    reloadXMP_EXPO();
 
     reloadJEDECTab();
     reloadXMP1Tab();
@@ -3077,32 +3243,6 @@ XMP_ProfileStruct MainWindow::importXMPProfileFromEXPO(const EXPO_ProfileStruct&
     // setDimmsChannel(1);
     // result.commandRate = CommandRate::_2n;
 
-    return result;
-}
-
-EXPO_ProfileStruct MainWindow::importEXPOProfileFromXMP(const XMP_ProfileStruct& xmp) {
-    EXPO_ProfileStruct result;
-    result.vdd = xmp.vdd;
-    result.vddq = xmp.vddq;
-    result.vpp = xmp.vpp;
-    result.minCycleTime = xmp.minCycleTime;
-    result.tAA = xmp.tAA;
-    result.tRCD = xmp.tRCD;
-    result.tRP = xmp.tRP;
-    result.tRAS = xmp.tRAS;
-    result.tRC = xmp.tRC;
-    result.tWR = xmp.tWR;
-    result.tRFC1 = xmp.tRFC1;
-    result.tRFC2 = xmp.tRFC2;
-    result.tRFC = xmp.tRFC;
-    result.tRRD_L = xmp.tRRD_L;
-    result.tCCD_L = xmp.tCCD_L;
-    result.tCCD_L_WR = xmp.tCCD_L_WR;
-    result.tCCD_L_WR2 = xmp.tCCD_L_WR2;
-    result.tFAW = xmp.tFAW;
-    result.tCCD_L_WTR = xmp.tCCD_L_WTR;
-    result.tCCD_S_WTR = xmp.tCCD_S_WTR;
-    result.tRTP = xmp.tRTP;
     return result;
 }
 

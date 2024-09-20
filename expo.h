@@ -87,6 +87,7 @@ public:
 
     void wipeProfile();
     void resetProfile();
+    void copyFromXMP(const XMP_ProfileStruct& xmpProfile);
 
     const bool hasData();
 
@@ -116,6 +117,7 @@ public:
 
     void fixCRC();
 
+    void resetAndCreateSample();
     void wipe();
 
     EXPO_Profile profile1;

@@ -14717,6 +14717,7 @@
     <addaction name="actionEnableXMPmagic"/>
     <addaction name="actionDisableXMPmagic"/>
     <addaction name="separator"/>
+    <addaction name="actionCreate_XMP_Block"/>
     <addaction name="actionWipeXMPregion"/>
     <addaction name="menuWipe_profile"/>
     <addaction name="separator"/>
@@ -14742,9 +14743,32 @@
      <addaction name="actionExportEXPOProfile1"/>
      <addaction name="actionExportEXPOProfile2"/>
     </widget>
-    <addaction name="actionWipeEXPOregion"/>
+    <widget class="QMenu" name="menuCopy_XMP_Profile_to_EXPO">
+     <property name="title">
+      <string>Copy XMP Profile to EXPO 1</string>
+     </property>
+     <addaction name="separator"/>
+     <addaction name="separator"/>
+     <addaction name="actionCopyXMP1ToExpo1"/>
+     <addaction name="actionCopyXMP2ToExpo1"/>
+     <addaction name="actionCopyXMPU2ToExpo1"/>
+    </widget>
+    <widget class="QMenu" name="menuCopy_XMP_Profile_to_EXPO_2">
+     <property name="title">
+      <string>Copy XMP Profile to EXPO 2</string>
+     </property>
+     <addaction name="actionCopyXMP1ToExpo2"/>
+     <addaction name="actionCopyXMP2ToExpo2"/>
+     <addaction name="actionCopyXMPU2ToExpo2"/>
+    </widget>
     <addaction name="menuImport_EXPO_profile_to"/>
     <addaction name="menuExport_EXPO_profile"/>
+    <addaction name="separator"/>
+    <addaction name="actionCreate_EXPO_block"/>
+    <addaction name="actionWipeEXPOregion"/>
+    <addaction name="separator"/>
+    <addaction name="menuCopy_XMP_Profile_to_EXPO"/>
+    <addaction name="menuCopy_XMP_Profile_to_EXPO_2"/>
    </widget>
    <addaction name="menuasdas"/>
    <addaction name="menuXMP"/>
@@ -14888,7 +14912,7 @@
   </action>
   <action name="actionWipeEXPOregion">
    <property name="text">
-    <string>Wipe EXPO</string>
+    <string>Wipe EXPO block</string>
    </property>
   </action>
   <action name="actionImportEXPOProfile1">
@@ -14909,6 +14933,52 @@
   <action name="actionExportEXPOProfile2">
    <property name="text">
     <string>EXPO2</string>
+   </property>
+  </action>
+  <action name="actionCreate_EXPO_block">
+   <property name="text">
+    <string>Create EXPO block</string>
+   </property>
+   <property name="toolTip">
+    <string>Wipes existent EXPO block</string>
+   </property>
+  </action>
+  <action name="actionCopyXMP1ToExpo1">
+   <property name="text">
+    <string>XMP1</string>
+   </property>
+  </action>
+  <action name="actionCopyXMP2ToExpo1">
+   <property name="text">
+    <string>XMP2</string>
+   </property>
+  </action>
+  <action name="actionCopyXMPU2ToExpo1">
+   <property name="text">
+    <string>User profile 2</string>
+   </property>
+  </action>
+  <action name="actionCopyXMP1ToExpo2">
+   <property name="text">
+    <string>XMP1</string>
+   </property>
+  </action>
+  <action name="actionCopyXMP2ToExpo2">
+   <property name="text">
+    <string>XMP2</string>
+   </property>
+  </action>
+  <action name="actionCopyXMPU2ToExpo2">
+   <property name="text">
+    <string>User profile 2</string>
+   </property>
+  </action>
+  <action name="actionCreate_XMP_Block">
+   <property name="text">
+    <string>Create XMP Block</string>
+   </property>
+   <property name="toolTip">
+    <string>Wipes existent XMP Block</string>
    </property>
   </action>
  </widget>

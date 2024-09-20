@@ -175,7 +175,7 @@ unsigned char ConvertVoltageToByteDDR5(unsigned char voltage)
     return ((ones << 5) + (hundredths / 5));
 }
 
-unsigned char SetBit(unsigned char bits, unsigned short bitNumber, bool value)
+void SetBit(unsigned char& bits, const unsigned short bitNumber, const bool value)
 {
     if (value)
     {
@@ -185,8 +185,6 @@ unsigned char SetBit(unsigned char bits, unsigned short bitNumber, bool value)
     {
         bits &= (0xFF ^ (1 << bitNumber));
     }
-
-    return bits;
 }
 
 bool GetBit(unsigned char bits, unsigned short bitNumber) {

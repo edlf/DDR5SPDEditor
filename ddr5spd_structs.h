@@ -19,6 +19,7 @@ constexpr size_t XMPProfileSize = 0x40;
 constexpr size_t maxXmpProfileName = 16;
 
 constexpr char XMPHeaderMagic[] = { 0x0C, 0x4A };
+constexpr char XMPHeaderVersion = 0x30;
 constexpr unsigned int xmpProfile1EnableBit = 0;
 constexpr unsigned int xmpProfile2EnableBit = 1;
 constexpr unsigned int xmpProfile3EnableBit = 2;
@@ -246,7 +247,7 @@ struct EXPO_HeaderStruct {
     unsigned char magic[4];
     unsigned char revision; // 0x10
     unsigned char profileEnableBits;
-    unsigned char unk1;
+    unsigned char profileEnableBits2;
     unsigned char zero_7;
     unsigned char zero_8;
     unsigned char zero_9;

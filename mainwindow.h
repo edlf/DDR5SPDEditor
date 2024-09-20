@@ -31,6 +31,7 @@ private slots:
     bool closeFileEnabled();
     void exit();
 
+    void createXMPBlock();
     void wipeXMP();
     void wipeXMPProfile1();
     void wipeXMPProfile2();
@@ -62,14 +63,20 @@ private slots:
     void enableXMPMagicBits();
     void disableXMPMagicBits();
 
+    void createEXPOBlock();
     void wipeEXPO();
     void exportEXPOProfile(const EXPO_ProfileStruct&);
     EXPO_ProfileStruct importEXPOProfile();
-    EXPO_ProfileStruct importEXPOProfileFromXMP(const XMP_ProfileStruct&);
     void exportEXPOProfile1();
     void exportEXPOProfile2();
     void importEXPOProfile1();
     void importEXPOProfile2();
+    void importEXPOProfile1FromXMP1();
+    void importEXPOProfile1FromXMP2();
+    void importEXPOProfile1FromXMPU2();
+    void importEXPOProfile2FromXMP1();
+    void importEXPOProfile2FromXMP2();
+    void importEXPOProfile2FromXMPU2();
 
     void reloadUI();
     void reloadJEDECTab();
@@ -620,6 +627,8 @@ private:
     void toggleUI(const bool);
     void toggleXMPUI(const bool, const bool);
     void toggleEXPOUI(const bool);
+    void reloadSPD();
+    void reloadXMP_EXPO();
 
     unsigned short minCycle;
 

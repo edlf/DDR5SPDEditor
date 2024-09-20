@@ -169,6 +169,7 @@ public:
     void enableMagic();
     void clearMagic();
     bool isMagicPresent();
+    void resetXMPtoSample();
 
     const unsigned short getHeaderCRC();
     void setHeaderCRC(const unsigned short);

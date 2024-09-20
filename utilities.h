@@ -18,7 +18,7 @@ unsigned short ConvertByteToVoltageDDR5(unsigned char val);
 
 unsigned char ConvertVoltageToByteDDR5(unsigned char voltage);
 
-unsigned char SetBit(unsigned char bits, unsigned short bitNumber, bool value);
+void SetBit(unsigned char& bits, const unsigned short bitNumber, const bool value);
 
 bool GetBit(unsigned char bits, unsigned short bitNumber);
 

@@ -229,6 +229,34 @@ void EXPO_Profile::resetProfile() {
     setDimmsChannel(1);
 }
 
+void EXPO_Profile::copyFromXMP(const XMP_ProfileStruct& xmpProfile) {
+    wipeProfile();
+
+    // Copy fields over
+    setVPP(xmpProfile.vpp);
+    setVDD(xmpProfile.vdd);
+    setVDDQ(xmpProfile.vddq);
+    setMinCycleTime(xmpProfile.minCycleTime);
+    settAA(xmpProfile.tAA);
+    settRCD(xmpProfile.tRCD);
+    settRP(xmpProfile.tRP);
+    settRAS(xmpProfile.tRAS);
+    settRC(xmpProfile.tRC);
+    settWR(xmpProfile.tWR);
+    settRFC1(xmpProfile.tRFC1);
+    settRFC2(xmpProfile.tRFC2);
+    settRFC(xmpProfile.tRFC);
+    settRRD_L(xmpProfile.tRRD_L);
+    settCCD_L_WR(xmpProfile.tCCD_L_WR);
+    settCCD_L_WR2(xmpProfile.tCCD_L_WR2);
+    settCCD_L_WTR(xmpProfile.tCCD_L_WTR);
+    settCCD_S_WTR(xmpProfile.tCCD_S_WTR);
+    settCCD_L(xmpProfile.tCCD_L);
+    settRTP(xmpProfile.tRTP);
+    settFAW(xmpProfile.tFAW);
+    setDimmsChannel(1);
+}
+
 const bool EXPO_Profile::hasData() {
     unsigned int  crc = utilities::Crc16(reinterpret_cast<unsigned char*>(&expoProfileStruct), sizeof(EXPO_ProfileStruct) - 2);
     return crc != 0x0;
@@ -280,6 +308,7 @@ const bool EXPO_Bundle::isEXPO1Enabled() {
 void EXPO_Bundle::setEXPO1Enabled(const bool value) {
     utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile1EnableBit, value);
     utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile1UnkBit, value);
+    utilities::SetBit(expoStruct.header.profileEnableBits2, expoProfile1EnableBit, value);
 }
 
 const bool EXPO_Bundle::isEXPO2Enabled() {
@@ -289,6 +318,7 @@ const bool EXPO_Bundle::isEXPO2Enabled() {
 void EXPO_Bundle::setEXPO2Enabled(const bool value) {
     utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile2EnableBit, value);
     utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile2UnkBit, value);
+    utilities::SetBit(expoStruct.header.profileEnableBits2, expoProfile2EnableBit, value);
 }
 
 const unsigned short EXPO_Bundle::getCRC() {
@@ -302,6 +332,14 @@ void EXPO_Bundle::setCRC(const unsigned short value) {
 void EXPO_Bundle::fixCRC() {
     unsigned int  crc = utilities::Crc16(reinterpret_cast<unsigned char*>(&expoStruct), sizeof(EXPO_Struct) - 2);
     setCRC(crc);
+}
+
+void EXPO_Bundle::resetAndCreateSample() {
+    wipe();
+    enableMagic();
+    profile1.resetProfile();
+    setEXPO1Enabled(true);
+    fixCRC();
 }
 
 void EXPO_Bundle::wipe() {
