@@ -1874,7 +1874,7 @@
           <property name="title">
            <string>Timings</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_8">
+          <widget class="QWidget" name="gridLayoutWidget_XMP1">
            <property name="geometry">
             <rect>
              <x>10</x>
@@ -1883,7 +1883,7 @@
              <height>281</height>
             </rect>
            </property>
-           <layout class="QGridLayout" name="gridLayout_6">
+           <layout class="QGridLayout" name="gridLayout_XMP1">
             <property name="horizontalSpacing">
              <number>8</number>
             </property>
@@ -11454,7 +11454,7 @@
           <property name="title">
            <string>Voltages</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_35">
+          <widget class="QWidget" name="gridLayoutWidget_EXPO1_1">
            <property name="geometry">
             <rect>
              <x>10</x>
@@ -11539,7 +11539,7 @@
           <property name="title">
            <string>Profile</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_36">
+          <widget class="QWidget" name="gridLayoutWidget_EXPO1_2">
            <property name="geometry">
             <rect>
              <x>10</x>
@@ -11602,7 +11602,7 @@
           <property name="title">
            <string>Frequency</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_37">
+          <widget class="QWidget" name="gridLayoutWidget_EXPO1_3">
            <property name="geometry">
             <rect>
              <x>10</x>
@@ -11672,7 +11672,7 @@
           <property name="title">
            <string>Timings</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_8">
+          <widget class="QWidget" name="gridLayoutWidget_EXPO1_4">
            <property name="geometry">
             <rect>
              <x>10</x>
@@ -11681,7 +11681,7 @@
              <height>281</height>
             </rect>
            </property>
-           <layout class="QGridLayout" name="gridLayout_6">
+           <layout class="QGridLayout" name="gridLayout_EXPO1">
             <property name="horizontalSpacing">
              <number>8</number>
             </property>
@@ -12854,7 +12854,7 @@
           <property name="title">
            <string>Voltages</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_35">
+          <widget class="QWidget" name="gridLayoutWidget_EXPO2_1">
            <property name="geometry">
             <rect>
              <x>10</x>
@@ -12939,7 +12939,7 @@
           <property name="title">
            <string>Profile</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_36">
+          <widget class="QWidget" name="gridLayoutWidget_EXPO2_2">
            <property name="geometry">
             <rect>
              <x>10</x>
@@ -13002,7 +13002,7 @@
           <property name="title">
            <string>Frequency</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_37">
+          <widget class="QWidget" name="gridLayoutWidget_EXPO2_3">
            <property name="geometry">
             <rect>
              <x>10</x>
@@ -13072,7 +13072,7 @@
           <property name="title">
            <string>Timings</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_8">
+          <widget class="QWidget" name="gridLayoutWidget_EXPO2_4">
            <property name="geometry">
             <rect>
              <x>10</x>
@@ -13081,7 +13081,7 @@
              <height>281</height>
             </rect>
            </property>
-           <layout class="QGridLayout" name="gridLayout_6">
+           <layout class="QGridLayout" name="gridLayout_EXPO2">
             <property name="horizontalSpacing">
              <number>8</number>
             </property>
