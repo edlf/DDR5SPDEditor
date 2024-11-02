@@ -39,38 +39,46 @@ constexpr unsigned int expoProfile2EnableBit = 4;
 constexpr unsigned int expoProfile1UnkBit = 1;
 constexpr unsigned int expoProfile2UnkBit = 5;
 
-enum class FormFactor
+// 4 bits
+enum class FormFactor : unsigned char
 {
-    Reserved,
-    RDIMM,
-    UDIMM,
-    SODIMM,
-    LRDIMM,
-    CUDIMM,
-    CSODIMM,
-    MRDIMM,
-    CAMM2,
-    Reserved_9,
-    DDIMM,
-    Solder_down,
-    Reserved_12,
-    Reserved_13,
-    Reserved_14,
-    Reserved_15
+    Reserved = 0x0,
+    RDIMM = 0x1,
+    UDIMM = 0x2,
+    SODIMM = 0x3,
+    LRDIMM = 0x4,
+    CUDIMM = 0x5,
+    CSODIMM = 0x6,
+    MRDIMM = 0x7,
+    CAMM2 = 0x8,
+    Reserved_9 = 0x9,
+    DDIMM = 0xA,
+    Solder_down = 0xB,
+    Reserved_12 = 0xC,
+    Reserved_13 = 0xD,
+    Reserved_14 = 0xE,
+    Reserved_15 = 0xF
 };
 
-enum class Density
+enum class ModuleType : unsigned char
 {
-    _0Gb,
-    _4Gb,
-    _8Gb,
-    _12Gb,
-    _16Gb,
-    _24Gb,
-    _32Gb,
-    _48Gb,
-    _64Gb,
-    Count
+    UnbufferedDIMM = 0x02,
+    SO_DIMM = 0x03,
+    LRDIMM = 0x04
+};
+
+// 4 bits
+enum class Density : unsigned char
+{
+    _0Gb = 0x0,
+    _4Gb = 0x1,
+    _8Gb = 0x2,
+    _12Gb = 0x3,
+    _16Gb = 0x4,
+    _24Gb = 0x5,
+    _32Gb = 0x6,
+    _48Gb = 0x7,
+    _64Gb = 0x8
 };
 
 enum class CommandRate
@@ -81,17 +89,17 @@ enum class CommandRate
     _3n
 };
 
-enum class OperatingTemperatureRange
+enum class OperatingTemperatureRange : unsigned char
 {
-    A1T,
-    A2T,
-    A3T,
-    IT,
-    ST,
-    ET,
-    RT,
-    NT,
-    XT
+    A1T = 0x0,
+    A2T = 0x1,
+    A3T = 0x2,
+    IT = 0x3,
+    ST = 0x4,
+    ET = 0x5,
+    RT = 0x6,
+    NT = 0x7,
+    XT = 0x8
 };
 
 static constexpr std::array<Density, 9> densityMap {
@@ -310,7 +318,7 @@ struct SPD_Struct {
     unsigned char bytesUsed;
     unsigned char revision_BaseConfig;
     unsigned char memoryType; // 12 = DDR5
-    unsigned char moduleType; // 0x02 = Unbuffered DIMM, 0x03 = SO-DIMM, 0x04=LRDIMM (only bits 3-0 are used)
+    unsigned char moduleType; // only bits 3-0 are used
     // Byte 4-7 First Density/Package
     unsigned char firstDensityPackage;
     unsigned char firstAddressing;
