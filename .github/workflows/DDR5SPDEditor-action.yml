@@ -69,7 +69,7 @@ jobs:
         submodules: 'recursive'
 
     - name: Configure CMake project
-      run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} ${{ env.extra_flags }}
+      run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DBUILD_SHARED_LIBS=OFF ${{ env.extra_flags }}
       env:
         CXX: ${{ matrix.sys.cxx }}
         CC: ${{ matrix.sys.cxx == 'g++-13' && 'gcc-13' || 'gcc' }}
