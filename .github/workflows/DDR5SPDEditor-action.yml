@@ -90,6 +90,12 @@ jobs:
         binary_orig: 'DDR5SPDEditor'
         is_windows_build: ${{ startsWith( matrix.sys.os, 'windows' ) && 'true' || 'false' }}
 
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: build/${{ matrix.sys.release_name }}
+
     - name: Make and upload release
       uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/') && matrix.sys.release_name != ''
