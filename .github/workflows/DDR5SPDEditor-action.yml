@@ -91,7 +91,7 @@ jobs:
         is_windows_build: ${{ startsWith( matrix.sys.os, 'windows' ) && 'true' || 'false' }}
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: build-artifacts
         path: build/${{ matrix.sys.release_name }}
