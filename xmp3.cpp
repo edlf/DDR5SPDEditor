@@ -299,20 +299,23 @@ const CommandRate XMP3_Profile::getCommandRate() {
 
     CommandRate val = CommandRate::Undefined;
     switch (index) {
-        case 1:
-            val = CommandRate::_1n;
-            break;
+    case 0:
+        val = CommandRate::Undefined;
+        break;
+    case 1:
+        val = CommandRate::_1n;
+        break;
 
-        case 2:
-            val = CommandRate::_2n;
-            break;
+    case 2:
+        val = CommandRate::_2n;
+        break;
 
-        case 3:
-            val = CommandRate::_3n;
-            break;
+    case 3:
+        val = CommandRate::_3n;
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     return val;
@@ -320,21 +323,25 @@ const CommandRate XMP3_Profile::getCommandRate() {
 
 void XMP3_Profile::setCommandRate(const CommandRate cr) {
     switch (cr) {
-        case CommandRate::_1n:
-            xmpProfileStruct.commandRate = ((xmpProfileStruct.commandRate & 0xF0) | (1 & 0xF));
-            break;
+    case CommandRate::Undefined:
+        xmpProfileStruct.commandRate = ((xmpProfileStruct.commandRate & 0xF0) | (0 & 0xF));
+        break;
 
-        case CommandRate::_2n:
-            xmpProfileStruct.commandRate = ((xmpProfileStruct.commandRate & 0xF0) | (2 & 0xF));
-            break;
+    case CommandRate::_1n:
+        xmpProfileStruct.commandRate = ((xmpProfileStruct.commandRate & 0xF0) | (1 & 0xF));
+        break;
 
-        case CommandRate::_3n:
-            xmpProfileStruct.commandRate = ((xmpProfileStruct.commandRate & 0xF0) | (3 & 0xF));
-            break;
+    case CommandRate::_2n:
+        xmpProfileStruct.commandRate = ((xmpProfileStruct.commandRate & 0xF0) | (2 & 0xF));
+        break;
 
-        default:
-            xmpProfileStruct.commandRate = ((xmpProfileStruct.commandRate & 0xF0) | (0 & 0xF));
-            break;
+    case CommandRate::_3n:
+        xmpProfileStruct.commandRate = ((xmpProfileStruct.commandRate & 0xF0) | (3 & 0xF));
+        break;
+
+    default:
+        xmpProfileStruct.commandRate = ((xmpProfileStruct.commandRate & 0xF0) | (0 & 0xF));
+        break;
     }
 }
 
