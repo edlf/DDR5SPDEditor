@@ -127,11 +127,14 @@ public:
     static bool isXMPPresentStatic(const SPD_Struct&);
     static bool isEXPOPresentStatic(const SPD_Struct&);
 
-    const char * const getPointerToStruct();
+    const QByteArray getBytes();
     DDR5SPD(SPD_Struct);
+    DDR5SPD(SPD_Struct, QByteArray);
 
     XMP3_Bundle xmpBundle;
     EXPO_Bundle expoBundle;
+
+    QByteArray extraBytes;
 };
 
 #endif // DDR5SPD_H

@@ -87,11 +87,25 @@ void MainWindow::openFile(){
                 tr("Failed to load file.") );
         }
 
-        if (file.size() != ddr5_structs::eepromSize) {
+        size_t expectedBytes = 0;
+
+        size_t fileSize = file.size();
+
+        switch (file.size()) {
+        // Regular 1K eeprom size
+        case ddr5_structs::eepromBaseSize:
+            expectedBytes = ddr5_structs::eepromBaseSize;
+            break;
+        // CUDIMM 2K size?
+        case ddr5_structs::eepromExtendedSize:
+            expectedBytes = ddr5_structs::eepromExtendedSize;
+            break;
+        default:
             QMessageBox::critical(
                 this,
                 appName,
                 tr("Invalid SPD file size.") );
+            break;
         }
 
         QByteArray contents = file.readAll();
@@ -100,7 +114,7 @@ void MainWindow::openFile(){
             delete(spd);
         }
 
-        if (contents.length() != ddr5_structs::eepromSize) {
+        if (contents.length() != expectedBytes) {
             QMessageBox::critical(
                 this,
                 appName,
@@ -109,7 +123,8 @@ void MainWindow::openFile(){
         }
 
         // TODO: Find proper way to do this
-        ddr5_structs::SPD_Struct rawSPD = *reinterpret_cast<ddr5_structs::SPD_Struct*>(contents.data());
+        QByteArray spdRawBytes = contents.sliced(0x0, ddr5_structs::eepromBaseSize);
+        ddr5_structs::SPD_Struct rawSPD = *reinterpret_cast<ddr5_structs::SPD_Struct*>(spdRawBytes.data());
 
         if (rawSPD.memoryType != 0x12) {
             QMessageBox::critical(
@@ -119,15 +134,47 @@ void MainWindow::openFile(){
             return;
         }
 
-        if (!(rawSPD.moduleType == 0x02 || rawSPD.moduleType == 0x03)) {
+        switch (rawSPD.moduleType) {
+        case 0x02: // ModuleType::UnbufferedDIMM
+            break;
+
+        case 0x03: // ModuleType::SO_DIMM
+            break;
+
+        case 0x05: // ModuleType::CUDIMM
             QMessageBox::warning(
                 this,
                 appName,
-                tr("Untested module type, only UDIMM or SODIMM memory has been tested.") );
-            return;
+                tr("CUDIMM detected. High change this will mangle your SPD!") );
+            break;
+
+        default:
+            QMessageBox::warning(
+                this,
+                appName,
+                tr("Untested module type, only UDIMM or SODIMM memory has been tested.\nHigh change this will mangle your SPD!") );
+            break;
         }
 
-        spd = new DDR5SPD(rawSPD);
+        QByteArray extraData;
+
+        switch (expectedBytes) {
+        // Regular 1K eeprom size
+        case ddr5_structs::eepromBaseSize:
+            spd = new DDR5SPD(rawSPD);
+            break;
+        // 2K EEPROM keep bytes past 0x400
+        case ddr5_structs::eepromExtendedSize:
+            extraData = contents.sliced(ddr5_structs::eepromBaseSize, ddr5_structs::eepromBaseSize);
+            spd = new DDR5SPD(rawSPD, extraData);
+            break;
+        default:
+            QMessageBox::critical(
+                this,
+                appName,
+                tr("Should never happen..") );
+            break;
+        }
 
         if (!spd->isCRCValid()) {
             QMessageBox::warning(
@@ -166,7 +213,8 @@ void MainWindow::saveFile(){
             }
 
             if (file.isWritable()) {
-                file.write(spd->getPointerToStruct(), ddr5_structs::eepromSize);
+                QByteArray bytes = spd->getBytes();
+                file.write(bytes, bytes.length());
                 file.close();
             } else {
                 QMessageBox::critical(
@@ -984,18 +1032,22 @@ void MainWindow::reloadXMP1Tab() {
     ui->cbRealTimeMemOC_XMP1->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
 
     switch (xmp_profile.getCommandRate()) {
-        default:
-        case CommandRate::_1n:
-            ui->cbCommandRate_XMP1->setCurrentIndex(1);
-            break;
+    default:
+    case CommandRate::Undefined:
+        ui->cbCommandRate_XMP1->setCurrentIndex(0);
+        break;
 
-        case CommandRate::_2n:
-            ui->cbCommandRate_XMP1->setCurrentIndex(2);
-            break;
+    case CommandRate::_1n:
+        ui->cbCommandRate_XMP1->setCurrentIndex(1);
+        break;
 
-        case CommandRate::_3n:
-            ui->cbCommandRate_XMP1->setCurrentIndex(3);
-            break;
+    case CommandRate::_2n:
+        ui->cbCommandRate_XMP1->setCurrentIndex(2);
+        break;
+
+    case CommandRate::_3n:
+        ui->cbCommandRate_XMP1->setCurrentIndex(3);
+        break;
     }
 
     // Voltages
@@ -1110,17 +1162,21 @@ void MainWindow::reloadXMP2Tab() {
 
     switch (xmp_profile.getCommandRate()) {
     default:
+    case CommandRate::Undefined:
+        ui->cbCommandRate_XMP2->setCurrentIndex(0);
+        break;
+
     case CommandRate::_1n:
-            ui->cbCommandRate_XMP2->setCurrentIndex(1);
-            break;
+        ui->cbCommandRate_XMP2->setCurrentIndex(1);
+        break;
 
     case CommandRate::_2n:
-            ui->cbCommandRate_XMP2->setCurrentIndex(2);
-            break;
+        ui->cbCommandRate_XMP2->setCurrentIndex(2);
+        break;
 
     case CommandRate::_3n:
-            ui->cbCommandRate_XMP2->setCurrentIndex(3);
-            break;
+        ui->cbCommandRate_XMP2->setCurrentIndex(3);
+        break;
     }
 
     // Voltages
@@ -1239,17 +1295,21 @@ void MainWindow::reloadXMP3Tab() {
 
     switch (xmp_profile.getCommandRate()) {
     default:
+    case CommandRate::Undefined:
+        ui->cbCommandRate_XMP3->setCurrentIndex(0);
+        break;
+
     case CommandRate::_1n:
-            ui->cbCommandRate_XMP3->setCurrentIndex(1);
-            break;
+        ui->cbCommandRate_XMP3->setCurrentIndex(1);
+        break;
 
     case CommandRate::_2n:
-            ui->cbCommandRate_XMP3->setCurrentIndex(2);
-            break;
+        ui->cbCommandRate_XMP3->setCurrentIndex(2);
+        break;
 
     case CommandRate::_3n:
-            ui->cbCommandRate_XMP3->setCurrentIndex(3);
-            break;
+        ui->cbCommandRate_XMP3->setCurrentIndex(3);
+        break;
     }
 
     // Voltages
@@ -1364,17 +1424,20 @@ void MainWindow::reloadXMPU1Tab() {
 
     switch (xmp_profile.getCommandRate()) {
     default:
+    case CommandRate::Undefined:
+        ui->cbCommandRate_XMPU1->setCurrentIndex(0);
+        break;
     case CommandRate::_1n:
-            ui->cbCommandRate_XMPU1->setCurrentIndex(1);
-            break;
+        ui->cbCommandRate_XMPU1->setCurrentIndex(1);
+        break;
 
     case CommandRate::_2n:
-            ui->cbCommandRate_XMPU1->setCurrentIndex(2);
-            break;
+        ui->cbCommandRate_XMPU1->setCurrentIndex(2);
+        break;
 
     case CommandRate::_3n:
-            ui->cbCommandRate_XMPU1->setCurrentIndex(3);
-            break;
+        ui->cbCommandRate_XMPU1->setCurrentIndex(3);
+        break;
     }
 
     // Voltages
@@ -1485,17 +1548,21 @@ void MainWindow::reloadXMPU2Tab() {
 
     switch (xmp_profile.getCommandRate()) {
     default:
+    case CommandRate::Undefined:
+        ui->cbCommandRate_XMPU2->setCurrentIndex(0);
+        break;
+
     case CommandRate::_1n:
-            ui->cbCommandRate_XMPU2->setCurrentIndex(1);
-            break;
+        ui->cbCommandRate_XMPU2->setCurrentIndex(1);
+        break;
 
     case CommandRate::_2n:
-            ui->cbCommandRate_XMPU2->setCurrentIndex(2);
-            break;
+        ui->cbCommandRate_XMPU2->setCurrentIndex(2);
+        break;
 
     case CommandRate::_3n:
-            ui->cbCommandRate_XMPU2->setCurrentIndex(3);
-            break;
+        ui->cbCommandRate_XMPU2->setCurrentIndex(3);
+        break;
     }
 
     // Voltages
@@ -1945,22 +2012,22 @@ void MainWindow::on_spinMinCycleTime_XMP1_editingFinished()
 void MainWindow::on_cbCommandRate_XMP1_currentIndexChanged(int index)
 {
     switch (index) {
-        default:
-        case 0:
-            spd->xmpBundle.profile1.setCommandRate(CommandRate::Undefined);
-            break;
+    default:
+    case 0:
+        spd->xmpBundle.profile1.setCommandRate(CommandRate::Undefined);
+        break;
 
-        case 1:
-            spd->xmpBundle.profile1.setCommandRate(CommandRate::_1n);
-            break;
+    case 1:
+        spd->xmpBundle.profile1.setCommandRate(CommandRate::_1n);
+        break;
 
-        case 2:
-            spd->xmpBundle.profile1.setCommandRate(CommandRate::_2n);
-            break;
+    case 2:
+        spd->xmpBundle.profile1.setCommandRate(CommandRate::_2n);
+        break;
 
-        case 3:
-            spd->xmpBundle.profile1.setCommandRate(CommandRate::_3n);
-            break;
+    case 3:
+        spd->xmpBundle.profile1.setCommandRate(CommandRate::_3n);
+        break;
     }
 }
 
@@ -2166,20 +2233,20 @@ void MainWindow::on_cbCommandRate_XMP2_currentIndexChanged(int index)
     switch (index) {
     default:
     case 0:
-            spd->xmpBundle.profile2.setCommandRate(CommandRate::Undefined);
-            break;
+        spd->xmpBundle.profile2.setCommandRate(CommandRate::Undefined);
+        break;
 
     case 1:
-            spd->xmpBundle.profile2.setCommandRate(CommandRate::_1n);
-            break;
+        spd->xmpBundle.profile2.setCommandRate(CommandRate::_1n);
+        break;
 
     case 2:
-            spd->xmpBundle.profile2.setCommandRate(CommandRate::_2n);
-            break;
+        spd->xmpBundle.profile2.setCommandRate(CommandRate::_2n);
+        break;
 
     case 3:
-            spd->xmpBundle.profile2.setCommandRate(CommandRate::_3n);
-            break;
+        spd->xmpBundle.profile2.setCommandRate(CommandRate::_3n);
+        break;
     }
 }
 
@@ -2385,20 +2452,20 @@ void MainWindow::on_cbCommandRate_XMP3_currentIndexChanged(int index)
     switch (index) {
     default:
     case 0:
-            spd->xmpBundle.profile3.setCommandRate(CommandRate::Undefined);
-            break;
+        spd->xmpBundle.profile3.setCommandRate(CommandRate::Undefined);
+        break;
 
     case 1:
-            spd->xmpBundle.profile3.setCommandRate(CommandRate::_1n);
-            break;
+        spd->xmpBundle.profile3.setCommandRate(CommandRate::_1n);
+        break;
 
     case 2:
-            spd->xmpBundle.profile3.setCommandRate(CommandRate::_2n);
-            break;
+        spd->xmpBundle.profile3.setCommandRate(CommandRate::_2n);
+        break;
 
     case 3:
-            spd->xmpBundle.profile3.setCommandRate(CommandRate::_3n);
-            break;
+        spd->xmpBundle.profile3.setCommandRate(CommandRate::_3n);
+        break;
     }
 }
 
@@ -2594,22 +2661,22 @@ void MainWindow::on_spinMinCycleTime_XMPU1_editingFinished()
 void MainWindow::on_cbCommandRate_XMPU1_currentIndexChanged(int index)
 {
     switch (index) {
-        default:
-        case 0:
-            spd->xmpBundle.profileUser1.setCommandRate(CommandRate::Undefined);
-            break;
+    default:
+    case 0:
+        spd->xmpBundle.profileUser1.setCommandRate(CommandRate::Undefined);
+        break;
 
-        case 1:
-            spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_1n);
-            break;
+    case 1:
+        spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_1n);
+        break;
 
-        case 2:
-            spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_2n);
-            break;
+    case 2:
+        spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_2n);
+        break;
 
-        case 3:
-            spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_3n);
-            break;
+    case 3:
+        spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_3n);
+        break;
     }
 }
 
@@ -2807,20 +2874,20 @@ void MainWindow::on_cbCommandRate_XMPU2_currentIndexChanged(int index)
     switch (index) {
     default:
     case 0:
-            spd->xmpBundle.profileUser2.setCommandRate(CommandRate::Undefined);
-            break;
+        spd->xmpBundle.profileUser2.setCommandRate(CommandRate::Undefined);
+        break;
 
     case 1:
-            spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_1n);
-            break;
+        spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_1n);
+        break;
 
     case 2:
-            spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_2n);
-            break;
+        spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_2n);
+        break;
 
     case 3:
-            spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_3n);
-            break;
+        spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_3n);
+        break;
     }
 }
 
@@ -3249,48 +3316,48 @@ XMP_ProfileStruct MainWindow::importXMPProfileFromEXPO(const EXPO_ProfileStruct&
 // Misc
 void MainWindow::update_cbFormFactor() {
     switch (spd->getFormFactor()) {
-        case FormFactor::RDIMM:
-            ui->cbFormFactor->setCurrentIndex(0);
-            break;
+    case FormFactor::RDIMM:
+        ui->cbFormFactor->setCurrentIndex(0);
+        break;
 
-        case FormFactor::UDIMM:
-            ui->cbFormFactor->setCurrentIndex(1);
-            break;
+    case FormFactor::UDIMM:
+        ui->cbFormFactor->setCurrentIndex(1);
+        break;
 
-        case FormFactor::SODIMM:
-            ui->cbFormFactor->setCurrentIndex(2);
-            break;
+    case FormFactor::SODIMM:
+        ui->cbFormFactor->setCurrentIndex(2);
+        break;
 
-        case FormFactor::LRDIMM:
-            ui->cbFormFactor->setCurrentIndex(3);
-            break;
+    case FormFactor::LRDIMM:
+        ui->cbFormFactor->setCurrentIndex(3);
+        break;
 
-        case FormFactor::CUDIMM:
-            ui->cbFormFactor->setCurrentIndex(4);
-            break;
+    case FormFactor::CUDIMM:
+        ui->cbFormFactor->setCurrentIndex(4);
+        break;
 
-        case FormFactor::CSODIMM:
-            ui->cbFormFactor->setCurrentIndex(5);
-            break;
+    case FormFactor::CSODIMM:
+        ui->cbFormFactor->setCurrentIndex(5);
+        break;
 
-        case FormFactor::MRDIMM:
-            ui->cbFormFactor->setCurrentIndex(6);
-            break;
+    case FormFactor::MRDIMM:
+        ui->cbFormFactor->setCurrentIndex(6);
+        break;
 
-        case FormFactor::CAMM2:
-            ui->cbFormFactor->setCurrentIndex(7);
-            break;
+    case FormFactor::CAMM2:
+        ui->cbFormFactor->setCurrentIndex(7);
+        break;
 
-        case FormFactor::DDIMM:
-            ui->cbFormFactor->setCurrentIndex(8);
-            break;
+    case FormFactor::DDIMM:
+        ui->cbFormFactor->setCurrentIndex(8);
+        break;
 
-        case FormFactor::Solder_down:
-            ui->cbFormFactor->setCurrentIndex(9);
-            break;
+    case FormFactor::Solder_down:
+        ui->cbFormFactor->setCurrentIndex(9);
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 }
 
@@ -3303,82 +3370,82 @@ void MainWindow::setDensity(const unsigned int val) {
 
 void MainWindow::update_cbDensity() {
     switch (spd->getDensity()) {
-        case Density::_0Gb:
-            setDensity(0);
-            break;
+    case Density::_0Gb:
+        setDensity(0);
+        break;
 
-        case Density::_4Gb:
-            setDensity(1);
-            break;
+    case Density::_4Gb:
+        setDensity(1);
+        break;
 
-        case Density::_8Gb:
-            setDensity(2);
-            break;
+    case Density::_8Gb:
+        setDensity(2);
+        break;
 
-        case Density::_12Gb:
-            setDensity(3);
-            break;
+    case Density::_12Gb:
+        setDensity(3);
+        break;
 
-        case Density::_16Gb:
-            setDensity(4);
-            break;
+    case Density::_16Gb:
+        setDensity(4);
+        break;
 
-        case Density::_24Gb:
-            setDensity(5);
-            break;
+    case Density::_24Gb:
+        setDensity(5);
+        break;
 
-        case Density::_32Gb:
-            setDensity(6);
-            break;
+    case Density::_32Gb:
+        setDensity(6);
+        break;
 
-        case Density::_48Gb:
-            setDensity(7);
-            break;
+    case Density::_48Gb:
+        setDensity(7);
+        break;
 
-        case Density::_64Gb:
-            setDensity(8);
-            break;
+    case Density::_64Gb:
+        setDensity(8);
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 }
 
 void MainWindow::on_cbFormFactor_currentIndexChanged(int index) {
     switch (index) {
-        case 0:
-            spd->setFormFactor(FormFactor::RDIMM);
-            break;
-        case 1:
-            spd->setFormFactor(FormFactor::UDIMM);
-            break;
-        case 2:
-            spd->setFormFactor(FormFactor::SODIMM);
-            break;
-        case 3:
-            spd->setFormFactor(FormFactor::LRDIMM);
-            break;
-        case 4:
-            spd->setFormFactor(FormFactor::CUDIMM);
-            break;
-        case 5:
-            spd->setFormFactor(FormFactor::CSODIMM);
-            break;
-        case 6:
-            spd->setFormFactor(FormFactor::MRDIMM);
-            break;
-        case 7:
-            spd->setFormFactor(FormFactor::CAMM2);
-            break;
-        case 8:
-            spd->setFormFactor(FormFactor::DDIMM);
-            break;
-        case 9:
-            spd->setFormFactor(FormFactor::Solder_down);
-            break;
+    case 0:
+        spd->setFormFactor(FormFactor::RDIMM);
+        break;
+    case 1:
+        spd->setFormFactor(FormFactor::UDIMM);
+        break;
+    case 2:
+        spd->setFormFactor(FormFactor::SODIMM);
+        break;
+    case 3:
+        spd->setFormFactor(FormFactor::LRDIMM);
+        break;
+    case 4:
+        spd->setFormFactor(FormFactor::CUDIMM);
+        break;
+    case 5:
+        spd->setFormFactor(FormFactor::CSODIMM);
+        break;
+    case 6:
+        spd->setFormFactor(FormFactor::MRDIMM);
+        break;
+    case 7:
+        spd->setFormFactor(FormFactor::CAMM2);
+        break;
+    case 8:
+        spd->setFormFactor(FormFactor::DDIMM);
+        break;
+    case 9:
+        spd->setFormFactor(FormFactor::Solder_down);
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     update_cbFormFactor();
@@ -3386,44 +3453,44 @@ void MainWindow::on_cbFormFactor_currentIndexChanged(int index) {
 
 void MainWindow::on_cdDensity_currentIndexChanged(int index) {
     switch (index) {
-        case 0:
-            spd->setDensity(Density::_0Gb);
-            break;
+    case 0:
+        spd->setDensity(Density::_0Gb);
+        break;
 
-        case 1:
-            spd->setDensity(Density::_4Gb);
-            break;
+    case 1:
+        spd->setDensity(Density::_4Gb);
+        break;
 
-        case 2:
-            spd->setDensity(Density::_8Gb);
-            break;
+    case 2:
+        spd->setDensity(Density::_8Gb);
+        break;
 
-        case 3:
-            spd->setDensity(Density::_12Gb);
-            break;
+    case 3:
+        spd->setDensity(Density::_12Gb);
+        break;
 
-        case 4:
-            spd->setDensity(Density::_16Gb);
-            break;
+    case 4:
+        spd->setDensity(Density::_16Gb);
+        break;
 
-        case 5:
-            spd->setDensity(Density::_24Gb);
-            break;
+    case 5:
+        spd->setDensity(Density::_24Gb);
+        break;
 
-        case 6:
-            spd->setDensity(Density::_32Gb);
-            break;
+    case 6:
+        spd->setDensity(Density::_32Gb);
+        break;
 
-        case 7:
-            spd->setDensity(Density::_48Gb);
-            break;
+    case 7:
+        spd->setDensity(Density::_48Gb);
+        break;
 
-        case 8:
-            spd->setDensity(Density::_64Gb);
-            break;
+    case 8:
+        spd->setDensity(Density::_64Gb);
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     update_cbDensity();

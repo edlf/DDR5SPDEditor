@@ -9,7 +9,8 @@
 namespace ddr5_structs {
 
 // JEDEC
-constexpr size_t eepromSize = 0x400;
+constexpr size_t eepromBaseSize = 0x400;
+constexpr size_t eepromExtendedSize = 0x800;
 constexpr size_t partNumberSize = 30;
 constexpr size_t jedecBlockSize = 0x200;
 
@@ -64,7 +65,8 @@ enum class ModuleType : unsigned char
 {
     UnbufferedDIMM = 0x02,
     SO_DIMM = 0x03,
-    LRDIMM = 0x04
+    LRDIMM = 0x04,
+    CUDIMM = 0x05
 };
 
 // 4 bits
@@ -236,7 +238,7 @@ struct XMP_ProfileStruct {
     unsigned char unknown_0A;
     unsigned char memory_boost_realtime_training;
     unsigned char commandRate;
-    unsigned char unknown_0D;
+    unsigned char unknown_3D;
 
     // Byte 0x3E-0x4F
     unsigned short checksum;
@@ -527,7 +529,7 @@ struct SPD_Struct {
 
 static_assert(std::endian::native == std::endian::little, "Little endian only"); // Requires C++20
 static_assert(sizeof(unsigned short) == 0x2, "Unsigned shorts must be 16 bits!");
-static_assert(sizeof(SPD_Struct) == eepromSize, "SPD struct size error");
+static_assert(sizeof(SPD_Struct) == eepromBaseSize, "SPD struct size error");
 static_assert(sizeof(XMP_HeaderStruct) == XMPHeaderSize, "XMP Header has to be 64 bytes in size");
 static_assert(sizeof(XMP_ProfileStruct) == XMPProfileSize, "XMP Profile has to be 64 bytes in size");
 static_assert(sizeof(XMP_Struct) == (sizeof(XMP_HeaderStruct) + 5*sizeof(XMP_ProfileStruct)), "XMP Block size is incorrect");

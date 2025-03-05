@@ -10,6 +10,14 @@ DDR5SPD::DDR5SPD(SPD_Struct value) :
 {
 }
 
+DDR5SPD::DDR5SPD(SPD_Struct value, QByteArray extraBytesIn) :
+    spdStruct(value),
+    expoBundle(spdStruct.xmpExpoBlock.hybrid.expo_struct),
+    xmpBundle(spdStruct.xmpExpoBlock.xmpOnly, isEXPOPresentStatic(value)),
+    extraBytes(extraBytesIn)
+{
+}
+
 const unsigned short DDR5SPD::getMinCycleTime() {
     return spdStruct.minCycleTime;
 }
@@ -271,7 +279,7 @@ const unsigned short DDR5SPD::gettCCD_M() {
 }
 
 void DDR5SPD::settCCD_M(const unsigned short value) {
-   spdStruct.tCCD_M = value;
+    spdStruct.tCCD_M = value;
 }
 
 const unsigned short DDR5SPD::gettCCD_M_lowerLimit() {
@@ -458,8 +466,14 @@ const bool DDR5SPD::isCRCValid(){
     return (calculateJedecCRC() == spdStruct.checksum);
 }
 
-const char * const DDR5SPD::getPointerToStruct() {
-    return reinterpret_cast<char*>(&spdStruct);
+const QByteArray DDR5SPD::getBytes() {
+    QByteArray res(reinterpret_cast<char*>(&spdStruct), eepromBaseSize);
+
+    if (extraBytes.length() != 0) {
+        res.append(extraBytes);
+    }
+
+    return res;
 }
 
 const FormFactor DDR5SPD::getFormFactor() {
