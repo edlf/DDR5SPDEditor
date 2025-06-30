@@ -17,7 +17,13 @@ unsigned short Crc16(unsigned char bytes[], unsigned int length);
 
 unsigned short TimeToTicksDDR5(const unsigned int ticks, const unsigned int minCycleTime);
 
+unsigned short TimeToTicksDDR5_RFC(const unsigned int time, const unsigned int minCycleTime);
+
 unsigned short TicksToTimeDDR5(const unsigned int ticks, const unsigned int minCycleTime);
+
+unsigned short TicksToTimeDDR5_RFC(const unsigned int ticks, const unsigned int minCycleTime);
+
+unsigned short TicksToTimeDDR5Middle(const unsigned int ticks, const unsigned int minCycleTime);
 
 void SetCLSupportedDDR5(ddr5_structs::CAS &, unsigned short cl, bool supported);
 

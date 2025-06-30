@@ -37,6 +37,21 @@ unsigned short TimeToTicksDDR5(const unsigned int time, const unsigned int minCy
   return static_cast<unsigned short>(tempNck / 1000);
 }
 
+unsigned short TimeToTicksDDR5_RFC(const unsigned int time, const unsigned int minCycleTime) {
+  if (minCycleTime == 0) {
+    return 0;
+  }
+
+  // Apply correction factor, scaled by 1000
+  unsigned int temp = time * (1000 - correctionFactor) * 1000;
+  // Initial nCK calculation, scaled by 1000
+  double tempNck = temp / minCycleTime;
+  // Add 1, scaled by 1000, to effectively round up
+  tempNck += 1000.0;
+  // Round down to next integer
+  return static_cast<unsigned short>(tempNck / 1000);
+}
+
 unsigned short TicksToTimeDDR5(const unsigned int ticks, const unsigned int minCycleTime) {
   if (minCycleTime == 0) {
     return 0;
@@ -44,6 +59,37 @@ unsigned short TicksToTimeDDR5(const unsigned int ticks, const unsigned int minC
 
   double frequency = (1.0 / (minCycleTime));
   double time = (S10E6 * ticks - S10E6) / ((1000 - correctionFactor) * frequency);
+
+  // Round up
+  time += 1000.0;
+
+  return static_cast<unsigned short>(time / 1000);
+}
+
+unsigned short TicksToTimeDDR5_RFC(const unsigned int ticks, const unsigned int minCycleTime) {
+  if (minCycleTime == 0) {
+    return 0;
+  }
+
+  double frequency = (1.0 / (minCycleTime));
+  double time = (S10E6 * (ticks / 1000.0) - S10E6) / ((1000 - correctionFactor) * frequency);
+
+  // Round up
+  time += 1000.0;
+
+  return static_cast<unsigned short>(time / 1000);
+}
+
+unsigned short TicksToTimeDDR5Middle(const unsigned int ticks, const unsigned int minCycleTime) {
+  if (minCycleTime == 0) {
+    return 0;
+  }
+
+  double frequency = (1.0 / (minCycleTime));
+  double time1 = (S10E6 * ticks - S10E6) / ((1000 - correctionFactor) * frequency);
+  double time2 = (S10E6 * (ticks + 1) - S10E6) / ((1000 - correctionFactor) * frequency);
+
+  double time = (time1 + time2) / 2.0;
 
   // Round up
   time += 1000.0;

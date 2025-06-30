@@ -790,45 +790,45 @@ void MainWindow::clearUI() {
   ui->spinBoxtAA->setValue(0);
   ui->spinBoxtAA_Ticks->setValue(0);
   ui->spinBoxtRCD->setValue(0);
-  ui->labeltRCD_Ticks->setText(emptyValue);
+  ui->spinBoxtRCD_Ticks->setValue(0);
   ui->spinBoxtRP->setValue(0);
-  ui->labeltRP_Ticks->setText(emptyValue);
+  ui->spinBoxtRP_Ticks->setValue(0);
   ui->spinBoxtRAS->setValue(0);
-  ui->labeltRAS_Ticks->setText(emptyValue);
+  ui->spinBoxtRAS_Ticks->setValue(0);
   ui->spinBoxtRC->setValue(0);
-  ui->labeltRC_Ticks->setText(emptyValue);
+  ui->spinBoxtRC_Ticks->setValue(0);
   ui->spinBoxtWR->setValue(0);
-  ui->labeltWR_Ticks->setText(emptyValue);
+  ui->spinBoxtWR_Ticks->setValue(0);
   ui->spinBoxtRFC1->setValue(0);
-  ui->labeltRFC1_Ticks->setText(emptyValue);
+  ui->spinBoxtRFC1_Ticks->setValue(0);
   ui->spinBoxtRFC2->setValue(0);
-  ui->labeltRFC2_Ticks->setText(emptyValue);
+  ui->spinBoxtRFC2_Ticks->setValue(0);
   ui->spinBoxtRFC->setValue(0);
-  ui->labeltRFC_Ticks->setText(emptyValue);
+  ui->spinBoxtRFC_Ticks->setValue(0);
   ui->spinBoxtRRD_L->setValue(0);
   ui->spinBoxtRRD_L_LCLK->setValue(0);
-  ui->labeltRRD_L_Ticks->setText(emptyValue);
+  ui->spinBoxtRRD_L_Ticks->setValue(0);
   ui->spinBoxtCCD_L->setValue(0);
   ui->spinBoxtCCD_L_LCLK->setValue(0);
-  ui->labeltCCD_L_Ticks->setText(emptyValue);
-  ui->spinBoxtCCDL_L_WR->setValue(0);
-  ui->spinBoxtCCDL_L_WR_LCLK->setValue(0);
-  ui->labeltCCDL_L_WR_Ticks->setText(emptyValue);
-  ui->spinBoxtCCDL_L_WR2->setValue(0);
-  ui->spinBoxtCCDL_L_WR2_LCLK->setValue(0);
-  ui->labeltCCDL_L_WR2_Ticks->setText(emptyValue);
+  ui->spinBoxtCCD_L_Ticks->setValue(0);
+  ui->spinBoxtCCD_L_WR->setValue(0);
+  ui->spinBoxtCCD_L_WR_LCLK->setValue(0);
+  ui->spinBoxtCCD_L_WR_Ticks->setValue(0);
+  ui->spinBoxtCCD_L_WR2->setValue(0);
+  ui->spinBoxtCCD_L_WR2_LCLK->setValue(0);
+  ui->spinBoxtCCD_L_WR2_Ticks->setValue(0);
   ui->spinBoxtFAW->setValue(0);
   ui->spinBoxtFAW_LCLK->setValue(0);
-  ui->labeltFAW_Ticks->setText(emptyValue);
+  ui->spinBoxtFAW_Ticks->setValue(0);
   ui->spinBoxtCCD_L_WTR->setValue(0);
   ui->spinBoxtCCD_L_WTR_LCLK->setValue(0);
-  ui->labeltCCD_L_WTR_Ticks->setText(emptyValue);
+  ui->spinBoxtCCD_L_WTR_Ticks->setValue(0);
   ui->spinBoxtCCD_S_WTR->setValue(0);
   ui->spinBoxtCCD_S_WTR_LCLK->setValue(0);
-  ui->labeltCCD_S_WTR_Ticks->setText(emptyValue);
+  ui->spinBoxtCCD_S_WTR_Ticks->setValue(0);
   ui->spinBoxtRTP->setValue(0);
   ui->spinBoxtRTP_LCLK->setValue(0);
-  ui->labeltRTP_Ticks->setText(emptyValue);
+  ui->spinBoxtRTP_Ticks->setValue(0);
 }
 
 void MainWindow::reloadJEDECTab() {
@@ -881,50 +881,48 @@ void MainWindow::reloadJEDECTab() {
   ui->cbCL96->setChecked(spd->getCLSupported(96));
   ui->cbCL98->setChecked(spd->getCLSupported(98));
 
-  unsigned int minCycleTime = spd->getMinCycleTime();
-
   ui->spinBoxtAA->setValue(spd->gettAA());
   ui->spinBoxtAA_Ticks->setValue(spd->gettAA_tick());
   ui->spinBoxtRCD->setValue(spd->gettRCD());
-  ui->labeltRCD_Ticks->setText(QString::number(spd->gettRCD_tick()));
+  ui->spinBoxtRCD_Ticks->setValue(spd->gettRCD_tick());
   ui->spinBoxtRP->setValue(spd->gettRP());
-  ui->labeltRP_Ticks->setText(QString::number(spd->gettRP_tick()));
+  ui->spinBoxtRP_Ticks->setValue(spd->gettRP_tick());
   ui->spinBoxtRAS->setValue(spd->gettRAS());
-  ui->labeltRAS_Ticks->setText(QString::number(spd->gettRAS_tick()));
+  ui->spinBoxtRAS_Ticks->setValue(spd->gettRAS_tick());
   ui->spinBoxtRC->setValue(spd->gettRC());
-  ui->labeltRC_Ticks->setText(QString::number(spd->gettRC_tick()));
+  ui->spinBoxtRC_Ticks->setValue(spd->gettRC_tick());
   ui->spinBoxtWR->setValue(spd->gettWR());
-  ui->labeltWR_Ticks->setText(QString::number(spd->gettWR_tick()));
-  ui->spinBoxtRFC1->setValue(spd->gettRFC1_slr());
-  ui->labeltRFC1_Ticks->setText(QString::number(spd->gettRFC1_slr_tick()));
-  ui->spinBoxtRFC2->setValue(spd->gettRFC2_slr());
-  ui->labeltRFC2_Ticks->setText(QString::number(spd->gettRFC2_slr_tick()));
+  ui->spinBoxtWR_Ticks->setValue(spd->gettWR_tick());
   ui->spinBoxtRFC->setValue(spd->gettRFCsb_slr());
-  ui->labeltRFC_Ticks->setText(QString::number(spd->gettRFCsb_slr_tick()));
+  ui->spinBoxtRFC_Ticks->setValue(spd->gettRFCsb_slr_tick());
+  ui->spinBoxtRFC1->setValue(spd->gettRFC1_slr());
+  ui->spinBoxtRFC1_Ticks->setValue(spd->gettRFC1_slr_tick());
+  ui->spinBoxtRFC2->setValue(spd->gettRFC2_slr());
+  ui->spinBoxtRFC2_Ticks->setValue(spd->gettRFC2_slr_tick());
   ui->spinBoxtRRD_L->setValue(spd->gettRRD_L());
   ui->spinBoxtRRD_L_LCLK->setValue(spd->gettRRD_L_lowerLimit());
-  ui->labeltRRD_L_Ticks->setText(QString::number(spd->gettRRD_L_tick()));
+  ui->spinBoxtRRD_L_Ticks->setValue(spd->gettRRD_L_tick());
   ui->spinBoxtCCD_L->setValue(spd->gettCCD_L());
   ui->spinBoxtCCD_L_LCLK->setValue(spd->gettCCD_L_lowerLimit());
-  ui->labeltCCD_L_Ticks->setText(QString::number(spd->gettCCD_L_tick()));
-  ui->spinBoxtCCDL_L_WR->setValue(spd->gettCCD_L_WR());
-  ui->spinBoxtCCDL_L_WR_LCLK->setValue(spd->gettCCD_L_WR_lowerLimit());
-  ui->labeltCCDL_L_WR_Ticks->setText(QString::number(spd->gettCCD_L_WR_tick()));
-  ui->spinBoxtCCDL_L_WR2->setValue(spd->gettCCD_L_WR2());
-  ui->spinBoxtCCDL_L_WR2_LCLK->setValue(spd->gettCCD_L_WR2_lowerLimit());
-  ui->labeltCCDL_L_WR2_Ticks->setText(QString::number(spd->gettCCD_L_WR2_tick()));
+  ui->spinBoxtCCD_L_Ticks->setValue(spd->gettCCD_L_tick());
+  ui->spinBoxtCCD_L_WR->setValue(spd->gettCCD_L_WR());
+  ui->spinBoxtCCD_L_WR_LCLK->setValue(spd->gettCCD_L_WR_lowerLimit());
+  ui->spinBoxtCCD_L_WR_Ticks->setValue(spd->gettCCD_L_WR_tick());
+  ui->spinBoxtCCD_L_WR2->setValue(spd->gettCCD_L_WR2());
+  ui->spinBoxtCCD_L_WR2_LCLK->setValue(spd->gettCCD_L_WR2_lowerLimit());
+  ui->spinBoxtCCD_L_WR2_Ticks->setValue(spd->gettCCD_L_WR2_tick());
   ui->spinBoxtFAW->setValue(spd->gettFAW());
   ui->spinBoxtFAW_LCLK->setValue(spd->gettFAW_lowerLimit());
-  ui->labeltFAW_Ticks->setText(QString::number(spd->gettFAW_tick()));
+  ui->spinBoxtFAW_Ticks->setValue(spd->gettFAW_tick());
   ui->spinBoxtCCD_L_WTR->setValue(spd->gettCCD_L_WTR());
   ui->spinBoxtCCD_L_WTR_LCLK->setValue(spd->gettCCD_L_WTR_lowerLimit());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->gettCCD_L_WTR_tick()));
+  ui->spinBoxtCCD_L_WTR_Ticks->setValue(spd->gettCCD_L_WTR_tick());
   ui->spinBoxtCCD_S_WTR->setValue(spd->gettCCD_S_WTR());
   ui->spinBoxtCCD_S_WTR_LCLK->setValue(spd->gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->gettCCD_S_WTR_tick()));
+  ui->spinBoxtCCD_S_WTR_Ticks->setValue(spd->gettCCD_S_WTR_tick());
   ui->spinBoxtRTP->setValue(spd->gettRTP());
   ui->spinBoxtRTP_LCLK->setValue(spd->gettRTP_lowerLimit());
-  ui->labeltRTP_Ticks->setText(QString::number(spd->gettRTP_tick()));
+  ui->spinBoxtRTP_Ticks->setValue(spd->gettRTP_tick());
 }
 
 void MainWindow::reloadXMP1Tab() {
@@ -1036,12 +1034,12 @@ void MainWindow::reloadXMP1Tab() {
   ui->sbtCCD_L_XMP1->setValue(xmp_profile.gettCCD_L());
   ui->sbtCCD_L_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_lowerLimit());
   ui->ltCCD_L_Ticks_XMP1->setText(QString::number(xmp_profile.gettCCD_L_tick()));
-  ui->sbtCCDL_L_WR_XMP1->setValue(xmp_profile.gettCCD_L_WR());
-  ui->sbtCCDL_L_WR_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
-  ui->ltCCDL_L_WR_Ticks_XMP1->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
-  ui->sbtCCDL_L_WR2_XMP1->setValue(xmp_profile.gettCCD_L_WR2());
-  ui->sbtCCDL_L_WR2_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
-  ui->ltCCDL_L_WR2_Ticks_XMP1->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
+  ui->sbtCCD_L_WR_XMP1->setValue(xmp_profile.gettCCD_L_WR());
+  ui->sbtCCD_L_WR_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
+  ui->ltCCD_L_WR_Ticks_XMP1->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
+  ui->sbtCCD_L_WR2_XMP1->setValue(xmp_profile.gettCCD_L_WR2());
+  ui->sbtCCD_L_WR2_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+  ui->ltCCD_L_WR2_Ticks_XMP1->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_XMP1->setValue(xmp_profile.gettFAW());
   ui->sbtFAW_LCLK_XMP1->setValue(xmp_profile.gettFAW_lowerLimit());
   ui->ltFAW_Ticks_XMP1->setText(QString::number(xmp_profile.gettFAW_tick()));
@@ -1165,12 +1163,12 @@ void MainWindow::reloadXMP2Tab() {
   ui->sbtCCD_L_XMP2->setValue(xmp_profile.gettCCD_L());
   ui->sbtCCD_L_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_lowerLimit());
   ui->ltCCD_L_Ticks_XMP2->setText(QString::number(xmp_profile.gettCCD_L_tick()));
-  ui->sbtCCDL_L_WR_XMP2->setValue(xmp_profile.gettCCD_L_WR());
-  ui->sbtCCDL_L_WR_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
-  ui->ltCCDL_L_WR_Ticks_XMP2->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
-  ui->sbtCCDL_L_WR2_XMP2->setValue(xmp_profile.gettCCD_L_WR2());
-  ui->sbtCCDL_L_WR2_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
-  ui->ltCCDL_L_WR2_Ticks_XMP2->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
+  ui->sbtCCD_L_WR_XMP2->setValue(xmp_profile.gettCCD_L_WR());
+  ui->sbtCCD_L_WR_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
+  ui->ltCCD_L_WR_Ticks_XMP2->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
+  ui->sbtCCD_L_WR2_XMP2->setValue(xmp_profile.gettCCD_L_WR2());
+  ui->sbtCCD_L_WR2_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+  ui->ltCCD_L_WR2_Ticks_XMP2->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_XMP2->setValue(xmp_profile.gettFAW());
   ui->sbtFAW_LCLK_XMP2->setValue(xmp_profile.gettFAW_lowerLimit());
   ui->ltFAW_Ticks_XMP2->setText(QString::number(xmp_profile.gettFAW_tick()));
@@ -1298,12 +1296,12 @@ void MainWindow::reloadXMP3Tab() {
   ui->sbtCCD_L_XMP3->setValue(xmp_profile.gettCCD_L());
   ui->sbtCCD_L_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_lowerLimit());
   ui->ltCCD_L_Ticks_XMP3->setText(QString::number(xmp_profile.gettCCD_L_tick()));
-  ui->sbtCCDL_L_WR_XMP3->setValue(xmp_profile.gettCCD_L_WR());
-  ui->sbtCCDL_L_WR_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
-  ui->ltCCDL_L_WR_Ticks_XMP3->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
-  ui->sbtCCDL_L_WR2_XMP3->setValue(xmp_profile.gettCCD_L_WR2());
-  ui->sbtCCDL_L_WR2_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
-  ui->ltCCDL_L_WR2_Ticks_XMP3->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
+  ui->sbtCCD_L_WR_XMP3->setValue(xmp_profile.gettCCD_L_WR());
+  ui->sbtCCD_L_WR_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
+  ui->ltCCD_L_WR_Ticks_XMP3->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
+  ui->sbtCCD_L_WR2_XMP3->setValue(xmp_profile.gettCCD_L_WR2());
+  ui->sbtCCD_L_WR2_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+  ui->ltCCD_L_WR2_Ticks_XMP3->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_XMP3->setValue(xmp_profile.gettFAW());
   ui->sbtFAW_LCLK_XMP3->setValue(xmp_profile.gettFAW_lowerLimit());
   ui->ltFAW_Ticks_XMP3->setText(QString::number(xmp_profile.gettFAW_tick()));
@@ -1426,12 +1424,12 @@ void MainWindow::reloadXMPU1Tab() {
   ui->sbtCCD_L_XMPU1->setValue(xmp_profile.gettCCD_L());
   ui->sbtCCD_L_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_lowerLimit());
   ui->ltCCD_L_Ticks_XMPU1->setText(QString::number(xmp_profile.gettCCD_L_tick()));
-  ui->sbtCCDL_L_WR_XMPU1->setValue(xmp_profile.gettCCD_L_WR());
-  ui->sbtCCDL_L_WR_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
-  ui->ltCCDL_L_WR_Ticks_XMPU1->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
-  ui->sbtCCDL_L_WR2_XMPU1->setValue(xmp_profile.gettCCD_L_WR2());
-  ui->sbtCCDL_L_WR2_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
-  ui->ltCCDL_L_WR2_Ticks_XMPU1->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
+  ui->sbtCCD_L_WR_XMPU1->setValue(xmp_profile.gettCCD_L_WR());
+  ui->sbtCCD_L_WR_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
+  ui->ltCCD_L_WR_Ticks_XMPU1->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
+  ui->sbtCCD_L_WR2_XMPU1->setValue(xmp_profile.gettCCD_L_WR2());
+  ui->sbtCCD_L_WR2_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+  ui->ltCCD_L_WR2_Ticks_XMPU1->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_XMPU1->setValue(xmp_profile.gettFAW());
   ui->sbtFAW_LCLK_XMPU1->setValue(xmp_profile.gettFAW_lowerLimit());
   ui->ltFAW_Ticks_XMPU1->setText(QString::number(xmp_profile.gettFAW_tick()));
@@ -1551,12 +1549,12 @@ void MainWindow::reloadXMPU2Tab() {
   ui->sbtCCD_L_XMPU2->setValue(xmp_profile.gettCCD_L());
   ui->sbtCCD_L_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_lowerLimit());
   ui->ltCCD_L_Ticks_XMPU2->setText(QString::number(xmp_profile.gettCCD_L_tick()));
-  ui->sbtCCDL_L_WR_XMPU2->setValue(xmp_profile.gettCCD_L_WR());
-  ui->sbtCCDL_L_WR_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
-  ui->ltCCDL_L_WR_Ticks_XMPU2->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
-  ui->sbtCCDL_L_WR2_XMPU2->setValue(xmp_profile.gettCCD_L_WR2());
-  ui->sbtCCDL_L_WR2_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
-  ui->ltCCDL_L_WR2_Ticks_XMPU2->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
+  ui->sbtCCD_L_WR_XMPU2->setValue(xmp_profile.gettCCD_L_WR());
+  ui->sbtCCD_L_WR_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
+  ui->ltCCD_L_WR_Ticks_XMPU2->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
+  ui->sbtCCD_L_WR2_XMPU2->setValue(xmp_profile.gettCCD_L_WR2());
+  ui->sbtCCD_L_WR2_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+  ui->ltCCD_L_WR2_Ticks_XMPU2->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_XMPU2->setValue(xmp_profile.gettFAW());
   ui->sbtFAW_LCLK_XMPU2->setValue(xmp_profile.gettFAW_lowerLimit());
   ui->ltFAW_Ticks_XMPU2->setText(QString::number(xmp_profile.gettFAW_tick()));
@@ -1614,10 +1612,10 @@ void MainWindow::reloadEXPO1Tab() {
   ui->ltRRD_L_Ticks_EXPO1->setText(QString::number(expo_profile.gettRRD_L_tick()));
   ui->sbtCCD_L_EXPO1->setValue(expo_profile.gettCCD_L());
   ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(expo_profile.gettCCD_L_tick()));
-  ui->sbtCCDL_L_WR_EXPO1->setValue(expo_profile.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(expo_profile.gettCCD_L_WR_tick()));
-  ui->sbtCCDL_L_WR2_EXPO1->setValue(expo_profile.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(expo_profile.gettCCD_L_WR2_tick()));
+  ui->sbtCCD_L_WR_EXPO1->setValue(expo_profile.gettCCD_L_WR());
+  ui->ltCCD_L_WR_Ticks_EXPO1->setText(QString::number(expo_profile.gettCCD_L_WR_tick()));
+  ui->sbtCCD_L_WR2_EXPO1->setValue(expo_profile.gettCCD_L_WR2());
+  ui->ltCCD_L_WR2_Ticks_EXPO1->setText(QString::number(expo_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_EXPO1->setValue(expo_profile.gettFAW());
   ui->ltFAW_Ticks_EXPO1->setText(QString::number(expo_profile.gettFAW_tick()));
   ui->sbtCCD_L_WTR_EXPO1->setValue(expo_profile.gettCCD_L_WTR());
@@ -1671,10 +1669,10 @@ void MainWindow::reloadEXPO2Tab() {
   ui->ltRRD_L_Ticks_EXPO2->setText(QString::number(expo_profile.gettRRD_L_tick()));
   ui->sbtCCD_L_EXPO2->setValue(expo_profile.gettCCD_L());
   ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(expo_profile.gettCCD_L_tick()));
-  ui->sbtCCDL_L_WR_EXPO2->setValue(expo_profile.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(expo_profile.gettCCD_L_WR_tick()));
-  ui->sbtCCDL_L_WR2_EXPO2->setValue(expo_profile.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(expo_profile.gettCCD_L_WR2_tick()));
+  ui->sbtCCD_L_WR_EXPO2->setValue(expo_profile.gettCCD_L_WR());
+  ui->ltCCD_L_WR_Ticks_EXPO2->setText(QString::number(expo_profile.gettCCD_L_WR_tick()));
+  ui->sbtCCD_L_WR2_EXPO2->setValue(expo_profile.gettCCD_L_WR2());
+  ui->ltCCD_L_WR2_Ticks_EXPO2->setText(QString::number(expo_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_EXPO2->setValue(expo_profile.gettFAW());
   ui->ltFAW_Ticks_EXPO2->setText(QString::number(expo_profile.gettFAW_tick()));
   ui->sbtCCD_L_WTR_EXPO2->setValue(expo_profile.gettCCD_L_WTR());
@@ -1719,6 +1717,10 @@ void MainWindow::reloadUI() {
 
 // JEDEC
 void MainWindow::on_spinMinCycleTime_valueChanged(int value) {
+  if (value == spd->getMinCycleTime()) {
+    return;
+  }
+
   spd->setMinCycleTime(value);
   QString frequencyStr = QString::number(spd->getFrequency()) + " MHz";
   QString mtStr = QString::number(spd->getMT()) + " MT/s";
@@ -1728,6 +1730,10 @@ void MainWindow::on_spinMinCycleTime_valueChanged(int value) {
 }
 
 void MainWindow::on_spinMaxCycleTime_valueChanged(int value) {
+  if (value == spd->getMaxCycleTime()) {
+    return;
+  }
+
   spd->setMaxCycleTime(value);
   QString frequencyStr = QString::number(spd->getFrequency()) + " MHz";
   QString mtStr = QString::number(spd->getMT()) + " MT/s";
@@ -1881,53 +1887,57 @@ void MainWindow::on_spinBoxtAA_valueChanged(int value) {
 }
 
 void MainWindow::on_spinBoxtAA_Ticks_valueChanged(int value) {
+  if (value == spd->gettAA_tick()) {
+    return;
+  }
+
   spd->settAA_tick(value);
   ui->spinBoxtAA->setValue(spd->gettAA());
 }
 
 void MainWindow::on_spinBoxtRCD_valueChanged(int value) {
   spd->settRCD(value);
-  ui->labeltRCD_Ticks->setText(QString::number(spd->gettRCD_tick()));
+  ui->spinBoxtRCD_Ticks->setValue(spd->gettRCD_tick());
 }
 
 void MainWindow::on_spinBoxtRP_valueChanged(int value) {
   spd->settRP(value);
-  ui->labeltRP_Ticks->setText(QString::number(spd->gettRP_tick()));
+  ui->spinBoxtRP_Ticks->setValue(spd->gettRP_tick());
 }
 
 void MainWindow::on_spinBoxtRAS_valueChanged(int value) {
   spd->settRAS(value);
-  ui->labeltRAS_Ticks->setText(QString::number(spd->gettRAS_tick()));
+  ui->spinBoxtRAS_Ticks->setValue(spd->gettRAS_tick());
 }
 
 void MainWindow::on_spinBoxtRC_valueChanged(int value) {
   spd->settRC(value);
-  ui->labeltRC_Ticks->setText(QString::number(spd->gettRC_tick()));
+  ui->spinBoxtRC_Ticks->setValue(spd->gettRC_tick());
 }
 
 void MainWindow::on_spinBoxtWR_valueChanged(int value) {
   spd->settWR(value);
-  ui->labeltWR_Ticks->setText(QString::number(spd->gettWR_tick()));
+  ui->spinBoxtWR_Ticks->setValue(spd->gettWR_tick());
 }
 
 void MainWindow::on_spinBoxtRFC1_valueChanged(int value) {
   spd->settRFC1_slr(value);
-  ui->labeltRFC1_Ticks->setText(QString::number(spd->gettRFC1_slr_tick()));
+  ui->spinBoxtRFC1_Ticks->setValue(spd->gettRFC1_slr_tick());
 }
 
 void MainWindow::on_spinBoxtRFC2_valueChanged(int value) {
   spd->settRFC2_slr(value);
-  ui->labeltRFC2_Ticks->setText(QString::number(spd->gettRFC2_slr_tick()));
+  ui->spinBoxtRFC2_Ticks->setValue(spd->gettRFC2_slr_tick());
 }
 
 void MainWindow::on_spinBoxtRFC_valueChanged(int value) {
   spd->settRFCsb_slr(value);
-  ui->labeltRFC_Ticks->setText(QString::number(spd->gettRFCsb_slr_tick()));
+  ui->spinBoxtRFC_Ticks->setValue(spd->gettRFCsb_slr_tick());
 }
 
 void MainWindow::on_spinBoxtRRD_L_valueChanged(int value) {
   spd->settRRD_L(value);
-  ui->labeltRRD_L_Ticks->setText(QString::number(spd->gettRRD_L_tick()));
+  ui->spinBoxtRRD_L_Ticks->setValue(spd->gettRRD_L_tick());
 }
 
 void MainWindow::on_spinBoxtRRD_L_LCLK_valueChanged(int value) {
@@ -1936,34 +1946,34 @@ void MainWindow::on_spinBoxtRRD_L_LCLK_valueChanged(int value) {
 
 void MainWindow::on_spinBoxtCCD_L_valueChanged(int value) {
   spd->settCCD_L(value);
-  ui->labeltCCD_L_Ticks->setText(QString::number(spd->gettCCD_L_tick()));
+  ui->spinBoxtCCD_L_Ticks->setValue(spd->gettCCD_L_tick());
 }
 
 void MainWindow::on_spinBoxtCCD_L_LCLK_valueChanged(int value) {
   spd->settCCD_L_lowerLimit(value);
 }
 
-void MainWindow::on_spinBoxtCCDL_L_WR_valueChanged(int value) {
+void MainWindow::on_spinBoxtCCD_L_WR_valueChanged(int value) {
   spd->settCCD_L_WR(value);
-  ui->labeltCCDL_L_WR_Ticks->setText(QString::number(spd->gettCCD_L_WR_tick()));
+  ui->spinBoxtCCD_L_WR_Ticks->setValue(spd->gettCCD_L_WR_tick());
 }
 
-void MainWindow::on_spinBoxtCCDL_L_WR_LCLK_valueChanged(int value) {
+void MainWindow::on_spinBoxtCCD_L_WR_LCLK_valueChanged(int value) {
   spd->settCCD_L_WR_lowerLimit(value);
 }
 
-void MainWindow::on_spinBoxtCCDL_L_WR2_valueChanged(int value) {
+void MainWindow::on_spinBoxtCCD_L_WR2_valueChanged(int value) {
   spd->settCCD_L_WR2(value);
-  ui->labeltCCDL_L_WR2_Ticks->setText(QString::number(spd->gettCCD_L_WR2_tick()));
+  ui->spinBoxtCCD_L_WR2_Ticks->setValue(spd->gettCCD_L_WR2_tick());
 }
 
-void MainWindow::on_spinBoxtCCDL_L_WR2_LCLK_valueChanged(int value) {
+void MainWindow::on_spinBoxtCCD_L_WR2_LCLK_valueChanged(int value) {
   spd->settCCD_L_WR2_lowerLimit(value);
 }
 
 void MainWindow::on_spinBoxtFAW_valueChanged(int value) {
   spd->settFAW(value);
-  ui->labeltFAW_Ticks->setText(QString::number(spd->gettFAW_tick()));
+  ui->spinBoxtFAW_Ticks->setValue(spd->gettFAW_tick());
 }
 
 void MainWindow::on_spinBoxtFAW_LCLK_valueChanged(int value) {
@@ -1972,7 +1982,7 @@ void MainWindow::on_spinBoxtFAW_LCLK_valueChanged(int value) {
 
 void MainWindow::on_spinBoxtCCD_L_WTR_valueChanged(int value) {
   spd->settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->gettCCD_L_WTR_tick()));
+  ui->spinBoxtCCD_L_WTR_Ticks->setValue(spd->gettCCD_L_WTR_tick());
 }
 
 void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_valueChanged(int value) {
@@ -1981,17 +1991,17 @@ void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_valueChanged(int value) {
 
 void MainWindow::on_spinBoxtCCD_S_WTR_valueChanged(int value) {
   spd->settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->gettCCD_S_WTR_tick()));
+  ui->spinBoxtCCD_S_WTR_Ticks->setValue(spd->gettCCD_S_WTR_tick());
 }
 
 void MainWindow::on_spinBoxtCCD_S_WTR_LCLK_valueChanged(int value) {
   spd->settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->gettCCD_S_WTR_tick()));
+  ui->spinBoxtCCD_S_WTR_Ticks->setValue(spd->gettCCD_S_WTR_tick());
 }
 
 void MainWindow::on_spinBoxtRTP_valueChanged(int value) {
   spd->settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(spd->gettRTP_tick()));
+  ui->spinBoxtRTP_Ticks->setValue(spd->gettRTP_tick());
 }
 
 void MainWindow::on_spinBoxtRTP_LCLK_valueChanged(int value) {
@@ -2010,49 +2020,47 @@ void MainWindow::on_spinBoxtAA_Ticks_editingFinished() {
 
 void MainWindow::on_spinBoxtRCD_editingFinished() {
   ui->spinBoxtRCD->setValue(spd->gettRCD());
-  ui->labeltRCD_Ticks->setText(QString::number(spd->gettRCD_tick()));
+  ui->spinBoxtRCD_Ticks->setValue(spd->gettRCD_tick());
 }
 
 void MainWindow::on_spinBoxtRP_editingFinished() {
   ui->spinBoxtRP->setValue(spd->gettRP());
-  ui->labeltRP_Ticks->setText(QString::number(spd->gettRP_tick()));
+  ui->spinBoxtRP_Ticks->setValue(spd->gettRP_tick());
 }
 
 void MainWindow::on_spinBoxtRAS_editingFinished() {
   ui->spinBoxtRAS->setValue(spd->gettRAS());
-  ui->labeltRAS_Ticks->setText(QString::number(spd->gettRAS_tick()));
+  ui->spinBoxtRAS_Ticks->setValue(spd->gettRAS_tick());
 }
 
 void MainWindow::on_spinBoxtRC_editingFinished() {
   ui->spinBoxtRC->setValue(spd->gettRC());
-  ui->labeltRC_Ticks->setText(QString::number(spd->gettRC_tick()));
+  ui->spinBoxtRC_Ticks->setValue(spd->gettRC_tick());
 }
 
 void MainWindow::on_spinBoxtWR_editingFinished() {
-  ui->spinBoxtWR->setValue(spd->gettRCD());
-  spd->settWR(ui->spinBoxtWR->value());
-  ui->labeltWR_Ticks->setText(QString::number(spd->gettWR_tick()));
+  ui->spinBoxtWR->setValue(spd->gettWR());
+  ui->spinBoxtWR_Ticks->setValue(spd->gettWR_tick());
 }
 
 void MainWindow::on_spinBoxtRFC1_editingFinished() {
   ui->spinBoxtRFC1->setValue(spd->gettRFC1_slr());
-  ui->labeltRFC1_Ticks->setText(QString::number(spd->gettRFC1_slr_tick()));
+  ui->spinBoxtRFC1_Ticks->setValue(spd->gettRFC1_slr_tick());
 }
 
 void MainWindow::on_spinBoxtRFC2_editingFinished() {
   ui->spinBoxtRFC2->setValue(spd->gettRFC2_slr());
-  ui->labeltRFC2_Ticks->setText(QString::number(spd->gettRFC2_slr_tick()));
+  ui->spinBoxtRFC2_Ticks->setValue(spd->gettRFC2_slr_tick());
 }
 
 void MainWindow::on_spinBoxtRFC_editingFinished() {
-  ui->spinBoxtRFC->setValue(spd->gettRCD());
-  spd->settRFCsb_slr(ui->spinBoxtRFC->value());
-  ui->labeltRFC_Ticks->setText(QString::number(spd->gettRFCsb_slr_tick()));
+  ui->spinBoxtRFC->setValue(spd->gettRFCsb_slr());
+  ui->spinBoxtRFC_Ticks->setValue(spd->gettRFCsb_slr_tick());
 }
 
 void MainWindow::on_spinBoxtRRD_L_editingFinished() {
   ui->spinBoxtRRD_L->setValue(spd->gettRRD_L());
-  ui->labeltRRD_L_Ticks->setText(QString::number(spd->gettRRD_L_tick()));
+  ui->spinBoxtRRD_L_Ticks->setValue(spd->gettRRD_L_tick());
 }
 
 void MainWindow::on_spinBoxtRRD_L_LCLK_editingFinished() {
@@ -2061,34 +2069,34 @@ void MainWindow::on_spinBoxtRRD_L_LCLK_editingFinished() {
 
 void MainWindow::on_spinBoxtCCD_L_editingFinished() {
   ui->spinBoxtCCD_L->setValue(spd->gettCCD_L());
-  ui->labeltCCD_L_Ticks->setText(QString::number(spd->gettCCD_L_tick()));
+  ui->spinBoxtCCD_L_Ticks->setValue(spd->gettCCD_L_tick());
 }
 
 void MainWindow::on_spinBoxtCCD_L_LCLK_editingFinished() {
   ui->spinBoxtCCD_L_LCLK->setValue(spd->gettCCD_L_lowerLimit());
 }
 
-void MainWindow::on_spinBoxtCCDL_L_WR_editingFinished() {
-  ui->spinBoxtCCDL_L_WR->setValue(spd->gettCCD_L_WR());
-  ui->labeltCCDL_L_WR_Ticks->setText(QString::number(spd->gettCCD_L_WR_tick()));
+void MainWindow::on_spinBoxtCCD_L_WR_editingFinished() {
+  ui->spinBoxtCCD_L_WR->setValue(spd->gettCCD_L_WR());
+  ui->spinBoxtCCD_L_WR_Ticks->setValue(spd->gettCCD_L_WR_tick());
 }
 
-void MainWindow::on_spinBoxtCCDL_L_WR_LCLK_editingFinished() {
-  ui->spinBoxtCCDL_L_WR_LCLK->setValue(spd->gettCCD_L_WR_lowerLimit());
+void MainWindow::on_spinBoxtCCD_L_WR_LCLK_editingFinished() {
+  ui->spinBoxtCCD_L_WR_LCLK->setValue(spd->gettCCD_L_WR_lowerLimit());
 }
 
-void MainWindow::on_spinBoxtCCDL_L_WR2_editingFinished() {
-  ui->spinBoxtCCDL_L_WR2->setValue(spd->gettCCD_L_WR2());
-  ui->labeltCCDL_L_WR2_Ticks->setText(QString::number(spd->gettCCD_L_WR2_tick()));
+void MainWindow::on_spinBoxtCCD_L_WR2_editingFinished() {
+  ui->spinBoxtCCD_L_WR2->setValue(spd->gettCCD_L_WR2());
+  ui->spinBoxtCCD_L_WR2_Ticks->setValue(spd->gettCCD_L_WR2_tick());
 }
 
-void MainWindow::on_spinBoxtCCDL_L_WR2_LCLK_editingFinished() {
-  ui->spinBoxtCCDL_L_WR2_LCLK->setValue(spd->gettCCD_L_WR2_lowerLimit());
+void MainWindow::on_spinBoxtCCD_L_WR2_LCLK_editingFinished() {
+  ui->spinBoxtCCD_L_WR2_LCLK->setValue(spd->gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_spinBoxtFAW_editingFinished() {
   ui->spinBoxtFAW->setValue(spd->gettFAW());
-  ui->labeltFAW_Ticks->setText(QString::number(spd->gettFAW_tick()));
+  ui->spinBoxtFAW_Ticks->setValue(spd->gettFAW_tick());
 }
 
 void MainWindow::on_spinBoxtFAW_LCLK_editingFinished() {
@@ -2097,7 +2105,7 @@ void MainWindow::on_spinBoxtFAW_LCLK_editingFinished() {
 
 void MainWindow::on_spinBoxtCCD_L_WTR_editingFinished() {
   ui->spinBoxtCCD_L_WTR->setValue(spd->gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->gettCCD_L_WTR_tick()));
+  ui->spinBoxtCCD_L_WTR_Ticks->setValue(spd->gettCCD_L_WTR_tick());
 }
 
 void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_editingFinished() {
@@ -2106,21 +2114,341 @@ void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_editingFinished() {
 
 void MainWindow::on_spinBoxtCCD_S_WTR_editingFinished() {
   ui->spinBoxtCCD_S_WTR->setValue(spd->gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->gettCCD_S_WTR_tick()));
+  ui->spinBoxtCCD_S_WTR_Ticks->setValue(spd->gettCCD_S_WTR_tick());
 }
 
 void MainWindow::on_spinBoxtCCD_S_WTR_LCLK_editingFinished() {
   ui->spinBoxtCCD_S_WTR_LCLK->setValue(spd->gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->gettCCD_S_WTR_tick()));
+  ui->spinBoxtCCD_S_WTR_Ticks->setValue(spd->gettCCD_S_WTR_tick());
 }
 
 void MainWindow::on_spinBoxtRTP_editingFinished() {
   ui->spinBoxtRTP->setValue(spd->gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(spd->gettRTP_tick()));
+  ui->spinBoxtRTP_Ticks->setValue(spd->gettRTP_tick());
 }
 
 void MainWindow::on_spinBoxtRTP_LCLK_editingFinished() {
   ui->spinBoxtRTP_LCLK->setValue(spd->gettRTP_lowerLimit());
+}
+
+void MainWindow::on_spinBoxtRCD_Ticks_editingFinished() {
+  ui->spinBoxtRCD->setValue(spd->gettRCD());
+  ui->spinBoxtRCD_Ticks->setValue(spd->gettRCD_tick());
+}
+
+void MainWindow::on_spinBoxtRP_Ticks_editingFinished() {
+  ui->spinBoxtRP->setValue(spd->gettRP());
+  ui->spinBoxtRP_Ticks->setValue(spd->gettRP_tick());
+}
+
+void MainWindow::on_spinBoxtRAS_Ticks_editingFinished() {
+  ui->spinBoxtRAS->setValue(spd->gettRAS());
+  ui->spinBoxtRAS_Ticks->setValue(spd->gettRAS_tick());
+}
+
+void MainWindow::on_spinBoxtRC_Ticks_editingFinished() {
+  ui->spinBoxtRC->setValue(spd->gettRC());
+  ui->spinBoxtRC_Ticks->setValue(spd->gettRC_tick());
+}
+
+void MainWindow::on_spinBoxtWR_Ticks_editingFinished() {
+  ui->spinBoxtWR->setValue(spd->gettWR());
+  ui->spinBoxtWR_Ticks->setValue(spd->gettWR_tick());
+}
+
+void MainWindow::on_spinBoxtRFC1_Ticks_editingFinished() {
+  ui->spinBoxtRFC1->setValue(spd->gettRFC1_slr());
+  ui->spinBoxtRFC1_Ticks->setValue(spd->gettRFC1_slr_tick());
+}
+
+void MainWindow::on_spinBoxtRFC2_Ticks_editingFinished() {
+  ui->spinBoxtRFC2->setValue(spd->gettRFC2_slr());
+  ui->spinBoxtRFC2_Ticks->setValue(spd->gettRFC2_slr_tick());
+}
+
+void MainWindow::on_spinBoxtRFC_Ticks_editingFinished() {
+  ui->spinBoxtRFC->setValue(spd->gettRFCsb_slr());
+  ui->spinBoxtRFC_Ticks->setValue(spd->gettRFCsb_slr_tick());
+}
+
+void MainWindow::on_spinBoxtRRD_L_Ticks_editingFinished() {
+  ui->spinBoxtRRD_L->setValue(spd->gettRRD_L());
+  ui->spinBoxtRRD_L_Ticks->setValue(spd->gettRRD_L_tick());
+}
+
+void MainWindow::on_spinBoxtRRD_L_LCLK_Ticks_editingFinished() {
+  ui->spinBoxtRRD_L_LCLK->setValue(spd->gettRRD_L_lowerLimit());
+}
+
+void MainWindow::on_spinBoxtCCD_L_Ticks_editingFinished() {
+  ui->spinBoxtCCD_L->setValue(spd->gettCCD_L());
+  ui->spinBoxtCCD_L_Ticks->setValue(spd->gettCCD_L_tick());
+}
+
+void MainWindow::on_spinBoxtCCD_L_LCLK_Ticks_editingFinished() {
+  ui->spinBoxtCCD_L_LCLK->setValue(spd->gettCCD_L_lowerLimit());
+}
+
+void MainWindow::on_spinBoxtCCD_L_WR_Ticks_editingFinished() {
+  ui->spinBoxtCCD_L_WR->setValue(spd->gettCCD_L_WR());
+  ui->spinBoxtCCD_L_WR_Ticks->setValue(spd->gettCCD_L_WR_tick());
+}
+
+void MainWindow::on_spinBoxtCCD_L_WR_LCLK_Ticks_editingFinished() {
+  ui->spinBoxtCCD_L_WR->setValue(spd->gettCCD_L_WR());
+}
+
+void MainWindow::on_spinBoxtCCD_L_WR2_Ticks_editingFinished() {
+  ui->spinBoxtCCD_L_WR2->setValue(spd->gettCCD_L_WR2());
+  ui->spinBoxtCCD_L_WR2_Ticks->setValue(spd->gettCCD_L_WR2_tick());
+}
+
+void MainWindow::on_spinBoxtCCD_L_WR2_LCLK_Ticks_editingFinished() {
+  ui->spinBoxtCCD_L_WR2_LCLK->setValue(spd->gettCCD_L_WR2_lowerLimit());
+}
+
+void MainWindow::on_spinBoxtFAW_Ticks_editingFinished() {
+  ui->spinBoxtFAW->setValue(spd->gettFAW());
+  ui->spinBoxtFAW_Ticks->setValue(spd->gettFAW_tick());
+}
+
+void MainWindow::on_spinBoxtFAW_LCLK_Ticks_editingFinished() {
+  ui->spinBoxtFAW_LCLK->setValue(spd->gettFAW_lowerLimit());
+}
+
+void MainWindow::on_spinBoxtCCD_L_WTR_Ticks_editingFinished() {
+  ui->spinBoxtCCD_L_WTR->setValue(spd->gettCCD_L_WTR());
+  ui->spinBoxtCCD_L_WTR_Ticks->setValue(spd->gettCCD_L_WTR_tick());
+}
+
+void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_Ticks_editingFinished() {
+  ui->spinBoxtCCD_L_WTR_LCLK->setValue(spd->gettCCD_L_WTR_lowerLimit());
+}
+
+void MainWindow::on_spinBoxtCCD_S_WTR_Ticks_editingFinished() {
+  ui->spinBoxtCCD_S_WTR->setValue(spd->gettCCD_S_WTR());
+  ui->spinBoxtCCD_S_WTR_Ticks->setValue(spd->gettCCD_S_WTR_tick());
+}
+
+void MainWindow::on_spinBoxtCCD_S_WTR_LCLK_Ticks_editingFinished() {
+  ui->spinBoxtCCD_S_WTR_LCLK->setValue(spd->gettCCD_S_WTR_lowerLimit());
+}
+
+void MainWindow::on_spinBoxtRTP_Ticks_editingFinished() {
+  ui->spinBoxtRTP->setValue(spd->gettRTP());
+  ui->spinBoxtRTP_Ticks->setValue(spd->gettRTP_tick());
+}
+
+void MainWindow::on_spinBoxtRTP_LCLK_Ticks_editingFinished() {
+  ui->spinBoxtRTP_LCLK->setValue(spd->gettRTP_lowerLimit());
+}
+
+void MainWindow::on_spinBoxtRCD_Ticks_valueChanged(int value) {
+  if (value == spd->gettRCD_tick()) {
+    return;
+  }
+
+  spd->settRCD_tick(value);
+  ui->spinBoxtRCD->setValue(spd->gettRCD());
+}
+
+void MainWindow::on_spinBoxtRP_Ticks_valueChanged(int value) {
+  if (value == spd->gettRP_tick()) {
+    return;
+  }
+
+  spd->settRP_tick(value);
+  ui->spinBoxtRP->setValue(spd->gettRP());
+}
+
+void MainWindow::on_spinBoxtRAS_Ticks_valueChanged(int value) {
+  if (value == spd->gettRAS_tick()) {
+    return;
+  }
+
+  spd->settRAS_tick(value);
+  ui->spinBoxtRAS->setValue(spd->gettRAS());
+}
+
+void MainWindow::on_spinBoxtRC_Ticks_valueChanged(int value) {
+  if (value == spd->gettRC_tick()) {
+    return;
+  }
+
+  spd->settRC_tick(value);
+  ui->spinBoxtRC->setValue(spd->gettRC());
+}
+
+void MainWindow::on_spinBoxtWR_Ticks_valueChanged(int value) {
+  if (value == spd->gettWR_tick()) {
+    return;
+  }
+
+  spd->settWR_tick(value);
+  ui->spinBoxtWR->setValue(spd->gettWR());
+}
+
+void MainWindow::on_spinBoxtRFC1_Ticks_valueChanged(int value) {
+  if (value == spd->gettRFC1_slr_tick()) {
+    return;
+  }
+
+  // spd->settRFC1_slr_tick(value);
+  // ui->spinBoxtRFC1->setValue(spd->gettRFC1_slr());
+}
+
+void MainWindow::on_spinBoxtRFC2_Ticks_valueChanged(int value) {
+  if (value == spd->gettRFC2_slr_tick()) {
+    return;
+  }
+
+  // spd->settRFC2_slr_tick(value);
+  // ui->spinBoxtRFC2->setValue(spd->gettRFC2_slr());
+}
+
+void MainWindow::on_spinBoxtRFC_Ticks_valueChanged(int value) {
+  if (value == spd->gettRFCsb_slr_tick()) {
+    return;
+  }
+
+  // spd->settRFCsb_slr_tick(value);
+  // ui->spinBoxtRFC_Ticks->setValue(spd->gettRFCsb_slr_tick());
+}
+
+void MainWindow::on_spinBoxtRRD_L_Ticks_valueChanged(int value) {
+  if (value == spd->gettRRD_L_tick()) {
+    return;
+  }
+
+  spd->settRRD_L_tick(value);
+  ui->spinBoxtRRD_L->setValue(spd->gettRRD_L());
+}
+
+void MainWindow::on_spinBoxtRRD_L_LCLK_Ticks_valueChanged(int value) {
+  if (value == spd->gettRRD_L_lowerLimit()) {
+    return;
+  }
+
+  spd->settRRD_L_lowerLimit(value);
+}
+
+void MainWindow::on_spinBoxtCCD_L_Ticks_valueChanged(int value) {
+  if (value == spd->gettCCD_L_tick()) {
+    return;
+  }
+
+  spd->settCCD_L_tick(value);
+  ui->spinBoxtCCD_L->setValue(spd->gettCCD_L());
+}
+
+void MainWindow::on_spinBoxtCCD_L_LCLK_Ticks_valueChanged(int value) {
+  if (value == spd->gettCCD_L_lowerLimit()) {
+    return;
+  }
+
+  spd->settCCD_L_lowerLimit(value);
+}
+
+void MainWindow::on_spinBoxtCCD_L_WR_Ticks_valueChanged(int value) {
+  if (value == spd->gettCCD_L_WR_tick()) {
+    return;
+  }
+
+  spd->settCCD_L_WR_tick(value);
+  ui->spinBoxtCCD_L_WR->setValue(spd->gettCCD_L_WR());
+}
+
+void MainWindow::on_spinBoxtCCD_L_WR_LCLK_Ticks_valueChanged(int value) {
+  if (value == spd->gettCCD_L_WR_lowerLimit()) {
+    return;
+  }
+
+  spd->settCCD_L_WR_lowerLimit(value);
+}
+
+void MainWindow::on_spinBoxtCCD_L_WR2_Ticks_valueChanged(int value) {
+  if (value == spd->gettCCD_L_WR2_tick()) {
+    return;
+  }
+
+  spd->settCCD_L_WR2_tick(value);
+  ui->spinBoxtCCD_L_WR2->setValue(spd->gettCCD_L_WR2());
+}
+
+void MainWindow::on_spinBoxtCCD_L_WR2_LCLK_Ticks_valueChanged(int value) {
+  if (value == spd->gettCCD_L_WR2_lowerLimit()) {
+    return;
+  }
+
+  spd->settCCD_L_WR2_lowerLimit(value);
+}
+
+void MainWindow::on_spinBoxtFAW_Ticks_valueChanged(int value) {
+  if (value == spd->gettFAW_tick()) {
+    return;
+  }
+
+  spd->settFAW_tick(value);
+  ui->spinBoxtFAW->setValue(spd->gettFAW());
+}
+
+void MainWindow::on_spinBoxtFAW_LCLK_Ticks_valueChanged(int value) {
+  if (value == spd->gettFAW_lowerLimit()) {
+    return;
+  }
+
+  spd->settFAW_lowerLimit(value);
+}
+
+void MainWindow::on_spinBoxtCCD_L_WTR_Ticks_valueChanged(int value) {
+  if (value == spd->gettCCD_L_WTR_tick()) {
+    return;
+  }
+
+  spd->settCCD_L_WTR_tick(value);
+  ui->spinBoxtCCD_L_WTR->setValue(spd->gettCCD_L_WTR());
+}
+
+void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_Ticks_valueChanged(int value) {
+  if (value == spd->gettCCD_L_WTR_lowerLimit()) {
+    return;
+  }
+
+  spd->settCCD_L_WTR_lowerLimit(value);
+}
+
+void MainWindow::on_spinBoxtCCD_S_WTR_Ticks_valueChanged(int value) {
+  if (value == spd->gettCCD_S_WTR_tick()) {
+    return;
+  }
+
+  spd->settCCD_S_WTR_tick(value);
+  ui->spinBoxtCCD_S_WTR->setValue(spd->gettCCD_S_WTR());
+}
+
+void MainWindow::on_spinBoxtCCD_S_WTR_LCLK_Ticks_valueChanged(int value) {
+  if (value == spd->gettCCD_S_WTR_lowerLimit()) {
+    return;
+  }
+
+  spd->settCCD_S_WTR_lowerLimit(value);
+}
+
+void MainWindow::on_spinBoxtRTP_Ticks_valueChanged(int value) {
+  if (value == spd->gettRTP_tick()) {
+    return;
+  }
+
+  spd->settRTP_tick(value);
+  ui->spinBoxtRTP->setValue(spd->gettRTP());
+}
+
+void MainWindow::on_spinBoxtRTP_LCLK_Ticks_valueChanged(int value) {
+  if (value == spd->gettRTP_lowerLimit()) {
+    return;
+  }
+
+  spd->settRTP_lowerLimit(value);
 }
 
 // XMP1
@@ -2397,21 +2725,21 @@ void MainWindow::on_sbtCCD_L_LCLK_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_L_lowerLimit(value);
 }
 
-void MainWindow::on_sbtCCDL_L_WR_XMP1_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR_tick()));
+  ui->ltCCD_L_WR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP1_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_LCLK_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_L_WR_lowerLimit(value);
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_XMP1_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR2_tick()));
+  ui->ltCCD_L_WR2_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR2_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP1_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_LCLK_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_L_WR2_lowerLimit(value);
 }
 
@@ -2426,7 +2754,7 @@ void MainWindow::on_sbtFAW_LCLK_XMP1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP1_valueChanged(int value) {
@@ -2435,17 +2763,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_S_WTR_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettRTP_tick()));
+  ui->ltRTP_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP1_valueChanged(int value) {
@@ -2516,22 +2844,22 @@ void MainWindow::on_sbtCCD_L_LCLK_XMP1_editingFinished() {
   ui->sbtCCD_L_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_lowerLimit());
 }
 
-void MainWindow::on_sbtCCDL_L_WR_XMP1_editingFinished() {
-  ui->sbtCCDL_L_WR_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR_tick()));
+void MainWindow::on_sbtCCD_L_WR_XMP1_editingFinished() {
+  ui->sbtCCD_L_WR_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR());
+  ui->ltCCD_L_WR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP1_editingFinished() {
-  ui->sbtCCDL_L_WR_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR_lowerLimit());
+void MainWindow::on_sbtCCD_L_WR_LCLK_XMP1_editingFinished() {
+  ui->sbtCCD_L_WR_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR_lowerLimit());
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_XMP1_editingFinished() {
-  ui->sbtCCDL_L_WR2_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR2_tick()));
+void MainWindow::on_sbtCCD_L_WR2_XMP1_editingFinished() {
+  ui->sbtCCD_L_WR2_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR2());
+  ui->ltCCD_L_WR2_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR2_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP1_editingFinished() {
-  ui->sbtCCDL_L_WR2_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR2_lowerLimit());
+void MainWindow::on_sbtCCD_L_WR2_LCLK_XMP1_editingFinished() {
+  ui->sbtCCD_L_WR2_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_sbtFAW_XMP1_editingFinished() {
@@ -2545,7 +2873,7 @@ void MainWindow::on_sbtFAW_LCLK_XMP1_editingFinished() {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP1_editingFinished() {
   ui->sbtCCD_L_WTR_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP1_editingFinished() {
@@ -2554,17 +2882,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP1_editingFinished() {
 
 void MainWindow::on_sbtCCD_S_WTR_XMP1_editingFinished() {
   ui->sbtCCD_S_WTR_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP1_editingFinished() {
   ui->sbtCCD_S_WTR_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP1_editingFinished() {
   ui->sbtRTP_XMP1->setValue(spd->xmpBundle.profile1.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettRTP_tick()));
+  ui->ltRTP_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP1_editingFinished() {
@@ -2845,21 +3173,21 @@ void MainWindow::on_sbtCCD_L_LCLK_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_L_lowerLimit(value);
 }
 
-void MainWindow::on_sbtCCDL_L_WR_XMP2_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR_tick()));
+  ui->ltCCD_L_WR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP2_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_LCLK_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_L_WR_lowerLimit(value);
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_XMP2_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR2_tick()));
+  ui->ltCCD_L_WR2_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR2_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP2_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_LCLK_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_L_WR2_lowerLimit(value);
 }
 
@@ -2874,7 +3202,7 @@ void MainWindow::on_sbtFAW_LCLK_XMP2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP2_valueChanged(int value) {
@@ -2883,17 +3211,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_S_WTR_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettRTP_tick()));
+  ui->ltRTP_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP2_valueChanged(int value) {
@@ -2964,22 +3292,22 @@ void MainWindow::on_sbtCCD_L_LCLK_XMP2_editingFinished() {
   ui->sbtCCD_L_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_lowerLimit());
 }
 
-void MainWindow::on_sbtCCDL_L_WR_XMP2_editingFinished() {
-  ui->sbtCCDL_L_WR_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR_tick()));
+void MainWindow::on_sbtCCD_L_WR_XMP2_editingFinished() {
+  ui->sbtCCD_L_WR_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR());
+  ui->ltCCD_L_WR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP2_editingFinished() {
-  ui->sbtCCDL_L_WR_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR_lowerLimit());
+void MainWindow::on_sbtCCD_L_WR_LCLK_XMP2_editingFinished() {
+  ui->sbtCCD_L_WR_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR_lowerLimit());
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_XMP2_editingFinished() {
-  ui->sbtCCDL_L_WR2_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR2_tick()));
+void MainWindow::on_sbtCCD_L_WR2_XMP2_editingFinished() {
+  ui->sbtCCD_L_WR2_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR2());
+  ui->ltCCD_L_WR2_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR2_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP2_editingFinished() {
-  ui->sbtCCDL_L_WR2_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR2_lowerLimit());
+void MainWindow::on_sbtCCD_L_WR2_LCLK_XMP2_editingFinished() {
+  ui->sbtCCD_L_WR2_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_sbtFAW_XMP2_editingFinished() {
@@ -2993,7 +3321,7 @@ void MainWindow::on_sbtFAW_LCLK_XMP2_editingFinished() {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP2_editingFinished() {
   ui->sbtCCD_L_WTR_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP2_editingFinished() {
@@ -3002,17 +3330,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP2_editingFinished() {
 
 void MainWindow::on_sbtCCD_S_WTR_XMP2_editingFinished() {
   ui->sbtCCD_S_WTR_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP2_editingFinished() {
   ui->sbtCCD_S_WTR_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP2_editingFinished() {
   ui->sbtRTP_XMP2->setValue(spd->xmpBundle.profile2.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettRTP_tick()));
+  ui->ltRTP_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP2_editingFinished() {
@@ -3293,21 +3621,21 @@ void MainWindow::on_sbtCCD_L_LCLK_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_L_lowerLimit(value);
 }
 
-void MainWindow::on_sbtCCDL_L_WR_XMP3_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR_tick()));
+  ui->ltCCD_L_WR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP3_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_LCLK_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_L_WR_lowerLimit(value);
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_XMP3_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR2_tick()));
+  ui->ltCCD_L_WR2_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR2_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP3_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_LCLK_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_L_WR2_lowerLimit(value);
 }
 
@@ -3322,7 +3650,7 @@ void MainWindow::on_sbtFAW_LCLK_XMP3_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP3_valueChanged(int value) {
@@ -3331,17 +3659,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP3_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_S_WTR_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettRTP_tick()));
+  ui->ltRTP_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP3_valueChanged(int value) {
@@ -3412,22 +3740,22 @@ void MainWindow::on_sbtCCD_L_LCLK_XMP3_editingFinished() {
   ui->sbtCCD_L_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_lowerLimit());
 }
 
-void MainWindow::on_sbtCCDL_L_WR_XMP3_editingFinished() {
-  ui->sbtCCDL_L_WR_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR_tick()));
+void MainWindow::on_sbtCCD_L_WR_XMP3_editingFinished() {
+  ui->sbtCCD_L_WR_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR());
+  ui->ltCCD_L_WR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP3_editingFinished() {
-  ui->sbtCCDL_L_WR_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR_lowerLimit());
+void MainWindow::on_sbtCCD_L_WR_LCLK_XMP3_editingFinished() {
+  ui->sbtCCD_L_WR_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR_lowerLimit());
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_XMP3_editingFinished() {
-  ui->sbtCCDL_L_WR2_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR2_tick()));
+void MainWindow::on_sbtCCD_L_WR2_XMP3_editingFinished() {
+  ui->sbtCCD_L_WR2_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR2());
+  ui->ltCCD_L_WR2_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR2_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP3_editingFinished() {
-  ui->sbtCCDL_L_WR2_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR2_lowerLimit());
+void MainWindow::on_sbtCCD_L_WR2_LCLK_XMP3_editingFinished() {
+  ui->sbtCCD_L_WR2_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_sbtFAW_XMP3_editingFinished() {
@@ -3441,7 +3769,7 @@ void MainWindow::on_sbtFAW_LCLK_XMP3_editingFinished() {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP3_editingFinished() {
   ui->sbtCCD_L_WTR_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP3_editingFinished() {
@@ -3450,17 +3778,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP3_editingFinished() {
 
 void MainWindow::on_sbtCCD_S_WTR_XMP3_editingFinished() {
   ui->sbtCCD_S_WTR_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP3_editingFinished() {
   ui->sbtCCD_S_WTR_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP3_editingFinished() {
   ui->sbtRTP_XMP3->setValue(spd->xmpBundle.profile3.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettRTP_tick()));
+  ui->ltRTP_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP3_editingFinished() {
@@ -3733,21 +4061,21 @@ void MainWindow::on_sbtCCD_L_LCLK_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_L_lowerLimit(value);
 }
 
-void MainWindow::on_sbtCCDL_L_WR_XMPU1_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR_tick()));
+  ui->ltCCD_L_WR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_LCLK_XMPU1_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_LCLK_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_L_WR_lowerLimit(value);
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_XMPU1_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR2_tick()));
+  ui->ltCCD_L_WR2_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR2_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMPU1_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_LCLK_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_L_WR2_lowerLimit(value);
 }
 
@@ -3762,7 +4090,7 @@ void MainWindow::on_sbtFAW_LCLK_XMPU1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU1_valueChanged(int value) {
@@ -3771,17 +4099,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_S_WTR_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettRTP_tick()));
+  ui->ltRTP_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMPU1_valueChanged(int value) {
@@ -3852,22 +4180,22 @@ void MainWindow::on_sbtCCD_L_LCLK_XMPU1_editingFinished() {
   ui->sbtCCD_L_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_lowerLimit());
 }
 
-void MainWindow::on_sbtCCDL_L_WR_XMPU1_editingFinished() {
-  ui->sbtCCDL_L_WR_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR_tick()));
+void MainWindow::on_sbtCCD_L_WR_XMPU1_editingFinished() {
+  ui->sbtCCD_L_WR_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR());
+  ui->ltCCD_L_WR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_LCLK_XMPU1_editingFinished() {
-  ui->sbtCCDL_L_WR_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR_lowerLimit());
+void MainWindow::on_sbtCCD_L_WR_LCLK_XMPU1_editingFinished() {
+  ui->sbtCCD_L_WR_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR_lowerLimit());
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_XMPU1_editingFinished() {
-  ui->sbtCCDL_L_WR2_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR2_tick()));
+void MainWindow::on_sbtCCD_L_WR2_XMPU1_editingFinished() {
+  ui->sbtCCD_L_WR2_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR2());
+  ui->ltCCD_L_WR2_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR2_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMPU1_editingFinished() {
-  ui->sbtCCDL_L_WR2_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR2_lowerLimit());
+void MainWindow::on_sbtCCD_L_WR2_LCLK_XMPU1_editingFinished() {
+  ui->sbtCCD_L_WR2_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_sbtFAW_XMPU1_editingFinished() {
@@ -3881,7 +4209,7 @@ void MainWindow::on_sbtFAW_LCLK_XMPU1_editingFinished() {
 
 void MainWindow::on_sbtCCD_L_WTR_XMPU1_editingFinished() {
   ui->sbtCCD_L_WTR_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU1_editingFinished() {
@@ -3890,17 +4218,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU1_editingFinished() {
 
 void MainWindow::on_sbtCCD_S_WTR_XMPU1_editingFinished() {
   ui->sbtCCD_S_WTR_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMPU1_editingFinished() {
   ui->sbtCCD_S_WTR_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMPU1_editingFinished() {
   ui->sbtRTP_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettRTP_tick()));
+  ui->ltRTP_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMPU1_editingFinished() {
@@ -4173,21 +4501,21 @@ void MainWindow::on_sbtCCD_L_LCLK_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_L_lowerLimit(value);
 }
 
-void MainWindow::on_sbtCCDL_L_WR_XMPU2_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR_tick()));
+  ui->ltCCD_L_WR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_LCLK_XMPU2_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_LCLK_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_L_WR_lowerLimit(value);
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_XMPU2_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR2_tick()));
+  ui->ltCCD_L_WR2_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR2_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMPU2_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_LCLK_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_L_WR2_lowerLimit(value);
 }
 
@@ -4202,7 +4530,7 @@ void MainWindow::on_sbtFAW_LCLK_XMPU2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU2_valueChanged(int value) {
@@ -4211,17 +4539,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_S_WTR_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettRTP_tick()));
+  ui->ltRTP_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMPU2_valueChanged(int value) {
@@ -4292,22 +4620,22 @@ void MainWindow::on_sbtCCD_L_LCLK_XMPU2_editingFinished() {
   ui->sbtCCD_L_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_lowerLimit());
 }
 
-void MainWindow::on_sbtCCDL_L_WR_XMPU2_editingFinished() {
-  ui->sbtCCDL_L_WR_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR_tick()));
+void MainWindow::on_sbtCCD_L_WR_XMPU2_editingFinished() {
+  ui->sbtCCD_L_WR_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR());
+  ui->ltCCD_L_WR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_LCLK_XMPU2_editingFinished() {
-  ui->sbtCCDL_L_WR_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR_lowerLimit());
+void MainWindow::on_sbtCCD_L_WR_LCLK_XMPU2_editingFinished() {
+  ui->sbtCCD_L_WR_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR_lowerLimit());
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_XMPU2_editingFinished() {
-  ui->sbtCCDL_L_WR2_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR2_tick()));
+void MainWindow::on_sbtCCD_L_WR2_XMPU2_editingFinished() {
+  ui->sbtCCD_L_WR2_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR2());
+  ui->ltCCD_L_WR2_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR2_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMPU2_editingFinished() {
-  ui->sbtCCDL_L_WR2_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR2_lowerLimit());
+void MainWindow::on_sbtCCD_L_WR2_LCLK_XMPU2_editingFinished() {
+  ui->sbtCCD_L_WR2_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_sbtFAW_XMPU2_editingFinished() {
@@ -4321,7 +4649,7 @@ void MainWindow::on_sbtFAW_LCLK_XMPU2_editingFinished() {
 
 void MainWindow::on_sbtCCD_L_WTR_XMPU2_editingFinished() {
   ui->sbtCCD_L_WTR_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU2_editingFinished() {
@@ -4330,17 +4658,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU2_editingFinished() {
 
 void MainWindow::on_sbtCCD_S_WTR_XMPU2_editingFinished() {
   ui->sbtCCD_S_WTR_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMPU2_editingFinished() {
   ui->sbtCCD_S_WTR_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMPU2_editingFinished() {
   ui->sbtRTP_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettRTP_tick()));
+  ui->ltRTP_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMPU2_editingFinished() {
@@ -4429,14 +4757,14 @@ void MainWindow::on_sbtCCD_L_EXPO1_valueChanged(int value) {
   ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_EXPO1_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR_tick()));
+  ui->ltCCD_L_WR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_EXPO1_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR2_tick()));
+  ui->ltCCD_L_WR2_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtFAW_EXPO1_valueChanged(int value) {
@@ -4446,17 +4774,17 @@ void MainWindow::on_sbtFAW_EXPO1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->expoBundle.profile1.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(spd->expoBundle.profile1.gettRTP_tick()));
+  ui->ltRTP_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRTP_tick()));
 }
 
 void MainWindow::on_sbVDD_EXPO1_editingFinished() {
@@ -4533,14 +4861,14 @@ void MainWindow::on_sbtCCD_L_EXPO1_editingFinished() {
   ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_EXPO1_editingFinished() {
-  ui->sbtCCDL_L_WR_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR_tick()));
+void MainWindow::on_sbtCCD_L_WR_EXPO1_editingFinished() {
+  ui->sbtCCD_L_WR_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_L_WR());
+  ui->ltCCD_L_WR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_EXPO1_editingFinished() {
-  ui->sbtCCDL_L_WR2_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR2_tick()));
+void MainWindow::on_sbtCCD_L_WR2_EXPO1_editingFinished() {
+  ui->sbtCCD_L_WR2_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_L_WR2());
+  ui->ltCCD_L_WR2_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtFAW_EXPO1_editingFinished() {
@@ -4550,17 +4878,17 @@ void MainWindow::on_sbtFAW_EXPO1_editingFinished() {
 
 void MainWindow::on_sbtCCD_L_WTR_EXPO1_editingFinished() {
   ui->sbtCCD_L_WTR_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_EXPO1_editingFinished() {
   ui->sbtCCD_S_WTR_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->expoBundle.profile1.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_EXPO1_editingFinished() {
   ui->sbtRTP_EXPO1->setValue(spd->expoBundle.profile1.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(spd->expoBundle.profile1.gettRTP_tick()));
+  ui->ltRTP_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRTP_tick()));
 }
 
 // EXPO2
@@ -4645,14 +4973,14 @@ void MainWindow::on_sbtCCD_L_EXPO2_valueChanged(int value) {
   ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_EXPO2_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR_tick()));
+  ui->ltCCD_L_WR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_EXPO2_valueChanged(int value) {
+void MainWindow::on_sbtCCD_L_WR2_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR2_tick()));
+  ui->ltCCD_L_WR2_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtFAW_EXPO2_valueChanged(int value) {
@@ -4662,17 +4990,17 @@ void MainWindow::on_sbtFAW_EXPO2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->expoBundle.profile2.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(spd->expoBundle.profile2.gettRTP_tick()));
+  ui->ltRTP_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRTP_tick()));
 }
 
 void MainWindow::on_sbVDD_EXPO2_editingFinished() {
@@ -4749,14 +5077,14 @@ void MainWindow::on_sbtCCD_L_EXPO2_editingFinished() {
   ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR_EXPO2_editingFinished() {
-  ui->sbtCCDL_L_WR_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR_tick()));
+void MainWindow::on_sbtCCD_L_WR_EXPO2_editingFinished() {
+  ui->sbtCCD_L_WR_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_L_WR());
+  ui->ltCCD_L_WR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR_tick()));
 }
 
-void MainWindow::on_sbtCCDL_L_WR2_EXPO2_editingFinished() {
-  ui->sbtCCDL_L_WR2_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR2_tick()));
+void MainWindow::on_sbtCCD_L_WR2_EXPO2_editingFinished() {
+  ui->sbtCCD_L_WR2_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_L_WR2());
+  ui->ltCCD_L_WR2_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtFAW_EXPO2_editingFinished() {
@@ -4766,17 +5094,17 @@ void MainWindow::on_sbtFAW_EXPO2_editingFinished() {
 
 void MainWindow::on_sbtCCD_L_WTR_EXPO2_editingFinished() {
   ui->sbtCCD_L_WTR_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WTR_tick()));
+  ui->ltCCD_L_WTR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_EXPO2_editingFinished() {
   ui->sbtCCD_S_WTR_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->expoBundle.profile2.gettCCD_S_WTR_tick()));
+  ui->ltCCD_S_WTR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_EXPO2_editingFinished() {
   ui->sbtRTP_EXPO2->setValue(spd->expoBundle.profile2.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(spd->expoBundle.profile2.gettRTP_tick()));
+  ui->ltRTP_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRTP_tick()));
 }
 
 // EXPO <-> Conversion

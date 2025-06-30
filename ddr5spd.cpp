@@ -540,43 +540,43 @@ void DDR5SPD::settWR_tick(const unsigned short tick) {
 }
 
 const unsigned short DDR5SPD::gettRFC1_slr_tick() {
-  return utilities::TimeToTicksDDR5(gettRFC1_slr() * 1000, getMinCycleTime());
+  return utilities::TimeToTicksDDR5_RFC(gettRFC1_slr(), getMinCycleTime());
 }
 
 void DDR5SPD::settRFC1_slr_tick(const unsigned short tick) {
-  settRFC1_slr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+  settRFC1_slr(utilities::TicksToTimeDDR5_RFC(tick, getMinCycleTime()));
 }
 
 const unsigned short DDR5SPD::gettRFC2_slr_tick() {
-  return utilities::TimeToTicksDDR5(gettRFC2_slr() * 1000, getMinCycleTime());
+  return utilities::TimeToTicksDDR5_RFC(gettRFC2_slr(), getMinCycleTime());
 }
 
 void DDR5SPD::settRFC2_slr_tick(const unsigned short tick) {
-  settRFC2_slr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+  settRFC2_slr(utilities::TicksToTimeDDR5_RFC(tick, getMinCycleTime()));
 }
 
 const unsigned short DDR5SPD::gettRFCsb_slr_tick() {
-  return utilities::TimeToTicksDDR5(gettRFCsb_slr() * 1000, getMinCycleTime());
+  return utilities::TimeToTicksDDR5_RFC(gettRFCsb_slr(), getMinCycleTime());
 }
 
 void DDR5SPD::settRFCsb_slr_tick(const unsigned short tick) {
-  settRFCsb_slr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+  settRFCsb_slr(utilities::TicksToTimeDDR5_RFC(tick, getMinCycleTime()));
 }
 
 const unsigned short DDR5SPD::gettRFC1_dlr_tick() {
-  return utilities::TimeToTicksDDR5(gettRFC1_dlr() * 1000, getMinCycleTime());
+  return utilities::TimeToTicksDDR5_RFC(gettRFC1_dlr(), getMinCycleTime());
 }
 
 void DDR5SPD::settRFC1_dlr_tick(const unsigned short tick) {
-  settRFC1_dlr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+  settRFC1_dlr(utilities::TicksToTimeDDR5_RFC(tick, getMinCycleTime()));
 }
 
 const unsigned short DDR5SPD::gettRFC2_dlr_tick() {
-  return utilities::TimeToTicksDDR5(gettRFC2_dlr() * 1000, getMinCycleTime());
+  return utilities::TimeToTicksDDR5_RFC(gettRFC2_dlr(), getMinCycleTime());
 }
 
 void DDR5SPD::settRFC2_dlr_tick(const unsigned short tick) {
-  settRFC2_dlr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+  settRFC2_dlr(utilities::TicksToTimeDDR5_RFC(tick, getMinCycleTime()));
 }
 
 const unsigned short DDR5SPD::gettRFCsb_dlr_tick() {
@@ -584,7 +584,7 @@ const unsigned short DDR5SPD::gettRFCsb_dlr_tick() {
 }
 
 void DDR5SPD::settRFCsb_dlr_tick(const unsigned short tick) {
-  settRFCsb_dlr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+  settRFCsb_dlr(utilities::TicksToTimeDDR5_RFC(tick, getMinCycleTime()));
 }
 
 const unsigned short DDR5SPD::gettRRD_L_tick() {
