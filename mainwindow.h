@@ -90,6 +90,8 @@ private slots:
     void reloadMiscTab();
 
     // Slots JEDEC
+    void on_spinMinCycleTime_valueChanged(int);
+    void on_spinMaxCycleTime_valueChanged(int);
     void on_spinMinCycleTime_editingFinished();
     void on_spinMaxCycleTime_editingFinished();
     void on_cbCL20_toggled(bool);
@@ -133,6 +135,32 @@ private slots:
     void on_cbCL96_toggled(bool);
     void on_cbCL98_toggled(bool);
 
+    void on_spinBoxtAA_valueChanged(int);
+    void on_spinBoxtRCD_valueChanged(int);
+    void on_spinBoxtRP_valueChanged(int);
+    void on_spinBoxtRAS_valueChanged(int);
+    void on_spinBoxtRC_valueChanged(int);
+    void on_spinBoxtWR_valueChanged(int);
+    void on_spinBoxtRFC1_valueChanged(int);
+    void on_spinBoxtRFC2_valueChanged(int);
+    void on_spinBoxtRFC_valueChanged(int);
+    void on_spinBoxtRRD_L_valueChanged(int);
+    void on_spinBoxtRRD_L_LCLK_valueChanged(int);
+    void on_spinBoxtCCD_L_valueChanged(int);
+    void on_spinBoxtCCD_L_LCLK_valueChanged(int);
+    void on_spinBoxtCCDL_L_WR_valueChanged(int);
+    void on_spinBoxtCCDL_L_WR_LCLK_valueChanged(int);
+    void on_spinBoxtCCDL_L_WR2_valueChanged(int);
+    void on_spinBoxtCCDL_L_WR2_LCLK_valueChanged(int);
+    void on_spinBoxtFAW_valueChanged(int);
+    void on_spinBoxtFAW_LCLK_valueChanged(int);
+    void on_spinBoxtCCD_L_WTR_valueChanged(int);
+    void on_spinBoxtCCD_L_WTR_LCLK_valueChanged(int);
+    void on_spinBoxtCCD_S_WTR_valueChanged(int);
+    void on_spinBoxtCCD_S_WTR_LCLK_valueChanged(int);
+    void on_spinBoxtRTP_valueChanged(int);
+    void on_spinBoxtRTP_LCLK_valueChanged(int);
+
     void on_spinBoxtAA_editingFinished();
     void on_spinBoxtRCD_editingFinished();
     void on_spinBoxtRP_editingFinished();
@@ -164,12 +192,18 @@ private slots:
     void on_cbEnabled_XMP1_toggled(bool);
     void on_cbDynamicMemBoost_XMP1_toggled(bool);
     void on_cbRealTimeMemOC_XMP1_toggled(bool);
+    void on_sbVDD_XMP1_valueChanged(int);
+    void on_sbVDDQ_XMP1_valueChanged(int);
+    void on_sbVPP_XMP1_valueChanged(int);
+    void on_sbVmemctrl_XMP1_valueChanged(int);
+    void on_spinMinCycleTime_XMP1_valueChanged(int);
+    void on_cbCommandRate_XMP1_currentIndexChanged(int);
+
     void on_sbVDD_XMP1_editingFinished();
     void on_sbVDDQ_XMP1_editingFinished();
     void on_sbVPP_XMP1_editingFinished();
     void on_sbVmemctrl_XMP1_editingFinished();
     void on_spinMinCycleTime_XMP1_editingFinished();
-    void on_cbCommandRate_XMP1_currentIndexChanged(int);
 
     void on_cbCL20_XMP1_toggled(bool);
     void on_cbCL22_XMP1_toggled(bool);
@@ -212,6 +246,32 @@ private slots:
     void on_cbCL96_XMP1_toggled(bool);
     void on_cbCL98_XMP1_toggled(bool);
 
+    void on_sbtAA_XMP1_valueChanged(int);
+    void on_sbtRCD_XMP1_valueChanged(int);
+    void on_sbtRP_XMP1_valueChanged(int);
+    void on_sbtRAS_XMP1_valueChanged(int);
+    void on_sbtRC_XMP1_valueChanged(int);
+    void on_sbtWR_XMP1_valueChanged(int);
+    void on_sbtRFC1_XMP1_valueChanged(int);
+    void on_sbtRFC2_XMP1_valueChanged(int);
+    void on_sbtRFC_XMP1_valueChanged(int);
+    void on_sbtRRD_L_XMP1_valueChanged(int);
+    void on_sbtRRD_L_LCLK_XMP1_valueChanged(int);
+    void on_sbtCCD_L_XMP1_valueChanged(int);
+    void on_sbtCCD_L_LCLK_XMP1_valueChanged(int);
+    void on_sbtCCDL_L_WR_XMP1_valueChanged(int);
+    void on_sbtCCDL_L_WR_LCLK_XMP1_valueChanged(int);
+    void on_sbtCCDL_L_WR2_XMP1_valueChanged(int);
+    void on_sbtCCDL_L_WR2_LCLK_XMP1_valueChanged(int);
+    void on_sbtFAW_XMP1_valueChanged(int);
+    void on_sbtFAW_LCLK_XMP1_valueChanged(int);
+    void on_sbtCCD_L_WTR_XMP1_valueChanged(int);
+    void on_sbtCCD_L_WTR_LCLK_XMP1_valueChanged(int);
+    void on_sbtCCD_S_WTR_XMP1_valueChanged(int);
+    void on_sbtCCD_S_WTR_LCLK_XMP1_valueChanged(int);
+    void on_sbtRTP_XMP1_valueChanged(int);
+    void on_sbtRTP_LCLK_XMP1_valueChanged(int);
+
     void on_sbtAA_XMP1_editingFinished();
     void on_sbtRCD_XMP1_editingFinished();
     void on_sbtRP_XMP1_editingFinished();
@@ -243,12 +303,18 @@ private slots:
     void on_cbEnabled_XMP2_toggled(bool);
     void on_cbDynamicMemBoost_XMP2_toggled(bool);
     void on_cbRealTimeMemOC_XMP2_toggled(bool);
+    void on_sbVDD_XMP2_valueChanged(int);
+    void on_sbVDDQ_XMP2_valueChanged(int);
+    void on_sbVPP_XMP2_valueChanged(int);
+    void on_sbVmemctrl_XMP2_valueChanged(int);
+    void on_spinMinCycleTime_XMP2_valueChanged(int);
+    void on_cbCommandRate_XMP2_currentIndexChanged(int);
+
     void on_sbVDD_XMP2_editingFinished();
     void on_sbVDDQ_XMP2_editingFinished();
     void on_sbVPP_XMP2_editingFinished();
     void on_sbVmemctrl_XMP2_editingFinished();
     void on_spinMinCycleTime_XMP2_editingFinished();
-    void on_cbCommandRate_XMP2_currentIndexChanged(int);
 
     void on_cbCL20_XMP2_toggled(bool);
     void on_cbCL22_XMP2_toggled(bool);
@@ -291,6 +357,32 @@ private slots:
     void on_cbCL96_XMP2_toggled(bool);
     void on_cbCL98_XMP2_toggled(bool);
 
+    void on_sbtAA_XMP2_valueChanged(int);
+    void on_sbtRCD_XMP2_valueChanged(int);
+    void on_sbtRP_XMP2_valueChanged(int);
+    void on_sbtRAS_XMP2_valueChanged(int);
+    void on_sbtRC_XMP2_valueChanged(int);
+    void on_sbtWR_XMP2_valueChanged(int);
+    void on_sbtRFC1_XMP2_valueChanged(int);
+    void on_sbtRFC2_XMP2_valueChanged(int);
+    void on_sbtRFC_XMP2_valueChanged(int);
+    void on_sbtRRD_L_XMP2_valueChanged(int);
+    void on_sbtRRD_L_LCLK_XMP2_valueChanged(int);
+    void on_sbtCCD_L_XMP2_valueChanged(int);
+    void on_sbtCCD_L_LCLK_XMP2_valueChanged(int);
+    void on_sbtCCDL_L_WR_XMP2_valueChanged(int);
+    void on_sbtCCDL_L_WR_LCLK_XMP2_valueChanged(int);
+    void on_sbtCCDL_L_WR2_XMP2_valueChanged(int);
+    void on_sbtCCDL_L_WR2_LCLK_XMP2_valueChanged(int);
+    void on_sbtFAW_XMP2_valueChanged(int);
+    void on_sbtFAW_LCLK_XMP2_valueChanged(int);
+    void on_sbtCCD_L_WTR_XMP2_valueChanged(int);
+    void on_sbtCCD_L_WTR_LCLK_XMP2_valueChanged(int);
+    void on_sbtCCD_S_WTR_XMP2_valueChanged(int);
+    void on_sbtCCD_S_WTR_LCLK_XMP2_valueChanged(int);
+    void on_sbtRTP_XMP2_valueChanged(int);
+    void on_sbtRTP_LCLK_XMP2_valueChanged(int);
+
     void on_sbtAA_XMP2_editingFinished();
     void on_sbtRCD_XMP2_editingFinished();
     void on_sbtRP_XMP2_editingFinished();
@@ -322,12 +414,18 @@ private slots:
     void on_cbEnabled_XMP3_toggled(bool);
     void on_cbDynamicMemBoost_XMP3_toggled(bool);
     void on_cbRealTimeMemOC_XMP3_toggled(bool);
+    void on_sbVDD_XMP3_valueChanged(int);
+    void on_sbVDDQ_XMP3_valueChanged(int);
+    void on_sbVPP_XMP3_valueChanged(int);
+    void on_sbVmemctrl_XMP3_valueChanged(int);
+    void on_spinMinCycleTime_XMP3_valueChanged(int);
+    void on_cbCommandRate_XMP3_currentIndexChanged(int);
+
     void on_sbVDD_XMP3_editingFinished();
     void on_sbVDDQ_XMP3_editingFinished();
     void on_sbVPP_XMP3_editingFinished();
     void on_sbVmemctrl_XMP3_editingFinished();
     void on_spinMinCycleTime_XMP3_editingFinished();
-    void on_cbCommandRate_XMP3_currentIndexChanged(int);
 
     void on_cbCL20_XMP3_toggled(bool);
     void on_cbCL22_XMP3_toggled(bool);
@@ -370,6 +468,32 @@ private slots:
     void on_cbCL96_XMP3_toggled(bool);
     void on_cbCL98_XMP3_toggled(bool);
 
+    void on_sbtAA_XMP3_valueChanged(int);
+    void on_sbtRCD_XMP3_valueChanged(int);
+    void on_sbtRP_XMP3_valueChanged(int);
+    void on_sbtRAS_XMP3_valueChanged(int);
+    void on_sbtRC_XMP3_valueChanged(int);
+    void on_sbtWR_XMP3_valueChanged(int);
+    void on_sbtRFC1_XMP3_valueChanged(int);
+    void on_sbtRFC2_XMP3_valueChanged(int);
+    void on_sbtRFC_XMP3_valueChanged(int);
+    void on_sbtRRD_L_XMP3_valueChanged(int);
+    void on_sbtRRD_L_LCLK_XMP3_valueChanged(int);
+    void on_sbtCCD_L_XMP3_valueChanged(int);
+    void on_sbtCCD_L_LCLK_XMP3_valueChanged(int);
+    void on_sbtCCDL_L_WR_XMP3_valueChanged(int);
+    void on_sbtCCDL_L_WR_LCLK_XMP3_valueChanged(int);
+    void on_sbtCCDL_L_WR2_XMP3_valueChanged(int);
+    void on_sbtCCDL_L_WR2_LCLK_XMP3_valueChanged(int);
+    void on_sbtFAW_XMP3_valueChanged(int);
+    void on_sbtFAW_LCLK_XMP3_valueChanged(int);
+    void on_sbtCCD_L_WTR_XMP3_valueChanged(int);
+    void on_sbtCCD_L_WTR_LCLK_XMP3_valueChanged(int);
+    void on_sbtCCD_S_WTR_XMP3_valueChanged(int);
+    void on_sbtCCD_S_WTR_LCLK_XMP3_valueChanged(int);
+    void on_sbtRTP_XMP3_valueChanged(int);
+    void on_sbtRTP_LCLK_XMP3_valueChanged(int);
+
     void on_sbtAA_XMP3_editingFinished();
     void on_sbtRCD_XMP3_editingFinished();
     void on_sbtRP_XMP3_editingFinished();
@@ -399,12 +523,18 @@ private slots:
     // Slots XMP User 1
     void on_cbDynamicMemBoost_XMPU1_toggled(bool);
     void on_cbRealTimeMemOC_XMPU1_toggled(bool);
+    void on_sbVDD_XMPU1_valueChanged(int);
+    void on_sbVDDQ_XMPU1_valueChanged(int);
+    void on_sbVPP_XMPU1_valueChanged(int);
+    void on_sbVmemctrl_XMPU1_valueChanged(int);
+    void on_spinMinCycleTime_XMPU1_valueChanged(int);
+    void on_cbCommandRate_XMPU1_currentIndexChanged(int);
+
     void on_sbVDD_XMPU1_editingFinished();
     void on_sbVDDQ_XMPU1_editingFinished();
     void on_sbVPP_XMPU1_editingFinished();
     void on_sbVmemctrl_XMPU1_editingFinished();
     void on_spinMinCycleTime_XMPU1_editingFinished();
-    void on_cbCommandRate_XMPU1_currentIndexChanged(int);
 
     void on_cbCL20_XMPU1_toggled(bool);
     void on_cbCL22_XMPU1_toggled(bool);
@@ -447,6 +577,32 @@ private slots:
     void on_cbCL96_XMPU1_toggled(bool);
     void on_cbCL98_XMPU1_toggled(bool);
 
+    void on_sbtAA_XMPU1_valueChanged(int);
+    void on_sbtRCD_XMPU1_valueChanged(int);
+    void on_sbtRP_XMPU1_valueChanged(int);
+    void on_sbtRAS_XMPU1_valueChanged(int);
+    void on_sbtRC_XMPU1_valueChanged(int);
+    void on_sbtWR_XMPU1_valueChanged(int);
+    void on_sbtRFC1_XMPU1_valueChanged(int);
+    void on_sbtRFC2_XMPU1_valueChanged(int);
+    void on_sbtRFC_XMPU1_valueChanged(int);
+    void on_sbtRRD_L_XMPU1_valueChanged(int);
+    void on_sbtRRD_L_LCLK_XMPU1_valueChanged(int);
+    void on_sbtCCD_L_XMPU1_valueChanged(int);
+    void on_sbtCCD_L_LCLK_XMPU1_valueChanged(int);
+    void on_sbtCCDL_L_WR_XMPU1_valueChanged(int);
+    void on_sbtCCDL_L_WR_LCLK_XMPU1_valueChanged(int);
+    void on_sbtCCDL_L_WR2_XMPU1_valueChanged(int);
+    void on_sbtCCDL_L_WR2_LCLK_XMPU1_valueChanged(int);
+    void on_sbtFAW_XMPU1_valueChanged(int);
+    void on_sbtFAW_LCLK_XMPU1_valueChanged(int);
+    void on_sbtCCD_L_WTR_XMPU1_valueChanged(int);
+    void on_sbtCCD_L_WTR_LCLK_XMPU1_valueChanged(int);
+    void on_sbtCCD_S_WTR_XMPU1_valueChanged(int);
+    void on_sbtCCD_S_WTR_LCLK_XMPU1_valueChanged(int);
+    void on_sbtRTP_XMPU1_valueChanged(int);
+    void on_sbtRTP_LCLK_XMPU1_valueChanged(int);
+
     void on_sbtAA_XMPU1_editingFinished();
     void on_sbtRCD_XMPU1_editingFinished();
     void on_sbtRP_XMPU1_editingFinished();
@@ -476,12 +632,18 @@ private slots:
     // Slots XMP User 2
     void on_cbDynamicMemBoost_XMPU2_toggled(bool);
     void on_cbRealTimeMemOC_XMPU2_toggled(bool);
+    void on_sbVDD_XMPU2_valueChanged(int);
+    void on_sbVDDQ_XMPU2_valueChanged(int);
+    void on_sbVPP_XMPU2_valueChanged(int);
+    void on_sbVmemctrl_XMPU2_valueChanged(int);
+    void on_spinMinCycleTime_XMPU2_valueChanged(int);
+    void on_cbCommandRate_XMPU2_currentIndexChanged(int);
+
     void on_sbVDD_XMPU2_editingFinished();
     void on_sbVDDQ_XMPU2_editingFinished();
     void on_sbVPP_XMPU2_editingFinished();
     void on_sbVmemctrl_XMPU2_editingFinished();
     void on_spinMinCycleTime_XMPU2_editingFinished();
-    void on_cbCommandRate_XMPU2_currentIndexChanged(int);
 
     void on_cbCL20_XMPU2_toggled(bool);
     void on_cbCL22_XMPU2_toggled(bool);
@@ -524,6 +686,32 @@ private slots:
     void on_cbCL96_XMPU2_toggled(bool);
     void on_cbCL98_XMPU2_toggled(bool);
 
+    void on_sbtAA_XMPU2_valueChanged(int);
+    void on_sbtRCD_XMPU2_valueChanged(int);
+    void on_sbtRP_XMPU2_valueChanged(int);
+    void on_sbtRAS_XMPU2_valueChanged(int);
+    void on_sbtRC_XMPU2_valueChanged(int);
+    void on_sbtWR_XMPU2_valueChanged(int);
+    void on_sbtRFC1_XMPU2_valueChanged(int);
+    void on_sbtRFC2_XMPU2_valueChanged(int);
+    void on_sbtRFC_XMPU2_valueChanged(int);
+    void on_sbtRRD_L_XMPU2_valueChanged(int);
+    void on_sbtRRD_L_LCLK_XMPU2_valueChanged(int);
+    void on_sbtCCD_L_XMPU2_valueChanged(int);
+    void on_sbtCCD_L_LCLK_XMPU2_valueChanged(int);
+    void on_sbtCCDL_L_WR_XMPU2_valueChanged(int);
+    void on_sbtCCDL_L_WR_LCLK_XMPU2_valueChanged(int);
+    void on_sbtCCDL_L_WR2_XMPU2_valueChanged(int);
+    void on_sbtCCDL_L_WR2_LCLK_XMPU2_valueChanged(int);
+    void on_sbtFAW_XMPU2_valueChanged(int);
+    void on_sbtFAW_LCLK_XMPU2_valueChanged(int);
+    void on_sbtCCD_L_WTR_XMPU2_valueChanged(int);
+    void on_sbtCCD_L_WTR_LCLK_XMPU2_valueChanged(int);
+    void on_sbtCCD_S_WTR_XMPU2_valueChanged(int);
+    void on_sbtCCD_S_WTR_LCLK_XMPU2_valueChanged(int);
+    void on_sbtRTP_XMPU2_valueChanged(int);
+    void on_sbtRTP_LCLK_XMPU2_valueChanged(int);
+
     void on_sbtAA_XMPU2_editingFinished();
     void on_sbtRCD_XMPU2_editingFinished();
     void on_sbtRP_XMPU2_editingFinished();
@@ -552,10 +740,32 @@ private slots:
 
     // Slots EXPO1
     void on_cbEnabled_EXPO1_toggled(bool);
+    void on_sbVDD_EXPO1_valueChanged(int);
+    void on_sbVDDQ_EXPO1_valueChanged(int);
+    void on_sbVPP_EXPO1_valueChanged(int);
+    void on_spinMinCycleTime_EXPO1_valueChanged(int);
     void on_sbVDD_EXPO1_editingFinished();
     void on_sbVDDQ_EXPO1_editingFinished();
     void on_sbVPP_EXPO1_editingFinished();
     void on_spinMinCycleTime_EXPO1_editingFinished();
+
+    void on_sbtAA_EXPO1_valueChanged(int);
+    void on_sbtRCD_EXPO1_valueChanged(int);
+    void on_sbtRP_EXPO1_valueChanged(int);
+    void on_sbtRAS_EXPO1_valueChanged(int);
+    void on_sbtRC_EXPO1_valueChanged(int);
+    void on_sbtWR_EXPO1_valueChanged(int);
+    void on_sbtRFC1_EXPO1_valueChanged(int);
+    void on_sbtRFC2_EXPO1_valueChanged(int);
+    void on_sbtRFC_EXPO1_valueChanged(int);
+    void on_sbtRRD_L_EXPO1_valueChanged(int);
+    void on_sbtCCD_L_EXPO1_valueChanged(int);
+    void on_sbtCCDL_L_WR_EXPO1_valueChanged(int);
+    void on_sbtCCDL_L_WR2_EXPO1_valueChanged(int);
+    void on_sbtFAW_EXPO1_valueChanged(int);
+    void on_sbtCCD_L_WTR_EXPO1_valueChanged(int);
+    void on_sbtCCD_S_WTR_EXPO1_valueChanged(int);
+    void on_sbtRTP_EXPO1_valueChanged(int);
 
     void on_sbtAA_EXPO1_editingFinished();
     void on_sbtRCD_EXPO1_editingFinished();
@@ -577,10 +787,32 @@ private slots:
 
     // Slots EXPO2
     void on_cbEnabled_EXPO2_toggled(bool);
+    void on_sbVDD_EXPO2_valueChanged(int);
+    void on_sbVDDQ_EXPO2_valueChanged(int);
+    void on_sbVPP_EXPO2_valueChanged(int);
+    void on_spinMinCycleTime_EXPO2_valueChanged(int);
     void on_sbVDD_EXPO2_editingFinished();
     void on_sbVDDQ_EXPO2_editingFinished();
     void on_sbVPP_EXPO2_editingFinished();
     void on_spinMinCycleTime_EXPO2_editingFinished();
+
+    void on_sbtAA_EXPO2_valueChanged(int);
+    void on_sbtRCD_EXPO2_valueChanged(int);
+    void on_sbtRP_EXPO2_valueChanged(int);
+    void on_sbtRAS_EXPO2_valueChanged(int);
+    void on_sbtRC_EXPO2_valueChanged(int);
+    void on_sbtWR_EXPO2_valueChanged(int);
+    void on_sbtRFC1_EXPO2_valueChanged(int);
+    void on_sbtRFC2_EXPO2_valueChanged(int);
+    void on_sbtRFC_EXPO2_valueChanged(int);
+    void on_sbtRRD_L_EXPO2_valueChanged(int);
+    void on_sbtCCD_L_EXPO2_valueChanged(int);
+    void on_sbtCCDL_L_WR_EXPO2_valueChanged(int);
+    void on_sbtCCDL_L_WR2_EXPO2_valueChanged(int);
+    void on_sbtFAW_EXPO2_valueChanged(int);
+    void on_sbtCCD_L_WTR_EXPO2_valueChanged(int);
+    void on_sbtCCD_S_WTR_EXPO2_valueChanged(int);
+    void on_sbtRTP_EXPO2_valueChanged(int);
 
     void on_sbtAA_EXPO2_editingFinished();
     void on_sbtRCD_EXPO2_editingFinished();
@@ -615,6 +847,8 @@ private slots:
     void on_cbColumnAddresses_currentIndexChanged(int);
     void on_cbRowAddresses_currentIndexChanged(int);
     void on_cdDeviceWidth_currentIndexChanged(int);
+    void on_sbManufacturingYear_valueChanged(int);
+    void on_sbManufacturingWeek_valueChanged(int);
     void on_sbManufacturingYear_editingFinished();
     void on_sbManufacturingWeek_editingFinished();
     void on_lePartNumber_editingFinished();
