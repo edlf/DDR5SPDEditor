@@ -1,14 +1,14 @@
 #ifndef DDR5SPD_H
 #define DDR5SPD_H
 
+#include <QByteArray>
+
 #include "ddr5spd_structs.h"
 #include "expo.h"
 #include "xmp3.h"
-#include <QByteArray>
 
 class DDR5SPD {
-
-public:
+ public:
   SPD_Struct spdStruct;
 
   // Raw SPD getters/setters
@@ -182,4 +182,4 @@ public:
   QByteArray extraBytes;
 };
 
-#endif // DDR5SPD_H
+#endif  // DDR5SPD_H

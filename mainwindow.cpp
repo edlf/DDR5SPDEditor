@@ -1,10 +1,10 @@
 #include "mainwindow.h"
+
 #include "./ui_mainwindow.h"
 #include "ddr5spd_structs.h"
 #include "utilities.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
   disableUI();
   clearUI();
@@ -13,102 +13,66 @@ MainWindow::MainWindow(QWidget *parent)
   // File menu
   connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::openFile);
   connect(ui->actionSave, &QAction::triggered, this, &MainWindow::saveFile);
-  connect(ui->actionSave, &QAction::enabledChanged, this,
-          &MainWindow::saveFileEnabled);
+  connect(ui->actionSave, &QAction::enabledChanged, this, &MainWindow::saveFileEnabled);
   connect(ui->actionClose, &QAction::triggered, this, &MainWindow::closeFile);
-  connect(ui->actionClose, &QAction::enabledChanged, this,
-          &MainWindow::closeFileEnabled);
+  connect(ui->actionClose, &QAction::enabledChanged, this, &MainWindow::closeFileEnabled);
   connect(ui->actionExit, &QAction::triggered, this, &MainWindow::exit);
 
   // XMP menu
-  connect(ui->actionCreate_XMP_Block, &QAction::triggered, this,
-          &MainWindow::createXMPBlock);
-  connect(ui->actionEnableXMPmagic, &QAction::triggered, this,
-          &MainWindow::enableXMPMagicBits);
-  connect(ui->actionDisableXMPmagic, &QAction::triggered, this,
-          &MainWindow::disableXMPMagicBits);
-  connect(ui->actionWipeXMPregion, &QAction::triggered, this,
-          &MainWindow::wipeXMP);
+  connect(ui->actionCreate_XMP_Block, &QAction::triggered, this, &MainWindow::createXMPBlock);
+  connect(ui->actionEnableXMPmagic, &QAction::triggered, this, &MainWindow::enableXMPMagicBits);
+  connect(ui->actionDisableXMPmagic, &QAction::triggered, this, &MainWindow::disableXMPMagicBits);
+  connect(ui->actionWipeXMPregion, &QAction::triggered, this, &MainWindow::wipeXMP);
 
-  connect(ui->actionWipeProfile1, &QAction::triggered, this,
-          &MainWindow::wipeXMPProfile1);
-  connect(ui->actionWipeProfile2, &QAction::triggered, this,
-          &MainWindow::wipeXMPProfile2);
-  connect(ui->actionWipeProfile3, &QAction::triggered, this,
-          &MainWindow::wipeXMPProfile3);
-  connect(ui->actionWipeProfileU1, &QAction::triggered, this,
-          &MainWindow::wipeXMPProfileU1);
-  connect(ui->actionWipeProfileU2, &QAction::triggered, this,
-          &MainWindow::wipeXMPProfileU2);
+  connect(ui->actionWipeProfile1, &QAction::triggered, this, &MainWindow::wipeXMPProfile1);
+  connect(ui->actionWipeProfile2, &QAction::triggered, this, &MainWindow::wipeXMPProfile2);
+  connect(ui->actionWipeProfile3, &QAction::triggered, this, &MainWindow::wipeXMPProfile3);
+  connect(ui->actionWipeProfileU1, &QAction::triggered, this, &MainWindow::wipeXMPProfileU1);
+  connect(ui->actionWipeProfileU2, &QAction::triggered, this, &MainWindow::wipeXMPProfileU2);
 
-  connect(ui->actionLoadSampleProfile1, &QAction::triggered, this,
-          &MainWindow::loadSampleXMPProfile1);
-  connect(ui->actionLoadSampleProfile2, &QAction::triggered, this,
-          &MainWindow::loadSampleXMPProfile2);
-  connect(ui->actionLoadSampleProfile3, &QAction::triggered, this,
-          &MainWindow::loadSampleXMPProfile3);
-  connect(ui->actionLoadSampleProfileU1, &QAction::triggered, this,
-          &MainWindow::loadSampleXMPProfileU1);
-  connect(ui->actionLoadSampleProfileU2, &QAction::triggered, this,
-          &MainWindow::loadSampleXMPProfileU2);
+  connect(ui->actionLoadSampleProfile1, &QAction::triggered, this, &MainWindow::loadSampleXMPProfile1);
+  connect(ui->actionLoadSampleProfile2, &QAction::triggered, this, &MainWindow::loadSampleXMPProfile2);
+  connect(ui->actionLoadSampleProfile3, &QAction::triggered, this, &MainWindow::loadSampleXMPProfile3);
+  connect(ui->actionLoadSampleProfileU1, &QAction::triggered, this, &MainWindow::loadSampleXMPProfileU1);
+  connect(ui->actionLoadSampleProfileU2, &QAction::triggered, this, &MainWindow::loadSampleXMPProfileU2);
 
-  connect(ui->actionExportProfile1, &QAction::triggered, this,
-          &MainWindow::exportXMPProfile1);
-  connect(ui->actionExportProfile2, &QAction::triggered, this,
-          &MainWindow::exportXMPProfile2);
-  connect(ui->actionExportProfile3, &QAction::triggered, this,
-          &MainWindow::exportXMPProfile3);
-  connect(ui->actionExportUserProfile1, &QAction::triggered, this,
-          &MainWindow::exportXMPProfileU1);
-  connect(ui->actionExportUserProfile2, &QAction::triggered, this,
-          &MainWindow::exportXMPProfileU2);
+  connect(ui->actionExportProfile1, &QAction::triggered, this, &MainWindow::exportXMPProfile1);
+  connect(ui->actionExportProfile2, &QAction::triggered, this, &MainWindow::exportXMPProfile2);
+  connect(ui->actionExportProfile3, &QAction::triggered, this, &MainWindow::exportXMPProfile3);
+  connect(ui->actionExportUserProfile1, &QAction::triggered, this, &MainWindow::exportXMPProfileU1);
+  connect(ui->actionExportUserProfile2, &QAction::triggered, this, &MainWindow::exportXMPProfileU2);
 
-  connect(ui->actionImportProfile1, &QAction::triggered, this,
-          &MainWindow::importXMPProfile1);
-  connect(ui->actionImportProfile2, &QAction::triggered, this,
-          &MainWindow::importXMPProfile2);
-  connect(ui->actionImportProfile3, &QAction::triggered, this,
-          &MainWindow::importXMPProfile3);
-  connect(ui->actionImportUserProfile1, &QAction::triggered, this,
-          &MainWindow::importXMPProfileU1);
-  connect(ui->actionImportUserProfile2, &QAction::triggered, this,
-          &MainWindow::importXMPProfileU2);
+  connect(ui->actionImportProfile1, &QAction::triggered, this, &MainWindow::importXMPProfile1);
+  connect(ui->actionImportProfile2, &QAction::triggered, this, &MainWindow::importXMPProfile2);
+  connect(ui->actionImportProfile3, &QAction::triggered, this, &MainWindow::importXMPProfile3);
+  connect(ui->actionImportUserProfile1, &QAction::triggered, this, &MainWindow::importXMPProfileU1);
+  connect(ui->actionImportUserProfile2, &QAction::triggered, this, &MainWindow::importXMPProfileU2);
 
   // EXPO menu
-  connect(ui->actionWipeEXPOregion, &QAction::triggered, this,
-          &MainWindow::wipeEXPO);
-  connect(ui->actionExportEXPOProfile1, &QAction::triggered, this,
-          &MainWindow::exportEXPOProfile1);
-  connect(ui->actionExportEXPOProfile2, &QAction::triggered, this,
-          &MainWindow::exportEXPOProfile2);
-  connect(ui->actionImportEXPOProfile1, &QAction::triggered, this,
-          &MainWindow::importEXPOProfile1);
-  connect(ui->actionImportEXPOProfile2, &QAction::triggered, this,
-          &MainWindow::importEXPOProfile2);
-  connect(ui->actionCreate_EXPO_block, &QAction::triggered, this,
-          &MainWindow::createEXPOBlock);
-  connect(ui->actionCopyXMP1ToExpo1, &QAction::triggered, this,
-          &MainWindow::importEXPOProfile1FromXMP1);
-  connect(ui->actionCopyXMP2ToExpo1, &QAction::triggered, this,
-          &MainWindow::importEXPOProfile1FromXMP2);
-  connect(ui->actionCopyXMPU2ToExpo1, &QAction::triggered, this,
-          &MainWindow::importEXPOProfile1FromXMPU2);
-  connect(ui->actionCopyXMP1ToExpo2, &QAction::triggered, this,
-          &MainWindow::importEXPOProfile2FromXMP1);
-  connect(ui->actionCopyXMP2ToExpo2, &QAction::triggered, this,
-          &MainWindow::importEXPOProfile2FromXMP2);
-  connect(ui->actionCopyXMPU2ToExpo2, &QAction::triggered, this,
-          &MainWindow::importEXPOProfile2FromXMPU2);
+  connect(ui->actionWipeEXPOregion, &QAction::triggered, this, &MainWindow::wipeEXPO);
+  connect(ui->actionExportEXPOProfile1, &QAction::triggered, this, &MainWindow::exportEXPOProfile1);
+  connect(ui->actionExportEXPOProfile2, &QAction::triggered, this, &MainWindow::exportEXPOProfile2);
+  connect(ui->actionImportEXPOProfile1, &QAction::triggered, this, &MainWindow::importEXPOProfile1);
+  connect(ui->actionImportEXPOProfile2, &QAction::triggered, this, &MainWindow::importEXPOProfile2);
+  connect(ui->actionCreate_EXPO_block, &QAction::triggered, this, &MainWindow::createEXPOBlock);
+  connect(ui->actionCopyXMP1ToExpo1, &QAction::triggered, this, &MainWindow::importEXPOProfile1FromXMP1);
+  connect(ui->actionCopyXMP2ToExpo1, &QAction::triggered, this, &MainWindow::importEXPOProfile1FromXMP2);
+  connect(ui->actionCopyXMPU2ToExpo1, &QAction::triggered, this, &MainWindow::importEXPOProfile1FromXMPU2);
+  connect(ui->actionCopyXMP1ToExpo2, &QAction::triggered, this, &MainWindow::importEXPOProfile2FromXMP1);
+  connect(ui->actionCopyXMP2ToExpo2, &QAction::triggered, this, &MainWindow::importEXPOProfile2FromXMP2);
+  connect(ui->actionCopyXMPU2ToExpo2, &QAction::triggered, this, &MainWindow::importEXPOProfile2FromXMPU2);
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow() {
+  delete ui;
+}
 
-void MainWindow::exit() { qApp->exit(); }
+void MainWindow::exit() {
+  qApp->exit();
+}
 
 void MainWindow::openFile() {
-  QString fileName =
-      QFileDialog::getOpenFileName(this, "Open File", QDir::currentPath(),
-                                   "SPD Files (*.spd *.bin);;All Files (*.*)");
+  QString fileName = QFileDialog::getOpenFileName(this, "Open File", QDir::currentPath(), "SPD Files (*.spd *.bin);;All Files (*.*)");
   if (!fileName.isEmpty()) {
     // do something with the selected file
     QFile file(fileName);
@@ -118,20 +82,18 @@ void MainWindow::openFile() {
 
     size_t expectedBytes = 0;
 
-    size_t fileSize = file.size();
-
     switch (file.size()) {
-    // Regular 1K eeprom size
-    case ddr5_structs::eepromBaseSize:
-      expectedBytes = ddr5_structs::eepromBaseSize;
-      break;
-    // CUDIMM 2K size?
-    case ddr5_structs::eepromExtendedSize:
-      expectedBytes = ddr5_structs::eepromExtendedSize;
-      break;
-    default:
-      QMessageBox::critical(this, appName, tr("Invalid SPD file size."));
-      break;
+      // Regular 1K eeprom size
+      case ddr5_structs::eepromBaseSize:
+        expectedBytes = ddr5_structs::eepromBaseSize;
+        break;
+      // CUDIMM 2K size?
+      case ddr5_structs::eepromExtendedSize:
+        expectedBytes = ddr5_structs::eepromExtendedSize;
+        break;
+      default:
+        QMessageBox::critical(this, appName, tr("Invalid SPD file size."));
+        break;
     }
 
     QByteArray contents = file.readAll();
@@ -147,8 +109,7 @@ void MainWindow::openFile() {
 
     // TODO: Find proper way to do this
     QByteArray spdRawBytes = contents.sliced(0x0, ddr5_structs::eepromBaseSize);
-    ddr5_structs::SPD_Struct rawSPD =
-        *reinterpret_cast<ddr5_structs::SPD_Struct *>(spdRawBytes.data());
+    ddr5_structs::SPD_Struct rawSPD = *reinterpret_cast<ddr5_structs::SPD_Struct *>(spdRawBytes.data());
 
     if (rawSPD.memoryType != 0x12) {
       QMessageBox::critical(this, appName, tr("Invalid memory type in SPD."));
@@ -156,48 +117,42 @@ void MainWindow::openFile() {
     }
 
     switch (rawSPD.moduleType) {
-    case 0x02: // ModuleType::UnbufferedDIMM
-      break;
+      case 0x02:  // ModuleType::UnbufferedDIMM
+        break;
 
-    case 0x03: // ModuleType::SO_DIMM
-      break;
+      case 0x03:  // ModuleType::SO_DIMM
+        break;
 
-    case 0x05: // ModuleType::CUDIMM
-      QMessageBox::warning(
-          this, appName,
-          tr("CUDIMM detected. High change this will mangle your SPD!"));
-      break;
+      case 0x05:  // ModuleType::CUDIMM
+        QMessageBox::warning(this, appName, tr("CUDIMM detected. High change this will mangle your SPD!"));
+        break;
 
-    default:
-      QMessageBox::warning(
-          this, appName,
-          tr("Untested module type, only UDIMM or SODIMM memory has been "
-             "tested.\nHigh change this will mangle your SPD!"));
-      break;
+      default:
+        QMessageBox::warning(this, appName,
+                             tr("Untested module type, only UDIMM or SODIMM memory has been "
+                                "tested.\nHigh change this will mangle your SPD!"));
+        break;
     }
 
     QByteArray extraData;
 
     switch (expectedBytes) {
-    // Regular 1K eeprom size
-    case ddr5_structs::eepromBaseSize:
-      spd = new DDR5SPD(rawSPD);
-      break;
-    // 2K EEPROM keep bytes past 0x400
-    case ddr5_structs::eepromExtendedSize:
-      extraData = contents.sliced(ddr5_structs::eepromBaseSize,
-                                  ddr5_structs::eepromBaseSize);
-      spd = new DDR5SPD(rawSPD, extraData);
-      break;
-    default:
-      QMessageBox::critical(this, appName, tr("Should never happen.."));
-      break;
+      // Regular 1K eeprom size
+      case ddr5_structs::eepromBaseSize:
+        spd = new DDR5SPD(rawSPD);
+        break;
+      // 2K EEPROM keep bytes past 0x400
+      case ddr5_structs::eepromExtendedSize:
+        extraData = contents.sliced(ddr5_structs::eepromBaseSize, ddr5_structs::eepromBaseSize);
+        spd = new DDR5SPD(rawSPD, extraData);
+        break;
+      default:
+        QMessageBox::critical(this, appName, tr("Should never happen.."));
+        break;
     }
 
     if (!spd->isCRCValid()) {
-      QMessageBox::warning(
-          this, appName,
-          tr("JEDEC section checksum error, will be fixed by saving."));
+      QMessageBox::warning(this, appName, tr("JEDEC section checksum error, will be fixed by saving."));
     }
 
     enableUI();
@@ -217,9 +172,7 @@ void MainWindow::saveFile() {
     }
 
     // Actually save
-    QString fileName = QFileDialog::getSaveFileName(
-        this, "Save File", QDir::currentPath(),
-        "SPD Files (*.spd *.bin);;All Files (*.*)");
+    QString fileName = QFileDialog::getSaveFileName(this, "Save File", QDir::currentPath(), "SPD Files (*.spd *.bin);;All Files (*.*)");
     if (!fileName.isEmpty()) {
       // save contents to the selected file
       QFile file(fileName);
@@ -233,8 +186,7 @@ void MainWindow::saveFile() {
         file.write(bytes, bytes.length());
         file.close();
       } else {
-        QMessageBox::critical(this, appName,
-                              tr("Failed to save file (read only?)."));
+        QMessageBox::critical(this, appName, tr("Failed to save file (read only?)."));
       }
     }
   }
@@ -283,9 +235,7 @@ void MainWindow::wipeEXPO() {
 }
 
 EXPO_ProfileStruct MainWindow::importEXPOProfile() {
-  QString fileName = QFileDialog::getOpenFileName(
-      this, "Open File", QDir::currentPath(),
-      "EXPO Files (*.expo *.bin);;All Files (*.*)");
+  QString fileName = QFileDialog::getOpenFileName(this, "Open File", QDir::currentPath(), "EXPO Files (*.expo *.bin);;All Files (*.*)");
 
   if (!fileName.isEmpty()) {
     // do something with the selected file
@@ -295,18 +245,15 @@ EXPO_ProfileStruct MainWindow::importEXPOProfile() {
     }
 
     if (file.size() != EXPOProfileSize) {
-      QMessageBox::critical(this, appName,
-                            tr("Invalid EXPO profile file size."));
+      QMessageBox::critical(this, appName, tr("Invalid EXPO profile file size."));
     }
 
     QByteArray contents = file.readAll();
 
     if (contents.length() != EXPOProfileSize) {
-      QMessageBox::critical(this, appName,
-                            tr("Invalid EXPO profile file size."));
+      QMessageBox::critical(this, appName, tr("Invalid EXPO profile file size."));
     } else {
-      EXPO_ProfileStruct readProfile =
-          *reinterpret_cast<EXPO_ProfileStruct *>(contents.data());
+      EXPO_ProfileStruct readProfile = *reinterpret_cast<EXPO_ProfileStruct *>(contents.data());
       return readProfile;
     }
   }
@@ -317,9 +264,7 @@ EXPO_ProfileStruct MainWindow::importEXPOProfile() {
 
 void MainWindow::exportEXPOProfile(const EXPO_ProfileStruct &expoProfile) {
   // Actually save
-  QString fileName = QFileDialog::getSaveFileName(
-      this, "Save EXPO File", QDir::currentPath(),
-      "EXPO Files (*.expo *.bin);;All Files (*.*)");
+  QString fileName = QFileDialog::getSaveFileName(this, "Save EXPO File", QDir::currentPath(), "EXPO Files (*.expo *.bin);;All Files (*.*)");
 
   if (!fileName.isEmpty()) {
     // save contents to the selected file
@@ -333,8 +278,7 @@ void MainWindow::exportEXPOProfile(const EXPO_ProfileStruct &expoProfile) {
       file.write(reinterpret_cast<const char *>(&expoProfile), EXPOProfileSize);
       file.close();
     } else {
-      QMessageBox::critical(this, appName,
-                            tr("Failed to save file (read only?)."));
+      QMessageBox::critical(this, appName, tr("Failed to save file (read only?)."));
     }
   }
 }
@@ -345,9 +289,7 @@ void MainWindow::importEXPOProfile1FromXMP1() {
   }
 
   if (!spd->isEXPOPresent()) {
-    QMessageBox::critical(
-        this, appName,
-        tr("EXPO is not present, please create EXPO block first."));
+    QMessageBox::critical(this, appName, tr("EXPO is not present, please create EXPO block first."));
     return;
   }
 
@@ -365,9 +307,7 @@ void MainWindow::importEXPOProfile1FromXMP2() {
   }
 
   if (!spd->isEXPOPresent()) {
-    QMessageBox::critical(
-        this, appName,
-        tr("EXPO is not present, please create EXPO block first."));
+    QMessageBox::critical(this, appName, tr("EXPO is not present, please create EXPO block first."));
     return;
   }
 
@@ -385,9 +325,7 @@ void MainWindow::importEXPOProfile1FromXMPU2() {
   }
 
   if (!spd->isEXPOPresent()) {
-    QMessageBox::critical(
-        this, appName,
-        tr("EXPO is not present, please create EXPO block first."));
+    QMessageBox::critical(this, appName, tr("EXPO is not present, please create EXPO block first."));
     return;
   }
 
@@ -405,9 +343,7 @@ void MainWindow::importEXPOProfile2FromXMP1() {
   }
 
   if (!spd->isEXPOPresent()) {
-    QMessageBox::critical(
-        this, appName,
-        tr("EXPO is not present, please create EXPO block first."));
+    QMessageBox::critical(this, appName, tr("EXPO is not present, please create EXPO block first."));
     return;
   }
 
@@ -425,9 +361,7 @@ void MainWindow::importEXPOProfile2FromXMP2() {
   }
 
   if (!spd->isEXPOPresent()) {
-    QMessageBox::critical(
-        this, appName,
-        tr("EXPO is not present, please create EXPO block first."));
+    QMessageBox::critical(this, appName, tr("EXPO is not present, please create EXPO block first."));
     return;
   }
 
@@ -445,9 +379,7 @@ void MainWindow::importEXPOProfile2FromXMPU2() {
   }
 
   if (!spd->isEXPOPresent()) {
-    QMessageBox::critical(
-        this, appName,
-        tr("EXPO is not present, please create EXPO block first."));
+    QMessageBox::critical(this, appName, tr("EXPO is not present, please create EXPO block first."));
     return;
   }
 
@@ -547,9 +479,7 @@ void MainWindow::loadSampleXMPProfileU2() {
 
 void MainWindow::exportXMPProfile(const XMP_ProfileStruct &xmpProfile) {
   // Actually save
-  QString fileName =
-      QFileDialog::getSaveFileName(this, "Save XMP File", QDir::currentPath(),
-                                   "XMP Files (*.xmp *.bin);;All Files (*.*)");
+  QString fileName = QFileDialog::getSaveFileName(this, "Save XMP File", QDir::currentPath(), "XMP Files (*.xmp *.bin);;All Files (*.*)");
 
   if (!fileName.isEmpty()) {
     // save contents to the selected file
@@ -563,8 +493,7 @@ void MainWindow::exportXMPProfile(const XMP_ProfileStruct &xmpProfile) {
       file.write(reinterpret_cast<const char *>(&xmpProfile), XMPProfileSize);
       file.close();
     } else {
-      QMessageBox::critical(this, appName,
-                            tr("Failed to save file (read only?)."));
+      QMessageBox::critical(this, appName, tr("Failed to save file (read only?)."));
     }
   }
 }
@@ -600,9 +529,7 @@ void MainWindow::exportXMPProfileU2() {
 }
 
 XMP_ProfileStruct MainWindow::importXMPProfile() {
-  QString fileName = QFileDialog::getOpenFileName(
-      this, "Open File", QDir::currentPath(),
-      "XMP Profile Files (*.xmp *.bin);;All Files (*.*)");
+  QString fileName = QFileDialog::getOpenFileName(this, "Open File", QDir::currentPath(), "XMP Profile Files (*.xmp *.bin);;All Files (*.*)");
 
   if (!fileName.isEmpty()) {
     // do something with the selected file
@@ -612,18 +539,15 @@ XMP_ProfileStruct MainWindow::importXMPProfile() {
     }
 
     if (file.size() != XMPProfileSize) {
-      QMessageBox::critical(this, appName,
-                            tr("Invalid XMP 3.0 profile file size."));
+      QMessageBox::critical(this, appName, tr("Invalid XMP 3.0 profile file size."));
     }
 
     QByteArray contents = file.readAll();
 
     if (contents.length() != XMPProfileSize) {
-      QMessageBox::critical(this, appName,
-                            tr("Invalid XMP 3.0 profile file size."));
+      QMessageBox::critical(this, appName, tr("Invalid XMP 3.0 profile file size."));
     } else {
-      XMP_ProfileStruct readProfile =
-          *reinterpret_cast<XMP_ProfileStruct *>(contents.data());
+      XMP_ProfileStruct readProfile = *reinterpret_cast<XMP_ProfileStruct *>(contents.data());
       return readProfile;
     }
   }
@@ -689,9 +613,13 @@ void MainWindow::disableXMPMagicBits() {
   reloadUI();
 }
 
-bool MainWindow::saveFileEnabled() { return spd != nullptr; }
+bool MainWindow::saveFileEnabled() {
+  return spd != nullptr;
+}
 
-bool MainWindow::closeFileEnabled() { return spd != nullptr; }
+bool MainWindow::closeFileEnabled() {
+  return spd != nullptr;
+}
 
 void MainWindow::toggleUI(const bool status) {
   bool disabled = !status;
@@ -956,70 +884,52 @@ void MainWindow::reloadJEDECTab() {
   unsigned int minCycleTime = spd->getMinCycleTime();
 
   ui->spinBoxtAA->setValue(spd->gettAA());
-  ui->labeltAA_Ticks->setText(
-      QString::number(utilities::TimeToTicksDDR5(spd->gettAA(), minCycleTime)));
+  ui->labeltAA_Ticks->setText(QString::number(spd->gettAA_tick()));
   ui->spinBoxtRCD->setValue(spd->gettRCD());
-  ui->labeltRCD_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettRCD(), minCycleTime)));
+  ui->labeltRCD_Ticks->setText(QString::number(spd->gettRCD_tick()));
   ui->spinBoxtRP->setValue(spd->gettRP());
-  ui->labeltRP_Ticks->setText(
-      QString::number(utilities::TimeToTicksDDR5(spd->gettRP(), minCycleTime)));
+  ui->labeltRP_Ticks->setText(QString::number(spd->gettRP_tick()));
   ui->spinBoxtRAS->setValue(spd->gettRAS());
-  ui->labeltRAS_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettRAS(), minCycleTime)));
+  ui->labeltRAS_Ticks->setText(QString::number(spd->gettRAS_tick()));
   ui->spinBoxtRC->setValue(spd->gettRC());
-  ui->labeltRC_Ticks->setText(
-      QString::number(utilities::TimeToTicksDDR5(spd->gettRC(), minCycleTime)));
+  ui->labeltRC_Ticks->setText(QString::number(spd->gettRC_tick()));
   ui->spinBoxtWR->setValue(spd->gettWR());
-  ui->labeltWR_Ticks->setText(
-      QString::number(utilities::TimeToTicksDDR5(spd->gettWR(), minCycleTime)));
+  ui->labeltWR_Ticks->setText(QString::number(spd->gettWR_tick()));
   ui->spinBoxtRFC1->setValue(spd->gettRFC1_slr());
-  ui->labeltRFC1_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettRFC1_slr() * 1000, minCycleTime)));
+  ui->labeltRFC1_Ticks->setText(QString::number(spd->gettRFC1_slr_tick()));
   ui->spinBoxtRFC2->setValue(spd->gettRFC2_slr());
-  ui->labeltRFC2_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettRFC2_slr() * 1000, minCycleTime)));
+  ui->labeltRFC2_Ticks->setText(QString::number(spd->gettRFC2_slr_tick()));
   ui->spinBoxtRFC->setValue(spd->gettRFCsb_slr());
-  ui->labeltRFC_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettRFCsb_slr() * 1000, minCycleTime)));
+  ui->labeltRFC_Ticks->setText(QString::number(spd->gettRFCsb_slr_tick()));
   ui->spinBoxtRRD_L->setValue(spd->gettRRD_L());
   ui->spinBoxtRRD_L_LCLK->setValue(spd->gettRRD_L_lowerLimit());
-  ui->labeltRRD_L_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettRRD_L(), minCycleTime)));
+  ui->labeltRRD_L_Ticks->setText(QString::number(spd->gettRRD_L_tick()));
   ui->spinBoxtCCD_L->setValue(spd->gettCCD_L());
   ui->spinBoxtCCD_L_LCLK->setValue(spd->gettCCD_L_lowerLimit());
-  ui->labeltCCD_L_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettCCD_L(), minCycleTime)));
+  ui->labeltCCD_L_Ticks->setText(QString::number(spd->gettCCD_L_tick()));
   ui->spinBoxtCCDL_L_WR->setValue(spd->gettCCD_L_WR());
   ui->spinBoxtCCDL_L_WR_LCLK->setValue(spd->gettCCD_L_WR_lowerLimit());
-  ui->labeltCCDL_L_WR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettCCD_L_WR(), minCycleTime)));
+  ui->labeltCCDL_L_WR_Ticks->setText(QString::number(spd->gettCCD_L_WR_tick()));
   ui->spinBoxtCCDL_L_WR2->setValue(spd->gettCCD_L_WR2());
   ui->spinBoxtCCDL_L_WR2_LCLK->setValue(spd->gettCCD_L_WR2_lowerLimit());
-  ui->labeltCCDL_L_WR2_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettCCD_L_WR2(), minCycleTime)));
+  ui->labeltCCDL_L_WR2_Ticks->setText(QString::number(spd->gettCCD_L_WR2_tick()));
   ui->spinBoxtFAW->setValue(spd->gettFAW());
   ui->spinBoxtFAW_LCLK->setValue(spd->gettFAW_lowerLimit());
-  ui->labeltFAW_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettFAW(), minCycleTime)));
+  ui->labeltFAW_Ticks->setText(QString::number(spd->gettFAW_tick()));
   ui->spinBoxtCCD_L_WTR->setValue(spd->gettCCD_L_WTR());
   ui->spinBoxtCCD_L_WTR_LCLK->setValue(spd->gettCCD_L_WTR_lowerLimit());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettCCD_L_WTR(), minCycleTime)));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->gettCCD_L_WTR_tick()));
   ui->spinBoxtCCD_S_WTR->setValue(spd->gettCCD_S_WTR());
   ui->spinBoxtCCD_S_WTR_LCLK->setValue(spd->gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettCCD_S_WTR(), minCycleTime)));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->gettCCD_S_WTR_tick()));
   ui->spinBoxtRTP->setValue(spd->gettRTP());
   ui->spinBoxtRTP_LCLK->setValue(spd->gettRTP_lowerLimit());
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->gettRTP(), minCycleTime)));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->gettRTP_tick()));
 }
 
 void MainWindow::reloadXMP1Tab() {
   // XMP Header
-  ui->leProfileName_XMP1->setText(
-      QString::fromStdString(spd->xmpBundle.getXMP1ProfileName()));
+  ui->leProfileName_XMP1->setText(QString::fromStdString(spd->xmpBundle.getXMP1ProfileName()));
   ui->cbEnabled_XMP1->setChecked(spd->xmpBundle.isXMP1Enabled());
 
   // XMP Profile
@@ -1032,28 +942,26 @@ void MainWindow::reloadXMP1Tab() {
   ui->lFrequencyValue_XMP1->setText(frequencyStr);
   ui->lMTValue_XMP1->setText(mtStr);
 
-  ui->cbDynamicMemBoost_XMP1->setChecked(
-      xmp_profile.getIntelDynamicMemoryBoost());
-  ui->cbRealTimeMemOC_XMP1->setChecked(
-      xmp_profile.getRealTimeMemoryFrequencyOC());
+  ui->cbDynamicMemBoost_XMP1->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
+  ui->cbRealTimeMemOC_XMP1->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
 
   switch (xmp_profile.getCommandRate()) {
-  default:
-  case CommandRate::Undefined:
-    ui->cbCommandRate_XMP1->setCurrentIndex(0);
-    break;
+    default:
+    case CommandRate::Undefined:
+      ui->cbCommandRate_XMP1->setCurrentIndex(0);
+      break;
 
-  case CommandRate::_1n:
-    ui->cbCommandRate_XMP1->setCurrentIndex(1);
-    break;
+    case CommandRate::_1n:
+      ui->cbCommandRate_XMP1->setCurrentIndex(1);
+      break;
 
-  case CommandRate::_2n:
-    ui->cbCommandRate_XMP1->setCurrentIndex(2);
-    break;
+    case CommandRate::_2n:
+      ui->cbCommandRate_XMP1->setCurrentIndex(2);
+      break;
 
-  case CommandRate::_3n:
-    ui->cbCommandRate_XMP1->setCurrentIndex(3);
-    break;
+    case CommandRate::_3n:
+      ui->cbCommandRate_XMP1->setCurrentIndex(3);
+      break;
   }
 
   // Voltages
@@ -1105,70 +1013,52 @@ void MainWindow::reloadXMP1Tab() {
   ui->cbCL98_XMP1->setChecked(xmp_profile.getCLSupported(98));
 
   ui->sbtAA_XMP1->setValue(xmp_profile.gettAA());
-  ui->ltAA_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettAA(), minCycleTime)));
+  ui->ltAA_Ticks_XMP1->setText(QString::number(xmp_profile.gettAA_tick()));
   ui->sbtRCD_XMP1->setValue(xmp_profile.gettRCD());
-  ui->ltRCD_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRCD(), minCycleTime)));
+  ui->ltRCD_Ticks_XMP1->setText(QString::number(xmp_profile.gettRCD_tick()));
   ui->sbtRP_XMP1->setValue(xmp_profile.gettRP());
-  ui->ltRP_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRP(), minCycleTime)));
+  ui->ltRP_Ticks_XMP1->setText(QString::number(xmp_profile.gettRP_tick()));
   ui->sbtRAS_XMP1->setValue(xmp_profile.gettRAS());
-  ui->ltRAS_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRAS(), minCycleTime)));
+  ui->ltRAS_Ticks_XMP1->setText(QString::number(xmp_profile.gettRAS_tick()));
   ui->sbtRC_XMP1->setValue(xmp_profile.gettRC());
-  ui->ltRC_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRC(), minCycleTime)));
+  ui->ltRC_Ticks_XMP1->setText(QString::number(xmp_profile.gettRC_tick()));
   ui->sbtWR_XMP1->setValue(xmp_profile.gettWR());
-  ui->ltWR_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettWR(), minCycleTime)));
+  ui->ltWR_Ticks_XMP1->setText(QString::number(xmp_profile.gettWR_tick()));
   ui->sbtRFC1_XMP1->setValue(xmp_profile.gettRFC1());
-  ui->ltRFC1_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC1() * 1000, minCycleTime)));
+  ui->ltRFC1_Ticks_XMP1->setText(QString::number(xmp_profile.gettRFC1_tick()));
   ui->sbtRFC2_XMP1->setValue(xmp_profile.gettRFC2());
-  ui->ltRFC2_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC2() * 1000, minCycleTime)));
+  ui->ltRFC2_Ticks_XMP1->setText(QString::number(xmp_profile.gettRFC2_tick()));
   ui->sbtRFC_XMP1->setValue(xmp_profile.gettRFC());
-  ui->ltRFC_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC() * 1000, minCycleTime)));
+  ui->ltRFC_Ticks_XMP1->setText(QString::number(xmp_profile.gettRFC_tick()));
   ui->sbtRRD_L_XMP1->setValue(xmp_profile.gettRRD_L());
   ui->sbtRRD_L_LCLK_XMP1->setValue(xmp_profile.gettRRD_L_lowerLimit());
-  ui->ltRRD_L_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRRD_L(), minCycleTime)));
+  ui->ltRRD_L_Ticks_XMP1->setText(QString::number(xmp_profile.gettRRD_L_tick()));
   ui->sbtCCD_L_XMP1->setValue(xmp_profile.gettCCD_L());
   ui->sbtCCD_L_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_lowerLimit());
-  ui->ltCCD_L_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L(), minCycleTime)));
+  ui->ltCCD_L_Ticks_XMP1->setText(QString::number(xmp_profile.gettCCD_L_tick()));
   ui->sbtCCDL_L_WR_XMP1->setValue(xmp_profile.gettCCD_L_WR());
   ui->sbtCCDL_L_WR_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
-  ui->ltCCDL_L_WR_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR(), minCycleTime)));
+  ui->ltCCDL_L_WR_Ticks_XMP1->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
   ui->sbtCCDL_L_WR2_XMP1->setValue(xmp_profile.gettCCD_L_WR2());
   ui->sbtCCDL_L_WR2_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
-  ui->ltCCDL_L_WR2_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR2(), minCycleTime)));
+  ui->ltCCDL_L_WR2_Ticks_XMP1->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_XMP1->setValue(xmp_profile.gettFAW());
   ui->sbtFAW_LCLK_XMP1->setValue(xmp_profile.gettFAW_lowerLimit());
-  ui->ltFAW_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettFAW(), minCycleTime)));
+  ui->ltFAW_Ticks_XMP1->setText(QString::number(xmp_profile.gettFAW_tick()));
   ui->sbtCCD_L_WTR_XMP1->setValue(xmp_profile.gettCCD_L_WTR());
   ui->sbtCCD_L_WTR_LCLK_XMP1->setValue(xmp_profile.gettCCD_L_WTR_lowerLimit());
-  ui->ltCCD_L_WTR_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WTR(), minCycleTime)));
+  ui->ltCCD_L_WTR_Ticks_XMP1->setText(QString::number(xmp_profile.gettCCD_L_WTR_tick()));
   ui->sbtCCD_S_WTR_XMP1->setValue(xmp_profile.gettCCD_S_WTR());
   ui->sbtCCD_S_WTR_LCLK_XMP1->setValue(xmp_profile.gettCCD_S_WTR_lowerLimit());
-  ui->ltCCD_S_WTR_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_S_WTR(), minCycleTime)));
+  ui->ltCCD_S_WTR_Ticks_XMP1->setText(QString::number(xmp_profile.gettCCD_S_WTR_tick()));
   ui->sbtRTP_XMP1->setValue(xmp_profile.gettRTP());
   ui->sbtRTP_LCLK_XMP1->setValue(xmp_profile.gettRTP_lowerLimit());
-  ui->ltRTP_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
+  ui->ltRTP_Ticks_XMP1->setText(QString::number(xmp_profile.gettRTP_tick()));
 }
 
 void MainWindow::reloadXMP2Tab() {
   // XMP Header
-  ui->leProfileName_XMP2->setText(
-      QString::fromStdString(spd->xmpBundle.getXMP2ProfileName()));
+  ui->leProfileName_XMP2->setText(QString::fromStdString(spd->xmpBundle.getXMP2ProfileName()));
   ui->cbEnabled_XMP2->setChecked(spd->xmpBundle.isXMP2Enabled());
 
   // XMP Profile
@@ -1181,28 +1071,26 @@ void MainWindow::reloadXMP2Tab() {
   ui->lFrequencyValue_XMP2->setText(frequencyStr);
   ui->lMTValue_XMP2->setText(mtStr);
 
-  ui->cbDynamicMemBoost_XMP2->setChecked(
-      xmp_profile.getIntelDynamicMemoryBoost());
-  ui->cbRealTimeMemOC_XMP2->setChecked(
-      xmp_profile.getRealTimeMemoryFrequencyOC());
+  ui->cbDynamicMemBoost_XMP2->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
+  ui->cbRealTimeMemOC_XMP2->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
 
   switch (xmp_profile.getCommandRate()) {
-  default:
-  case CommandRate::Undefined:
-    ui->cbCommandRate_XMP2->setCurrentIndex(0);
-    break;
+    default:
+    case CommandRate::Undefined:
+      ui->cbCommandRate_XMP2->setCurrentIndex(0);
+      break;
 
-  case CommandRate::_1n:
-    ui->cbCommandRate_XMP2->setCurrentIndex(1);
-    break;
+    case CommandRate::_1n:
+      ui->cbCommandRate_XMP2->setCurrentIndex(1);
+      break;
 
-  case CommandRate::_2n:
-    ui->cbCommandRate_XMP2->setCurrentIndex(2);
-    break;
+    case CommandRate::_2n:
+      ui->cbCommandRate_XMP2->setCurrentIndex(2);
+      break;
 
-  case CommandRate::_3n:
-    ui->cbCommandRate_XMP2->setCurrentIndex(3);
-    break;
+    case CommandRate::_3n:
+      ui->cbCommandRate_XMP2->setCurrentIndex(3);
+      break;
   }
 
   // Voltages
@@ -1254,64 +1142,47 @@ void MainWindow::reloadXMP2Tab() {
   ui->cbCL98_XMP2->setChecked(xmp_profile.getCLSupported(98));
 
   ui->sbtAA_XMP2->setValue(xmp_profile.gettAA());
-  ui->ltAA_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettAA(), minCycleTime)));
+  ui->ltAA_Ticks_XMP2->setText(QString::number(xmp_profile.gettAA_tick()));
   ui->sbtRCD_XMP2->setValue(xmp_profile.gettRCD());
-  ui->ltRCD_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRCD(), minCycleTime)));
+  ui->ltRCD_Ticks_XMP2->setText(QString::number(xmp_profile.gettRCD_tick()));
   ui->sbtRP_XMP2->setValue(xmp_profile.gettRP());
-  ui->ltRP_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRP(), minCycleTime)));
+  ui->ltRP_Ticks_XMP2->setText(QString::number(xmp_profile.gettRP_tick()));
   ui->sbtRAS_XMP2->setValue(xmp_profile.gettRAS());
-  ui->ltRAS_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRAS(), minCycleTime)));
+  ui->ltRAS_Ticks_XMP2->setText(QString::number(xmp_profile.gettRAS_tick()));
   ui->sbtRC_XMP2->setValue(xmp_profile.gettRC());
-  ui->ltRC_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRC(), minCycleTime)));
+  ui->ltRC_Ticks_XMP2->setText(QString::number(xmp_profile.gettRC_tick()));
   ui->sbtWR_XMP2->setValue(xmp_profile.gettWR());
-  ui->ltWR_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettWR(), minCycleTime)));
+  ui->ltWR_Ticks_XMP2->setText(QString::number(xmp_profile.gettWR_tick()));
   ui->sbtRFC1_XMP2->setValue(xmp_profile.gettRFC1());
-  ui->ltRFC1_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC1() * 1000, minCycleTime)));
+  ui->ltRFC1_Ticks_XMP2->setText(QString::number(xmp_profile.gettRFC1_tick()));
   ui->sbtRFC2_XMP2->setValue(xmp_profile.gettRFC2());
-  ui->ltRFC2_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC2() * 1000, minCycleTime)));
+  ui->ltRFC2_Ticks_XMP2->setText(QString::number(xmp_profile.gettRFC2_tick()));
   ui->sbtRFC_XMP2->setValue(xmp_profile.gettRFC());
-  ui->ltRFC_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC() * 1000, minCycleTime)));
+  ui->ltRFC_Ticks_XMP2->setText(QString::number(xmp_profile.gettRFC_tick()));
   ui->sbtRRD_L_XMP2->setValue(xmp_profile.gettRRD_L());
   ui->sbtRRD_L_LCLK_XMP2->setValue(xmp_profile.gettRRD_L_lowerLimit());
-  ui->ltRRD_L_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRRD_L(), minCycleTime)));
+  ui->ltRRD_L_Ticks_XMP2->setText(QString::number(xmp_profile.gettRRD_L_tick()));
   ui->sbtCCD_L_XMP2->setValue(xmp_profile.gettCCD_L());
   ui->sbtCCD_L_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_lowerLimit());
-  ui->ltCCD_L_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L(), minCycleTime)));
+  ui->ltCCD_L_Ticks_XMP2->setText(QString::number(xmp_profile.gettCCD_L_tick()));
   ui->sbtCCDL_L_WR_XMP2->setValue(xmp_profile.gettCCD_L_WR());
   ui->sbtCCDL_L_WR_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
-  ui->ltCCDL_L_WR_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR(), minCycleTime)));
+  ui->ltCCDL_L_WR_Ticks_XMP2->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
   ui->sbtCCDL_L_WR2_XMP2->setValue(xmp_profile.gettCCD_L_WR2());
   ui->sbtCCDL_L_WR2_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
-  ui->ltCCDL_L_WR2_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR2(), minCycleTime)));
+  ui->ltCCDL_L_WR2_Ticks_XMP2->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_XMP2->setValue(xmp_profile.gettFAW());
   ui->sbtFAW_LCLK_XMP2->setValue(xmp_profile.gettFAW_lowerLimit());
-  ui->ltFAW_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettFAW(), minCycleTime)));
+  ui->ltFAW_Ticks_XMP2->setText(QString::number(xmp_profile.gettFAW_tick()));
   ui->sbtCCD_L_WTR_XMP2->setValue(xmp_profile.gettCCD_L_WTR());
   ui->sbtCCD_L_WTR_LCLK_XMP2->setValue(xmp_profile.gettCCD_L_WTR_lowerLimit());
-  ui->ltCCD_L_WTR_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WTR(), minCycleTime)));
+  ui->ltCCD_L_WTR_Ticks_XMP2->setText(QString::number(xmp_profile.gettCCD_L_WTR_tick()));
   ui->sbtCCD_S_WTR_XMP2->setValue(xmp_profile.gettCCD_S_WTR());
   ui->sbtCCD_S_WTR_LCLK_XMP2->setValue(xmp_profile.gettCCD_S_WTR_lowerLimit());
-  ui->ltCCD_S_WTR_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_S_WTR(), minCycleTime)));
+  ui->ltCCD_S_WTR_Ticks_XMP2->setText(QString::number(xmp_profile.gettCCD_S_WTR_tick()));
   ui->sbtRTP_XMP2->setValue(xmp_profile.gettRTP());
   ui->sbtRTP_LCLK_XMP2->setValue(xmp_profile.gettRTP_lowerLimit());
-  ui->ltRTP_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
+  ui->ltRTP_Ticks_XMP2->setText(QString::number(xmp_profile.gettRTP_tick()));
 }
 
 void MainWindow::reloadXMP3Tab() {
@@ -1320,8 +1191,7 @@ void MainWindow::reloadXMP3Tab() {
   }
 
   // XMP Header
-  ui->leProfileName_XMP3->setText(
-      QString::fromStdString(spd->xmpBundle.getXMP3ProfileName()));
+  ui->leProfileName_XMP3->setText(QString::fromStdString(spd->xmpBundle.getXMP3ProfileName()));
   ui->cbEnabled_XMP3->setChecked(spd->xmpBundle.isXMP3Enabled());
 
   // XMP Profile
@@ -1334,28 +1204,26 @@ void MainWindow::reloadXMP3Tab() {
   ui->lFrequencyValue_XMP3->setText(frequencyStr);
   ui->lMTValue_XMP3->setText(mtStr);
 
-  ui->cbDynamicMemBoost_XMP3->setChecked(
-      xmp_profile.getIntelDynamicMemoryBoost());
-  ui->cbRealTimeMemOC_XMP3->setChecked(
-      xmp_profile.getRealTimeMemoryFrequencyOC());
+  ui->cbDynamicMemBoost_XMP3->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
+  ui->cbRealTimeMemOC_XMP3->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
 
   switch (xmp_profile.getCommandRate()) {
-  default:
-  case CommandRate::Undefined:
-    ui->cbCommandRate_XMP3->setCurrentIndex(0);
-    break;
+    default:
+    case CommandRate::Undefined:
+      ui->cbCommandRate_XMP3->setCurrentIndex(0);
+      break;
 
-  case CommandRate::_1n:
-    ui->cbCommandRate_XMP3->setCurrentIndex(1);
-    break;
+    case CommandRate::_1n:
+      ui->cbCommandRate_XMP3->setCurrentIndex(1);
+      break;
 
-  case CommandRate::_2n:
-    ui->cbCommandRate_XMP3->setCurrentIndex(2);
-    break;
+    case CommandRate::_2n:
+      ui->cbCommandRate_XMP3->setCurrentIndex(2);
+      break;
 
-  case CommandRate::_3n:
-    ui->cbCommandRate_XMP3->setCurrentIndex(3);
-    break;
+    case CommandRate::_3n:
+      ui->cbCommandRate_XMP3->setCurrentIndex(3);
+      break;
   }
 
   // Voltages
@@ -1407,64 +1275,47 @@ void MainWindow::reloadXMP3Tab() {
   ui->cbCL98_XMP3->setChecked(xmp_profile.getCLSupported(98));
 
   ui->sbtAA_XMP3->setValue(xmp_profile.gettAA());
-  ui->ltAA_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettAA(), minCycleTime)));
+  ui->ltAA_Ticks_XMP3->setText(QString::number(xmp_profile.gettAA_tick()));
   ui->sbtRCD_XMP3->setValue(xmp_profile.gettRCD());
-  ui->ltRCD_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRCD(), minCycleTime)));
+  ui->ltRCD_Ticks_XMP3->setText(QString::number(xmp_profile.gettRCD_tick()));
   ui->sbtRP_XMP3->setValue(xmp_profile.gettRP());
-  ui->ltRP_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRP(), minCycleTime)));
+  ui->ltRP_Ticks_XMP3->setText(QString::number(xmp_profile.gettRP_tick()));
   ui->sbtRAS_XMP3->setValue(xmp_profile.gettRAS());
-  ui->ltRAS_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRAS(), minCycleTime)));
+  ui->ltRAS_Ticks_XMP3->setText(QString::number(xmp_profile.gettRAS_tick()));
   ui->sbtRC_XMP3->setValue(xmp_profile.gettRC());
-  ui->ltRC_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRC(), minCycleTime)));
+  ui->ltRC_Ticks_XMP3->setText(QString::number(xmp_profile.gettRC_tick()));
   ui->sbtWR_XMP3->setValue(xmp_profile.gettWR());
-  ui->ltWR_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettWR(), minCycleTime)));
+  ui->ltWR_Ticks_XMP3->setText(QString::number(xmp_profile.gettWR_tick()));
   ui->sbtRFC1_XMP3->setValue(xmp_profile.gettRFC1());
-  ui->ltRFC1_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC1() * 1000, minCycleTime)));
+  ui->ltRFC1_Ticks_XMP3->setText(QString::number(xmp_profile.gettRFC1_tick()));
   ui->sbtRFC2_XMP3->setValue(xmp_profile.gettRFC2());
-  ui->ltRFC2_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC2() * 1000, minCycleTime)));
+  ui->ltRFC2_Ticks_XMP3->setText(QString::number(xmp_profile.gettRFC2_tick()));
   ui->sbtRFC_XMP3->setValue(xmp_profile.gettRFC());
-  ui->ltRFC_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC() * 1000, minCycleTime)));
+  ui->ltRFC_Ticks_XMP3->setText(QString::number(xmp_profile.gettRFC_tick()));
   ui->sbtRRD_L_XMP3->setValue(xmp_profile.gettRRD_L());
   ui->sbtRRD_L_LCLK_XMP3->setValue(xmp_profile.gettRRD_L_lowerLimit());
-  ui->ltRRD_L_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRRD_L(), minCycleTime)));
+  ui->ltRRD_L_Ticks_XMP3->setText(QString::number(xmp_profile.gettRRD_L_tick()));
   ui->sbtCCD_L_XMP3->setValue(xmp_profile.gettCCD_L());
   ui->sbtCCD_L_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_lowerLimit());
-  ui->ltCCD_L_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L(), minCycleTime)));
+  ui->ltCCD_L_Ticks_XMP3->setText(QString::number(xmp_profile.gettCCD_L_tick()));
   ui->sbtCCDL_L_WR_XMP3->setValue(xmp_profile.gettCCD_L_WR());
   ui->sbtCCDL_L_WR_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
-  ui->ltCCDL_L_WR_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR(), minCycleTime)));
+  ui->ltCCDL_L_WR_Ticks_XMP3->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
   ui->sbtCCDL_L_WR2_XMP3->setValue(xmp_profile.gettCCD_L_WR2());
   ui->sbtCCDL_L_WR2_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
-  ui->ltCCDL_L_WR2_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR2(), minCycleTime)));
+  ui->ltCCDL_L_WR2_Ticks_XMP3->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_XMP3->setValue(xmp_profile.gettFAW());
   ui->sbtFAW_LCLK_XMP3->setValue(xmp_profile.gettFAW_lowerLimit());
-  ui->ltFAW_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettFAW(), minCycleTime)));
+  ui->ltFAW_Ticks_XMP3->setText(QString::number(xmp_profile.gettFAW_tick()));
   ui->sbtCCD_L_WTR_XMP3->setValue(xmp_profile.gettCCD_L_WTR());
   ui->sbtCCD_L_WTR_LCLK_XMP3->setValue(xmp_profile.gettCCD_L_WTR_lowerLimit());
-  ui->ltCCD_L_WTR_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WTR(), minCycleTime)));
+  ui->ltCCD_L_WTR_Ticks_XMP3->setText(QString::number(xmp_profile.gettCCD_L_WTR_tick()));
   ui->sbtCCD_S_WTR_XMP3->setValue(xmp_profile.gettCCD_S_WTR());
   ui->sbtCCD_S_WTR_LCLK_XMP3->setValue(xmp_profile.gettCCD_S_WTR_lowerLimit());
-  ui->ltCCD_S_WTR_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_S_WTR(), minCycleTime)));
+  ui->ltCCD_S_WTR_Ticks_XMP3->setText(QString::number(xmp_profile.gettCCD_S_WTR_tick()));
   ui->sbtRTP_XMP3->setValue(xmp_profile.gettRTP());
   ui->sbtRTP_LCLK_XMP3->setValue(xmp_profile.gettRTP_lowerLimit());
-  ui->ltRTP_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
+  ui->ltRTP_Ticks_XMP3->setText(QString::number(xmp_profile.gettRTP_tick()));
 }
 
 void MainWindow::reloadXMPU1Tab() {
@@ -1482,27 +1333,25 @@ void MainWindow::reloadXMPU1Tab() {
   ui->lFrequencyValue_XMPU1->setText(frequencyStr);
   ui->lMTValue_XMPU1->setText(mtStr);
 
-  ui->cbDynamicMemBoost_XMPU1->setChecked(
-      xmp_profile.getIntelDynamicMemoryBoost());
-  ui->cbRealTimeMemOC_XMPU1->setChecked(
-      xmp_profile.getRealTimeMemoryFrequencyOC());
+  ui->cbDynamicMemBoost_XMPU1->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
+  ui->cbRealTimeMemOC_XMPU1->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
 
   switch (xmp_profile.getCommandRate()) {
-  default:
-  case CommandRate::Undefined:
-    ui->cbCommandRate_XMPU1->setCurrentIndex(0);
-    break;
-  case CommandRate::_1n:
-    ui->cbCommandRate_XMPU1->setCurrentIndex(1);
-    break;
+    default:
+    case CommandRate::Undefined:
+      ui->cbCommandRate_XMPU1->setCurrentIndex(0);
+      break;
+    case CommandRate::_1n:
+      ui->cbCommandRate_XMPU1->setCurrentIndex(1);
+      break;
 
-  case CommandRate::_2n:
-    ui->cbCommandRate_XMPU1->setCurrentIndex(2);
-    break;
+    case CommandRate::_2n:
+      ui->cbCommandRate_XMPU1->setCurrentIndex(2);
+      break;
 
-  case CommandRate::_3n:
-    ui->cbCommandRate_XMPU1->setCurrentIndex(3);
-    break;
+    case CommandRate::_3n:
+      ui->cbCommandRate_XMPU1->setCurrentIndex(3);
+      break;
   }
 
   // Voltages
@@ -1554,65 +1403,47 @@ void MainWindow::reloadXMPU1Tab() {
   ui->cbCL98_XMPU1->setChecked(xmp_profile.getCLSupported(98));
 
   ui->sbtAA_XMPU1->setValue(xmp_profile.gettAA());
-  ui->ltAA_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettAA(), minCycleTime)));
+  ui->ltAA_Ticks_XMPU1->setText(QString::number(xmp_profile.gettAA_tick()));
   ui->sbtRCD_XMPU1->setValue(xmp_profile.gettRCD());
-  ui->ltRCD_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRCD(), minCycleTime)));
+  ui->ltRCD_Ticks_XMPU1->setText(QString::number(xmp_profile.gettRCD_tick()));
   ui->sbtRP_XMPU1->setValue(xmp_profile.gettRP());
-  ui->ltRP_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRP(), minCycleTime)));
+  ui->ltRP_Ticks_XMPU1->setText(QString::number(xmp_profile.gettRP_tick()));
   ui->sbtRAS_XMPU1->setValue(xmp_profile.gettRAS());
-  ui->ltRAS_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRAS(), minCycleTime)));
+  ui->ltRAS_Ticks_XMPU1->setText(QString::number(xmp_profile.gettRAS_tick()));
   ui->sbtRC_XMPU1->setValue(xmp_profile.gettRC());
-  ui->ltRC_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRC(), minCycleTime)));
+  ui->ltRC_Ticks_XMPU1->setText(QString::number(xmp_profile.gettRC_tick()));
   ui->sbtWR_XMPU1->setValue(xmp_profile.gettWR());
-  ui->ltWR_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettWR(), minCycleTime)));
+  ui->ltWR_Ticks_XMPU1->setText(QString::number(xmp_profile.gettWR_tick()));
   ui->sbtRFC1_XMPU1->setValue(xmp_profile.gettRFC1());
-  ui->ltRFC1_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC1() * 1000, minCycleTime)));
+  ui->ltRFC1_Ticks_XMPU1->setText(QString::number(xmp_profile.gettRFC1_tick()));
   ui->sbtRFC2_XMPU1->setValue(xmp_profile.gettRFC2());
-  ui->ltRFC2_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC2() * 1000, minCycleTime)));
+  ui->ltRFC2_Ticks_XMPU1->setText(QString::number(xmp_profile.gettRFC2_tick()));
   ui->sbtRFC_XMPU1->setValue(xmp_profile.gettRFC());
-  ui->ltRFC_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC() * 1000, minCycleTime)));
+  ui->ltRFC_Ticks_XMPU1->setText(QString::number(xmp_profile.gettRFC_tick()));
   ui->sbtRRD_L_XMPU1->setValue(xmp_profile.gettRRD_L());
   ui->sbtRRD_L_LCLK_XMPU1->setValue(xmp_profile.gettRRD_L_lowerLimit());
-  ui->ltRRD_L_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRRD_L(), minCycleTime)));
+  ui->ltRRD_L_Ticks_XMPU1->setText(QString::number(xmp_profile.gettRRD_L_tick()));
   ui->sbtCCD_L_XMPU1->setValue(xmp_profile.gettCCD_L());
   ui->sbtCCD_L_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_lowerLimit());
-  ui->ltCCD_L_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L(), minCycleTime)));
+  ui->ltCCD_L_Ticks_XMPU1->setText(QString::number(xmp_profile.gettCCD_L_tick()));
   ui->sbtCCDL_L_WR_XMPU1->setValue(xmp_profile.gettCCD_L_WR());
   ui->sbtCCDL_L_WR_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
-  ui->ltCCDL_L_WR_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR(), minCycleTime)));
+  ui->ltCCDL_L_WR_Ticks_XMPU1->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
   ui->sbtCCDL_L_WR2_XMPU1->setValue(xmp_profile.gettCCD_L_WR2());
-  ui->sbtCCDL_L_WR2_LCLK_XMPU1->setValue(
-      xmp_profile.gettCCD_L_WR2_lowerLimit());
-  ui->ltCCDL_L_WR2_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR2(), minCycleTime)));
+  ui->sbtCCDL_L_WR2_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+  ui->ltCCDL_L_WR2_Ticks_XMPU1->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_XMPU1->setValue(xmp_profile.gettFAW());
   ui->sbtFAW_LCLK_XMPU1->setValue(xmp_profile.gettFAW_lowerLimit());
-  ui->ltFAW_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettFAW(), minCycleTime)));
+  ui->ltFAW_Ticks_XMPU1->setText(QString::number(xmp_profile.gettFAW_tick()));
   ui->sbtCCD_L_WTR_XMPU1->setValue(xmp_profile.gettCCD_L_WTR());
   ui->sbtCCD_L_WTR_LCLK_XMPU1->setValue(xmp_profile.gettCCD_L_WTR_lowerLimit());
-  ui->ltCCD_L_WTR_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WTR(), minCycleTime)));
+  ui->ltCCD_L_WTR_Ticks_XMPU1->setText(QString::number(xmp_profile.gettCCD_L_WTR_tick()));
   ui->sbtCCD_S_WTR_XMPU1->setValue(xmp_profile.gettCCD_S_WTR());
   ui->sbtCCD_S_WTR_LCLK_XMPU1->setValue(xmp_profile.gettCCD_S_WTR_lowerLimit());
-  ui->ltCCD_S_WTR_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_S_WTR(), minCycleTime)));
+  ui->ltCCD_S_WTR_Ticks_XMPU1->setText(QString::number(xmp_profile.gettCCD_S_WTR_tick()));
   ui->sbtRTP_XMPU1->setValue(xmp_profile.gettRTP());
   ui->sbtRTP_LCLK_XMPU1->setValue(xmp_profile.gettRTP_lowerLimit());
-  ui->ltRTP_Ticks_XMPU1->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
+  ui->ltRTP_Ticks_XMPU1->setText(QString::number(xmp_profile.gettRTP_tick()));
 }
 
 void MainWindow::reloadXMPU2Tab() {
@@ -1626,28 +1457,26 @@ void MainWindow::reloadXMPU2Tab() {
   ui->lFrequencyValue_XMPU2->setText(frequencyStr);
   ui->lMTValue_XMPU2->setText(mtStr);
 
-  ui->cbDynamicMemBoost_XMPU2->setChecked(
-      xmp_profile.getIntelDynamicMemoryBoost());
-  ui->cbRealTimeMemOC_XMPU2->setChecked(
-      xmp_profile.getRealTimeMemoryFrequencyOC());
+  ui->cbDynamicMemBoost_XMPU2->setChecked(xmp_profile.getIntelDynamicMemoryBoost());
+  ui->cbRealTimeMemOC_XMPU2->setChecked(xmp_profile.getRealTimeMemoryFrequencyOC());
 
   switch (xmp_profile.getCommandRate()) {
-  default:
-  case CommandRate::Undefined:
-    ui->cbCommandRate_XMPU2->setCurrentIndex(0);
-    break;
+    default:
+    case CommandRate::Undefined:
+      ui->cbCommandRate_XMPU2->setCurrentIndex(0);
+      break;
 
-  case CommandRate::_1n:
-    ui->cbCommandRate_XMPU2->setCurrentIndex(1);
-    break;
+    case CommandRate::_1n:
+      ui->cbCommandRate_XMPU2->setCurrentIndex(1);
+      break;
 
-  case CommandRate::_2n:
-    ui->cbCommandRate_XMPU2->setCurrentIndex(2);
-    break;
+    case CommandRate::_2n:
+      ui->cbCommandRate_XMPU2->setCurrentIndex(2);
+      break;
 
-  case CommandRate::_3n:
-    ui->cbCommandRate_XMPU2->setCurrentIndex(3);
-    break;
+    case CommandRate::_3n:
+      ui->cbCommandRate_XMPU2->setCurrentIndex(3);
+      break;
   }
 
   // Voltages
@@ -1699,73 +1528,54 @@ void MainWindow::reloadXMPU2Tab() {
   ui->cbCL98_XMPU2->setChecked(xmp_profile.getCLSupported(98));
 
   ui->sbtAA_XMPU2->setValue(xmp_profile.gettAA());
-  ui->ltAA_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettAA(), minCycleTime)));
+  ui->ltAA_Ticks_XMPU2->setText(QString::number(xmp_profile.gettAA_tick()));
   ui->sbtRCD_XMPU2->setValue(xmp_profile.gettRCD());
-  ui->ltRCD_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRCD(), minCycleTime)));
+  ui->ltRCD_Ticks_XMPU2->setText(QString::number(xmp_profile.gettRCD_tick()));
   ui->sbtRP_XMPU2->setValue(xmp_profile.gettRP());
-  ui->ltRP_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRP(), minCycleTime)));
+  ui->ltRP_Ticks_XMPU2->setText(QString::number(xmp_profile.gettRP_tick()));
   ui->sbtRAS_XMPU2->setValue(xmp_profile.gettRAS());
-  ui->ltRAS_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRAS(), minCycleTime)));
+  ui->ltRAS_Ticks_XMPU2->setText(QString::number(xmp_profile.gettRAS_tick()));
   ui->sbtRC_XMPU2->setValue(xmp_profile.gettRC());
-  ui->ltRC_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRC(), minCycleTime)));
+  ui->ltRC_Ticks_XMPU2->setText(QString::number(xmp_profile.gettRC_tick()));
   ui->sbtWR_XMPU2->setValue(xmp_profile.gettWR());
-  ui->ltWR_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettWR(), minCycleTime)));
+  ui->ltWR_Ticks_XMPU2->setText(QString::number(xmp_profile.gettWR_tick()));
   ui->sbtRFC1_XMPU2->setValue(xmp_profile.gettRFC1());
-  ui->ltRFC1_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC1() * 1000, minCycleTime)));
+  ui->ltRFC1_Ticks_XMPU2->setText(QString::number(xmp_profile.gettRFC1_tick()));
   ui->sbtRFC2_XMPU2->setValue(xmp_profile.gettRFC2());
-  ui->ltRFC2_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC2() * 1000, minCycleTime)));
+  ui->ltRFC2_Ticks_XMPU2->setText(QString::number(xmp_profile.gettRFC2_tick()));
   ui->sbtRFC_XMPU2->setValue(xmp_profile.gettRFC());
-  ui->ltRFC_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRFC() * 1000, minCycleTime)));
+  ui->ltRFC_Ticks_XMPU2->setText(QString::number(xmp_profile.gettRFC_tick()));
   ui->sbtRRD_L_XMPU2->setValue(xmp_profile.gettRRD_L());
   ui->sbtRRD_L_LCLK_XMPU2->setValue(xmp_profile.gettRRD_L_lowerLimit());
-  ui->ltRRD_L_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRRD_L(), minCycleTime)));
+  ui->ltRRD_L_Ticks_XMPU2->setText(QString::number(xmp_profile.gettRRD_L_tick()));
   ui->sbtCCD_L_XMPU2->setValue(xmp_profile.gettCCD_L());
   ui->sbtCCD_L_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_lowerLimit());
-  ui->ltCCD_L_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L(), minCycleTime)));
+  ui->ltCCD_L_Ticks_XMPU2->setText(QString::number(xmp_profile.gettCCD_L_tick()));
   ui->sbtCCDL_L_WR_XMPU2->setValue(xmp_profile.gettCCD_L_WR());
   ui->sbtCCDL_L_WR_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_WR_lowerLimit());
-  ui->ltCCDL_L_WR_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR(), minCycleTime)));
+  ui->ltCCDL_L_WR_Ticks_XMPU2->setText(QString::number(xmp_profile.gettCCD_L_WR_tick()));
   ui->sbtCCDL_L_WR2_XMPU2->setValue(xmp_profile.gettCCD_L_WR2());
-  ui->sbtCCDL_L_WR2_LCLK_XMPU2->setValue(
-      xmp_profile.gettCCD_L_WR2_lowerLimit());
-  ui->ltCCDL_L_WR2_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WR2(), minCycleTime)));
+  ui->sbtCCDL_L_WR2_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_WR2_lowerLimit());
+  ui->ltCCDL_L_WR2_Ticks_XMPU2->setText(QString::number(xmp_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_XMPU2->setValue(xmp_profile.gettFAW());
   ui->sbtFAW_LCLK_XMPU2->setValue(xmp_profile.gettFAW_lowerLimit());
-  ui->ltFAW_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettFAW(), minCycleTime)));
+  ui->ltFAW_Ticks_XMPU2->setText(QString::number(xmp_profile.gettFAW_tick()));
   ui->sbtCCD_L_WTR_XMPU2->setValue(xmp_profile.gettCCD_L_WTR());
   ui->sbtCCD_L_WTR_LCLK_XMPU2->setValue(xmp_profile.gettCCD_L_WTR_lowerLimit());
-  ui->ltCCD_L_WTR_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_L_WTR(), minCycleTime)));
+  ui->ltCCD_L_WTR_Ticks_XMPU2->setText(QString::number(xmp_profile.gettCCD_L_WTR_tick()));
   ui->sbtCCD_S_WTR_XMPU2->setValue(xmp_profile.gettCCD_S_WTR());
   ui->sbtCCD_S_WTR_LCLK_XMPU2->setValue(xmp_profile.gettCCD_S_WTR_lowerLimit());
-  ui->ltCCD_S_WTR_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettCCD_S_WTR(), minCycleTime)));
+  ui->ltCCD_S_WTR_Ticks_XMPU2->setText(QString::number(xmp_profile.gettCCD_S_WTR_tick()));
   ui->sbtRTP_XMPU2->setValue(xmp_profile.gettRTP());
   ui->sbtRTP_LCLK_XMPU2->setValue(xmp_profile.gettRTP_lowerLimit());
-  ui->ltRTP_Ticks_XMPU2->setText(QString::number(
-      utilities::TimeToTicksDDR5(xmp_profile.gettRTP(), minCycleTime)));
+  ui->ltRTP_Ticks_XMPU2->setText(QString::number(xmp_profile.gettRTP_tick()));
 }
 
 void MainWindow::reloadEXPO1Tab() {
   EXPO_Profile dummy;
 
   // EXPO Header
-  EXPO_Profile &expo_profile =
-      spd->isEXPOPresent() ? spd->expoBundle.profile1 : dummy;
+  EXPO_Profile &expo_profile = spd->isEXPOPresent() ? spd->expoBundle.profile1 : dummy;
   ui->cbEnabled_EXPO1->setChecked(spd->expoBundle.isEXPO1Enabled());
 
   // EXPO Profile
@@ -1782,65 +1592,47 @@ void MainWindow::reloadEXPO1Tab() {
   ui->sbVPP_EXPO1->setValue(expo_profile.getVPP());
 
   ui->sbtAA_EXPO1->setValue(expo_profile.gettAA());
-  ui->ltAA_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettAA(), minCycleTime)));
+  ui->ltAA_Ticks_EXPO1->setText(QString::number(expo_profile.gettAA_tick()));
   ui->sbtRCD_EXPO1->setValue(expo_profile.gettRCD());
-  ui->ltRCD_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRCD(), minCycleTime)));
+  ui->ltRCD_Ticks_EXPO1->setText(QString::number(expo_profile.gettRCD_tick()));
   ui->sbtRP_EXPO1->setValue(expo_profile.gettRP());
-  ui->ltRP_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRP(), minCycleTime)));
+  ui->ltRP_Ticks_EXPO1->setText(QString::number(expo_profile.gettRP_tick()));
   ui->sbtRAS_EXPO1->setValue(expo_profile.gettRAS());
-  ui->ltRAS_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRAS(), minCycleTime)));
+  ui->ltRAS_Ticks_EXPO1->setText(QString::number(expo_profile.gettRAS_tick()));
   ui->sbtRC_EXPO1->setValue(expo_profile.gettRC());
-  ui->ltRC_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRC(), minCycleTime)));
+  ui->ltRC_Ticks_EXPO1->setText(QString::number(expo_profile.gettRC_tick()));
   ui->sbtWR_EXPO1->setValue(expo_profile.gettWR());
-  ui->ltWR_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettWR(), minCycleTime)));
+  ui->ltWR_Ticks_EXPO1->setText(QString::number(expo_profile.gettWR_tick()));
   ui->sbtRFC1_EXPO1->setValue(expo_profile.gettRFC1());
-  ui->ltRFC1_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(
-      expo_profile.gettRFC1() * 1000, minCycleTime)));
+  ui->ltRFC1_Ticks_EXPO1->setText(QString::number(expo_profile.gettRFC1_tick()));
   ui->sbtRFC2_EXPO1->setValue(expo_profile.gettRFC2());
-  ui->ltRFC2_Ticks_EXPO1->setText(QString::number(utilities::TimeToTicksDDR5(
-      expo_profile.gettRFC2() * 1000, minCycleTime)));
+  ui->ltRFC2_Ticks_EXPO1->setText(QString::number(expo_profile.gettRFC2_tick()));
   ui->sbtRFC_EXPO1->setValue(expo_profile.gettRFC());
-  ui->ltRFC_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRFC() * 1000, minCycleTime)));
+  ui->ltRFC_Ticks_EXPO1->setText(QString::number(expo_profile.gettRFC_tick()));
   // Enhanced timings
   ui->sbtRRD_L_EXPO1->setValue(expo_profile.gettRRD_L());
-  ui->ltRRD_L_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRRD_L(), minCycleTime)));
+  ui->ltRRD_L_Ticks_EXPO1->setText(QString::number(expo_profile.gettRRD_L_tick()));
   ui->sbtCCD_L_EXPO1->setValue(expo_profile.gettCCD_L());
-  ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettCCD_L(), minCycleTime)));
+  ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(expo_profile.gettCCD_L_tick()));
   ui->sbtCCDL_L_WR_EXPO1->setValue(expo_profile.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WR(), minCycleTime)));
+  ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(expo_profile.gettCCD_L_WR_tick()));
   ui->sbtCCDL_L_WR2_EXPO1->setValue(expo_profile.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WR2(), minCycleTime)));
+  ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(expo_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_EXPO1->setValue(expo_profile.gettFAW());
-  ui->ltFAW_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettFAW(), minCycleTime)));
+  ui->ltFAW_Ticks_EXPO1->setText(QString::number(expo_profile.gettFAW_tick()));
   ui->sbtCCD_L_WTR_EXPO1->setValue(expo_profile.gettCCD_L_WTR());
-  ui->ltCCD_L_WTR_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WTR(), minCycleTime)));
+  ui->ltCCD_L_WTR_Ticks_EXPO1->setText(QString::number(expo_profile.gettCCD_L_WTR_tick()));
   ui->sbtCCD_S_WTR_EXPO1->setValue(expo_profile.gettCCD_S_WTR());
-  ui->ltCCD_S_WTR_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettCCD_S_WTR(), minCycleTime)));
+  ui->ltCCD_S_WTR_Ticks_EXPO1->setText(QString::number(expo_profile.gettCCD_S_WTR_tick()));
   ui->sbtRTP_EXPO1->setValue(expo_profile.gettRTP());
-  ui->ltRTP_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRTP(), minCycleTime)));
+  ui->ltRTP_Ticks_EXPO1->setText(QString::number(expo_profile.gettRTP_tick()));
 }
 
 void MainWindow::reloadEXPO2Tab() {
   EXPO_Profile dummy;
 
   // EXPO Header
-  EXPO_Profile &expo_profile =
-      spd->isEXPOPresent() ? spd->expoBundle.profile2 : dummy;
+  EXPO_Profile &expo_profile = spd->isEXPOPresent() ? spd->expoBundle.profile2 : dummy;
   ui->cbEnabled_EXPO2->setChecked(spd->expoBundle.isEXPO2Enabled());
 
   // EXPO Profile
@@ -1857,57 +1649,40 @@ void MainWindow::reloadEXPO2Tab() {
   ui->sbVPP_EXPO2->setValue(expo_profile.getVPP());
 
   ui->sbtAA_EXPO2->setValue(expo_profile.gettAA());
-  ui->ltAA_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettAA(), minCycleTime)));
+  ui->ltAA_Ticks_EXPO2->setText(QString::number(expo_profile.gettAA_tick()));
   ui->sbtRCD_EXPO2->setValue(expo_profile.gettRCD());
-  ui->ltRCD_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRCD(), minCycleTime)));
+  ui->ltRCD_Ticks_EXPO2->setText(QString::number(expo_profile.gettRCD_tick()));
   ui->sbtRP_EXPO2->setValue(expo_profile.gettRP());
-  ui->ltRP_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRP(), minCycleTime)));
+  ui->ltRP_Ticks_EXPO2->setText(QString::number(expo_profile.gettRP_tick()));
   ui->sbtRAS_EXPO2->setValue(expo_profile.gettRAS());
-  ui->ltRAS_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRAS(), minCycleTime)));
+  ui->ltRAS_Ticks_EXPO2->setText(QString::number(expo_profile.gettRAS_tick()));
   ui->sbtRC_EXPO2->setValue(expo_profile.gettRC());
-  ui->ltRC_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRC(), minCycleTime)));
+  ui->ltRC_Ticks_EXPO2->setText(QString::number(expo_profile.gettRC_tick()));
   ui->sbtWR_EXPO2->setValue(expo_profile.gettWR());
-  ui->ltWR_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettWR(), minCycleTime)));
+  ui->ltWR_Ticks_EXPO2->setText(QString::number(expo_profile.gettWR_tick()));
   ui->sbtRFC1_EXPO2->setValue(expo_profile.gettRFC1());
-  ui->ltRFC1_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(
-      expo_profile.gettRFC1() * 1000, minCycleTime)));
+  ui->ltRFC1_Ticks_EXPO2->setText(QString::number(expo_profile.gettRFC1_tick()));
   ui->sbtRFC2_EXPO2->setValue(expo_profile.gettRFC2());
-  ui->ltRFC2_Ticks_EXPO2->setText(QString::number(utilities::TimeToTicksDDR5(
-      expo_profile.gettRFC2() * 1000, minCycleTime)));
+  ui->ltRFC2_Ticks_EXPO2->setText(QString::number(expo_profile.gettRFC2_tick()));
   ui->sbtRFC_EXPO2->setValue(expo_profile.gettRFC());
-  ui->ltRFC_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRFC() * 1000, minCycleTime)));
+  ui->ltRFC_Ticks_EXPO2->setText(QString::number(expo_profile.gettRFC_tick()));
   // Enhanced timings
   ui->sbtRRD_L_EXPO2->setValue(expo_profile.gettRRD_L());
-  ui->ltRRD_L_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRRD_L(), minCycleTime)));
+  ui->ltRRD_L_Ticks_EXPO2->setText(QString::number(expo_profile.gettRRD_L_tick()));
   ui->sbtCCD_L_EXPO2->setValue(expo_profile.gettCCD_L());
-  ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettCCD_L(), minCycleTime)));
+  ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(expo_profile.gettCCD_L_tick()));
   ui->sbtCCDL_L_WR_EXPO2->setValue(expo_profile.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WR(), minCycleTime)));
+  ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(expo_profile.gettCCD_L_WR_tick()));
   ui->sbtCCDL_L_WR2_EXPO2->setValue(expo_profile.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WR2(), minCycleTime)));
+  ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(expo_profile.gettCCD_L_WR2_tick()));
   ui->sbtFAW_EXPO2->setValue(expo_profile.gettFAW());
-  ui->ltFAW_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettFAW(), minCycleTime)));
+  ui->ltFAW_Ticks_EXPO2->setText(QString::number(expo_profile.gettFAW_tick()));
   ui->sbtCCD_L_WTR_EXPO2->setValue(expo_profile.gettCCD_L_WTR());
-  ui->ltCCD_L_WTR_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettCCD_L_WTR(), minCycleTime)));
+  ui->ltCCD_L_WTR_Ticks_EXPO2->setText(QString::number(expo_profile.gettCCD_L_WTR_tick()));
   ui->sbtCCD_S_WTR_EXPO2->setValue(expo_profile.gettCCD_S_WTR());
-  ui->ltCCD_S_WTR_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettCCD_S_WTR(), minCycleTime)));
+  ui->ltCCD_S_WTR_Ticks_EXPO2->setText(QString::number(expo_profile.gettCCD_S_WTR_tick()));
   ui->sbtRTP_EXPO2->setValue(expo_profile.gettRTP());
-  ui->ltRTP_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(expo_profile.gettRTP(), minCycleTime)));
+  ui->ltRTP_Ticks_EXPO2->setText(QString::number(expo_profile.gettRTP_tick()));
 }
 
 void MainWindow::reloadMiscTab() {
@@ -2174,8 +1949,7 @@ void MainWindow::on_spinBoxtCCDL_L_WR_LCLK_valueChanged(int value) {
 
 void MainWindow::on_spinBoxtCCDL_L_WR2_valueChanged(int value) {
   spd->settCCD_L_WR2(value);
-  ui->labeltCCDL_L_WR2_Ticks->setText(
-      QString::number(spd->gettCCD_L_WR2_tick()));
+  ui->labeltCCDL_L_WR2_Ticks->setText(QString::number(spd->gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_spinBoxtCCDL_L_WR2_LCLK_valueChanged(int value) {
@@ -2193,8 +1967,7 @@ void MainWindow::on_spinBoxtFAW_LCLK_valueChanged(int value) {
 
 void MainWindow::on_spinBoxtCCD_L_WTR_valueChanged(int value) {
   spd->settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(
-      QString::number(spd->gettCCD_L_WTR_tick()));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_valueChanged(int value) {
@@ -2203,14 +1976,12 @@ void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_valueChanged(int value) {
 
 void MainWindow::on_spinBoxtCCD_S_WTR_valueChanged(int value) {
   spd->settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(
-      QString::number(spd->gettCCD_S_WTR_tick()));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_spinBoxtCCD_S_WTR_LCLK_valueChanged(int value) {
   spd->settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(
-      QString::number(spd->gettCCD_S_WTR_tick()));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_spinBoxtRTP_valueChanged(int value) {
@@ -2298,8 +2069,7 @@ void MainWindow::on_spinBoxtCCDL_L_WR_LCLK_editingFinished() {
 
 void MainWindow::on_spinBoxtCCDL_L_WR2_editingFinished() {
   ui->spinBoxtCCDL_L_WR2->setValue(spd->gettCCD_L_WR2());
-  ui->labeltCCDL_L_WR2_Ticks->setText(
-      QString::number(spd->gettCCD_L_WR2_tick()));
+  ui->labeltCCDL_L_WR2_Ticks->setText(QString::number(spd->gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_spinBoxtCCDL_L_WR2_LCLK_editingFinished() {
@@ -2317,8 +2087,7 @@ void MainWindow::on_spinBoxtFAW_LCLK_editingFinished() {
 
 void MainWindow::on_spinBoxtCCD_L_WTR_editingFinished() {
   ui->spinBoxtCCD_L_WTR->setValue(spd->gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(
-      QString::number(spd->gettCCD_L_WTR_tick()));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_editingFinished() {
@@ -2327,14 +2096,12 @@ void MainWindow::on_spinBoxtCCD_L_WTR_LCLK_editingFinished() {
 
 void MainWindow::on_spinBoxtCCD_S_WTR_editingFinished() {
   ui->spinBoxtCCD_S_WTR->setValue(spd->gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(
-      QString::number(spd->gettCCD_S_WTR_tick()));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_spinBoxtCCD_S_WTR_LCLK_editingFinished() {
   ui->spinBoxtCCD_S_WTR_LCLK->setValue(spd->gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(
-      QString::number(spd->gettCCD_S_WTR_tick()));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_spinBoxtRTP_editingFinished() {
@@ -2348,8 +2115,7 @@ void MainWindow::on_spinBoxtRTP_LCLK_editingFinished() {
 
 // XMP1
 void MainWindow::on_leProfileName_XMP1_editingFinished() {
-  spd->xmpBundle.setXMP1ProfileName(
-      ui->leProfileName_XMP1->text().toStdString());
+  spd->xmpBundle.setXMP1ProfileName(ui->leProfileName_XMP1->text().toStdString());
 }
 
 void MainWindow::on_cbEnabled_XMP1_toggled(bool val) {
@@ -2383,8 +2149,7 @@ void MainWindow::on_sbVmemctrl_XMP1_valueChanged(int value) {
 void MainWindow::on_spinMinCycleTime_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.setMinCycleTime(value);
 
-  QString frequencyStr =
-      QString::number(spd->xmpBundle.profile1.getFrequency()) + " MHz";
+  QString frequencyStr = QString::number(spd->xmpBundle.profile1.getFrequency()) + " MHz";
   QString mtStr = QString::number(spd->xmpBundle.profile1.getMT()) + " MT/s";
 
   ui->lFrequencyValue_XMP1->setText(frequencyStr);
@@ -2408,11 +2173,9 @@ void MainWindow::on_sbVmemctrl_XMP1_editingFinished() {
 }
 
 void MainWindow::on_spinMinCycleTime_XMP1_editingFinished() {
-  ui->spinMinCycleTime_XMP1->setValue(
-      spd->xmpBundle.profile1.getMinCycleTime());
+  ui->spinMinCycleTime_XMP1->setValue(spd->xmpBundle.profile1.getMinCycleTime());
 
-  QString frequencyStr =
-      QString::number(spd->xmpBundle.profile1.getFrequency()) + " MHz";
+  QString frequencyStr = QString::number(spd->xmpBundle.profile1.getFrequency()) + " MHz";
   QString mtStr = QString::number(spd->xmpBundle.profile1.getMT()) + " MT/s";
 
   ui->lFrequencyValue_XMP1->setText(frequencyStr);
@@ -2421,22 +2184,22 @@ void MainWindow::on_spinMinCycleTime_XMP1_editingFinished() {
 
 void MainWindow::on_cbCommandRate_XMP1_currentIndexChanged(int index) {
   switch (index) {
-  default:
-  case 0:
-    spd->xmpBundle.profile1.setCommandRate(CommandRate::Undefined);
-    break;
+    default:
+    case 0:
+      spd->xmpBundle.profile1.setCommandRate(CommandRate::Undefined);
+      break;
 
-  case 1:
-    spd->xmpBundle.profile1.setCommandRate(CommandRate::_1n);
-    break;
+    case 1:
+      spd->xmpBundle.profile1.setCommandRate(CommandRate::_1n);
+      break;
 
-  case 2:
-    spd->xmpBundle.profile1.setCommandRate(CommandRate::_2n);
-    break;
+    case 2:
+      spd->xmpBundle.profile1.setCommandRate(CommandRate::_2n);
+      break;
 
-  case 3:
-    spd->xmpBundle.profile1.setCommandRate(CommandRate::_3n);
-    break;
+    case 3:
+      spd->xmpBundle.profile1.setCommandRate(CommandRate::_3n);
+      break;
   }
 }
 
@@ -2563,72 +2326,52 @@ void MainWindow::on_cbCL98_XMP1_toggled(bool value) {
 
 void MainWindow::on_sbtAA_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settAA(value);
-  ui->ltAA_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettAA(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltAA_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settRCD(value);
-  ui->ltRCD_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRCD(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRCD_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settRP(value);
-  ui->ltRP_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRP(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRP_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settRAS(value);
-  ui->ltRAS_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRAS(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRAS_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settRC(value);
-  ui->ltRC_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRC(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRC_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settWR(value);
-  ui->ltWR_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettWR(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltWR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settRFC1(value);
-  ui->ltRFC1_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRFC1() * 1000,
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRFC1_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settRFC2(value);
-  ui->ltRFC2_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRFC2() * 1000,
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRFC2_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settRFC(value);
-  ui->ltRFC_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRFC() * 1000,
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRFC_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settRRD_L(value);
-  ui->ltRRD_L_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRRD_L(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRRD_L()));
 }
 
 void MainWindow::on_sbtRRD_L_LCLK_XMP1_valueChanged(int value) {
@@ -2637,9 +2380,7 @@ void MainWindow::on_sbtRRD_L_LCLK_XMP1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_L(value);
-  ui->ltCCD_L_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_L(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_LCLK_XMP1_valueChanged(int value) {
@@ -2648,9 +2389,7 @@ void MainWindow::on_sbtCCD_L_LCLK_XMP1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCDL_L_WR_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_L_WR(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP1_valueChanged(int value) {
@@ -2659,9 +2398,7 @@ void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCDL_L_WR2_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_L_WR2(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP1_valueChanged(int value) {
@@ -2670,9 +2407,7 @@ void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP1_valueChanged(int value) {
 
 void MainWindow::on_sbtFAW_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settFAW(value);
-  ui->ltFAW_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettFAW(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltFAW_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtFAW_LCLK_XMP1_valueChanged(int value) {
@@ -2681,9 +2416,7 @@ void MainWindow::on_sbtFAW_LCLK_XMP1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_L_WTR(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP1_valueChanged(int value) {
@@ -2692,23 +2425,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_S_WTR_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP1_valueChanged(int value) {
   spd->xmpBundle.profile1.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRTP(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP1_valueChanged(int value) {
@@ -2717,121 +2444,89 @@ void MainWindow::on_sbtRTP_LCLK_XMP1_valueChanged(int value) {
 
 void MainWindow::on_sbtAA_XMP1_editingFinished() {
   ui->sbtAA_XMP1->setValue(spd->xmpBundle.profile1.gettAA());
-  ui->ltAA_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettAA(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltAA_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_XMP1_editingFinished() {
   ui->sbtRCD_XMP1->setValue(spd->xmpBundle.profile1.gettRCD());
-  ui->ltRCD_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRCD(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRCD_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_XMP1_editingFinished() {
   ui->sbtRP_XMP1->setValue(spd->xmpBundle.profile1.gettRP());
-  ui->ltRP_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRP(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRP_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_XMP1_editingFinished() {
   ui->sbtRAS_XMP1->setValue(spd->xmpBundle.profile1.gettRAS());
-  ui->ltRAS_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRAS(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRAS_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_XMP1_editingFinished() {
   ui->sbtRC_XMP1->setValue(spd->xmpBundle.profile1.gettRC());
-  ui->ltRC_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRC(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRC_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_XMP1_editingFinished() {
   ui->sbtWR_XMP1->setValue(spd->xmpBundle.profile1.gettWR());
-  ui->ltWR_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettWR(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltWR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_XMP1_editingFinished() {
   ui->sbtRFC1_XMP1->setValue(spd->xmpBundle.profile1.gettAA());
   spd->xmpBundle.profile1.settRFC1(ui->sbtRFC1_XMP1->value());
-  ui->ltRFC1_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRFC1() * 1000,
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRFC1_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_XMP1_editingFinished() {
   ui->sbtRFC2_XMP1->setValue(spd->xmpBundle.profile1.gettRFC2());
-  ui->ltRFC2_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRFC2() * 1000,
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRFC2_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_XMP1_editingFinished() {
   ui->sbtRFC_XMP1->setValue(spd->xmpBundle.profile1.gettRFC());
-  ui->ltRFC_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRFC() * 1000,
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRFC_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_XMP1_editingFinished() {
   ui->sbtRRD_L_XMP1->setValue(spd->xmpBundle.profile1.gettRRD_L());
-  ui->ltRRD_L_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRRD_L(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettRRD_L_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_LCLK_XMP1_editingFinished() {
-  ui->sbtRRD_L_LCLK_XMP1->setValue(
-      spd->xmpBundle.profile1.gettRRD_L_lowerLimit());
+  ui->sbtRRD_L_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettRRD_L_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_L_XMP1_editingFinished() {
   ui->sbtCCD_L_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L());
-  ui->ltCCD_L_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_L(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_LCLK_XMP1_editingFinished() {
-  ui->sbtCCD_L_LCLK_XMP1->setValue(
-      spd->xmpBundle.profile1.gettCCD_L_lowerLimit());
+  ui->sbtCCD_L_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_lowerLimit());
 }
 
 void MainWindow::on_sbtCCDL_L_WR_XMP1_editingFinished() {
   ui->sbtCCDL_L_WR_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_L_WR(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP1_editingFinished() {
-  ui->sbtCCDL_L_WR_LCLK_XMP1->setValue(
-      spd->xmpBundle.profile1.gettCCD_L_WR_lowerLimit());
+  ui->sbtCCDL_L_WR_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR_lowerLimit());
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_XMP1_editingFinished() {
   ui->sbtCCDL_L_WR2_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_L_WR2(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP1_editingFinished() {
-  ui->sbtCCDL_L_WR2_LCLK_XMP1->setValue(
-      spd->xmpBundle.profile1.gettCCD_L_WR2_lowerLimit());
+  ui->sbtCCDL_L_WR2_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_sbtFAW_XMP1_editingFinished() {
   ui->sbtFAW_XMP1->setValue(spd->xmpBundle.profile1.gettFAW());
-  ui->ltFAW_Ticks_XMP1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettFAW(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->ltFAW_Ticks_XMP1->setText(QString::number(spd->xmpBundle.profile1.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtFAW_LCLK_XMP1_editingFinished() {
@@ -2840,36 +2535,26 @@ void MainWindow::on_sbtFAW_LCLK_XMP1_editingFinished() {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP1_editingFinished() {
   ui->sbtCCD_L_WTR_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_L_WTR(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP1_editingFinished() {
-  ui->sbtCCD_L_WTR_LCLK_XMP1->setValue(
-      spd->xmpBundle.profile1.gettCCD_L_WTR_lowerLimit());
+  ui->sbtCCD_L_WTR_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_L_WTR_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_S_WTR_XMP1_editingFinished() {
   ui->sbtCCD_S_WTR_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP1_editingFinished() {
-  ui->sbtCCD_S_WTR_LCLK_XMP1->setValue(
-      spd->xmpBundle.profile1.gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->sbtCCD_S_WTR_LCLK_XMP1->setValue(spd->xmpBundle.profile1.gettCCD_S_WTR_lowerLimit());
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP1_editingFinished() {
   ui->sbtRTP_XMP1->setValue(spd->xmpBundle.profile1.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile1.gettRTP(),
-                                 spd->xmpBundle.profile1.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile1.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP1_editingFinished() {
@@ -2878,8 +2563,7 @@ void MainWindow::on_sbtRTP_LCLK_XMP1_editingFinished() {
 
 // XMP2
 void MainWindow::on_leProfileName_XMP2_editingFinished() {
-  spd->xmpBundle.setXMP2ProfileName(
-      ui->leProfileName_XMP2->text().toStdString());
+  spd->xmpBundle.setXMP2ProfileName(ui->leProfileName_XMP2->text().toStdString());
 }
 
 void MainWindow::on_cbEnabled_XMP2_toggled(bool val) {
@@ -2913,8 +2597,7 @@ void MainWindow::on_sbVmemctrl_XMP2_valueChanged(int value) {
 void MainWindow::on_spinMinCycleTime_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.setMinCycleTime(value);
 
-  QString frequencyStr =
-      QString::number(spd->xmpBundle.profile2.getFrequency()) + " MHz";
+  QString frequencyStr = QString::number(spd->xmpBundle.profile2.getFrequency()) + " MHz";
   QString mtStr = QString::number(spd->xmpBundle.profile2.getMT()) + " MT/s";
 
   ui->lFrequencyValue_XMP2->setText(frequencyStr);
@@ -2938,11 +2621,9 @@ void MainWindow::on_sbVmemctrl_XMP2_editingFinished() {
 }
 
 void MainWindow::on_spinMinCycleTime_XMP2_editingFinished() {
-  ui->spinMinCycleTime_XMP2->setValue(
-      spd->xmpBundle.profile2.getMinCycleTime());
+  ui->spinMinCycleTime_XMP2->setValue(spd->xmpBundle.profile2.getMinCycleTime());
 
-  QString frequencyStr =
-      QString::number(spd->xmpBundle.profile2.getFrequency()) + " MHz";
+  QString frequencyStr = QString::number(spd->xmpBundle.profile2.getFrequency()) + " MHz";
   QString mtStr = QString::number(spd->xmpBundle.profile2.getMT()) + " MT/s";
 
   ui->lFrequencyValue_XMP2->setText(frequencyStr);
@@ -2951,22 +2632,22 @@ void MainWindow::on_spinMinCycleTime_XMP2_editingFinished() {
 
 void MainWindow::on_cbCommandRate_XMP2_currentIndexChanged(int index) {
   switch (index) {
-  default:
-  case 0:
-    spd->xmpBundle.profile2.setCommandRate(CommandRate::Undefined);
-    break;
+    default:
+    case 0:
+      spd->xmpBundle.profile2.setCommandRate(CommandRate::Undefined);
+      break;
 
-  case 1:
-    spd->xmpBundle.profile2.setCommandRate(CommandRate::_1n);
-    break;
+    case 1:
+      spd->xmpBundle.profile2.setCommandRate(CommandRate::_1n);
+      break;
 
-  case 2:
-    spd->xmpBundle.profile2.setCommandRate(CommandRate::_2n);
-    break;
+    case 2:
+      spd->xmpBundle.profile2.setCommandRate(CommandRate::_2n);
+      break;
 
-  case 3:
-    spd->xmpBundle.profile2.setCommandRate(CommandRate::_3n);
-    break;
+    case 3:
+      spd->xmpBundle.profile2.setCommandRate(CommandRate::_3n);
+      break;
   }
 }
 
@@ -3093,72 +2774,52 @@ void MainWindow::on_cbCL98_XMP2_toggled(bool value) {
 
 void MainWindow::on_sbtAA_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settAA(value);
-  ui->ltAA_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettAA(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltAA_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settRCD(value);
-  ui->ltRCD_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRCD(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRCD_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settRP(value);
-  ui->ltRP_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRP(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRP_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settRAS(value);
-  ui->ltRAS_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRAS(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRAS_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settRC(value);
-  ui->ltRC_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRC(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRC_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settWR(value);
-  ui->ltWR_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettWR(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltWR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settRFC1(value);
-  ui->ltRFC1_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRFC1() * 1000,
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRFC1_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settRFC2(value);
-  ui->ltRFC2_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRFC2() * 1000,
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRFC2_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settRFC(value);
-  ui->ltRFC_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRFC() * 1000,
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRFC_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settRRD_L(value);
-  ui->ltRRD_L_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRRD_L(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRRD_L()));
 }
 
 void MainWindow::on_sbtRRD_L_LCLK_XMP2_valueChanged(int value) {
@@ -3167,9 +2828,7 @@ void MainWindow::on_sbtRRD_L_LCLK_XMP2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_L(value);
-  ui->ltCCD_L_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_L(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_LCLK_XMP2_valueChanged(int value) {
@@ -3178,9 +2837,7 @@ void MainWindow::on_sbtCCD_L_LCLK_XMP2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCDL_L_WR_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_L_WR(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP2_valueChanged(int value) {
@@ -3189,9 +2846,7 @@ void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCDL_L_WR2_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_L_WR2(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP2_valueChanged(int value) {
@@ -3200,9 +2855,7 @@ void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP2_valueChanged(int value) {
 
 void MainWindow::on_sbtFAW_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settFAW(value);
-  ui->ltFAW_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettFAW(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltFAW_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtFAW_LCLK_XMP2_valueChanged(int value) {
@@ -3211,9 +2864,7 @@ void MainWindow::on_sbtFAW_LCLK_XMP2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_L_WTR(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP2_valueChanged(int value) {
@@ -3222,23 +2873,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_S_WTR_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP2_valueChanged(int value) {
   spd->xmpBundle.profile2.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRTP(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP2_valueChanged(int value) {
@@ -3247,121 +2892,89 @@ void MainWindow::on_sbtRTP_LCLK_XMP2_valueChanged(int value) {
 
 void MainWindow::on_sbtAA_XMP2_editingFinished() {
   ui->sbtAA_XMP2->setValue(spd->xmpBundle.profile2.gettAA());
-  ui->ltAA_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettAA(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltAA_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_XMP2_editingFinished() {
   ui->sbtRCD_XMP2->setValue(spd->xmpBundle.profile2.gettRCD());
-  ui->ltRCD_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRCD(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRCD_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_XMP2_editingFinished() {
   ui->sbtRP_XMP2->setValue(spd->xmpBundle.profile2.gettRP());
-  ui->ltRP_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRP(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRP_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_XMP2_editingFinished() {
   ui->sbtRAS_XMP2->setValue(spd->xmpBundle.profile2.gettRAS());
-  ui->ltRAS_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRAS(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRAS_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_XMP2_editingFinished() {
   ui->sbtRC_XMP2->setValue(spd->xmpBundle.profile2.gettRC());
-  ui->ltRC_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRC(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRC_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_XMP2_editingFinished() {
   ui->sbtWR_XMP2->setValue(spd->xmpBundle.profile2.gettWR());
-  ui->ltWR_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettWR(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltWR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_XMP2_editingFinished() {
   ui->sbtRFC1_XMP2->setValue(spd->xmpBundle.profile2.gettAA());
   spd->xmpBundle.profile2.settRFC1(ui->sbtRFC1_XMP2->value());
-  ui->ltRFC1_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRFC1() * 1000,
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRFC1_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_XMP2_editingFinished() {
   ui->sbtRFC2_XMP2->setValue(spd->xmpBundle.profile2.gettRFC2());
-  ui->ltRFC2_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRFC2() * 1000,
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRFC2_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_XMP2_editingFinished() {
   ui->sbtRFC_XMP2->setValue(spd->xmpBundle.profile2.gettRFC());
-  ui->ltRFC_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRFC() * 1000,
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRFC_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_XMP2_editingFinished() {
   ui->sbtRRD_L_XMP2->setValue(spd->xmpBundle.profile2.gettRRD_L());
-  ui->ltRRD_L_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRRD_L(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettRRD_L_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_LCLK_XMP2_editingFinished() {
-  ui->sbtRRD_L_LCLK_XMP2->setValue(
-      spd->xmpBundle.profile2.gettRRD_L_lowerLimit());
+  ui->sbtRRD_L_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettRRD_L_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_L_XMP2_editingFinished() {
   ui->sbtCCD_L_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L());
-  ui->ltCCD_L_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_L(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_LCLK_XMP2_editingFinished() {
-  ui->sbtCCD_L_LCLK_XMP2->setValue(
-      spd->xmpBundle.profile2.gettCCD_L_lowerLimit());
+  ui->sbtCCD_L_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_lowerLimit());
 }
 
 void MainWindow::on_sbtCCDL_L_WR_XMP2_editingFinished() {
   ui->sbtCCDL_L_WR_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_L_WR(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP2_editingFinished() {
-  ui->sbtCCDL_L_WR_LCLK_XMP2->setValue(
-      spd->xmpBundle.profile2.gettCCD_L_WR_lowerLimit());
+  ui->sbtCCDL_L_WR_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR_lowerLimit());
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_XMP2_editingFinished() {
   ui->sbtCCDL_L_WR2_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_L_WR2(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP2_editingFinished() {
-  ui->sbtCCDL_L_WR2_LCLK_XMP2->setValue(
-      spd->xmpBundle.profile2.gettCCD_L_WR2_lowerLimit());
+  ui->sbtCCDL_L_WR2_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_sbtFAW_XMP2_editingFinished() {
   ui->sbtFAW_XMP2->setValue(spd->xmpBundle.profile2.gettFAW());
-  ui->ltFAW_Ticks_XMP2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettFAW(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->ltFAW_Ticks_XMP2->setText(QString::number(spd->xmpBundle.profile2.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtFAW_LCLK_XMP2_editingFinished() {
@@ -3370,36 +2983,26 @@ void MainWindow::on_sbtFAW_LCLK_XMP2_editingFinished() {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP2_editingFinished() {
   ui->sbtCCD_L_WTR_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_L_WTR(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP2_editingFinished() {
-  ui->sbtCCD_L_WTR_LCLK_XMP2->setValue(
-      spd->xmpBundle.profile2.gettCCD_L_WTR_lowerLimit());
+  ui->sbtCCD_L_WTR_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_L_WTR_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_S_WTR_XMP2_editingFinished() {
   ui->sbtCCD_S_WTR_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP2_editingFinished() {
-  ui->sbtCCD_S_WTR_LCLK_XMP2->setValue(
-      spd->xmpBundle.profile2.gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->sbtCCD_S_WTR_LCLK_XMP2->setValue(spd->xmpBundle.profile2.gettCCD_S_WTR_lowerLimit());
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP2_editingFinished() {
   ui->sbtRTP_XMP2->setValue(spd->xmpBundle.profile2.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile2.gettRTP(),
-                                 spd->xmpBundle.profile2.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile2.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP2_editingFinished() {
@@ -3408,8 +3011,7 @@ void MainWindow::on_sbtRTP_LCLK_XMP2_editingFinished() {
 
 // XMP3
 void MainWindow::on_leProfileName_XMP3_editingFinished() {
-  spd->xmpBundle.setXMP3ProfileName(
-      ui->leProfileName_XMP3->text().toStdString());
+  spd->xmpBundle.setXMP3ProfileName(ui->leProfileName_XMP3->text().toStdString());
 }
 
 void MainWindow::on_cbEnabled_XMP3_toggled(bool val) {
@@ -3443,8 +3045,7 @@ void MainWindow::on_sbVmemctrl_XMP3_valueChanged(int value) {
 void MainWindow::on_spinMinCycleTime_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.setMinCycleTime(value);
 
-  QString frequencyStr =
-      QString::number(spd->xmpBundle.profile3.getFrequency()) + " MHz";
+  QString frequencyStr = QString::number(spd->xmpBundle.profile3.getFrequency()) + " MHz";
   QString mtStr = QString::number(spd->xmpBundle.profile3.getMT()) + " MT/s";
 
   ui->lFrequencyValue_XMP3->setText(frequencyStr);
@@ -3468,11 +3069,9 @@ void MainWindow::on_sbVmemctrl_XMP3_editingFinished() {
 }
 
 void MainWindow::on_spinMinCycleTime_XMP3_editingFinished() {
-  ui->spinMinCycleTime_XMP3->setValue(
-      spd->xmpBundle.profile3.getMinCycleTime());
+  ui->spinMinCycleTime_XMP3->setValue(spd->xmpBundle.profile3.getMinCycleTime());
 
-  QString frequencyStr =
-      QString::number(spd->xmpBundle.profile3.getFrequency()) + " MHz";
+  QString frequencyStr = QString::number(spd->xmpBundle.profile3.getFrequency()) + " MHz";
   QString mtStr = QString::number(spd->xmpBundle.profile3.getMT()) + " MT/s";
 
   ui->lFrequencyValue_XMP3->setText(frequencyStr);
@@ -3481,22 +3080,22 @@ void MainWindow::on_spinMinCycleTime_XMP3_editingFinished() {
 
 void MainWindow::on_cbCommandRate_XMP3_currentIndexChanged(int index) {
   switch (index) {
-  default:
-  case 0:
-    spd->xmpBundle.profile3.setCommandRate(CommandRate::Undefined);
-    break;
+    default:
+    case 0:
+      spd->xmpBundle.profile3.setCommandRate(CommandRate::Undefined);
+      break;
 
-  case 1:
-    spd->xmpBundle.profile3.setCommandRate(CommandRate::_1n);
-    break;
+    case 1:
+      spd->xmpBundle.profile3.setCommandRate(CommandRate::_1n);
+      break;
 
-  case 2:
-    spd->xmpBundle.profile3.setCommandRate(CommandRate::_2n);
-    break;
+    case 2:
+      spd->xmpBundle.profile3.setCommandRate(CommandRate::_2n);
+      break;
 
-  case 3:
-    spd->xmpBundle.profile3.setCommandRate(CommandRate::_3n);
-    break;
+    case 3:
+      spd->xmpBundle.profile3.setCommandRate(CommandRate::_3n);
+      break;
   }
 }
 
@@ -3623,72 +3222,52 @@ void MainWindow::on_cbCL98_XMP3_toggled(bool value) {
 
 void MainWindow::on_sbtAA_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settAA(value);
-  ui->ltAA_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettAA(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltAA_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settRCD(value);
-  ui->ltRCD_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRCD(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRCD_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settRP(value);
-  ui->ltRP_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRP(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRP_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settRAS(value);
-  ui->ltRAS_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRAS(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRAS_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settRC(value);
-  ui->ltRC_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRC(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRC_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settWR(value);
-  ui->ltWR_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettWR(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltWR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settRFC1(value);
-  ui->ltRFC1_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRFC1() * 1000,
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRFC1_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settRFC2(value);
-  ui->ltRFC2_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRFC2() * 1000,
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRFC2_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settRFC(value);
-  ui->ltRFC_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRFC() * 1000,
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRFC_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settRRD_L(value);
-  ui->ltRRD_L_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRRD_L(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRRD_L()));
 }
 
 void MainWindow::on_sbtRRD_L_LCLK_XMP3_valueChanged(int value) {
@@ -3697,9 +3276,7 @@ void MainWindow::on_sbtRRD_L_LCLK_XMP3_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_L(value);
-  ui->ltCCD_L_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_L(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_LCLK_XMP3_valueChanged(int value) {
@@ -3708,9 +3285,7 @@ void MainWindow::on_sbtCCD_L_LCLK_XMP3_valueChanged(int value) {
 
 void MainWindow::on_sbtCCDL_L_WR_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_L_WR(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP3_valueChanged(int value) {
@@ -3719,9 +3294,7 @@ void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP3_valueChanged(int value) {
 
 void MainWindow::on_sbtCCDL_L_WR2_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_L_WR2(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP3_valueChanged(int value) {
@@ -3730,9 +3303,7 @@ void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP3_valueChanged(int value) {
 
 void MainWindow::on_sbtFAW_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settFAW(value);
-  ui->ltFAW_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettFAW(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltFAW_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtFAW_LCLK_XMP3_valueChanged(int value) {
@@ -3741,9 +3312,7 @@ void MainWindow::on_sbtFAW_LCLK_XMP3_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_L_WTR(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP3_valueChanged(int value) {
@@ -3752,23 +3321,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP3_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_S_WTR_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP3_valueChanged(int value) {
   spd->xmpBundle.profile3.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRTP(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP3_valueChanged(int value) {
@@ -3777,121 +3340,89 @@ void MainWindow::on_sbtRTP_LCLK_XMP3_valueChanged(int value) {
 
 void MainWindow::on_sbtAA_XMP3_editingFinished() {
   ui->sbtAA_XMP3->setValue(spd->xmpBundle.profile3.gettAA());
-  ui->ltAA_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettAA(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltAA_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_XMP3_editingFinished() {
   ui->sbtRCD_XMP3->setValue(spd->xmpBundle.profile3.gettRCD());
-  ui->ltRCD_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRCD(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRCD_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_XMP3_editingFinished() {
   ui->sbtRP_XMP3->setValue(spd->xmpBundle.profile3.gettRP());
-  ui->ltRP_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRP(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRP_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_XMP3_editingFinished() {
   ui->sbtRAS_XMP3->setValue(spd->xmpBundle.profile3.gettRAS());
-  ui->ltRAS_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRAS(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRAS_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_XMP3_editingFinished() {
   ui->sbtRC_XMP3->setValue(spd->xmpBundle.profile3.gettRC());
-  ui->ltRC_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRC(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRC_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_XMP3_editingFinished() {
   ui->sbtWR_XMP3->setValue(spd->xmpBundle.profile3.gettWR());
-  ui->ltWR_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettWR(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltWR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_XMP3_editingFinished() {
   ui->sbtRFC1_XMP3->setValue(spd->xmpBundle.profile3.gettAA());
   spd->xmpBundle.profile3.settRFC1(ui->sbtRFC1_XMP3->value());
-  ui->ltRFC1_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRFC1() * 1000,
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRFC1_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_XMP3_editingFinished() {
   ui->sbtRFC2_XMP3->setValue(spd->xmpBundle.profile3.gettRFC2());
-  ui->ltRFC2_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRFC2() * 1000,
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRFC2_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_XMP3_editingFinished() {
   ui->sbtRFC_XMP3->setValue(spd->xmpBundle.profile3.gettRFC());
-  ui->ltRFC_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRFC() * 1000,
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRFC_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_XMP3_editingFinished() {
   ui->sbtRRD_L_XMP3->setValue(spd->xmpBundle.profile3.gettRRD_L());
-  ui->ltRRD_L_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRRD_L(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettRRD_L_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_LCLK_XMP3_editingFinished() {
-  ui->sbtRRD_L_LCLK_XMP3->setValue(
-      spd->xmpBundle.profile3.gettRRD_L_lowerLimit());
+  ui->sbtRRD_L_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettRRD_L_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_L_XMP3_editingFinished() {
   ui->sbtCCD_L_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L());
-  ui->ltCCD_L_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_L(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_LCLK_XMP3_editingFinished() {
-  ui->sbtCCD_L_LCLK_XMP3->setValue(
-      spd->xmpBundle.profile3.gettCCD_L_lowerLimit());
+  ui->sbtCCD_L_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_lowerLimit());
 }
 
 void MainWindow::on_sbtCCDL_L_WR_XMP3_editingFinished() {
   ui->sbtCCDL_L_WR_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_L_WR(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_LCLK_XMP3_editingFinished() {
-  ui->sbtCCDL_L_WR_LCLK_XMP3->setValue(
-      spd->xmpBundle.profile3.gettCCD_L_WR_lowerLimit());
+  ui->sbtCCDL_L_WR_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR_lowerLimit());
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_XMP3_editingFinished() {
   ui->sbtCCDL_L_WR2_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_L_WR2(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMP3_editingFinished() {
-  ui->sbtCCDL_L_WR2_LCLK_XMP3->setValue(
-      spd->xmpBundle.profile3.gettCCD_L_WR2_lowerLimit());
+  ui->sbtCCDL_L_WR2_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_sbtFAW_XMP3_editingFinished() {
   ui->sbtFAW_XMP3->setValue(spd->xmpBundle.profile3.gettFAW());
-  ui->ltFAW_Ticks_XMP3->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettFAW(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->ltFAW_Ticks_XMP3->setText(QString::number(spd->xmpBundle.profile3.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtFAW_LCLK_XMP3_editingFinished() {
@@ -3900,36 +3431,26 @@ void MainWindow::on_sbtFAW_LCLK_XMP3_editingFinished() {
 
 void MainWindow::on_sbtCCD_L_WTR_XMP3_editingFinished() {
   ui->sbtCCD_L_WTR_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_L_WTR(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMP3_editingFinished() {
-  ui->sbtCCD_L_WTR_LCLK_XMP3->setValue(
-      spd->xmpBundle.profile3.gettCCD_L_WTR_lowerLimit());
+  ui->sbtCCD_L_WTR_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_L_WTR_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_S_WTR_XMP3_editingFinished() {
   ui->sbtCCD_S_WTR_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMP3_editingFinished() {
-  ui->sbtCCD_S_WTR_LCLK_XMP3->setValue(
-      spd->xmpBundle.profile3.gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettCCD_S_WTR(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->sbtCCD_S_WTR_LCLK_XMP3->setValue(spd->xmpBundle.profile3.gettCCD_S_WTR_lowerLimit());
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMP3_editingFinished() {
   ui->sbtRTP_XMP3->setValue(spd->xmpBundle.profile3.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->xmpBundle.profile3.gettRTP(),
-                                 spd->xmpBundle.profile3.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profile3.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMP3_editingFinished() {
@@ -3964,10 +3485,8 @@ void MainWindow::on_sbVmemctrl_XMPU1_valueChanged(int value) {
 void MainWindow::on_spinMinCycleTime_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.setMinCycleTime(value);
 
-  QString frequencyStr =
-      QString::number(spd->xmpBundle.profileUser1.getFrequency()) + " MHz";
-  QString mtStr =
-      QString::number(spd->xmpBundle.profileUser1.getMT()) + " MT/s";
+  QString frequencyStr = QString::number(spd->xmpBundle.profileUser1.getFrequency()) + " MHz";
+  QString mtStr = QString::number(spd->xmpBundle.profileUser1.getMT()) + " MT/s";
 
   ui->lFrequencyValue_XMPU1->setText(frequencyStr);
   ui->lMTValue_XMPU1->setText(mtStr);
@@ -3990,13 +3509,10 @@ void MainWindow::on_sbVmemctrl_XMPU1_editingFinished() {
 }
 
 void MainWindow::on_spinMinCycleTime_XMPU1_editingFinished() {
-  ui->spinMinCycleTime_XMPU1->setValue(
-      spd->xmpBundle.profileUser1.getMinCycleTime());
+  ui->spinMinCycleTime_XMPU1->setValue(spd->xmpBundle.profileUser1.getMinCycleTime());
 
-  QString frequencyStr =
-      QString::number(spd->xmpBundle.profileUser1.getFrequency()) + " MHz";
-  QString mtStr =
-      QString::number(spd->xmpBundle.profileUser1.getMT()) + " MT/s";
+  QString frequencyStr = QString::number(spd->xmpBundle.profileUser1.getFrequency()) + " MHz";
+  QString mtStr = QString::number(spd->xmpBundle.profileUser1.getMT()) + " MT/s";
 
   ui->lFrequencyValue_XMPU1->setText(frequencyStr);
   ui->lMTValue_XMPU1->setText(mtStr);
@@ -4004,22 +3520,22 @@ void MainWindow::on_spinMinCycleTime_XMPU1_editingFinished() {
 
 void MainWindow::on_cbCommandRate_XMPU1_currentIndexChanged(int index) {
   switch (index) {
-  default:
-  case 0:
-    spd->xmpBundle.profileUser1.setCommandRate(CommandRate::Undefined);
-    break;
+    default:
+    case 0:
+      spd->xmpBundle.profileUser1.setCommandRate(CommandRate::Undefined);
+      break;
 
-  case 1:
-    spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_1n);
-    break;
+    case 1:
+      spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_1n);
+      break;
 
-  case 2:
-    spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_2n);
-    break;
+    case 2:
+      spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_2n);
+      break;
 
-  case 3:
-    spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_3n);
-    break;
+    case 3:
+      spd->xmpBundle.profileUser1.setCommandRate(CommandRate::_3n);
+      break;
   }
 }
 
@@ -4146,72 +3662,52 @@ void MainWindow::on_cbCL98_XMPU1_toggled(bool value) {
 
 void MainWindow::on_sbtAA_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settAA(value);
-  ui->ltAA_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettAA(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltAA_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settRCD(value);
-  ui->ltRCD_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRCD(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRCD_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settRP(value);
-  ui->ltRP_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRP(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRP_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settRAS(value);
-  ui->ltRAS_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRAS(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRAS_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settRC(value);
-  ui->ltRC_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRC(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRC_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settWR(value);
-  ui->ltWR_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettWR(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltWR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settRFC1(value);
-  ui->ltRFC1_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRFC1() * 1000,
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRFC1_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settRFC2(value);
-  ui->ltRFC2_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRFC2() * 1000,
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRFC2_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settRFC(value);
-  ui->ltRFC_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRFC() * 1000,
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRFC_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settRRD_L(value);
-  ui->ltRRD_L_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRRD_L(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRRD_L()));
 }
 
 void MainWindow::on_sbtRRD_L_LCLK_XMPU1_valueChanged(int value) {
@@ -4220,9 +3716,7 @@ void MainWindow::on_sbtRRD_L_LCLK_XMPU1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_L(value);
-  ui->ltCCD_L_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettCCD_L(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_LCLK_XMPU1_valueChanged(int value) {
@@ -4231,10 +3725,7 @@ void MainWindow::on_sbtCCD_L_LCLK_XMPU1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCDL_L_WR_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_XMPU1->setText(
-      QString::number(utilities::TimeToTicksDDR5(
-          spd->xmpBundle.profileUser1.gettCCD_L_WR(),
-          spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_LCLK_XMPU1_valueChanged(int value) {
@@ -4243,10 +3734,7 @@ void MainWindow::on_sbtCCDL_L_WR_LCLK_XMPU1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCDL_L_WR2_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_XMPU1->setText(
-      QString::number(utilities::TimeToTicksDDR5(
-          spd->xmpBundle.profileUser1.gettCCD_L_WR2(),
-          spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMPU1_valueChanged(int value) {
@@ -4255,9 +3743,7 @@ void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMPU1_valueChanged(int value) {
 
 void MainWindow::on_sbtFAW_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settFAW(value);
-  ui->ltFAW_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettFAW(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltFAW_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtFAW_LCLK_XMPU1_valueChanged(int value) {
@@ -4266,9 +3752,7 @@ void MainWindow::on_sbtFAW_LCLK_XMPU1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettCCD_L_WTR(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU1_valueChanged(int value) {
@@ -4277,23 +3761,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU1_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_S_WTR_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettCCD_S_WTR(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettCCD_S_WTR(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMPU1_valueChanged(int value) {
   spd->xmpBundle.profileUser1.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRTP(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMPU1_valueChanged(int value) {
@@ -4302,168 +3780,121 @@ void MainWindow::on_sbtRTP_LCLK_XMPU1_valueChanged(int value) {
 
 void MainWindow::on_sbtAA_XMPU1_editingFinished() {
   ui->sbtAA_XMPU1->setValue(spd->xmpBundle.profileUser1.gettAA());
-  ui->ltAA_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettAA(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltAA_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_XMPU1_editingFinished() {
   ui->sbtRCD_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRCD());
-  ui->ltRCD_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRCD(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRCD_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_XMPU1_editingFinished() {
   ui->sbtRP_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRP());
-  ui->ltRP_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRP(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRP_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_XMPU1_editingFinished() {
   ui->sbtRAS_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRAS());
-  ui->ltRAS_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRAS(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRAS_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_XMPU1_editingFinished() {
   ui->sbtRC_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRC());
-  ui->ltRC_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRC(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRC_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_XMPU1_editingFinished() {
   ui->sbtWR_XMPU1->setValue(spd->xmpBundle.profileUser1.gettWR());
-  ui->ltWR_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettWR(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltWR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_XMPU1_editingFinished() {
   ui->sbtRFC1_XMPU1->setValue(spd->xmpBundle.profileUser1.gettAA());
   spd->xmpBundle.profileUser1.settRFC1(ui->sbtRFC1_XMPU1->value());
-  ui->ltRFC1_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRFC1() * 1000,
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRFC1_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_XMPU1_editingFinished() {
   ui->sbtRFC2_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRFC2());
-  ui->ltRFC2_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRFC2() * 1000,
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRFC2_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_XMPU1_editingFinished() {
   ui->sbtRFC_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRFC());
-  ui->ltRFC_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRFC() * 1000,
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRFC_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_XMPU1_editingFinished() {
   ui->sbtRRD_L_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRRD_L());
-  ui->ltRRD_L_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRRD_L(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettRRD_L_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_LCLK_XMPU1_editingFinished() {
-  ui->sbtRRD_L_LCLK_XMPU1->setValue(
-      spd->xmpBundle.profileUser1.gettRRD_L_lowerLimit());
+  ui->sbtRRD_L_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRRD_L_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_L_XMPU1_editingFinished() {
   ui->sbtCCD_L_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L());
-  ui->ltCCD_L_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettCCD_L(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_LCLK_XMPU1_editingFinished() {
-  ui->sbtCCD_L_LCLK_XMPU1->setValue(
-      spd->xmpBundle.profileUser1.gettCCD_L_lowerLimit());
+  ui->sbtCCD_L_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_lowerLimit());
 }
 
 void MainWindow::on_sbtCCDL_L_WR_XMPU1_editingFinished() {
   ui->sbtCCDL_L_WR_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_XMPU1->setText(
-      QString::number(utilities::TimeToTicksDDR5(
-          spd->xmpBundle.profileUser1.gettCCD_L_WR(),
-          spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_LCLK_XMPU1_editingFinished() {
-  ui->sbtCCDL_L_WR_LCLK_XMPU1->setValue(
-      spd->xmpBundle.profileUser1.gettCCD_L_WR_lowerLimit());
+  ui->sbtCCDL_L_WR_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR_lowerLimit());
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_XMPU1_editingFinished() {
-  ui->sbtCCDL_L_WR2_XMPU1->setValue(
-      spd->xmpBundle.profileUser1.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_XMPU1->setText(
-      QString::number(utilities::TimeToTicksDDR5(
-          spd->xmpBundle.profileUser1.gettCCD_L_WR2(),
-          spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->sbtCCDL_L_WR2_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR2());
+  ui->ltCCDL_L_WR2_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMPU1_editingFinished() {
-  ui->sbtCCDL_L_WR2_LCLK_XMPU1->setValue(
-      spd->xmpBundle.profileUser1.gettCCD_L_WR2_lowerLimit());
+  ui->sbtCCDL_L_WR2_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_sbtFAW_XMPU1_editingFinished() {
   ui->sbtFAW_XMPU1->setValue(spd->xmpBundle.profileUser1.gettFAW());
-  ui->ltFAW_Ticks_XMPU1->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettFAW(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->ltFAW_Ticks_XMPU1->setText(QString::number(spd->xmpBundle.profileUser1.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtFAW_LCLK_XMPU1_editingFinished() {
-  ui->sbtFAW_LCLK_XMPU1->setValue(
-      spd->xmpBundle.profileUser1.gettFAW_lowerLimit());
+  ui->sbtFAW_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettFAW_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_L_WTR_XMPU1_editingFinished() {
   ui->sbtCCD_L_WTR_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettCCD_L_WTR(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU1_editingFinished() {
-  ui->sbtCCD_L_WTR_LCLK_XMPU1->setValue(
-      spd->xmpBundle.profileUser1.gettCCD_L_WTR_lowerLimit());
+  ui->sbtCCD_L_WTR_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_L_WTR_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_S_WTR_XMPU1_editingFinished() {
   ui->sbtCCD_S_WTR_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettCCD_S_WTR(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMPU1_editingFinished() {
-  ui->sbtCCD_S_WTR_LCLK_XMPU1->setValue(
-      spd->xmpBundle.profileUser1.gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettCCD_S_WTR(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->sbtCCD_S_WTR_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettCCD_S_WTR_lowerLimit());
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMPU1_editingFinished() {
   ui->sbtRTP_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser1.gettRTP(),
-      spd->xmpBundle.profileUser1.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profileUser1.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMPU1_editingFinished() {
-  ui->sbtRTP_LCLK_XMPU1->setValue(
-      spd->xmpBundle.profileUser1.gettRTP_lowerLimit());
+  ui->sbtRTP_LCLK_XMPU1->setValue(spd->xmpBundle.profileUser1.gettRTP_lowerLimit());
 }
 
 // XMP User 2
@@ -4494,10 +3925,8 @@ void MainWindow::on_sbVmemctrl_XMPU2_valueChanged(int value) {
 void MainWindow::on_spinMinCycleTime_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.setMinCycleTime(value);
 
-  QString frequencyStr =
-      QString::number(spd->xmpBundle.profileUser2.getFrequency()) + " MHz";
-  QString mtStr =
-      QString::number(spd->xmpBundle.profileUser2.getMT()) + " MT/s";
+  QString frequencyStr = QString::number(spd->xmpBundle.profileUser2.getFrequency()) + " MHz";
+  QString mtStr = QString::number(spd->xmpBundle.profileUser2.getMT()) + " MT/s";
 
   ui->lFrequencyValue_XMPU2->setText(frequencyStr);
   ui->lMTValue_XMPU2->setText(mtStr);
@@ -4520,13 +3949,10 @@ void MainWindow::on_sbVmemctrl_XMPU2_editingFinished() {
 }
 
 void MainWindow::on_spinMinCycleTime_XMPU2_editingFinished() {
-  ui->spinMinCycleTime_XMPU2->setValue(
-      spd->xmpBundle.profileUser2.getMinCycleTime());
+  ui->spinMinCycleTime_XMPU2->setValue(spd->xmpBundle.profileUser2.getMinCycleTime());
 
-  QString frequencyStr =
-      QString::number(spd->xmpBundle.profileUser2.getFrequency()) + " MHz";
-  QString mtStr =
-      QString::number(spd->xmpBundle.profileUser2.getMT()) + " MT/s";
+  QString frequencyStr = QString::number(spd->xmpBundle.profileUser2.getFrequency()) + " MHz";
+  QString mtStr = QString::number(spd->xmpBundle.profileUser2.getMT()) + " MT/s";
 
   ui->lFrequencyValue_XMPU2->setText(frequencyStr);
   ui->lMTValue_XMPU2->setText(mtStr);
@@ -4534,22 +3960,22 @@ void MainWindow::on_spinMinCycleTime_XMPU2_editingFinished() {
 
 void MainWindow::on_cbCommandRate_XMPU2_currentIndexChanged(int index) {
   switch (index) {
-  default:
-  case 0:
-    spd->xmpBundle.profileUser2.setCommandRate(CommandRate::Undefined);
-    break;
+    default:
+    case 0:
+      spd->xmpBundle.profileUser2.setCommandRate(CommandRate::Undefined);
+      break;
 
-  case 1:
-    spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_1n);
-    break;
+    case 1:
+      spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_1n);
+      break;
 
-  case 2:
-    spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_2n);
-    break;
+    case 2:
+      spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_2n);
+      break;
 
-  case 3:
-    spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_3n);
-    break;
+    case 3:
+      spd->xmpBundle.profileUser2.setCommandRate(CommandRate::_3n);
+      break;
   }
 }
 
@@ -4676,72 +4102,52 @@ void MainWindow::on_cbCL98_XMPU2_toggled(bool value) {
 
 void MainWindow::on_sbtAA_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settAA(value);
-  ui->ltAA_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettAA(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltAA_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settRCD(value);
-  ui->ltRCD_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRCD(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRCD_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settRP(value);
-  ui->ltRP_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRP(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRP_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settRAS(value);
-  ui->ltRAS_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRAS(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRAS_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settRC(value);
-  ui->ltRC_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRC(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRC_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settWR(value);
-  ui->ltWR_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettWR(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltWR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settRFC1(value);
-  ui->ltRFC1_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRFC1() * 1000,
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRFC1_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settRFC2(value);
-  ui->ltRFC2_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRFC2() * 1000,
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRFC2_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settRFC(value);
-  ui->ltRFC_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRFC() * 1000,
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRFC_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settRRD_L(value);
-  ui->ltRRD_L_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRRD_L(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRRD_L()));
 }
 
 void MainWindow::on_sbtRRD_L_LCLK_XMPU2_valueChanged(int value) {
@@ -4750,9 +4156,7 @@ void MainWindow::on_sbtRRD_L_LCLK_XMPU2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_L(value);
-  ui->ltCCD_L_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettCCD_L(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_LCLK_XMPU2_valueChanged(int value) {
@@ -4761,10 +4165,7 @@ void MainWindow::on_sbtCCD_L_LCLK_XMPU2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCDL_L_WR_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_XMPU2->setText(
-      QString::number(utilities::TimeToTicksDDR5(
-          spd->xmpBundle.profileUser2.gettCCD_L_WR(),
-          spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_LCLK_XMPU2_valueChanged(int value) {
@@ -4773,10 +4174,7 @@ void MainWindow::on_sbtCCDL_L_WR_LCLK_XMPU2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCDL_L_WR2_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_XMPU2->setText(
-      QString::number(utilities::TimeToTicksDDR5(
-          spd->xmpBundle.profileUser2.gettCCD_L_WR2(),
-          spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMPU2_valueChanged(int value) {
@@ -4785,9 +4183,7 @@ void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMPU2_valueChanged(int value) {
 
 void MainWindow::on_sbtFAW_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settFAW(value);
-  ui->ltFAW_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettFAW(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltFAW_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtFAW_LCLK_XMPU2_valueChanged(int value) {
@@ -4796,9 +4192,7 @@ void MainWindow::on_sbtFAW_LCLK_XMPU2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_L_WTR_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettCCD_L_WTR(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU2_valueChanged(int value) {
@@ -4807,23 +4201,17 @@ void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU2_valueChanged(int value) {
 
 void MainWindow::on_sbtCCD_S_WTR_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettCCD_S_WTR(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settCCD_S_WTR_lowerLimit(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettCCD_S_WTR(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMPU2_valueChanged(int value) {
   spd->xmpBundle.profileUser2.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRTP(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMPU2_valueChanged(int value) {
@@ -4832,168 +4220,121 @@ void MainWindow::on_sbtRTP_LCLK_XMPU2_valueChanged(int value) {
 
 void MainWindow::on_sbtAA_XMPU2_editingFinished() {
   ui->sbtAA_XMPU2->setValue(spd->xmpBundle.profileUser2.gettAA());
-  ui->ltAA_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettAA(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltAA_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_XMPU2_editingFinished() {
   ui->sbtRCD_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRCD());
-  ui->ltRCD_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRCD(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRCD_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_XMPU2_editingFinished() {
   ui->sbtRP_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRP());
-  ui->ltRP_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRP(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRP_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_XMPU2_editingFinished() {
   ui->sbtRAS_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRAS());
-  ui->ltRAS_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRAS(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRAS_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_XMPU2_editingFinished() {
   ui->sbtRC_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRC());
-  ui->ltRC_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRC(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRC_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_XMPU2_editingFinished() {
   ui->sbtWR_XMPU2->setValue(spd->xmpBundle.profileUser2.gettWR());
-  ui->ltWR_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettWR(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltWR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_XMPU2_editingFinished() {
   ui->sbtRFC1_XMPU2->setValue(spd->xmpBundle.profileUser2.gettAA());
   spd->xmpBundle.profileUser2.settRFC1(ui->sbtRFC1_XMPU2->value());
-  ui->ltRFC1_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRFC1() * 1000,
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRFC1_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_XMPU2_editingFinished() {
   ui->sbtRFC2_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRFC2());
-  ui->ltRFC2_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRFC2() * 1000,
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRFC2_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_XMPU2_editingFinished() {
   ui->sbtRFC_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRFC());
-  ui->ltRFC_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRFC() * 1000,
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRFC_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_XMPU2_editingFinished() {
   ui->sbtRRD_L_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRRD_L());
-  ui->ltRRD_L_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRRD_L(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettRRD_L_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_LCLK_XMPU2_editingFinished() {
-  ui->sbtRRD_L_LCLK_XMPU2->setValue(
-      spd->xmpBundle.profileUser2.gettRRD_L_lowerLimit());
+  ui->sbtRRD_L_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRRD_L_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_L_XMPU2_editingFinished() {
   ui->sbtCCD_L_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L());
-  ui->ltCCD_L_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettCCD_L(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_LCLK_XMPU2_editingFinished() {
-  ui->sbtCCD_L_LCLK_XMPU2->setValue(
-      spd->xmpBundle.profileUser2.gettCCD_L_lowerLimit());
+  ui->sbtCCD_L_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_lowerLimit());
 }
 
 void MainWindow::on_sbtCCDL_L_WR_XMPU2_editingFinished() {
   ui->sbtCCDL_L_WR_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_XMPU2->setText(
-      QString::number(utilities::TimeToTicksDDR5(
-          spd->xmpBundle.profileUser2.gettCCD_L_WR(),
-          spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_LCLK_XMPU2_editingFinished() {
-  ui->sbtCCDL_L_WR_LCLK_XMPU2->setValue(
-      spd->xmpBundle.profileUser2.gettCCD_L_WR_lowerLimit());
+  ui->sbtCCDL_L_WR_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR_lowerLimit());
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_XMPU2_editingFinished() {
-  ui->sbtCCDL_L_WR2_XMPU2->setValue(
-      spd->xmpBundle.profileUser2.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_XMPU2->setText(
-      QString::number(utilities::TimeToTicksDDR5(
-          spd->xmpBundle.profileUser2.gettCCD_L_WR2(),
-          spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->sbtCCDL_L_WR2_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR2());
+  ui->ltCCDL_L_WR2_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_LCLK_XMPU2_editingFinished() {
-  ui->sbtCCDL_L_WR2_LCLK_XMPU2->setValue(
-      spd->xmpBundle.profileUser2.gettCCD_L_WR2_lowerLimit());
+  ui->sbtCCDL_L_WR2_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WR2_lowerLimit());
 }
 
 void MainWindow::on_sbtFAW_XMPU2_editingFinished() {
   ui->sbtFAW_XMPU2->setValue(spd->xmpBundle.profileUser2.gettFAW());
-  ui->ltFAW_Ticks_XMPU2->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettFAW(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->ltFAW_Ticks_XMPU2->setText(QString::number(spd->xmpBundle.profileUser2.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtFAW_LCLK_XMPU2_editingFinished() {
-  ui->sbtFAW_LCLK_XMPU2->setValue(
-      spd->xmpBundle.profileUser2.gettFAW_lowerLimit());
+  ui->sbtFAW_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettFAW_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_L_WTR_XMPU2_editingFinished() {
   ui->sbtCCD_L_WTR_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettCCD_L_WTR(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_LCLK_XMPU2_editingFinished() {
-  ui->sbtCCD_L_WTR_LCLK_XMPU2->setValue(
-      spd->xmpBundle.profileUser2.gettCCD_L_WTR_lowerLimit());
+  ui->sbtCCD_L_WTR_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_L_WTR_lowerLimit());
 }
 
 void MainWindow::on_sbtCCD_S_WTR_XMPU2_editingFinished() {
   ui->sbtCCD_S_WTR_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettCCD_S_WTR(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_LCLK_XMPU2_editingFinished() {
-  ui->sbtCCD_S_WTR_LCLK_XMPU2->setValue(
-      spd->xmpBundle.profileUser2.gettCCD_S_WTR_lowerLimit());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettCCD_S_WTR(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->sbtCCD_S_WTR_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettCCD_S_WTR_lowerLimit());
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_XMPU2_editingFinished() {
   ui->sbtRTP_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(utilities::TimeToTicksDDR5(
-      spd->xmpBundle.profileUser2.gettRTP(),
-      spd->xmpBundle.profileUser2.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->xmpBundle.profileUser2.gettRTP_tick()));
 }
 
 void MainWindow::on_sbtRTP_LCLK_XMPU2_editingFinished() {
-  ui->sbtRTP_LCLK_XMPU2->setValue(
-      spd->xmpBundle.profileUser2.gettRTP_lowerLimit());
+  ui->sbtRTP_LCLK_XMPU2->setValue(spd->xmpBundle.profileUser2.gettRTP_lowerLimit());
 }
 
 // EXPO1
@@ -5016,8 +4357,7 @@ void MainWindow::on_sbVPP_EXPO1_valueChanged(int value) {
 void MainWindow::on_spinMinCycleTime_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.setMinCycleTime(value);
 
-  QString frequencyStr =
-      QString::number(spd->expoBundle.profile1.getFrequency()) + " MHz";
+  QString frequencyStr = QString::number(spd->expoBundle.profile1.getFrequency()) + " MHz";
   QString mtStr = QString::number(spd->expoBundle.profile1.getMT()) + " MT/s";
 
   ui->lFrequencyValue_EXPO1->setText(frequencyStr);
@@ -5026,121 +4366,87 @@ void MainWindow::on_spinMinCycleTime_EXPO1_valueChanged(int value) {
 
 void MainWindow::on_sbtAA_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settAA(value);
-  ui->ltAA_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettAA(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltAA_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settRCD(value);
-  ui->ltRCD_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRCD(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRCD_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settRP(value);
-  ui->ltRP_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRP(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRP_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settRAS(value);
-  ui->ltRAS_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRAS(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRAS_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settRC(value);
-  ui->ltRC_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRC(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRC_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settWR(value);
-  ui->ltWR_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettWR(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltWR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settRFC1(value);
-  ui->ltRFC1_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRFC1() * 1000,
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRFC1_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settRFC2(value);
-  ui->ltRFC2_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRFC2() * 1000,
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRFC2_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settRFC(value);
-  ui->ltRFC_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRFC() * 1000,
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRFC_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settRRD_L(value);
-  ui->ltRRD_L_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRRD_L(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRRD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settCCD_L(value);
-  ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L_WR(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L_WR2(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtFAW_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settFAW(value);
-  ui->ltFAW_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettFAW(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltFAW_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L_WTR(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_S_WTR(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->expoBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_EXPO1_valueChanged(int value) {
   spd->expoBundle.profile1.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRTP(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->expoBundle.profile1.gettRTP_tick()));
 }
 
 void MainWindow::on_sbVDD_EXPO1_editingFinished() {
@@ -5156,130 +4462,95 @@ void MainWindow::on_sbVPP_EXPO1_editingFinished() {
 }
 
 void MainWindow::on_spinMinCycleTime_EXPO1_editingFinished() {
-  ui->spinMinCycleTime_EXPO1->setValue(
-      spd->expoBundle.profile1.getMinCycleTime());
+  ui->spinMinCycleTime_EXPO1->setValue(spd->expoBundle.profile1.getMinCycleTime());
 }
 
 void MainWindow::on_sbtAA_EXPO1_editingFinished() {
   ui->sbtAA_EXPO1->setValue(spd->expoBundle.profile1.gettAA());
-  ui->ltAA_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettAA(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltAA_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_EXPO1_editingFinished() {
   ui->sbtRCD_EXPO1->setValue(spd->expoBundle.profile1.gettRCD());
-  ui->ltRCD_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRCD(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRCD_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_EXPO1_editingFinished() {
   ui->sbtRP_EXPO1->setValue(spd->expoBundle.profile1.gettRP());
-  ui->ltRP_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRP(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRP_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_EXPO1_editingFinished() {
   ui->sbtRAS_EXPO1->setValue(spd->expoBundle.profile1.gettRAS());
-  ui->ltRAS_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRAS(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRAS_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_EXPO1_editingFinished() {
   ui->sbtRC_EXPO1->setValue(spd->expoBundle.profile1.gettRC());
-  ui->ltRC_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRC(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRC_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_EXPO1_editingFinished() {
   ui->sbtWR_EXPO1->setValue(spd->expoBundle.profile1.gettWR());
   spd->expoBundle.profile1.settWR(ui->sbtWR_EXPO1->value());
-  ui->ltWR_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettWR(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltWR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_EXPO1_editingFinished() {
   ui->sbtRFC1_EXPO1->setValue(spd->expoBundle.profile1.gettRFC1());
   spd->expoBundle.profile1.settRFC1(ui->sbtRFC1_EXPO1->value());
-  ui->ltRFC1_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRFC1() * 1000,
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRFC1_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_EXPO1_editingFinished() {
   ui->sbtRFC2_EXPO1->setValue(spd->expoBundle.profile1.gettRFC2());
   spd->expoBundle.profile1.settRFC2(ui->sbtRFC2_EXPO1->value());
-  ui->ltRFC2_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRFC2() * 1000,
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRFC2_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_EXPO1_editingFinished() {
   ui->sbtRFC_EXPO1->setValue(spd->expoBundle.profile1.gettRFC());
-  ui->ltRFC_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRFC() * 1000,
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRFC_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_EXPO1_editingFinished() {
   ui->sbtRRD_L_EXPO1->setValue(spd->expoBundle.profile1.gettRRD_L());
-  ui->ltRRD_L_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRRD_L(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettRRD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_EXPO1_editingFinished() {
   ui->sbtCCD_L_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_L());
-  ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_EXPO1_editingFinished() {
   ui->sbtCCDL_L_WR_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L_WR(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_EXPO1_editingFinished() {
   ui->sbtCCDL_L_WR2_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L_WR2(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtFAW_EXPO1_editingFinished() {
   ui->sbtFAW_EXPO1->setValue(spd->expoBundle.profile1.gettFAW());
-  ui->ltFAW_Ticks_EXPO1->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettFAW(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->ltFAW_Ticks_EXPO1->setText(QString::number(spd->expoBundle.profile1.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_EXPO1_editingFinished() {
   ui->sbtCCD_L_WTR_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_L_WTR(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->expoBundle.profile1.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_EXPO1_editingFinished() {
   ui->sbtCCD_S_WTR_EXPO1->setValue(spd->expoBundle.profile1.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettCCD_S_WTR(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->expoBundle.profile1.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_EXPO1_editingFinished() {
   ui->sbtRTP_EXPO1->setValue(spd->expoBundle.profile1.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile1.gettRTP(),
-                                 spd->expoBundle.profile1.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->expoBundle.profile1.gettRTP_tick()));
 }
 
 // EXPO2
@@ -5302,8 +4573,7 @@ void MainWindow::on_sbVPP_EXPO2_valueChanged(int value) {
 void MainWindow::on_spinMinCycleTime_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.setMinCycleTime(value);
 
-  QString frequencyStr =
-      QString::number(spd->expoBundle.profile2.getFrequency()) + " MHz";
+  QString frequencyStr = QString::number(spd->expoBundle.profile2.getFrequency()) + " MHz";
   QString mtStr = QString::number(spd->expoBundle.profile2.getMT()) + " MT/s";
 
   ui->lFrequencyValue_EXPO2->setText(frequencyStr);
@@ -5312,121 +4582,87 @@ void MainWindow::on_spinMinCycleTime_EXPO2_valueChanged(int value) {
 
 void MainWindow::on_sbtAA_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settAA(value);
-  ui->ltAA_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettAA(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltAA_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settRCD(value);
-  ui->ltRCD_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRCD(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRCD_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settRP(value);
-  ui->ltRP_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRP(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRP_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settRAS(value);
-  ui->ltRAS_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRAS(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRAS_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settRC(value);
-  ui->ltRC_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRC(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRC_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settWR(value);
-  ui->ltWR_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettWR(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltWR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settRFC1(value);
-  ui->ltRFC1_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRFC1() * 1000,
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRFC1_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settRFC2(value);
-  ui->ltRFC2_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRFC2() * 1000,
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRFC2_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settRFC(value);
-  ui->ltRFC_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRFC() * 1000,
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRFC_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settRRD_L(value);
-  ui->ltRRD_L_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRRD_L(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRRD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settCCD_L(value);
-  ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settCCD_L_WR(value);
-  ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L_WR(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settCCD_L_WR2(value);
-  ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L_WR2(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtFAW_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settFAW(value);
-  ui->ltFAW_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettFAW(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltFAW_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settCCD_L_WTR(value);
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L_WTR(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settCCD_S_WTR(value);
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_S_WTR(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->expoBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_EXPO2_valueChanged(int value) {
   spd->expoBundle.profile2.settRTP(value);
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRTP(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->expoBundle.profile2.gettRTP_tick()));
 }
 
 void MainWindow::on_sbVDD_EXPO2_editingFinished() {
@@ -5442,135 +4678,99 @@ void MainWindow::on_sbVPP_EXPO2_editingFinished() {
 }
 
 void MainWindow::on_spinMinCycleTime_EXPO2_editingFinished() {
-  ui->spinMinCycleTime_EXPO2->setValue(
-      spd->expoBundle.profile2.getMinCycleTime());
+  ui->spinMinCycleTime_EXPO2->setValue(spd->expoBundle.profile2.getMinCycleTime());
 }
 
 void MainWindow::on_sbtAA_EXPO2_editingFinished() {
   ui->sbtAA_EXPO2->setValue(spd->expoBundle.profile2.gettAA());
-  ui->ltAA_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettAA(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltAA_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettAA_tick()));
 }
 
 void MainWindow::on_sbtRCD_EXPO2_editingFinished() {
   ui->sbtRCD_EXPO2->setValue(spd->expoBundle.profile2.gettRCD());
-  ui->ltRCD_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRCD(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRCD_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRCD_tick()));
 }
 
 void MainWindow::on_sbtRP_EXPO2_editingFinished() {
   ui->sbtRP_EXPO2->setValue(spd->expoBundle.profile2.gettRP());
-  ui->ltRP_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRP(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRP_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRP_tick()));
 }
 
 void MainWindow::on_sbtRAS_EXPO2_editingFinished() {
   ui->sbtRAS_EXPO2->setValue(spd->expoBundle.profile2.gettRAS());
-  ui->ltRAS_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRAS(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRAS_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRAS_tick()));
 }
 
 void MainWindow::on_sbtRC_EXPO2_editingFinished() {
   ui->sbtRC_EXPO2->setValue(spd->expoBundle.profile2.gettRC());
-  ui->ltRC_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRC(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRC_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRC_tick()));
 }
 
 void MainWindow::on_sbtWR_EXPO2_editingFinished() {
   ui->sbtWR_EXPO2->setValue(spd->expoBundle.profile2.gettWR());
   spd->expoBundle.profile2.settWR(ui->sbtWR_EXPO2->value());
-  ui->ltWR_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettWR(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltWR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettWR_tick()));
 }
 
 void MainWindow::on_sbtRFC1_EXPO2_editingFinished() {
   ui->sbtRFC1_EXPO2->setValue(spd->expoBundle.profile2.gettRFC1());
   spd->expoBundle.profile2.settRFC1(ui->sbtRFC1_EXPO2->value());
-  ui->ltRFC1_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRFC1() * 1000,
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRFC1_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRFC1_tick()));
 }
 
 void MainWindow::on_sbtRFC2_EXPO2_editingFinished() {
   ui->sbtRFC2_EXPO2->setValue(spd->expoBundle.profile2.gettRFC2());
   spd->expoBundle.profile2.settRFC2(ui->sbtRFC2_EXPO2->value());
-  ui->ltRFC2_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRFC2() * 1000,
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRFC2_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRFC2_tick()));
 }
 
 void MainWindow::on_sbtRFC_EXPO2_editingFinished() {
   ui->sbtRFC_EXPO2->setValue(spd->expoBundle.profile2.gettRFC());
-  ui->ltRFC_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRFC() * 1000,
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRFC_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRFC_tick()));
 }
 
 void MainWindow::on_sbtRRD_L_EXPO2_editingFinished() {
   ui->sbtRRD_L_EXPO2->setValue(spd->expoBundle.profile2.gettRRD_L());
-  ui->ltRRD_L_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRRD_L(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltRRD_L_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettRRD_L_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_EXPO2_editingFinished() {
   ui->sbtCCD_L_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_L());
-  ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltCCD_L_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR_EXPO2_editingFinished() {
   ui->sbtCCDL_L_WR_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_L_WR());
-  ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L_WR(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltCCDL_L_WR_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR_tick()));
 }
 
 void MainWindow::on_sbtCCDL_L_WR2_EXPO2_editingFinished() {
   ui->sbtCCDL_L_WR2_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_L_WR2());
-  ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L_WR2(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltCCDL_L_WR2_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WR2_tick()));
 }
 
 void MainWindow::on_sbtFAW_EXPO2_editingFinished() {
   ui->sbtFAW_EXPO2->setValue(spd->expoBundle.profile2.gettFAW());
-  ui->ltFAW_Ticks_EXPO2->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettFAW(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->ltFAW_Ticks_EXPO2->setText(QString::number(spd->expoBundle.profile2.gettFAW_tick()));
 }
 
 void MainWindow::on_sbtCCD_L_WTR_EXPO2_editingFinished() {
   ui->sbtCCD_L_WTR_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_L_WTR());
-  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_L_WTR(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->labeltCCD_L_WTR_Ticks->setText(QString::number(spd->expoBundle.profile2.gettCCD_L_WTR_tick()));
 }
 
 void MainWindow::on_sbtCCD_S_WTR_EXPO2_editingFinished() {
   ui->sbtCCD_S_WTR_EXPO2->setValue(spd->expoBundle.profile2.gettCCD_S_WTR());
-  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettCCD_S_WTR(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->labeltCCD_S_WTR_Ticks->setText(QString::number(spd->expoBundle.profile2.gettCCD_S_WTR_tick()));
 }
 
 void MainWindow::on_sbtRTP_EXPO2_editingFinished() {
   ui->sbtRTP_EXPO2->setValue(spd->expoBundle.profile2.gettRTP());
-  ui->labeltRTP_Ticks->setText(QString::number(
-      utilities::TimeToTicksDDR5(spd->expoBundle.profile2.gettRTP(),
-                                 spd->expoBundle.profile2.getMinCycleTime())));
+  ui->labeltRTP_Ticks->setText(QString::number(spd->expoBundle.profile2.gettRTP_tick()));
 }
 
 // EXPO <-> Conversion
-XMP_ProfileStruct
-MainWindow::importXMPProfileFromEXPO(const EXPO_ProfileStruct &expo) {
+XMP_ProfileStruct MainWindow::importXMPProfileFromEXPO(const EXPO_ProfileStruct &expo) {
   XMP_ProfileStruct result;
   result.vdd = expo.vdd;
   result.vddq = expo.vddq;
@@ -5621,48 +4821,48 @@ MainWindow::importXMPProfileFromEXPO(const EXPO_ProfileStruct &expo) {
 // Misc
 void MainWindow::update_cbFormFactor() {
   switch (spd->getFormFactor()) {
-  case FormFactor::RDIMM:
-    ui->cbFormFactor->setCurrentIndex(0);
-    break;
+    case FormFactor::RDIMM:
+      ui->cbFormFactor->setCurrentIndex(0);
+      break;
 
-  case FormFactor::UDIMM:
-    ui->cbFormFactor->setCurrentIndex(1);
-    break;
+    case FormFactor::UDIMM:
+      ui->cbFormFactor->setCurrentIndex(1);
+      break;
 
-  case FormFactor::SODIMM:
-    ui->cbFormFactor->setCurrentIndex(2);
-    break;
+    case FormFactor::SODIMM:
+      ui->cbFormFactor->setCurrentIndex(2);
+      break;
 
-  case FormFactor::LRDIMM:
-    ui->cbFormFactor->setCurrentIndex(3);
-    break;
+    case FormFactor::LRDIMM:
+      ui->cbFormFactor->setCurrentIndex(3);
+      break;
 
-  case FormFactor::CUDIMM:
-    ui->cbFormFactor->setCurrentIndex(4);
-    break;
+    case FormFactor::CUDIMM:
+      ui->cbFormFactor->setCurrentIndex(4);
+      break;
 
-  case FormFactor::CSODIMM:
-    ui->cbFormFactor->setCurrentIndex(5);
-    break;
+    case FormFactor::CSODIMM:
+      ui->cbFormFactor->setCurrentIndex(5);
+      break;
 
-  case FormFactor::MRDIMM:
-    ui->cbFormFactor->setCurrentIndex(6);
-    break;
+    case FormFactor::MRDIMM:
+      ui->cbFormFactor->setCurrentIndex(6);
+      break;
 
-  case FormFactor::CAMM2:
-    ui->cbFormFactor->setCurrentIndex(7);
-    break;
+    case FormFactor::CAMM2:
+      ui->cbFormFactor->setCurrentIndex(7);
+      break;
 
-  case FormFactor::DDIMM:
-    ui->cbFormFactor->setCurrentIndex(8);
-    break;
+    case FormFactor::DDIMM:
+      ui->cbFormFactor->setCurrentIndex(8);
+      break;
 
-  case FormFactor::Solder_down:
-    ui->cbFormFactor->setCurrentIndex(9);
-    break;
+    case FormFactor::Solder_down:
+      ui->cbFormFactor->setCurrentIndex(9);
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
 }
 
@@ -5675,82 +4875,82 @@ void MainWindow::setDensity(const unsigned int val) {
 
 void MainWindow::update_cbDensity() {
   switch (spd->getDensity()) {
-  case Density::_0Gb:
-    setDensity(0);
-    break;
+    case Density::_0Gb:
+      setDensity(0);
+      break;
 
-  case Density::_4Gb:
-    setDensity(1);
-    break;
+    case Density::_4Gb:
+      setDensity(1);
+      break;
 
-  case Density::_8Gb:
-    setDensity(2);
-    break;
+    case Density::_8Gb:
+      setDensity(2);
+      break;
 
-  case Density::_12Gb:
-    setDensity(3);
-    break;
+    case Density::_12Gb:
+      setDensity(3);
+      break;
 
-  case Density::_16Gb:
-    setDensity(4);
-    break;
+    case Density::_16Gb:
+      setDensity(4);
+      break;
 
-  case Density::_24Gb:
-    setDensity(5);
-    break;
+    case Density::_24Gb:
+      setDensity(5);
+      break;
 
-  case Density::_32Gb:
-    setDensity(6);
-    break;
+    case Density::_32Gb:
+      setDensity(6);
+      break;
 
-  case Density::_48Gb:
-    setDensity(7);
-    break;
+    case Density::_48Gb:
+      setDensity(7);
+      break;
 
-  case Density::_64Gb:
-    setDensity(8);
-    break;
+    case Density::_64Gb:
+      setDensity(8);
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
 }
 
 void MainWindow::on_cbFormFactor_currentIndexChanged(int index) {
   switch (index) {
-  case 0:
-    spd->setFormFactor(FormFactor::RDIMM);
-    break;
-  case 1:
-    spd->setFormFactor(FormFactor::UDIMM);
-    break;
-  case 2:
-    spd->setFormFactor(FormFactor::SODIMM);
-    break;
-  case 3:
-    spd->setFormFactor(FormFactor::LRDIMM);
-    break;
-  case 4:
-    spd->setFormFactor(FormFactor::CUDIMM);
-    break;
-  case 5:
-    spd->setFormFactor(FormFactor::CSODIMM);
-    break;
-  case 6:
-    spd->setFormFactor(FormFactor::MRDIMM);
-    break;
-  case 7:
-    spd->setFormFactor(FormFactor::CAMM2);
-    break;
-  case 8:
-    spd->setFormFactor(FormFactor::DDIMM);
-    break;
-  case 9:
-    spd->setFormFactor(FormFactor::Solder_down);
-    break;
+    case 0:
+      spd->setFormFactor(FormFactor::RDIMM);
+      break;
+    case 1:
+      spd->setFormFactor(FormFactor::UDIMM);
+      break;
+    case 2:
+      spd->setFormFactor(FormFactor::SODIMM);
+      break;
+    case 3:
+      spd->setFormFactor(FormFactor::LRDIMM);
+      break;
+    case 4:
+      spd->setFormFactor(FormFactor::CUDIMM);
+      break;
+    case 5:
+      spd->setFormFactor(FormFactor::CSODIMM);
+      break;
+    case 6:
+      spd->setFormFactor(FormFactor::MRDIMM);
+      break;
+    case 7:
+      spd->setFormFactor(FormFactor::CAMM2);
+      break;
+    case 8:
+      spd->setFormFactor(FormFactor::DDIMM);
+      break;
+    case 9:
+      spd->setFormFactor(FormFactor::Solder_down);
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
 
   update_cbFormFactor();
@@ -5758,44 +4958,44 @@ void MainWindow::on_cbFormFactor_currentIndexChanged(int index) {
 
 void MainWindow::on_cdDensity_currentIndexChanged(int index) {
   switch (index) {
-  case 0:
-    spd->setDensity(Density::_0Gb);
-    break;
+    case 0:
+      spd->setDensity(Density::_0Gb);
+      break;
 
-  case 1:
-    spd->setDensity(Density::_4Gb);
-    break;
+    case 1:
+      spd->setDensity(Density::_4Gb);
+      break;
 
-  case 2:
-    spd->setDensity(Density::_8Gb);
-    break;
+    case 2:
+      spd->setDensity(Density::_8Gb);
+      break;
 
-  case 3:
-    spd->setDensity(Density::_12Gb);
-    break;
+    case 3:
+      spd->setDensity(Density::_12Gb);
+      break;
 
-  case 4:
-    spd->setDensity(Density::_16Gb);
-    break;
+    case 4:
+      spd->setDensity(Density::_16Gb);
+      break;
 
-  case 5:
-    spd->setDensity(Density::_24Gb);
-    break;
+    case 5:
+      spd->setDensity(Density::_24Gb);
+      break;
 
-  case 6:
-    spd->setDensity(Density::_32Gb);
-    break;
+    case 6:
+      spd->setDensity(Density::_32Gb);
+      break;
 
-  case 7:
-    spd->setDensity(Density::_48Gb);
-    break;
+    case 7:
+      spd->setDensity(Density::_48Gb);
+      break;
 
-  case 8:
-    spd->setDensity(Density::_64Gb);
-    break;
+    case 8:
+      spd->setDensity(Density::_64Gb);
+      break;
 
-  default:
-    break;
+    default:
+      break;
   }
 
   update_cbDensity();
@@ -5850,46 +5050,32 @@ void MainWindow::on_lePartNumber_editingFinished() {
 }
 
 void MainWindow::update_cbBankGroup() {
-  int val =
-      std::distance(bankGroupsBitsMap.begin(),
-                    std::find(bankGroupsBitsMap.begin(),
-                              bankGroupsBitsMap.end(), spd->getBankGroups()));
+  int val = std::distance(bankGroupsBitsMap.begin(), std::find(bankGroupsBitsMap.begin(), bankGroupsBitsMap.end(), spd->getBankGroups()));
 
   ui->cbBankGroup->setCurrentIndex(val);
 }
 
 void MainWindow::update_cbBanksPerBankGroup() {
-  int val = std::distance(banksPerBankGroupBitsMap.begin(),
-                          std::find(banksPerBankGroupBitsMap.begin(),
-                                    banksPerBankGroupBitsMap.end(),
-                                    spd->getBanksPerBankGroup()));
+  int val =
+      std::distance(banksPerBankGroupBitsMap.begin(), std::find(banksPerBankGroupBitsMap.begin(), banksPerBankGroupBitsMap.end(), spd->getBanksPerBankGroup()));
 
   ui->cbBanksPerBankGroup->setCurrentIndex(val);
 }
 
 void MainWindow::update_cbColumnAddresses() {
-  int val = std::distance(columnAddressBitsMap.begin(),
-                          std::find(columnAddressBitsMap.begin(),
-                                    columnAddressBitsMap.end(),
-                                    spd->getColumnAddresses()));
+  int val = std::distance(columnAddressBitsMap.begin(), std::find(columnAddressBitsMap.begin(), columnAddressBitsMap.end(), spd->getColumnAddresses()));
 
   ui->cbColumnAddresses->setCurrentIndex(val);
 }
 
 void MainWindow::update_cbRowAddresses() {
-  int val =
-      std::distance(rowAddressBitsMap.begin(),
-                    std::find(rowAddressBitsMap.begin(),
-                              rowAddressBitsMap.end(), spd->getRowAddresses()));
+  int val = std::distance(rowAddressBitsMap.begin(), std::find(rowAddressBitsMap.begin(), rowAddressBitsMap.end(), spd->getRowAddresses()));
 
   ui->cbRowAddresses->setCurrentIndex(val);
 }
 
 void MainWindow::update_cdDeviceWidth() {
-  int val =
-      std::distance(deviceWidthMap.begin(),
-                    std::find(deviceWidthMap.begin(), deviceWidthMap.end(),
-                              spd->getDeviceWidth()));
+  int val = std::distance(deviceWidthMap.begin(), std::find(deviceWidthMap.begin(), deviceWidthMap.end(), spd->getDeviceWidth()));
 
   ui->cdDeviceWidth->setCurrentIndex(val);
 }

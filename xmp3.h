@@ -1,13 +1,14 @@
 #ifndef XMP3_H
 #define XMP3_H
 
-#include "ddr5spd_structs.h"
 #include <string>
+
+#include "ddr5spd_structs.h"
 
 using namespace ddr5_structs;
 
 class XMP3_Profile {
-public:
+ public:
   XMP3_Profile(ddr5_structs::XMP_ProfileStruct &);
   XMP3_Profile();
 
@@ -186,12 +187,12 @@ public:
   XMP_ProfileStruct getCopy();
   void import(const XMP_ProfileStruct);
 
-private:
+ private:
   XMP_ProfileStruct &xmpProfileStruct;
 };
 
 class XMP3_Bundle {
-public:
+ public:
   XMP3_Bundle(XMP_Struct &);
   XMP3_Bundle(XMP_Struct &, bool);
 
@@ -237,9 +238,9 @@ public:
   XMP3_Profile profileUser1;
   XMP3_Profile profileUser2;
 
-private:
+ private:
   XMP_Struct &xmpStruct;
   bool expoCoexistence;
 };
 
-#endif // XMP3_H
+#endif  // XMP3_H

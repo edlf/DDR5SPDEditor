@@ -18,11 +18,11 @@ const QString appName = "DDR5 SPD Editor";
 class MainWindow : public QMainWindow {
   Q_OBJECT
 
-public:
+ public:
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-private slots:
+ private slots:
   void openFile();
   void saveFile();
   bool saveFileEnabled();
@@ -853,7 +853,7 @@ private slots:
   void on_lePartNumber_editingFinished();
   void setDensity(const unsigned int val);
 
-private:
+ private:
   void clearUI();
   void disableUI();
   void enableUI();
@@ -868,4 +868,4 @@ private:
   DDR5SPD *spd = nullptr;
   Ui::MainWindow *ui;
 };
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

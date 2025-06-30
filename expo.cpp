@@ -1,13 +1,16 @@
 #include "expo.h"
-#include "utilities.h"
+
 #include <cstring>
+
+#include "utilities.h"
 
 EXPO_ProfileStruct dummy;
 
-EXPO_Profile::EXPO_Profile(EXPO_ProfileStruct &rawExpoProfileIn)
-    : expoProfileStruct(rawExpoProfileIn) {}
+EXPO_Profile::EXPO_Profile(EXPO_ProfileStruct &rawExpoProfileIn) : expoProfileStruct(rawExpoProfileIn) {
+}
 
-EXPO_Profile::EXPO_Profile() : expoProfileStruct(dummy) {}
+EXPO_Profile::EXPO_Profile() : expoProfileStruct(dummy) {
+}
 
 const unsigned short EXPO_Profile::getVPP() {
   return utilities::ConvertByteToVoltageDDR5(expoProfileStruct.vpp);
@@ -45,39 +48,53 @@ const unsigned int EXPO_Profile::getFrequency() {
   return static_cast<unsigned int>(1.0 / (getMinCycleTime() / 1000000.0));
 }
 
-const unsigned int EXPO_Profile::getMT() { return getFrequency() * 2; }
+const unsigned int EXPO_Profile::getMT() {
+  return getFrequency() * 2;
+}
 
-const unsigned short EXPO_Profile::gettAA() { return expoProfileStruct.tAA; }
+const unsigned short EXPO_Profile::gettAA() {
+  return expoProfileStruct.tAA;
+}
 
 void EXPO_Profile::settAA(const unsigned short value) {
   expoProfileStruct.tAA = value;
 }
 
-const unsigned short EXPO_Profile::gettRCD() { return expoProfileStruct.tRCD; }
+const unsigned short EXPO_Profile::gettRCD() {
+  return expoProfileStruct.tRCD;
+}
 
 void EXPO_Profile::settRCD(const unsigned short value) {
   expoProfileStruct.tRCD = value;
 }
 
-const unsigned short EXPO_Profile::gettRP() { return expoProfileStruct.tRP; }
+const unsigned short EXPO_Profile::gettRP() {
+  return expoProfileStruct.tRP;
+}
 
 void EXPO_Profile::settRP(const unsigned short value) {
   expoProfileStruct.tRP = value;
 }
 
-const unsigned short EXPO_Profile::gettRAS() { return expoProfileStruct.tRAS; }
+const unsigned short EXPO_Profile::gettRAS() {
+  return expoProfileStruct.tRAS;
+}
 
 void EXPO_Profile::settRAS(const unsigned short value) {
   expoProfileStruct.tRAS = value;
 }
 
-const unsigned short EXPO_Profile::gettRC() { return expoProfileStruct.tRC; }
+const unsigned short EXPO_Profile::gettRC() {
+  return expoProfileStruct.tRC;
+}
 
 void EXPO_Profile::settRC(const unsigned short value) {
   expoProfileStruct.tRC = value;
 }
 
-const unsigned short EXPO_Profile::gettWR() { return expoProfileStruct.tWR; }
+const unsigned short EXPO_Profile::gettWR() {
+  return expoProfileStruct.tWR;
+}
 
 void EXPO_Profile::settWR(const unsigned short value) {
   expoProfileStruct.tWR = value;
@@ -99,7 +116,9 @@ void EXPO_Profile::settRFC2(const unsigned short value) {
   expoProfileStruct.tRFC2 = value;
 }
 
-const unsigned short EXPO_Profile::gettRFC() { return expoProfileStruct.tRFC; }
+const unsigned short EXPO_Profile::gettRFC() {
+  return expoProfileStruct.tRFC;
+}
 
 void EXPO_Profile::settRFC(const unsigned short value) {
   expoProfileStruct.tRFC = value;
@@ -153,13 +172,17 @@ void EXPO_Profile::settCCD_L(const unsigned short value) {
   expoProfileStruct.tCCD_L = value;
 }
 
-const unsigned short EXPO_Profile::gettRTP() { return expoProfileStruct.tRTP; }
+const unsigned short EXPO_Profile::gettRTP() {
+  return expoProfileStruct.tRTP;
+}
 
 void EXPO_Profile::settRTP(const unsigned short value) {
   expoProfileStruct.tRTP = value;
 }
 
-const unsigned short EXPO_Profile::gettFAW() { return expoProfileStruct.tFAW; }
+const unsigned short EXPO_Profile::gettFAW() {
+  return expoProfileStruct.tFAW;
+}
 
 void EXPO_Profile::settFAW(const unsigned short value) {
   expoProfileStruct.tFAW = value;
@@ -359,22 +382,21 @@ void EXPO_Profile::copyFromXMP(const XMP_ProfileStruct &xmpProfile) {
 }
 
 const bool EXPO_Profile::hasData() {
-  unsigned int crc =
-      utilities::Crc16(reinterpret_cast<unsigned char *>(&expoProfileStruct),
-                       sizeof(EXPO_ProfileStruct) - 2);
+  unsigned int crc = utilities::Crc16(reinterpret_cast<unsigned char *>(&expoProfileStruct), sizeof(EXPO_ProfileStruct) - 2);
   return crc != 0x0;
 }
 
-EXPO_ProfileStruct EXPO_Profile::getCopy() { return expoProfileStruct; }
+EXPO_ProfileStruct EXPO_Profile::getCopy() {
+  return expoProfileStruct;
+}
 
 void EXPO_Profile::import(const EXPO_ProfileStruct in) {
   expoProfileStruct = in;
 }
 
 // EXPO Bundle methods
-EXPO_Bundle::EXPO_Bundle(EXPO_Struct &expoBlockRef)
-    : expoStruct(expoBlockRef), profile1(expoBlockRef.profile1),
-      profile2(expoBlockRef.profile2) {}
+EXPO_Bundle::EXPO_Bundle(EXPO_Struct &expoBlockRef) : expoStruct(expoBlockRef), profile1(expoBlockRef.profile1), profile2(expoBlockRef.profile2) {
+}
 
 void EXPO_Bundle::enableMagic() {
   expoStruct.header.magic[0] = EXPOHeaderMagic[0];
@@ -393,50 +415,40 @@ void EXPO_Bundle::clearMagic() {
 }
 
 bool EXPO_Bundle::isMagicPresent() {
-  return (expoStruct.header.magic[0] == EXPOHeaderMagic[0] &&
-          expoStruct.header.magic[1] == EXPOHeaderMagic[1] &&
-          expoStruct.header.magic[2] == EXPOHeaderMagic[2] &&
-          expoStruct.header.magic[3] == EXPOHeaderMagic[3] &&
-          expoStruct.header.revision == EXPORevision);
+  return (expoStruct.header.magic[0] == EXPOHeaderMagic[0] && expoStruct.header.magic[1] == EXPOHeaderMagic[1] &&
+          expoStruct.header.magic[2] == EXPOHeaderMagic[2] && expoStruct.header.magic[3] == EXPOHeaderMagic[3] && expoStruct.header.revision == EXPORevision);
 }
 
 const bool EXPO_Bundle::isEXPO1Enabled() {
-  return utilities::GetBit(expoStruct.header.profileEnableBits,
-                           expoProfile1EnableBit);
+  return utilities::GetBit(expoStruct.header.profileEnableBits, expoProfile1EnableBit);
 }
 
 void EXPO_Bundle::setEXPO1Enabled(const bool value) {
-  utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile1EnableBit,
-                    value);
-  utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile1UnkBit,
-                    value);
-  utilities::SetBit(expoStruct.header.profileEnableBits2, expoProfile1EnableBit,
-                    value);
+  utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile1EnableBit, value);
+  utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile1UnkBit, value);
+  utilities::SetBit(expoStruct.header.profileEnableBits2, expoProfile1EnableBit, value);
 }
 
 const bool EXPO_Bundle::isEXPO2Enabled() {
-  return utilities::GetBit(expoStruct.header.profileEnableBits,
-                           expoProfile2EnableBit);
+  return utilities::GetBit(expoStruct.header.profileEnableBits, expoProfile2EnableBit);
 }
 
 void EXPO_Bundle::setEXPO2Enabled(const bool value) {
-  utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile2EnableBit,
-                    value);
-  utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile2UnkBit,
-                    value);
-  utilities::SetBit(expoStruct.header.profileEnableBits2, expoProfile2EnableBit,
-                    value);
+  utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile2EnableBit, value);
+  utilities::SetBit(expoStruct.header.profileEnableBits, expoProfile2UnkBit, value);
+  utilities::SetBit(expoStruct.header.profileEnableBits2, expoProfile2EnableBit, value);
 }
 
-const unsigned short EXPO_Bundle::getCRC() { return expoStruct.checksum; }
+const unsigned short EXPO_Bundle::getCRC() {
+  return expoStruct.checksum;
+}
 
 void EXPO_Bundle::setCRC(const unsigned short value) {
   expoStruct.checksum = value;
 }
 
 void EXPO_Bundle::fixCRC() {
-  unsigned int crc = utilities::Crc16(
-      reinterpret_cast<unsigned char *>(&expoStruct), sizeof(EXPO_Struct) - 2);
+  unsigned int crc = utilities::Crc16(reinterpret_cast<unsigned char *>(&expoStruct), sizeof(EXPO_Struct) - 2);
   setCRC(crc);
 }
 
@@ -448,4 +460,6 @@ void EXPO_Bundle::resetAndCreateSample() {
   fixCRC();
 }
 
-void EXPO_Bundle::wipe() { std::memset(&expoStruct, 0x0, sizeof(EXPO_Struct)); }
+void EXPO_Bundle::wipe() {
+  std::memset(&expoStruct, 0x0, sizeof(EXPO_Struct));
+}

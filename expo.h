@@ -1,13 +1,14 @@
 #ifndef EXPO_H
 #define EXPO_H
 
-#include "ddr5spd_structs.h"
 #include <string>
+
+#include "ddr5spd_structs.h"
 
 using namespace ddr5_structs;
 
 class EXPO_Profile {
-public:
+ public:
   EXPO_Profile(ddr5_structs::EXPO_ProfileStruct &);
   EXPO_Profile();
 
@@ -145,12 +146,12 @@ public:
   EXPO_ProfileStruct getCopy();
   void import(const EXPO_ProfileStruct);
 
-private:
+ private:
   EXPO_ProfileStruct &expoProfileStruct;
 };
 
 class EXPO_Bundle {
-public:
+ public:
   EXPO_Bundle(EXPO_Struct &);
 
   void enableMagic();
@@ -174,8 +175,8 @@ public:
   EXPO_Profile profile1;
   EXPO_Profile profile2;
 
-private:
+ private:
   EXPO_Struct &expoStruct;
 };
 
-#endif // EXPO_H
+#endif  // EXPO_H

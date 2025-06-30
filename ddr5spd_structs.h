@@ -1,9 +1,10 @@
 #ifndef DDR5SPD_STRUCTS_H
 #define DDR5SPD_STRUCTS_H
 
+#include <stddef.h>
+
 #include <array>
 #include <bit>
-#include <stddef.h>
 #include <type_traits>
 
 namespace ddr5_structs {
@@ -80,7 +81,12 @@ enum class Density : unsigned char {
   _64Gb = 0x8
 };
 
-enum class CommandRate { Undefined, _1n, _2n, _3n };
+enum class CommandRate {
+  Undefined,
+  _1n,
+  _2n,
+  _3n
+};
 
 enum class OperatingTemperatureRange : unsigned char {
   A1T = 0x0,
@@ -94,34 +100,23 @@ enum class OperatingTemperatureRange : unsigned char {
   XT = 0x8
 };
 
-static constexpr std::array<Density, 9> densityMap{
-    Density::_0Gb,  Density::_4Gb,  Density::_8Gb,
-    Density::_12Gb, Density::_16Gb, Density::_24Gb,
-    Density::_32Gb, Density::_48Gb, Density::_64Gb};
+static constexpr std::array<Density, 9> densityMap{Density::_0Gb,  Density::_4Gb,  Density::_8Gb,  Density::_12Gb, Density::_16Gb,
+                                                   Density::_24Gb, Density::_32Gb, Density::_48Gb, Density::_64Gb};
 
-static constexpr std::array<CommandRate, 4> commandRateMap{
-    CommandRate::Undefined, CommandRate::_1n, CommandRate::_2n,
-    CommandRate::_3n};
+static constexpr std::array<CommandRate, 4> commandRateMap{CommandRate::Undefined, CommandRate::_1n, CommandRate::_2n, CommandRate::_3n};
 
-static constexpr std::array<FormFactor, 16> formFactorMap{
-    FormFactor::Reserved,    FormFactor::RDIMM,       FormFactor::UDIMM,
-    FormFactor::SODIMM,      FormFactor::LRDIMM,      FormFactor::CUDIMM,
-    FormFactor::CSODIMM,     FormFactor::MRDIMM,      FormFactor::CAMM2,
-    FormFactor::Reserved_9,  FormFactor::DDIMM,       FormFactor::Solder_down,
-    FormFactor::Reserved_12, FormFactor::Reserved_13, FormFactor::Reserved_14,
-    FormFactor::Reserved_15};
+static constexpr std::array<FormFactor, 16> formFactorMap{FormFactor::Reserved,    FormFactor::RDIMM,       FormFactor::UDIMM,       FormFactor::SODIMM,
+                                                          FormFactor::LRDIMM,      FormFactor::CUDIMM,      FormFactor::CSODIMM,     FormFactor::MRDIMM,
+                                                          FormFactor::CAMM2,       FormFactor::Reserved_9,  FormFactor::DDIMM,       FormFactor::Solder_down,
+                                                          FormFactor::Reserved_12, FormFactor::Reserved_13, FormFactor::Reserved_14, FormFactor::Reserved_15};
 
-static constexpr std::array<OperatingTemperatureRange, 9>
-    operatingTemperatureRangeMap{
-        OperatingTemperatureRange::A1T, OperatingTemperatureRange::A2T,
-        OperatingTemperatureRange::A3T, OperatingTemperatureRange::IT,
-        OperatingTemperatureRange::ST,  OperatingTemperatureRange::ET,
-        OperatingTemperatureRange::RT,  OperatingTemperatureRange::NT,
-        OperatingTemperatureRange::XT};
+static constexpr std::array<OperatingTemperatureRange, 9> operatingTemperatureRangeMap{
+    OperatingTemperatureRange::A1T, OperatingTemperatureRange::A2T, OperatingTemperatureRange::A3T,
+    OperatingTemperatureRange::IT,  OperatingTemperatureRange::ST,  OperatingTemperatureRange::ET,
+    OperatingTemperatureRange::RT,  OperatingTemperatureRange::NT,  OperatingTemperatureRange::XT};
 
 static constexpr std::array<unsigned short, 4> bankGroupsBitsMap{1, 2, 4, 8};
-static constexpr std::array<unsigned short, 3> banksPerBankGroupBitsMap{1, 2,
-                                                                        4};
+static constexpr std::array<unsigned short, 3> banksPerBankGroupBitsMap{1, 2, 4};
 static constexpr std::array<unsigned short, 2> columnAddressBitsMap{10, 11};
 static constexpr std::array<unsigned short, 3> rowAddressBitsMap{16, 17, 18};
 static constexpr std::array<unsigned short, 4> deviceWidthMap{4, 8, 16, 32};
@@ -147,16 +142,16 @@ struct XMP_HeaderStruct {
   unsigned char version;
   unsigned char profileEnBits;
 
-  unsigned char unknown_04; // 0x00
+  unsigned char unknown_04;  // 0x00
   unsigned char pmicManufacturerId[2];
 
-  unsigned char unknown_07; // 0x01
-  unsigned char unknown_08; // 0x03
-  unsigned char unknown_09; // 0x12
-  unsigned char unknown_0A; // 0x00
-  unsigned char unknown_0B; // 0x00
-  unsigned char unknown_0C; // 0x00
-  unsigned char unknown_0D; // 0x00
+  unsigned char unknown_07;  // 0x01
+  unsigned char unknown_08;  // 0x03
+  unsigned char unknown_09;  // 0x12
+  unsigned char unknown_0A;  // 0x00
+  unsigned char unknown_0B;  // 0x00
+  unsigned char unknown_0C;  // 0x00
+  unsigned char unknown_0D;  // 0x00
 
   char profileName1[maxXmpProfileName];
   char profileName2[maxXmpProfileName];
@@ -221,7 +216,7 @@ struct XMP_Struct {
 
 struct EXPO_HeaderStruct {
   unsigned char magic[4];
-  unsigned char revision; // 0x10
+  unsigned char revision;  // 0x10
   unsigned char profileEnableBits;
   unsigned char profileEnableBits2;
   unsigned char zero_7;
@@ -285,8 +280,8 @@ struct SPD_Struct {
   // Byte 0 to 3 Header/Type
   unsigned char bytesUsed;
   unsigned char revision_BaseConfig;
-  unsigned char memoryType; // 12 = DDR5
-  unsigned char moduleType; // only bits 3-0 are used
+  unsigned char memoryType;  // 12 = DDR5
+  unsigned char moduleType;  // only bits 3-0 are used
   // Byte 4-7 First Density/Package
   unsigned char firstDensityPackage;
   unsigned char firstAddressing;
@@ -303,11 +298,11 @@ struct SPD_Struct {
   unsigned char sdramFaultHandling;
   unsigned char reserved_15;
   // Byte 16-18 (Voltages, 1.1v)
-  unsigned char voltageVDD;  // 0x00 -> 1.1v
-  unsigned char voltageVDDQ; // 0x00 -> 1.1v
-  unsigned char voltageVPP;  // 0x00 -> 1.1v
+  unsigned char voltageVDD;   // 0x00 -> 1.1v
+  unsigned char voltageVDDQ;  // 0x00 -> 1.1v
+  unsigned char voltageVPP;   // 0x00 -> 1.1v
   // Byte 19
-  unsigned char sdramTimming; // Should be 0x00 for JEDEC standard timmings
+  unsigned char sdramTimming;  // Should be 0x00 for JEDEC standard timmings
   // Byte 20-21
   unsigned short minCycleTime;
   // Byte 22-23
@@ -466,19 +461,19 @@ struct SPD_Struct {
 
   // Block 8 - Manufacturing information
   // Byte 512
-  unsigned short moduleManufacturer; // Mandatory
+  unsigned short moduleManufacturer;  // Mandatory
   // Byte 514
-  unsigned char manufactureLocation; // Mandatory
+  unsigned char manufactureLocation;  // Mandatory
   // Byte 515-516
-  unsigned char manufactureDate[2]; // Mandatory
+  unsigned char manufactureDate[2];  // Mandatory
   // Bytes 517-520
-  unsigned char serialNumber[4]; // Mandatory
+  unsigned char serialNumber[4];  // Mandatory
   // Bytes 521-550
-  char modulePartnumber[partNumberSize]; // Mandatory
+  char modulePartnumber[partNumberSize];  // Mandatory
   // Byte 551
   unsigned char moduleRevision;
   // Byte 552-553 DRAM Manufacturer ID Code
-  unsigned short dramManufacturer; // Mandatory
+  unsigned short dramManufacturer;  // Mandatory
   // Byte 554 DRAM stepping
   unsigned char dramStepping;
 
@@ -494,22 +489,15 @@ struct SPD_Struct {
 #pragma pack(pop)
 
 static_assert(std::endian::native == std::endian::little,
-              "Little endian only"); // Requires C++20
-static_assert(sizeof(unsigned short) == 0x2,
-              "Unsigned shorts must be 16 bits!");
+              "Little endian only");  // Requires C++20
+static_assert(sizeof(unsigned short) == 0x2, "Unsigned shorts must be 16 bits!");
 static_assert(sizeof(SPD_Struct) == eepromBaseSize, "SPD struct size error");
-static_assert(sizeof(XMP_HeaderStruct) == XMPHeaderSize,
-              "XMP Header has to be 64 bytes in size");
-static_assert(sizeof(XMP_ProfileStruct) == XMPProfileSize,
-              "XMP Profile has to be 64 bytes in size");
-static_assert(sizeof(XMP_Struct) ==
-                  (sizeof(XMP_HeaderStruct) + 5 * sizeof(XMP_ProfileStruct)),
-              "XMP Block size is incorrect");
-static_assert(sizeof(EXPO_Struct) == EXPOSize,
-              "EXPO block has to be 128 bytes in size");
-static_assert(sizeof(EXPO_ProfileStruct) == EXPOProfileSize,
-              "EXPO profile has to be 40 bytes in size");
+static_assert(sizeof(XMP_HeaderStruct) == XMPHeaderSize, "XMP Header has to be 64 bytes in size");
+static_assert(sizeof(XMP_ProfileStruct) == XMPProfileSize, "XMP Profile has to be 64 bytes in size");
+static_assert(sizeof(XMP_Struct) == (sizeof(XMP_HeaderStruct) + 5 * sizeof(XMP_ProfileStruct)), "XMP Block size is incorrect");
+static_assert(sizeof(EXPO_Struct) == EXPOSize, "EXPO block has to be 128 bytes in size");
+static_assert(sizeof(EXPO_ProfileStruct) == EXPOProfileSize, "EXPO profile has to be 40 bytes in size");
 
-}; // namespace ddr5_structs
+};  // namespace ddr5_structs
 
-#endif // DDR5SPD_STRUCTS_H
+#endif  // DDR5SPD_STRUCTS_H
