@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>632</width>
-    <height>983</height>
+    <width>1229</width>
+    <height>591</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -58,16 +58,28 @@
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>481</width>
+             <width>571</width>
              <height>66</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_2">
+            <property name="sizeConstraint">
+             <enum>QLayout::SizeConstraint::SetFixedSize</enum>
+            </property>
+            <property name="horizontalSpacing">
+             <number>6</number>
+            </property>
             <property name="verticalSpacing">
              <number>0</number>
             </property>
             <item row="0" column="2">
              <widget class="QLabel" name="labelFrequency">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Frequency</string>
               </property>
@@ -75,6 +87,12 @@
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="labelMaxCycleTime">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Maximum cycle time</string>
               </property>
@@ -82,6 +100,12 @@
             </item>
             <item row="0" column="0">
              <widget class="QLabel" name="labelMinCycleTime">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Minimum cycle time</string>
               </property>
@@ -89,6 +113,12 @@
             </item>
             <item row="1" column="1">
              <widget class="QSpinBox" name="spinMaxCycleTime">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="maximum">
                <number>65000</number>
               </property>
@@ -96,6 +126,12 @@
             </item>
             <item row="1" column="2">
              <widget class="QLabel" name="labelMT">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Megatransfers:</string>
               </property>
@@ -103,6 +139,24 @@
             </item>
             <item row="0" column="1">
              <widget class="QSpinBox" name="spinMinCycleTime">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="baseSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="maximum">
                <number>65000</number>
               </property>
@@ -110,6 +164,12 @@
             </item>
             <item row="0" column="3">
              <widget class="QLabel" name="labelFrequencyValue">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>0 MHz</string>
               </property>
@@ -117,6 +177,12 @@
             </item>
             <item row="1" column="3">
              <widget class="QLabel" name="labelMTValue">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>0 MT/s</string>
               </property>
@@ -128,22 +194,22 @@
          <widget class="QGroupBox" name="groupBoxCAS">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>120</y>
+            <x>610</x>
+            <y>10</y>
             <width>591</width>
-            <height>181</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
            <string>Supported CAS Latencies</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_2">
+          <widget class="QWidget" name="gridLayoutWidgetCAS">
            <property name="geometry">
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>423</width>
-             <height>141</height>
+             <width>484</width>
+             <height>121</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutCAS">
@@ -153,73 +219,66 @@
             <property name="verticalSpacing">
              <number>0</number>
             </property>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="cbCL44">
+            <item row="2" column="4">
+             <widget class="QCheckBox" name="cbCL64">
               <property name="text">
-               <string>CL44</string>
+               <string>CL64</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QCheckBox" name="cbCL38">
+             <widget class="QCheckBox" name="cbCL36">
               <property name="text">
-               <string>CL38</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="cbCL24">
-              <property name="text">
-               <string>CL24</string>
+               <string>CL36</string>
               </property>
              </widget>
             </item>
             <item row="0" column="4">
-             <widget class="QCheckBox" name="cbCL68">
+             <widget class="QCheckBox" name="cbCL60">
               <property name="text">
-               <string>CL68</string>
+               <string>CL60</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="5">
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="cbCL30">
+              <property name="text">
+               <string>CL30</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="6">
+             <widget class="QCheckBox" name="cbCL84">
+              <property name="text">
+               <string>CL84</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="cbCL54">
+              <property name="text">
+               <string>CL54</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="7">
+             <widget class="QCheckBox" name="cbCL90">
+              <property name="text">
+               <string>CL90</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QCheckBox" name="cbCL58">
+              <property name="text">
+               <string>CL58</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="6">
              <widget class="QCheckBox" name="cbCL80">
               <property name="text">
                <string>CL80</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="cbCL20">
-              <property name="text">
-               <string>CL20</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QCheckBox" name="cbCL56">
-              <property name="text">
-               <string>CL56</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="cbCL26">
-              <property name="text">
-               <string>CL26</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="cbCL34">
-              <property name="text">
-               <string>CL34</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QCheckBox" name="cbCL42">
-              <property name="text">
-               <string>CL42</string>
               </property>
              </widget>
             </item>
@@ -230,10 +289,150 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="cbCL36">
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="cbCL50">
               <property name="text">
-               <string>CL36</string>
+               <string>CL50</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="cbCL46">
+              <property name="text">
+               <string>CL46</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="cbCL38">
+              <property name="text">
+               <string>CL38</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="cbCL34">
+              <property name="text">
+               <string>CL34</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="cbCL24">
+              <property name="text">
+               <string>CL24</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="7">
+             <widget class="QCheckBox" name="cbCL98">
+              <property name="text">
+               <string>CL98</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QCheckBox" name="cbCL52">
+              <property name="text">
+               <string>CL52</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="cbCL32">
+              <property name="text">
+               <string>CL32</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QCheckBox" name="cbCL72">
+              <property name="text">
+               <string>CL72</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="cbCL26">
+              <property name="text">
+               <string>CL26</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="4">
+             <widget class="QCheckBox" name="cbCL66">
+              <property name="text">
+               <string>CL66</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="cbCL56">
+              <property name="text">
+               <string>CL56</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QCheckBox" name="cbCL48">
+              <property name="text">
+               <string>CL48</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="5">
+             <widget class="QCheckBox" name="cbCL78">
+              <property name="text">
+               <string>CL78</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="7">
+             <widget class="QCheckBox" name="cbCL92">
+              <property name="text">
+               <string>CL92</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="cbCL42">
+              <property name="text">
+               <string>CL42</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QCheckBox" name="cbCL62">
+              <property name="text">
+               <string>CL62</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="cbCL40">
+              <property name="text">
+               <string>CL40</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="7">
+             <widget class="QCheckBox" name="cbCL94">
+              <property name="text">
+               <string>CL94</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="6">
+             <widget class="QCheckBox" name="cbCL88">
+              <property name="text">
+               <string>CL88</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="6">
+             <widget class="QCheckBox" name="cbCL86">
+              <property name="text">
+               <string>CL86</string>
               </property>
              </widget>
             </item>
@@ -244,192 +443,65 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="cbCL30">
-              <property name="text">
-               <string>CL30</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QCheckBox" name="cbCL40">
-              <property name="text">
-               <string>CL40</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="cbCL32">
-              <property name="text">
-               <string>CL32</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="6">
-             <widget class="QCheckBox" name="cbCL92">
-              <property name="text">
-               <string>CL92</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="6">
-             <widget class="QCheckBox" name="cbCL94">
-              <property name="text">
-               <string>CL94</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="6">
-             <widget class="QCheckBox" name="cbCL96">
-              <property name="text">
-               <string>CL96</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="6">
-             <widget class="QCheckBox" name="cbCL98">
-              <property name="text">
-               <string>CL98</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="cbCL46">
-              <property name="text">
-               <string>CL46</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QCheckBox" name="cbCL48">
-              <property name="text">
-               <string>CL48</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QCheckBox" name="cbCL50">
-              <property name="text">
-               <string>CL50</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="2">
-             <widget class="QCheckBox" name="cbCL54">
-              <property name="text">
-               <string>CL54</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="3">
-             <widget class="QCheckBox" name="cbCL66">
-              <property name="text">
-               <string>CL66</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="4">
-             <widget class="QCheckBox" name="cbCL78">
-              <property name="text">
-               <string>CL78</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="5">
-             <widget class="QCheckBox" name="cbCL90">
-              <property name="text">
-               <string>CL90</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="5">
-             <widget class="QCheckBox" name="cbCL88">
-              <property name="text">
-               <string>CL88</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="5">
-             <widget class="QCheckBox" name="cbCL86">
-              <property name="text">
-               <string>CL86</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="5">
-             <widget class="QCheckBox" name="cbCL84">
-              <property name="text">
-               <string>CL84</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
              <widget class="QCheckBox" name="cbCL82">
               <property name="text">
                <string>CL82</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="cbCL44">
+              <property name="text">
+               <string>CL44</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="5">
+             <widget class="QCheckBox" name="cbCL76">
+              <property name="text">
+               <string>CL76</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QCheckBox" name="cbCL68">
+              <property name="text">
+               <string>CL68</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
              <widget class="QCheckBox" name="cbCL70">
               <property name="text">
                <string>CL70</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QCheckBox" name="cbCL58">
+            <item row="3" column="7">
+             <widget class="QCheckBox" name="cbCL96">
               <property name="text">
-               <string>CL58</string>
+               <string>CL96</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
-             <widget class="QCheckBox" name="cbCL52">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="cbCL20">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
-               <string>CL52</string>
+               <string>CL20</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
-             <widget class="QCheckBox" name="cbCL60">
-              <property name="text">
-               <string>CL60</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="4">
-             <widget class="QCheckBox" name="cbCL72">
-              <property name="text">
-               <string>CL72</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="3">
-             <widget class="QCheckBox" name="cbCL62">
-              <property name="text">
-               <string>CL62</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="3">
-             <widget class="QCheckBox" name="cbCL64">
-              <property name="text">
-               <string>CL64</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="4">
+            <item row="2" column="5">
              <widget class="QCheckBox" name="cbCL74">
               <property name="text">
                <string>CL74</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="4">
-             <widget class="QCheckBox" name="cbCL76">
-              <property name="text">
-               <string>CL76</string>
               </property>
              </widget>
             </item>
@@ -440,9 +512,9 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>310</y>
+            <y>120</y>
             <width>591</width>
-            <height>321</height>
+            <height>371</height>
            </rect>
           </property>
           <property name="title">
@@ -454,12 +526,12 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>316</height>
+             <height>331</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout">
             <property name="horizontalSpacing">
-             <number>8</number>
+             <number>6</number>
             </property>
             <property name="verticalSpacing">
              <number>2</number>
@@ -611,6 +683,18 @@
             </item>
             <item row="0" column="5">
              <widget class="QLabel" name="labelLowerTick">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="baseSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="font">
                <font>
                 <bold>true</bold>
@@ -680,7 +764,7 @@
             <item row="0" column="0">
              <widget class="QLabel" name="labelName">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -1577,7 +1661,7 @@
             <item row="1" column="6">
              <widget class="QLabel" name="labeltRRD_L_Ticks">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -1599,7 +1683,7 @@
             <item row="2" column="6">
              <widget class="QLabel" name="labeltCCD_L_Ticks">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -1621,7 +1705,7 @@
             <item row="3" column="6">
              <widget class="QLabel" name="labeltCCDL_L_WR_Ticks">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -1762,7 +1846,7 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>170</y>
+            <y>10</y>
             <width>591</width>
             <height>111</height>
            </rect>
@@ -1863,9 +1947,9 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>560</y>
+            <y>130</y>
             <width>591</width>
-            <height>321</height>
+            <height>361</height>
            </rect>
           </property>
           <property name="title">
@@ -1877,7 +1961,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>316</height>
+             <height>331</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_XMP1">
@@ -3182,22 +3266,22 @@
          <widget class="QGroupBox" name="groupBoxCAS_XMP1">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>370</y>
+            <x>610</x>
+            <y>260</y>
             <width>591</width>
-            <height>181</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
            <string>Supported CAS Latencies</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_9">
+          <widget class="QWidget" name="gridLayoutWidget_XMP1">
            <property name="geometry">
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>423</width>
-             <height>141</height>
+             <width>484</width>
+             <height>121</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutCAS_XMP1">
@@ -3207,73 +3291,66 @@
             <property name="verticalSpacing">
              <number>0</number>
             </property>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="cbCL44_XMP1">
+            <item row="2" column="4">
+             <widget class="QCheckBox" name="cbCL64_XMP1">
               <property name="text">
-               <string>CL44</string>
+               <string>CL64</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QCheckBox" name="cbCL38_XMP1">
+             <widget class="QCheckBox" name="cbCL36_XMP1">
               <property name="text">
-               <string>CL38</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="cbCL24_XMP1">
-              <property name="text">
-               <string>CL24</string>
+               <string>CL36</string>
               </property>
              </widget>
             </item>
             <item row="0" column="4">
-             <widget class="QCheckBox" name="cbCL68_XMP1">
+             <widget class="QCheckBox" name="cbCL60_XMP1">
               <property name="text">
-               <string>CL68</string>
+               <string>CL60</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="5">
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="cbCL30_XMP1">
+              <property name="text">
+               <string>CL30</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="6">
+             <widget class="QCheckBox" name="cbCL84_XMP1">
+              <property name="text">
+               <string>CL84</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="cbCL54_XMP1">
+              <property name="text">
+               <string>CL54</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="7">
+             <widget class="QCheckBox" name="cbCL90_XMP1">
+              <property name="text">
+               <string>CL90</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QCheckBox" name="cbCL58_XMP1">
+              <property name="text">
+               <string>CL58</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="6">
              <widget class="QCheckBox" name="cbCL80_XMP1">
               <property name="text">
                <string>CL80</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="cbCL20_XMP1">
-              <property name="text">
-               <string>CL20</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QCheckBox" name="cbCL56_XMP1">
-              <property name="text">
-               <string>CL56</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="cbCL26_XMP1">
-              <property name="text">
-               <string>CL26</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="cbCL34_XMP1">
-              <property name="text">
-               <string>CL34</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QCheckBox" name="cbCL42_XMP1">
-              <property name="text">
-               <string>CL42</string>
               </property>
              </widget>
             </item>
@@ -3284,10 +3361,150 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="cbCL36_XMP1">
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="cbCL50_XMP1">
               <property name="text">
-               <string>CL36</string>
+               <string>CL50</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="cbCL46_XMP1">
+              <property name="text">
+               <string>CL46</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="cbCL38_XMP1">
+              <property name="text">
+               <string>CL38</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="cbCL34_XMP1">
+              <property name="text">
+               <string>CL34</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="cbCL24_XMP1">
+              <property name="text">
+               <string>CL24</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="7">
+             <widget class="QCheckBox" name="cbCL98_XMP1">
+              <property name="text">
+               <string>CL98</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QCheckBox" name="cbCL52_XMP1">
+              <property name="text">
+               <string>CL52</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="cbCL32_XMP1">
+              <property name="text">
+               <string>CL32</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QCheckBox" name="cbCL72_XMP1">
+              <property name="text">
+               <string>CL72</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="cbCL26_XMP1">
+              <property name="text">
+               <string>CL26</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="4">
+             <widget class="QCheckBox" name="cbCL66_XMP1">
+              <property name="text">
+               <string>CL66</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="cbCL56_XMP1">
+              <property name="text">
+               <string>CL56</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QCheckBox" name="cbCL48_XMP1">
+              <property name="text">
+               <string>CL48</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="5">
+             <widget class="QCheckBox" name="cbCL78_XMP1">
+              <property name="text">
+               <string>CL78</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="7">
+             <widget class="QCheckBox" name="cbCL92_XMP1">
+              <property name="text">
+               <string>CL92</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="cbCL42_XMP1">
+              <property name="text">
+               <string>CL42</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QCheckBox" name="cbCL62_XMP1">
+              <property name="text">
+               <string>CL62</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="cbCL40_XMP1">
+              <property name="text">
+               <string>CL40</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="7">
+             <widget class="QCheckBox" name="cbCL94_XMP1">
+              <property name="text">
+               <string>CL94</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="6">
+             <widget class="QCheckBox" name="cbCL88_XMP1">
+              <property name="text">
+               <string>CL88</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="6">
+             <widget class="QCheckBox" name="cbCL86_XMP1">
+              <property name="text">
+               <string>CL86</string>
               </property>
              </widget>
             </item>
@@ -3298,192 +3515,65 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="cbCL30_XMP1">
-              <property name="text">
-               <string>CL30</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QCheckBox" name="cbCL40_XMP1">
-              <property name="text">
-               <string>CL40</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="cbCL32_XMP1">
-              <property name="text">
-               <string>CL32</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="6">
-             <widget class="QCheckBox" name="cbCL92_XMP1">
-              <property name="text">
-               <string>CL92</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="6">
-             <widget class="QCheckBox" name="cbCL94_XMP1">
-              <property name="text">
-               <string>CL94</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="6">
-             <widget class="QCheckBox" name="cbCL96_XMP1">
-              <property name="text">
-               <string>CL96</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="6">
-             <widget class="QCheckBox" name="cbCL98_XMP1">
-              <property name="text">
-               <string>CL98</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="cbCL46_XMP1">
-              <property name="text">
-               <string>CL46</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QCheckBox" name="cbCL48_XMP1">
-              <property name="text">
-               <string>CL48</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QCheckBox" name="cbCL50_XMP1">
-              <property name="text">
-               <string>CL50</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="2">
-             <widget class="QCheckBox" name="cbCL54_XMP1">
-              <property name="text">
-               <string>CL54</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="3">
-             <widget class="QCheckBox" name="cbCL66_XMP1">
-              <property name="text">
-               <string>CL66</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="4">
-             <widget class="QCheckBox" name="cbCL78_XMP1">
-              <property name="text">
-               <string>CL78</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="5">
-             <widget class="QCheckBox" name="cbCL90_XMP1">
-              <property name="text">
-               <string>CL90</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="5">
-             <widget class="QCheckBox" name="cbCL88_XMP1">
-              <property name="text">
-               <string>CL88</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="5">
-             <widget class="QCheckBox" name="cbCL86_XMP1">
-              <property name="text">
-               <string>CL86</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="5">
-             <widget class="QCheckBox" name="cbCL84_XMP1">
-              <property name="text">
-               <string>CL84</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
              <widget class="QCheckBox" name="cbCL82_XMP1">
               <property name="text">
                <string>CL82</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="cbCL44_XMP1">
+              <property name="text">
+               <string>CL44</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="5">
+             <widget class="QCheckBox" name="cbCL76_XMP1">
+              <property name="text">
+               <string>CL76</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QCheckBox" name="cbCL68_XMP1">
+              <property name="text">
+               <string>CL68</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
              <widget class="QCheckBox" name="cbCL70_XMP1">
               <property name="text">
                <string>CL70</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QCheckBox" name="cbCL58_XMP1">
+            <item row="3" column="7">
+             <widget class="QCheckBox" name="cbCL96_XMP1">
               <property name="text">
-               <string>CL58</string>
+               <string>CL96</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
-             <widget class="QCheckBox" name="cbCL52_XMP1">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="cbCL20_XMP1">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
-               <string>CL52</string>
+               <string>CL20</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
-             <widget class="QCheckBox" name="cbCL60_XMP1">
-              <property name="text">
-               <string>CL60</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="4">
-             <widget class="QCheckBox" name="cbCL72_XMP1">
-              <property name="text">
-               <string>CL72</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="3">
-             <widget class="QCheckBox" name="cbCL62_XMP1">
-              <property name="text">
-               <string>CL62</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="3">
-             <widget class="QCheckBox" name="cbCL64_XMP1">
-              <property name="text">
-               <string>CL64</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="4">
+            <item row="2" column="5">
              <widget class="QCheckBox" name="cbCL74_XMP1">
               <property name="text">
                <string>CL74</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="4">
-             <widget class="QCheckBox" name="cbCL76_XMP1">
-              <property name="text">
-               <string>CL76</string>
               </property>
              </widget>
             </item>
@@ -3493,10 +3583,10 @@
          <widget class="QGroupBox" name="groupBoxHeader_XMP1">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>610</x>
             <y>10</y>
             <width>591</width>
-            <height>151</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
@@ -3590,8 +3680,8 @@
          <widget class="QGroupBox" name="groupBoxVoltages_XMP1">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>290</y>
+            <x>610</x>
+            <y>180</y>
             <width>591</width>
             <height>71</height>
            </rect>
@@ -3700,10 +3790,10 @@
          <widget class="QGroupBox" name="groupBoxHeader_XMP2">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>610</x>
             <y>10</y>
             <width>591</width>
-            <height>151</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
@@ -3797,8 +3887,8 @@
          <widget class="QGroupBox" name="groupBoxVoltages_XMP2">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>290</y>
+            <x>610</x>
+            <y>180</y>
             <width>591</width>
             <height>71</height>
            </rect>
@@ -3902,22 +3992,22 @@
          <widget class="QGroupBox" name="groupBoxCAS_XMP2">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>370</y>
+            <x>610</x>
+            <y>260</y>
             <width>591</width>
-            <height>181</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
            <string>Supported CAS Latencies</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_10">
+          <widget class="QWidget" name="gridLayoutWidget_XMP2">
            <property name="geometry">
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>423</width>
-             <height>141</height>
+             <width>484</width>
+             <height>121</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutCAS_XMP2">
@@ -3927,73 +4017,66 @@
             <property name="verticalSpacing">
              <number>0</number>
             </property>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="cbCL44_XMP2">
+            <item row="2" column="4">
+             <widget class="QCheckBox" name="cbCL64_XMP2">
               <property name="text">
-               <string>CL44</string>
+               <string>CL64</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QCheckBox" name="cbCL38_XMP2">
+             <widget class="QCheckBox" name="cbCL36_XMP2">
               <property name="text">
-               <string>CL38</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="cbCL24_XMP2">
-              <property name="text">
-               <string>CL24</string>
+               <string>CL36</string>
               </property>
              </widget>
             </item>
             <item row="0" column="4">
-             <widget class="QCheckBox" name="cbCL68_XMP2">
+             <widget class="QCheckBox" name="cbCL60_XMP2">
               <property name="text">
-               <string>CL68</string>
+               <string>CL60</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="5">
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="cbCL30_XMP2">
+              <property name="text">
+               <string>CL30</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="6">
+             <widget class="QCheckBox" name="cbCL84_XMP2">
+              <property name="text">
+               <string>CL84</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="cbCL54_XMP2">
+              <property name="text">
+               <string>CL54</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="7">
+             <widget class="QCheckBox" name="cbCL90_XMP2">
+              <property name="text">
+               <string>CL90</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QCheckBox" name="cbCL58_XMP2">
+              <property name="text">
+               <string>CL58</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="6">
              <widget class="QCheckBox" name="cbCL80_XMP2">
               <property name="text">
                <string>CL80</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="cbCL20_XMP2">
-              <property name="text">
-               <string>CL20</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QCheckBox" name="cbCL56_XMP2">
-              <property name="text">
-               <string>CL56</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="cbCL26_XMP2">
-              <property name="text">
-               <string>CL26</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="cbCL34_XMP2">
-              <property name="text">
-               <string>CL34</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QCheckBox" name="cbCL42_XMP2">
-              <property name="text">
-               <string>CL42</string>
               </property>
              </widget>
             </item>
@@ -4004,10 +4087,150 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="cbCL36_XMP2">
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="cbCL50_XMP2">
               <property name="text">
-               <string>CL36</string>
+               <string>CL50</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="cbCL46_XMP2">
+              <property name="text">
+               <string>CL46</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="cbCL38_XMP2">
+              <property name="text">
+               <string>CL38</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="cbCL34_XMP2">
+              <property name="text">
+               <string>CL34</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="cbCL24_XMP2">
+              <property name="text">
+               <string>CL24</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="7">
+             <widget class="QCheckBox" name="cbCL98_XMP2">
+              <property name="text">
+               <string>CL98</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QCheckBox" name="cbCL52_XMP2">
+              <property name="text">
+               <string>CL52</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="cbCL32_XMP2">
+              <property name="text">
+               <string>CL32</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QCheckBox" name="cbCL72_XMP2">
+              <property name="text">
+               <string>CL72</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="cbCL26_XMP2">
+              <property name="text">
+               <string>CL26</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="4">
+             <widget class="QCheckBox" name="cbCL66_XMP2">
+              <property name="text">
+               <string>CL66</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="cbCL56_XMP2">
+              <property name="text">
+               <string>CL56</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QCheckBox" name="cbCL48_XMP2">
+              <property name="text">
+               <string>CL48</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="5">
+             <widget class="QCheckBox" name="cbCL78_XMP2">
+              <property name="text">
+               <string>CL78</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="7">
+             <widget class="QCheckBox" name="cbCL92_XMP2">
+              <property name="text">
+               <string>CL92</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="cbCL42_XMP2">
+              <property name="text">
+               <string>CL42</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QCheckBox" name="cbCL62_XMP2">
+              <property name="text">
+               <string>CL62</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="cbCL40_XMP2">
+              <property name="text">
+               <string>CL40</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="7">
+             <widget class="QCheckBox" name="cbCL94_XMP2">
+              <property name="text">
+               <string>CL94</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="6">
+             <widget class="QCheckBox" name="cbCL88_XMP2">
+              <property name="text">
+               <string>CL88</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="6">
+             <widget class="QCheckBox" name="cbCL86_XMP2">
+              <property name="text">
+               <string>CL86</string>
               </property>
              </widget>
             </item>
@@ -4018,192 +4241,65 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="cbCL30_XMP2">
-              <property name="text">
-               <string>CL30</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QCheckBox" name="cbCL40_XMP2">
-              <property name="text">
-               <string>CL40</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="cbCL32_XMP2">
-              <property name="text">
-               <string>CL32</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="6">
-             <widget class="QCheckBox" name="cbCL92_XMP2">
-              <property name="text">
-               <string>CL92</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="6">
-             <widget class="QCheckBox" name="cbCL94_XMP2">
-              <property name="text">
-               <string>CL94</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="6">
-             <widget class="QCheckBox" name="cbCL96_XMP2">
-              <property name="text">
-               <string>CL96</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="6">
-             <widget class="QCheckBox" name="cbCL98_XMP2">
-              <property name="text">
-               <string>CL98</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="cbCL46_XMP2">
-              <property name="text">
-               <string>CL46</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QCheckBox" name="cbCL48_XMP2">
-              <property name="text">
-               <string>CL48</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QCheckBox" name="cbCL50_XMP2">
-              <property name="text">
-               <string>CL50</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="2">
-             <widget class="QCheckBox" name="cbCL54_XMP2">
-              <property name="text">
-               <string>CL54</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="3">
-             <widget class="QCheckBox" name="cbCL66_XMP2">
-              <property name="text">
-               <string>CL66</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="4">
-             <widget class="QCheckBox" name="cbCL78_XMP2">
-              <property name="text">
-               <string>CL78</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="5">
-             <widget class="QCheckBox" name="cbCL90_XMP2">
-              <property name="text">
-               <string>CL90</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="5">
-             <widget class="QCheckBox" name="cbCL88_XMP2">
-              <property name="text">
-               <string>CL88</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="5">
-             <widget class="QCheckBox" name="cbCL86_XMP2">
-              <property name="text">
-               <string>CL86</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="5">
-             <widget class="QCheckBox" name="cbCL84_XMP2">
-              <property name="text">
-               <string>CL84</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
              <widget class="QCheckBox" name="cbCL82_XMP2">
               <property name="text">
                <string>CL82</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="cbCL44_XMP2">
+              <property name="text">
+               <string>CL44</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="5">
+             <widget class="QCheckBox" name="cbCL76_XMP2">
+              <property name="text">
+               <string>CL76</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QCheckBox" name="cbCL68_XMP2">
+              <property name="text">
+               <string>CL68</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
              <widget class="QCheckBox" name="cbCL70_XMP2">
               <property name="text">
                <string>CL70</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QCheckBox" name="cbCL58_XMP2">
+            <item row="3" column="7">
+             <widget class="QCheckBox" name="cbCL96_XMP2">
               <property name="text">
-               <string>CL58</string>
+               <string>CL96</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
-             <widget class="QCheckBox" name="cbCL52_XMP2">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="cbCL20_XMP2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
-               <string>CL52</string>
+               <string>CL20</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
-             <widget class="QCheckBox" name="cbCL60_XMP2">
-              <property name="text">
-               <string>CL60</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="4">
-             <widget class="QCheckBox" name="cbCL72_XMP2">
-              <property name="text">
-               <string>CL72</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="3">
-             <widget class="QCheckBox" name="cbCL62_XMP2">
-              <property name="text">
-               <string>CL62</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="3">
-             <widget class="QCheckBox" name="cbCL64_XMP2">
-              <property name="text">
-               <string>CL64</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="4">
+            <item row="2" column="5">
              <widget class="QCheckBox" name="cbCL74_XMP2">
               <property name="text">
                <string>CL74</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="4">
-             <widget class="QCheckBox" name="cbCL76_XMP2">
-              <property name="text">
-               <string>CL76</string>
               </property>
              </widget>
             </item>
@@ -4214,7 +4310,7 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>170</y>
+            <y>10</y>
             <width>591</width>
             <height>111</height>
            </rect>
@@ -4315,9 +4411,9 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>560</y>
+            <y>130</y>
             <width>591</width>
-            <height>321</height>
+            <height>361</height>
            </rect>
           </property>
           <property name="title">
@@ -4329,7 +4425,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>316</height>
+             <height>331</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_7">
@@ -5639,10 +5735,10 @@
          <widget class="QGroupBox" name="groupBoxHeader_XMP3">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>610</x>
             <y>10</y>
             <width>591</width>
-            <height>151</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
@@ -5736,8 +5832,8 @@
          <widget class="QGroupBox" name="groupBoxVoltages_XMP3">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>290</y>
+            <x>610</x>
+            <y>180</y>
             <width>591</width>
             <height>71</height>
            </rect>
@@ -5841,22 +5937,22 @@
          <widget class="QGroupBox" name="groupBoxCAS_XMP3">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>370</y>
+            <x>610</x>
+            <y>260</y>
             <width>591</width>
-            <height>181</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
            <string>Supported CAS Latencies</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_19">
+          <widget class="QWidget" name="gridLayoutWidget_XMP3">
            <property name="geometry">
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>423</width>
-             <height>141</height>
+             <width>484</width>
+             <height>121</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutCAS_XMP3">
@@ -5866,73 +5962,66 @@
             <property name="verticalSpacing">
              <number>0</number>
             </property>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="cbCL44_XMP3">
+            <item row="2" column="4">
+             <widget class="QCheckBox" name="cbCL64_XMP3">
               <property name="text">
-               <string>CL44</string>
+               <string>CL64</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QCheckBox" name="cbCL38_XMP3">
+             <widget class="QCheckBox" name="cbCL36_XMP3">
               <property name="text">
-               <string>CL38</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="cbCL24_XMP3">
-              <property name="text">
-               <string>CL24</string>
+               <string>CL36</string>
               </property>
              </widget>
             </item>
             <item row="0" column="4">
-             <widget class="QCheckBox" name="cbCL68_XMP3">
+             <widget class="QCheckBox" name="cbCL60_XMP3">
               <property name="text">
-               <string>CL68</string>
+               <string>CL60</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="5">
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="cbCL30_XMP3">
+              <property name="text">
+               <string>CL30</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="6">
+             <widget class="QCheckBox" name="cbCL84_XMP3">
+              <property name="text">
+               <string>CL84</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="cbCL54_XMP3">
+              <property name="text">
+               <string>CL54</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="7">
+             <widget class="QCheckBox" name="cbCL90_XMP3">
+              <property name="text">
+               <string>CL90</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QCheckBox" name="cbCL58_XMP3">
+              <property name="text">
+               <string>CL58</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="6">
              <widget class="QCheckBox" name="cbCL80_XMP3">
               <property name="text">
                <string>CL80</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="cbCL20_XMP3">
-              <property name="text">
-               <string>CL20</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QCheckBox" name="cbCL56_XMP3">
-              <property name="text">
-               <string>CL56</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="cbCL26_XMP3">
-              <property name="text">
-               <string>CL26</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="cbCL34_XMP3">
-              <property name="text">
-               <string>CL34</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QCheckBox" name="cbCL42_XMP3">
-              <property name="text">
-               <string>CL42</string>
               </property>
              </widget>
             </item>
@@ -5943,10 +6032,150 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="cbCL36_XMP3">
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="cbCL50_XMP3">
               <property name="text">
-               <string>CL36</string>
+               <string>CL50</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="cbCL46_XMP3">
+              <property name="text">
+               <string>CL46</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="cbCL38_XMP3">
+              <property name="text">
+               <string>CL38</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="cbCL34_XMP3">
+              <property name="text">
+               <string>CL34</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="cbCL24_XMP3">
+              <property name="text">
+               <string>CL24</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="7">
+             <widget class="QCheckBox" name="cbCL98_XMP3">
+              <property name="text">
+               <string>CL98</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QCheckBox" name="cbCL52_XMP3">
+              <property name="text">
+               <string>CL52</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="cbCL32_XMP3">
+              <property name="text">
+               <string>CL32</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QCheckBox" name="cbCL72_XMP3">
+              <property name="text">
+               <string>CL72</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="cbCL26_XMP3">
+              <property name="text">
+               <string>CL26</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="4">
+             <widget class="QCheckBox" name="cbCL66_XMP3">
+              <property name="text">
+               <string>CL66</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="cbCL56_XMP3">
+              <property name="text">
+               <string>CL56</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QCheckBox" name="cbCL48_XMP3">
+              <property name="text">
+               <string>CL48</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="5">
+             <widget class="QCheckBox" name="cbCL78_XMP3">
+              <property name="text">
+               <string>CL78</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="7">
+             <widget class="QCheckBox" name="cbCL92_XMP3">
+              <property name="text">
+               <string>CL92</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="cbCL42_XMP3">
+              <property name="text">
+               <string>CL42</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QCheckBox" name="cbCL62_XMP3">
+              <property name="text">
+               <string>CL62</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="cbCL40_XMP3">
+              <property name="text">
+               <string>CL40</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="7">
+             <widget class="QCheckBox" name="cbCL94_XMP3">
+              <property name="text">
+               <string>CL94</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="6">
+             <widget class="QCheckBox" name="cbCL88_XMP3">
+              <property name="text">
+               <string>CL88</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="6">
+             <widget class="QCheckBox" name="cbCL86_XMP3">
+              <property name="text">
+               <string>CL86</string>
               </property>
              </widget>
             </item>
@@ -5957,192 +6186,65 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="cbCL30_XMP3">
-              <property name="text">
-               <string>CL30</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QCheckBox" name="cbCL40_XMP3">
-              <property name="text">
-               <string>CL40</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="cbCL32_XMP3">
-              <property name="text">
-               <string>CL32</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="6">
-             <widget class="QCheckBox" name="cbCL92_XMP3">
-              <property name="text">
-               <string>CL92</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="6">
-             <widget class="QCheckBox" name="cbCL94_XMP3">
-              <property name="text">
-               <string>CL94</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="6">
-             <widget class="QCheckBox" name="cbCL96_XMP3">
-              <property name="text">
-               <string>CL96</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="6">
-             <widget class="QCheckBox" name="cbCL98_XMP3">
-              <property name="text">
-               <string>CL98</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="cbCL46_XMP3">
-              <property name="text">
-               <string>CL46</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QCheckBox" name="cbCL48_XMP3">
-              <property name="text">
-               <string>CL48</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QCheckBox" name="cbCL50_XMP3">
-              <property name="text">
-               <string>CL50</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="2">
-             <widget class="QCheckBox" name="cbCL54_XMP3">
-              <property name="text">
-               <string>CL54</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="3">
-             <widget class="QCheckBox" name="cbCL66_XMP3">
-              <property name="text">
-               <string>CL66</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="4">
-             <widget class="QCheckBox" name="cbCL78_XMP3">
-              <property name="text">
-               <string>CL78</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="5">
-             <widget class="QCheckBox" name="cbCL90_XMP3">
-              <property name="text">
-               <string>CL90</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="5">
-             <widget class="QCheckBox" name="cbCL88_XMP3">
-              <property name="text">
-               <string>CL88</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="5">
-             <widget class="QCheckBox" name="cbCL86_XMP3">
-              <property name="text">
-               <string>CL86</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="5">
-             <widget class="QCheckBox" name="cbCL84_XMP3">
-              <property name="text">
-               <string>CL84</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
              <widget class="QCheckBox" name="cbCL82_XMP3">
               <property name="text">
                <string>CL82</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="cbCL44_XMP3">
+              <property name="text">
+               <string>CL44</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="5">
+             <widget class="QCheckBox" name="cbCL76_XMP3">
+              <property name="text">
+               <string>CL76</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QCheckBox" name="cbCL68_XMP3">
+              <property name="text">
+               <string>CL68</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
              <widget class="QCheckBox" name="cbCL70_XMP3">
               <property name="text">
                <string>CL70</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QCheckBox" name="cbCL58_XMP3">
+            <item row="3" column="7">
+             <widget class="QCheckBox" name="cbCL96_XMP3">
               <property name="text">
-               <string>CL58</string>
+               <string>CL96</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
-             <widget class="QCheckBox" name="cbCL52_XMP3">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="cbCL20_XMP3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
-               <string>CL52</string>
+               <string>CL20</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
-             <widget class="QCheckBox" name="cbCL60_XMP3">
-              <property name="text">
-               <string>CL60</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="4">
-             <widget class="QCheckBox" name="cbCL72_XMP3">
-              <property name="text">
-               <string>CL72</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="3">
-             <widget class="QCheckBox" name="cbCL62_XMP3">
-              <property name="text">
-               <string>CL62</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="3">
-             <widget class="QCheckBox" name="cbCL64_XMP3">
-              <property name="text">
-               <string>CL64</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="4">
+            <item row="2" column="5">
              <widget class="QCheckBox" name="cbCL74_XMP3">
               <property name="text">
                <string>CL74</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="4">
-             <widget class="QCheckBox" name="cbCL76_XMP3">
-              <property name="text">
-               <string>CL76</string>
               </property>
              </widget>
             </item>
@@ -6153,7 +6255,7 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>170</y>
+            <y>10</y>
             <width>591</width>
             <height>111</height>
            </rect>
@@ -6254,9 +6356,9 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>560</y>
+            <y>130</y>
             <width>591</width>
-            <height>321</height>
+            <height>361</height>
            </rect>
           </property>
           <property name="title">
@@ -6268,7 +6370,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>316</height>
+             <height>331</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_8">
@@ -7578,10 +7680,10 @@
          <widget class="QGroupBox" name="groupBoxHeader_XMPU1">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>610</x>
             <y>10</y>
             <width>591</width>
-            <height>151</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
@@ -7668,8 +7770,8 @@
          <widget class="QGroupBox" name="groupBoxVoltages_XMPU1">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>290</y>
+            <x>610</x>
+            <y>180</y>
             <width>591</width>
             <height>71</height>
            </rect>
@@ -7773,22 +7875,22 @@
          <widget class="QGroupBox" name="groupBoxCAS_XMPU1">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>370</y>
+            <x>610</x>
+            <y>260</y>
             <width>591</width>
-            <height>181</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
            <string>Supported CAS Latencies</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_24">
+          <widget class="QWidget" name="gridLayoutWidget_XMPU1">
            <property name="geometry">
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>423</width>
-             <height>141</height>
+             <width>484</width>
+             <height>121</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutCAS_XMPU1">
@@ -7798,73 +7900,66 @@
             <property name="verticalSpacing">
              <number>0</number>
             </property>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="cbCL44_XMPU1">
+            <item row="2" column="4">
+             <widget class="QCheckBox" name="cbCL64_XMPU1">
               <property name="text">
-               <string>CL44</string>
+               <string>CL64</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QCheckBox" name="cbCL38_XMPU1">
+             <widget class="QCheckBox" name="cbCL36_XMPU1">
               <property name="text">
-               <string>CL38</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="cbCL24_XMPU1">
-              <property name="text">
-               <string>CL24</string>
+               <string>CL36</string>
               </property>
              </widget>
             </item>
             <item row="0" column="4">
-             <widget class="QCheckBox" name="cbCL68_XMPU1">
+             <widget class="QCheckBox" name="cbCL60_XMPU1">
               <property name="text">
-               <string>CL68</string>
+               <string>CL60</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="5">
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="cbCL30_XMPU1">
+              <property name="text">
+               <string>CL30</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="6">
+             <widget class="QCheckBox" name="cbCL84_XMPU1">
+              <property name="text">
+               <string>CL84</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="cbCL54_XMPU1">
+              <property name="text">
+               <string>CL54</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="7">
+             <widget class="QCheckBox" name="cbCL90_XMPU1">
+              <property name="text">
+               <string>CL90</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QCheckBox" name="cbCL58_XMPU1">
+              <property name="text">
+               <string>CL58</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="6">
              <widget class="QCheckBox" name="cbCL80_XMPU1">
               <property name="text">
                <string>CL80</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="cbCL20_XMPU1">
-              <property name="text">
-               <string>CL20</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QCheckBox" name="cbCL56_XMPU1">
-              <property name="text">
-               <string>CL56</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="cbCL26_XMPU1">
-              <property name="text">
-               <string>CL26</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="cbCL34_XMPU1">
-              <property name="text">
-               <string>CL34</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QCheckBox" name="cbCL42_XMPU1">
-              <property name="text">
-               <string>CL42</string>
               </property>
              </widget>
             </item>
@@ -7875,10 +7970,150 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="cbCL36_XMPU1">
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="cbCL50_XMPU1">
               <property name="text">
-               <string>CL36</string>
+               <string>CL50</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="cbCL46_XMPU1">
+              <property name="text">
+               <string>CL46</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="cbCL38_XMPU1">
+              <property name="text">
+               <string>CL38</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="cbCL34_XMPU1">
+              <property name="text">
+               <string>CL34</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="cbCL24_XMPU1">
+              <property name="text">
+               <string>CL24</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="7">
+             <widget class="QCheckBox" name="cbCL98_XMPU1">
+              <property name="text">
+               <string>CL98</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QCheckBox" name="cbCL52_XMPU1">
+              <property name="text">
+               <string>CL52</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="cbCL32_XMPU1">
+              <property name="text">
+               <string>CL32</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QCheckBox" name="cbCL72_XMPU1">
+              <property name="text">
+               <string>CL72</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="cbCL26_XMPU1">
+              <property name="text">
+               <string>CL26</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="4">
+             <widget class="QCheckBox" name="cbCL66_XMPU1">
+              <property name="text">
+               <string>CL66</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="cbCL56_XMPU1">
+              <property name="text">
+               <string>CL56</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QCheckBox" name="cbCL48_XMPU1">
+              <property name="text">
+               <string>CL48</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="5">
+             <widget class="QCheckBox" name="cbCL78_XMPU1">
+              <property name="text">
+               <string>CL78</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="7">
+             <widget class="QCheckBox" name="cbCL92_XMPU1">
+              <property name="text">
+               <string>CL92</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="cbCL42_XMPU1">
+              <property name="text">
+               <string>CL42</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QCheckBox" name="cbCL62_XMPU1">
+              <property name="text">
+               <string>CL62</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="cbCL40_XMPU1">
+              <property name="text">
+               <string>CL40</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="7">
+             <widget class="QCheckBox" name="cbCL94_XMPU1">
+              <property name="text">
+               <string>CL94</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="6">
+             <widget class="QCheckBox" name="cbCL88_XMPU1">
+              <property name="text">
+               <string>CL88</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="6">
+             <widget class="QCheckBox" name="cbCL86_XMPU1">
+              <property name="text">
+               <string>CL86</string>
               </property>
              </widget>
             </item>
@@ -7889,192 +8124,65 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="cbCL30_XMPU1">
-              <property name="text">
-               <string>CL30</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QCheckBox" name="cbCL40_XMPU1">
-              <property name="text">
-               <string>CL40</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="cbCL32_XMPU1">
-              <property name="text">
-               <string>CL32</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="6">
-             <widget class="QCheckBox" name="cbCL92_XMPU1">
-              <property name="text">
-               <string>CL92</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="6">
-             <widget class="QCheckBox" name="cbCL94_XMPU1">
-              <property name="text">
-               <string>CL94</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="6">
-             <widget class="QCheckBox" name="cbCL96_XMPU1">
-              <property name="text">
-               <string>CL96</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="6">
-             <widget class="QCheckBox" name="cbCL98_XMPU1">
-              <property name="text">
-               <string>CL98</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="cbCL46_XMPU1">
-              <property name="text">
-               <string>CL46</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QCheckBox" name="cbCL48_XMPU1">
-              <property name="text">
-               <string>CL48</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QCheckBox" name="cbCL50_XMPU1">
-              <property name="text">
-               <string>CL50</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="2">
-             <widget class="QCheckBox" name="cbCL54_XMPU1">
-              <property name="text">
-               <string>CL54</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="3">
-             <widget class="QCheckBox" name="cbCL66_XMPU1">
-              <property name="text">
-               <string>CL66</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="4">
-             <widget class="QCheckBox" name="cbCL78_XMPU1">
-              <property name="text">
-               <string>CL78</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="5">
-             <widget class="QCheckBox" name="cbCL90_XMPU1">
-              <property name="text">
-               <string>CL90</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="5">
-             <widget class="QCheckBox" name="cbCL88_XMPU1">
-              <property name="text">
-               <string>CL88</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="5">
-             <widget class="QCheckBox" name="cbCL86_XMPU1">
-              <property name="text">
-               <string>CL86</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="5">
-             <widget class="QCheckBox" name="cbCL84_XMPU1">
-              <property name="text">
-               <string>CL84</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
              <widget class="QCheckBox" name="cbCL82_XMPU1">
               <property name="text">
                <string>CL82</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="cbCL44_XMPU1">
+              <property name="text">
+               <string>CL44</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="5">
+             <widget class="QCheckBox" name="cbCL76_XMPU1">
+              <property name="text">
+               <string>CL76</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QCheckBox" name="cbCL68_XMPU1">
+              <property name="text">
+               <string>CL68</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
              <widget class="QCheckBox" name="cbCL70_XMPU1">
               <property name="text">
                <string>CL70</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QCheckBox" name="cbCL58_XMPU1">
+            <item row="3" column="7">
+             <widget class="QCheckBox" name="cbCL96_XMPU1">
               <property name="text">
-               <string>CL58</string>
+               <string>CL96</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
-             <widget class="QCheckBox" name="cbCL52_XMPU1">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="cbCL20_XMPU1">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
-               <string>CL52</string>
+               <string>CL20</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
-             <widget class="QCheckBox" name="cbCL60_XMPU1">
-              <property name="text">
-               <string>CL60</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="4">
-             <widget class="QCheckBox" name="cbCL72_XMPU1">
-              <property name="text">
-               <string>CL72</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="3">
-             <widget class="QCheckBox" name="cbCL62_XMPU1">
-              <property name="text">
-               <string>CL62</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="3">
-             <widget class="QCheckBox" name="cbCL64_XMPU1">
-              <property name="text">
-               <string>CL64</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="4">
+            <item row="2" column="5">
              <widget class="QCheckBox" name="cbCL74_XMPU1">
               <property name="text">
                <string>CL74</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="4">
-             <widget class="QCheckBox" name="cbCL76_XMPU1">
-              <property name="text">
-               <string>CL76</string>
               </property>
              </widget>
             </item>
@@ -8085,7 +8193,7 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>170</y>
+            <y>10</y>
             <width>591</width>
             <height>111</height>
            </rect>
@@ -8186,9 +8294,9 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>560</y>
+            <y>130</y>
             <width>591</width>
-            <height>321</height>
+            <height>361</height>
            </rect>
           </property>
           <property name="title">
@@ -8200,7 +8308,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>316</height>
+             <height>331</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_9">
@@ -9510,10 +9618,10 @@
          <widget class="QGroupBox" name="groupBoxHeader_XMPU2">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>610</x>
             <y>10</y>
             <width>591</width>
-            <height>151</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
@@ -9600,8 +9708,8 @@
          <widget class="QGroupBox" name="groupBoxVoltages_XMPU2">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>290</y>
+            <x>610</x>
+            <y>180</y>
             <width>591</width>
             <height>71</height>
            </rect>
@@ -9705,22 +9813,22 @@
          <widget class="QGroupBox" name="groupBoxCAS_XMPU2">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>370</y>
+            <x>610</x>
+            <y>260</y>
             <width>591</width>
-            <height>181</height>
+            <height>161</height>
            </rect>
           </property>
           <property name="title">
            <string>Supported CAS Latencies</string>
           </property>
-          <widget class="QWidget" name="gridLayoutWidget_29">
+          <widget class="QWidget" name="gridLayoutWidget_XMPU2">
            <property name="geometry">
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>423</width>
-             <height>141</height>
+             <width>484</width>
+             <height>121</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutCAS_XMPU2">
@@ -9730,73 +9838,66 @@
             <property name="verticalSpacing">
              <number>0</number>
             </property>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="cbCL44_XMPU2">
+            <item row="2" column="4">
+             <widget class="QCheckBox" name="cbCL64_XMPU2">
               <property name="text">
-               <string>CL44</string>
+               <string>CL64</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QCheckBox" name="cbCL38_XMPU2">
+             <widget class="QCheckBox" name="cbCL36_XMPU2">
               <property name="text">
-               <string>CL38</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="cbCL24_XMPU2">
-              <property name="text">
-               <string>CL24</string>
+               <string>CL36</string>
               </property>
              </widget>
             </item>
             <item row="0" column="4">
-             <widget class="QCheckBox" name="cbCL68_XMPU2">
+             <widget class="QCheckBox" name="cbCL60_XMPU2">
               <property name="text">
-               <string>CL68</string>
+               <string>CL60</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="5">
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="cbCL30_XMPU2">
+              <property name="text">
+               <string>CL30</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="6">
+             <widget class="QCheckBox" name="cbCL84_XMPU2">
+              <property name="text">
+               <string>CL84</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="cbCL54_XMPU2">
+              <property name="text">
+               <string>CL54</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="7">
+             <widget class="QCheckBox" name="cbCL90_XMPU2">
+              <property name="text">
+               <string>CL90</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="3">
+             <widget class="QCheckBox" name="cbCL58_XMPU2">
+              <property name="text">
+               <string>CL58</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="6">
              <widget class="QCheckBox" name="cbCL80_XMPU2">
               <property name="text">
                <string>CL80</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="cbCL20_XMPU2">
-              <property name="text">
-               <string>CL20</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QCheckBox" name="cbCL56_XMPU2">
-              <property name="text">
-               <string>CL56</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="cbCL26_XMPU2">
-              <property name="text">
-               <string>CL26</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="cbCL34_XMPU2">
-              <property name="text">
-               <string>CL34</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QCheckBox" name="cbCL42_XMPU2">
-              <property name="text">
-               <string>CL42</string>
               </property>
              </widget>
             </item>
@@ -9807,10 +9908,150 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="cbCL36_XMPU2">
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="cbCL50_XMPU2">
               <property name="text">
-               <string>CL36</string>
+               <string>CL50</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="cbCL46_XMPU2">
+              <property name="text">
+               <string>CL46</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="cbCL38_XMPU2">
+              <property name="text">
+               <string>CL38</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="cbCL34_XMPU2">
+              <property name="text">
+               <string>CL34</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="cbCL24_XMPU2">
+              <property name="text">
+               <string>CL24</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="7">
+             <widget class="QCheckBox" name="cbCL98_XMPU2">
+              <property name="text">
+               <string>CL98</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QCheckBox" name="cbCL52_XMPU2">
+              <property name="text">
+               <string>CL52</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="cbCL32_XMPU2">
+              <property name="text">
+               <string>CL32</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QCheckBox" name="cbCL72_XMPU2">
+              <property name="text">
+               <string>CL72</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="cbCL26_XMPU2">
+              <property name="text">
+               <string>CL26</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="4">
+             <widget class="QCheckBox" name="cbCL66_XMPU2">
+              <property name="text">
+               <string>CL66</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="cbCL56_XMPU2">
+              <property name="text">
+               <string>CL56</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QCheckBox" name="cbCL48_XMPU2">
+              <property name="text">
+               <string>CL48</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="5">
+             <widget class="QCheckBox" name="cbCL78_XMPU2">
+              <property name="text">
+               <string>CL78</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="7">
+             <widget class="QCheckBox" name="cbCL92_XMPU2">
+              <property name="text">
+               <string>CL92</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="cbCL42_XMPU2">
+              <property name="text">
+               <string>CL42</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QCheckBox" name="cbCL62_XMPU2">
+              <property name="text">
+               <string>CL62</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="cbCL40_XMPU2">
+              <property name="text">
+               <string>CL40</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="7">
+             <widget class="QCheckBox" name="cbCL94_XMPU2">
+              <property name="text">
+               <string>CL94</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="6">
+             <widget class="QCheckBox" name="cbCL88_XMPU2">
+              <property name="text">
+               <string>CL88</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="6">
+             <widget class="QCheckBox" name="cbCL86_XMPU2">
+              <property name="text">
+               <string>CL86</string>
               </property>
              </widget>
             </item>
@@ -9821,192 +10062,65 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="cbCL30_XMPU2">
-              <property name="text">
-               <string>CL30</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QCheckBox" name="cbCL40_XMPU2">
-              <property name="text">
-               <string>CL40</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="cbCL32_XMPU2">
-              <property name="text">
-               <string>CL32</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="6">
-             <widget class="QCheckBox" name="cbCL92_XMPU2">
-              <property name="text">
-               <string>CL92</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="6">
-             <widget class="QCheckBox" name="cbCL94_XMPU2">
-              <property name="text">
-               <string>CL94</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="6">
-             <widget class="QCheckBox" name="cbCL96_XMPU2">
-              <property name="text">
-               <string>CL96</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="6">
-             <widget class="QCheckBox" name="cbCL98_XMPU2">
-              <property name="text">
-               <string>CL98</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="cbCL46_XMPU2">
-              <property name="text">
-               <string>CL46</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QCheckBox" name="cbCL48_XMPU2">
-              <property name="text">
-               <string>CL48</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QCheckBox" name="cbCL50_XMPU2">
-              <property name="text">
-               <string>CL50</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="2">
-             <widget class="QCheckBox" name="cbCL54_XMPU2">
-              <property name="text">
-               <string>CL54</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="3">
-             <widget class="QCheckBox" name="cbCL66_XMPU2">
-              <property name="text">
-               <string>CL66</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="4">
-             <widget class="QCheckBox" name="cbCL78_XMPU2">
-              <property name="text">
-               <string>CL78</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="5">
-             <widget class="QCheckBox" name="cbCL90_XMPU2">
-              <property name="text">
-               <string>CL90</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="5">
-             <widget class="QCheckBox" name="cbCL88_XMPU2">
-              <property name="text">
-               <string>CL88</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="5">
-             <widget class="QCheckBox" name="cbCL86_XMPU2">
-              <property name="text">
-               <string>CL86</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="5">
-             <widget class="QCheckBox" name="cbCL84_XMPU2">
-              <property name="text">
-               <string>CL84</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
              <widget class="QCheckBox" name="cbCL82_XMPU2">
               <property name="text">
                <string>CL82</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="4">
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="cbCL44_XMPU2">
+              <property name="text">
+               <string>CL44</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="5">
+             <widget class="QCheckBox" name="cbCL76_XMPU2">
+              <property name="text">
+               <string>CL76</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QCheckBox" name="cbCL68_XMPU2">
+              <property name="text">
+               <string>CL68</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
              <widget class="QCheckBox" name="cbCL70_XMPU2">
               <property name="text">
                <string>CL70</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QCheckBox" name="cbCL58_XMPU2">
+            <item row="3" column="7">
+             <widget class="QCheckBox" name="cbCL96_XMPU2">
               <property name="text">
-               <string>CL58</string>
+               <string>CL96</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="2">
-             <widget class="QCheckBox" name="cbCL52_XMPU2">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="cbCL20_XMPU2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
-               <string>CL52</string>
+               <string>CL20</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
-             <widget class="QCheckBox" name="cbCL60_XMPU2">
-              <property name="text">
-               <string>CL60</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="4">
-             <widget class="QCheckBox" name="cbCL72_XMPU2">
-              <property name="text">
-               <string>CL72</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="3">
-             <widget class="QCheckBox" name="cbCL62_XMPU2">
-              <property name="text">
-               <string>CL62</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="3">
-             <widget class="QCheckBox" name="cbCL64_XMPU2">
-              <property name="text">
-               <string>CL64</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="4">
+            <item row="2" column="5">
              <widget class="QCheckBox" name="cbCL74_XMPU2">
               <property name="text">
                <string>CL74</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="4">
-             <widget class="QCheckBox" name="cbCL76_XMPU2">
-              <property name="text">
-               <string>CL76</string>
               </property>
              </widget>
             </item>
@@ -10017,7 +10131,7 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>170</y>
+            <y>10</y>
             <width>591</width>
             <height>111</height>
            </rect>
@@ -10118,9 +10232,9 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>560</y>
+            <y>130</y>
             <width>591</width>
-            <height>321</height>
+            <height>361</height>
            </rect>
           </property>
           <property name="title">
@@ -10132,7 +10246,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>316</height>
+             <height>331</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_10">
@@ -11442,8 +11556,8 @@
          <widget class="QGroupBox" name="groupBoxVoltages_EXPO1">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>190</y>
+            <x>610</x>
+            <y>90</y>
             <width>591</width>
             <height>71</height>
            </rect>
@@ -11527,7 +11641,7 @@
          <widget class="QGroupBox" name="groupBoxHeader_EXPO1">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>610</x>
             <y>10</y>
             <width>591</width>
             <height>71</height>
@@ -11591,9 +11705,9 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>90</y>
+            <y>10</y>
             <width>591</width>
-            <height>91</height>
+            <height>101</height>
            </rect>
           </property>
           <property name="title">
@@ -11605,7 +11719,7 @@
              <x>10</x>
              <y>30</y>
              <width>481</width>
-             <height>52</height>
+             <height>61</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutFrequency_EXPO1">
@@ -11661,9 +11775,9 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>260</y>
+            <y>120</y>
             <width>591</width>
-            <height>321</height>
+            <height>361</height>
            </rect>
           </property>
           <property name="title">
@@ -11675,7 +11789,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>316</height>
+             <height>331</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_EXPO1">
@@ -12842,8 +12956,8 @@
          <widget class="QGroupBox" name="groupBoxVoltages_EXPO2">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>190</y>
+            <x>610</x>
+            <y>90</y>
             <width>591</width>
             <height>71</height>
            </rect>
@@ -12927,7 +13041,7 @@
          <widget class="QGroupBox" name="groupBoxHeader_EXPO2">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>610</x>
             <y>10</y>
             <width>591</width>
             <height>71</height>
@@ -12991,9 +13105,9 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>90</y>
+            <y>10</y>
             <width>591</width>
-            <height>91</height>
+            <height>101</height>
            </rect>
           </property>
           <property name="title">
@@ -13005,7 +13119,7 @@
              <x>10</x>
              <y>30</y>
              <width>481</width>
-             <height>52</height>
+             <height>61</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutFrequency_EXPO2">
@@ -13061,9 +13175,9 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>260</y>
+            <y>120</y>
             <width>591</width>
-            <height>321</height>
+            <height>361</height>
            </rect>
           </property>
           <property name="title">
@@ -13075,7 +13189,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>316</height>
+             <height>331</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_EXPO2">
@@ -14334,7 +14448,7 @@
             <x>10</x>
             <y>90</y>
             <width>591</width>
-            <height>191</height>
+            <height>201</height>
            </rect>
           </property>
           <property name="title">
@@ -14519,8 +14633,8 @@
          <widget class="QGroupBox" name="groupBoxPhysicalcharacteristics_4">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>290</y>
+            <x>610</x>
+            <y>10</y>
             <width>591</width>
             <height>71</height>
            </rect>
@@ -14578,8 +14692,8 @@
          <widget class="QGroupBox" name="groupBoxPhysicalcharacteristics_5">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>370</y>
+            <x>610</x>
+            <y>90</y>
             <width>591</width>
             <height>131</height>
            </rect>
@@ -14653,7 +14767,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>632</width>
+     <width>1229</width>
      <height>30</height>
     </rect>
    </property>
