@@ -788,7 +788,7 @@ void MainWindow::clearUI() {
   ui->cbCL98->setChecked(spd->getCLSupported(false));
 
   ui->spinBoxtAA->setValue(0);
-  ui->labeltAA_Ticks->setText(emptyValue);
+  ui->spinBoxtAA_Ticks->setValue(0);
   ui->spinBoxtRCD->setValue(0);
   ui->labeltRCD_Ticks->setText(emptyValue);
   ui->spinBoxtRP->setValue(0);
@@ -884,7 +884,7 @@ void MainWindow::reloadJEDECTab() {
   unsigned int minCycleTime = spd->getMinCycleTime();
 
   ui->spinBoxtAA->setValue(spd->gettAA());
-  ui->labeltAA_Ticks->setText(QString::number(spd->gettAA_tick()));
+  ui->spinBoxtAA_Ticks->setValue(spd->gettAA_tick());
   ui->spinBoxtRCD->setValue(spd->gettRCD());
   ui->labeltRCD_Ticks->setText(QString::number(spd->gettRCD_tick()));
   ui->spinBoxtRP->setValue(spd->gettRP());
@@ -1877,7 +1877,12 @@ void MainWindow::on_cbCL98_toggled(bool value) {
 
 void MainWindow::on_spinBoxtAA_valueChanged(int value) {
   spd->settAA(value);
-  ui->labeltAA_Ticks->setText(QString::number(spd->gettAA_tick()));
+  ui->spinBoxtAA_Ticks->setValue(spd->gettAA_tick());
+}
+
+void MainWindow::on_spinBoxtAA_Ticks_valueChanged(int value) {
+  spd->settAA_tick(value);
+  ui->spinBoxtAA->setValue(spd->gettAA());
 }
 
 void MainWindow::on_spinBoxtRCD_valueChanged(int value) {
@@ -1995,7 +2000,12 @@ void MainWindow::on_spinBoxtRTP_LCLK_valueChanged(int value) {
 
 void MainWindow::on_spinBoxtAA_editingFinished() {
   ui->spinBoxtAA->setValue(spd->gettAA());
-  ui->labeltAA_Ticks->setText(QString::number(spd->gettAA_tick()));
+  ui->spinBoxtAA_Ticks->setValue(spd->gettAA_tick());
+}
+
+void MainWindow::on_spinBoxtAA_Ticks_editingFinished() {
+  ui->spinBoxtAA->setValue(spd->gettAA());
+  ui->spinBoxtAA_Ticks->setValue(spd->gettAA_tick());
 }
 
 void MainWindow::on_spinBoxtRCD_editingFinished() {

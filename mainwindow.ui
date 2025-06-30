@@ -59,7 +59,7 @@
              <x>10</x>
              <y>30</y>
              <width>481</width>
-             <height>61</height>
+             <height>66</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_2">
@@ -142,7 +142,7 @@
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>409</width>
+             <width>423</width>
              <height>141</height>
             </rect>
            </property>
@@ -454,7 +454,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>281</height>
+             <height>316</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout">
@@ -724,7 +724,7 @@
              </widget>
             </item>
             <item row="1" column="2">
-             <widget class="QLabel" name="labeltAA_Ticks">
+             <widget class="QSpinBox" name="spinBoxtAA_Ticks">
               <property name="enabled">
                <bool>true</bool>
               </property>
@@ -740,14 +740,11 @@
                 <height>20</height>
                </size>
               </property>
-              <property name="lineWidth">
-               <number>0</number>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
               <property name="alignment">
                <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+              <property name="maximum">
+               <number>200</number>
               </property>
              </widget>
             </item>
@@ -1880,7 +1877,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>281</height>
+             <height>316</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_XMP1">
@@ -3199,7 +3196,7 @@
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>409</width>
+             <width>423</width>
              <height>141</height>
             </rect>
            </property>
@@ -3511,7 +3508,7 @@
              <x>10</x>
              <y>30</y>
              <width>441</width>
-             <height>116</height>
+             <height>128</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_XMP1">
@@ -3608,7 +3605,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutVoltages_XMP1">
@@ -3718,7 +3715,7 @@
              <x>10</x>
              <y>30</y>
              <width>441</width>
-             <height>116</height>
+             <height>128</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_XMP2">
@@ -3815,7 +3812,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutVoltages_XMP2">
@@ -3919,7 +3916,7 @@
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>409</width>
+             <width>423</width>
              <height>141</height>
             </rect>
            </property>
@@ -4332,7 +4329,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>281</height>
+             <height>316</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_7">
@@ -5657,7 +5654,7 @@
              <x>10</x>
              <y>30</y>
              <width>441</width>
-             <height>116</height>
+             <height>128</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_XMP3">
@@ -5754,7 +5751,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutVoltages_XMP3">
@@ -5858,7 +5855,7 @@
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>409</width>
+             <width>423</width>
              <height>141</height>
             </rect>
            </property>
@@ -6271,7 +6268,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>281</height>
+             <height>316</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_8">
@@ -7596,7 +7593,7 @@
              <x>10</x>
              <y>30</y>
              <width>361</width>
-             <height>116</height>
+             <height>128</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_XMPU1">
@@ -7686,7 +7683,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutVoltages_XMPU1">
@@ -7790,7 +7787,7 @@
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>409</width>
+             <width>423</width>
              <height>141</height>
             </rect>
            </property>
@@ -8203,7 +8200,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>281</height>
+             <height>316</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_9">
@@ -9528,7 +9525,7 @@
              <x>10</x>
              <y>30</y>
              <width>361</width>
-             <height>116</height>
+             <height>128</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_XMPU2">
@@ -9618,7 +9615,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutVoltages_XMPU2">
@@ -9722,7 +9719,7 @@
             <rect>
              <x>10</x>
              <y>30</y>
-             <width>409</width>
+             <width>423</width>
              <height>141</height>
             </rect>
            </property>
@@ -10135,7 +10132,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>281</height>
+             <height>316</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_10">
@@ -11460,7 +11457,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutVoltages_EXPO1">
@@ -11545,7 +11542,7 @@
              <x>10</x>
              <y>30</y>
              <width>361</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_EXPO1">
@@ -11608,7 +11605,7 @@
              <x>10</x>
              <y>30</y>
              <width>481</width>
-             <height>51</height>
+             <height>52</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutFrequency_EXPO1">
@@ -11678,7 +11675,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>281</height>
+             <height>316</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_EXPO1">
@@ -12860,7 +12857,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutVoltages_EXPO2">
@@ -12945,7 +12942,7 @@
              <x>10</x>
              <y>30</y>
              <width>361</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_Profile_EXPO2">
@@ -13008,7 +13005,7 @@
              <x>10</x>
              <y>30</y>
              <width>481</width>
-             <height>51</height>
+             <height>52</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayoutFrequency_EXPO2">
@@ -13078,7 +13075,7 @@
              <x>10</x>
              <y>30</y>
              <width>571</width>
-             <height>281</height>
+             <height>316</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_EXPO2">
@@ -14260,7 +14257,7 @@
              <x>10</x>
              <y>30</y>
              <width>481</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_3">
@@ -14349,7 +14346,7 @@
              <x>10</x>
              <y>30</y>
              <width>481</width>
-             <height>151</height>
+             <height>162</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
@@ -14537,7 +14534,7 @@
              <x>10</x>
              <y>30</y>
              <width>481</width>
-             <height>31</height>
+             <height>34</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_11">
@@ -14596,7 +14593,7 @@
              <x>10</x>
              <y>30</y>
              <width>481</width>
-             <height>91</height>
+             <height>98</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_12">
@@ -14657,7 +14654,7 @@
      <x>0</x>
      <y>0</y>
      <width>632</width>
-     <height>21</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuasdas">

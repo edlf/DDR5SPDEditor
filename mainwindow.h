@@ -135,6 +135,7 @@ class MainWindow : public QMainWindow {
   void on_cbCL98_toggled(bool);
 
   void on_spinBoxtAA_valueChanged(int);
+  void on_spinBoxtAA_Ticks_valueChanged(int);
   void on_spinBoxtRCD_valueChanged(int);
   void on_spinBoxtRP_valueChanged(int);
   void on_spinBoxtRAS_valueChanged(int);
@@ -161,6 +162,7 @@ class MainWindow : public QMainWindow {
   void on_spinBoxtRTP_LCLK_valueChanged(int);
 
   void on_spinBoxtAA_editingFinished();
+  void on_spinBoxtAA_Ticks_editingFinished();
   void on_spinBoxtRCD_editingFinished();
   void on_spinBoxtRP_editingFinished();
   void on_spinBoxtRAS_editingFinished();
