@@ -138,7 +138,7 @@ const unsigned short XMP3_Profile::gettCCD_L_WR() {
   return xmpProfileStruct.tCCD_L_WR;
 }
 
-void XMP3_Profile::settCCD_L_WR(unsigned short value) {
+void XMP3_Profile::settCCD_L_WR(const unsigned short value) {
   xmpProfileStruct.tCCD_L_WR = value;
 }
 
@@ -146,7 +146,7 @@ const unsigned short XMP3_Profile::gettCCD_L_WR_lowerLimit() {
   return xmpProfileStruct.tCCD_L_WR_lowerLimit;
 }
 
-void XMP3_Profile::settCCD_L_WR_lowerLimit(unsigned short value) {
+void XMP3_Profile::settCCD_L_WR_lowerLimit(const unsigned short value) {
   xmpProfileStruct.tCCD_L_WR_lowerLimit = value;
 }
 
@@ -170,7 +170,7 @@ const unsigned short XMP3_Profile::gettCCD_L_WTR() {
   return xmpProfileStruct.tCCD_L_WTR;
 }
 
-void XMP3_Profile::settCCD_L_WTR(unsigned short value) {
+void XMP3_Profile::settCCD_L_WTR(const unsigned short value) {
   xmpProfileStruct.tCCD_L_WTR = value;
 }
 
@@ -178,7 +178,7 @@ const unsigned short XMP3_Profile::gettCCD_L_WTR_lowerLimit() {
   return xmpProfileStruct.tCCD_L_WTR_lowerLimit;
 }
 
-void XMP3_Profile::settCCD_L_WTR_lowerLimit(unsigned short value) {
+void XMP3_Profile::settCCD_L_WTR_lowerLimit(const unsigned short value) {
   xmpProfileStruct.tCCD_L_WTR_lowerLimit = value;
 }
 
@@ -186,7 +186,7 @@ const unsigned short XMP3_Profile::gettCCD_S_WTR() {
   return xmpProfileStruct.tCCD_S_WTR;
 }
 
-void XMP3_Profile::settCCD_S_WTR(unsigned short value) {
+void XMP3_Profile::settCCD_S_WTR(const unsigned short value) {
   xmpProfileStruct.tCCD_S_WTR = value;
 }
 
@@ -194,7 +194,7 @@ const unsigned short XMP3_Profile::gettCCD_S_WTR_lowerLimit() {
   return xmpProfileStruct.tCCD_S_WTR_lowerLimit;
 }
 
-void XMP3_Profile::settCCD_S_WTR_lowerLimit(unsigned short value) {
+void XMP3_Profile::settCCD_S_WTR_lowerLimit(const unsigned short value) {
   xmpProfileStruct.tCCD_S_WTR_lowerLimit = value;
 }
 
@@ -240,6 +240,130 @@ const unsigned short XMP3_Profile::gettFAW_lowerLimit() {
 
 void XMP3_Profile::settFAW_lowerLimit(const unsigned short value) {
   xmpProfileStruct.tFAW_lowerLimit = value;
+}
+
+const unsigned short XMP3_Profile::gettAA_tick() {
+  return utilities::TimeToTicksDDR5(gettAA(), getMinCycleTime());
+}
+
+void XMP3_Profile::settAA_tick(const unsigned short tick) {
+  settAA(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short XMP3_Profile::gettRCD_tick() {
+  return utilities::TimeToTicksDDR5(gettRCD(), getMinCycleTime());
+}
+
+void XMP3_Profile::settRCD_tick(const unsigned short tick) {
+  settRCD(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short XMP3_Profile::gettRP_tick() {
+  return utilities::TimeToTicksDDR5(gettRP(), getMinCycleTime());
+}
+
+void XMP3_Profile::settRP_tick(const unsigned short tick) {
+  settRP(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short XMP3_Profile::gettRAS_tick() {
+  return utilities::TimeToTicksDDR5(gettRAS(), getMinCycleTime());
+}
+
+void XMP3_Profile::settRAS_tick(const unsigned short tick) {
+  settRAS(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short XMP3_Profile::gettRC_tick() {
+  return utilities::TimeToTicksDDR5(gettRC(), getMinCycleTime());
+}
+
+void XMP3_Profile::settRC_tick(const unsigned short tick) {
+  settRC(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+const unsigned short XMP3_Profile::gettWR_tick() {
+  return utilities::TimeToTicksDDR5(gettWR(), getMinCycleTime());
+}
+void XMP3_Profile::settWR_tick(const unsigned short tick) {
+  settWR(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+const unsigned short XMP3_Profile::gettRFC1_tick() {
+  return utilities::TimeToTicksDDR5(gettRFC1() * 1000, getMinCycleTime());
+}
+void XMP3_Profile::settRFC1_tick(const unsigned short tick) {
+  settRFC1(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+}
+const unsigned short XMP3_Profile::gettRFC2_tick() {
+  return utilities::TimeToTicksDDR5(gettRFC2() * 1000, getMinCycleTime());
+}
+void XMP3_Profile::settRFC2_tick(const unsigned short tick) {
+  settRFC2(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+}
+const unsigned short XMP3_Profile::gettRFC_tick() {
+  return utilities::TimeToTicksDDR5(gettRFC() * 1000, getMinCycleTime());
+}
+void XMP3_Profile::settRFC_tick(const unsigned short tick) {
+  settRFC(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+}
+const unsigned short XMP3_Profile::gettRRD_L_tick() {
+  return utilities::TimeToTicksDDR5(gettRRD_L(), getMinCycleTime());
+}
+void XMP3_Profile::settRRD_L_tick(const unsigned short tick) {
+  settRRD_L(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+const unsigned short XMP3_Profile::gettCCD_L_WR_tick() {
+  return utilities::TimeToTicksDDR5(gettCCD_L(), getMinCycleTime());
+}
+void XMP3_Profile::settCCD_L_WR_tick(const unsigned short tick) {
+  settCCD_L_WR(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short XMP3_Profile::gettCCD_L_WR2_tick() {
+  return utilities::TimeToTicksDDR5(gettCCD_L_WR2(), getMinCycleTime());
+}
+
+void XMP3_Profile::settCCD_L_WR2_tick(const unsigned short tick) {
+  settCCD_L_WR2(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short XMP3_Profile::gettCCD_L_WTR_tick() {
+  return utilities::TimeToTicksDDR5(gettCCD_L_WTR(), getMinCycleTime());
+}
+
+void XMP3_Profile::settCCD_L_WTR_tick(const unsigned short tick) {
+  settCCD_L_WTR(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short XMP3_Profile::gettCCD_S_WTR_tick() {
+  return utilities::TimeToTicksDDR5(gettCCD_S_WTR(), getMinCycleTime());
+}
+
+void XMP3_Profile::settCCD_S_WTR_tick(const unsigned short tick) {
+  settCCD_S_WTR(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short XMP3_Profile::gettCCD_L_tick() {
+  return utilities::TimeToTicksDDR5(gettCCD_L(), getMinCycleTime());
+}
+
+void XMP3_Profile::settCCD_L_tick(const unsigned short tick) {
+  settCCD_L(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short XMP3_Profile::gettRTP_tick() {
+  return utilities::TimeToTicksDDR5(gettRTP(), getMinCycleTime());
+}
+
+void XMP3_Profile::settRTP_tick(const unsigned short tick) {
+  settRTP(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short XMP3_Profile::gettFAW_tick() {
+  return utilities::TimeToTicksDDR5(gettFAW(), getMinCycleTime());
+}
+
+void XMP3_Profile::settFAW_tick(const unsigned short tick) {
+  settFAW(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
 }
 
 const bool XMP3_Profile::getIntelDynamicMemoryBoost() {

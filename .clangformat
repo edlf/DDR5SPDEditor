@@ -1,6 +1,6 @@
 ---
-BasedOnStyle: Mozilla
-AccessModifierOffset: -2
+BasedOnStyle: Google
+AccessModifierOffset: -1
 AlignAfterOpenBracket: Align
 AlignArrayOfStructures: None
 AlignConsecutiveAssignments:
@@ -58,97 +58,101 @@ AlignConsecutiveTableGenDefinitionColons:
   AlignCompound: false
   AlignFunctionPointers: false
   PadOperators: false
-AlignEscapedNewlines: Right
+AlignEscapedNewlines: Left
 AlignOperands: Align
 AlignTrailingComments:
   Kind: Always
   OverEmptyLines: 0
 AllowAllArgumentsOnNextLine: true
-AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: true
 AllowBreakBeforeNoexceptSpecifier: Never
 AllowShortBlocksOnASingleLine: Never
 AllowShortCaseExpressionOnASingleLine: true
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortCompoundRequirementOnASingleLine: true
 AllowShortEnumsOnASingleLine: true
-AllowShortFunctionsOnASingleLine: Inline
-AllowShortIfStatementsOnASingleLine: Never
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: WithoutElse
 AllowShortLambdasOnASingleLine: All
-AllowShortLoopsOnASingleLine: false
-AlwaysBreakAfterDefinitionReturnType: TopLevel
-AlwaysBreakBeforeMultilineStrings: false
+AllowShortLoopsOnASingleLine: true
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakBeforeMultilineStrings: true
 AttributeMacros:
   - __capability
-BinPackArguments: false
-BinPackParameters: false
+BinPackArguments: true
+BinPackParameters: true
 BitFieldColonSpacing: Both
 BraceWrapping:
   AfterCaseLabel: false
-  AfterClass: true
+  AfterClass: false
   AfterControlStatement: Never
-  AfterEnum: true
-  AfterFunction: true
+  AfterEnum: false
+  AfterFunction: false
   AfterNamespace: false
   AfterObjCDeclaration: false
-  AfterStruct: true
-  AfterUnion: true
-  AfterExternBlock: true
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
   BeforeCatch: false
   BeforeElse: false
   BeforeLambdaBody: false
   BeforeWhile: false
   IndentBraces: false
   SplitEmptyFunction: true
-  SplitEmptyRecord: false
+  SplitEmptyRecord: true
   SplitEmptyNamespace: true
 BreakAdjacentStringLiterals: true
 BreakAfterAttributes: Leave
 BreakAfterJavaFieldAnnotations: false
-BreakAfterReturnType: TopLevel
+BreakAfterReturnType: None
 BreakArrays: true
 BreakBeforeBinaryOperators: None
-BreakBeforeBraces: Mozilla
+BreakBeforeBraces: Attach
 BreakBeforeConceptDeclarations: Always
 BreakBeforeInlineASMColon: OnlyMultiline
 BreakBeforeTernaryOperators: true
-BreakConstructorInitializers: BeforeComma
+BreakConstructorInitializers: BeforeColon
 BreakFunctionDefinitionParameters: false
-BreakInheritanceList: BeforeComma
+BreakInheritanceList: BeforeColon
 BreakStringLiterals: true
 BreakTemplateDeclarations: Yes
 ColumnLimit: 160
 CommentPragmas: "^ IWYU pragma:"
 CompactNamespaces: false
-ConstructorInitializerIndentWidth: 2
-ContinuationIndentWidth: 2
-Cpp11BracedListStyle: false
-DerivePointerAlignment: false
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+Cpp11BracedListStyle: true
+DerivePointerAlignment: true
 DisableFormat: false
 EmptyLineAfterAccessModifier: Never
 EmptyLineBeforeAccessModifier: LogicalBlock
 ExperimentalAutoDetectBinPacking: false
-FixNamespaceComments: false
+FixNamespaceComments: true
 ForEachMacros:
   - foreach
   - Q_FOREACH
   - BOOST_FOREACH
 IfMacros:
   - KJ_IF_MAYBE
-IncludeBlocks: Preserve
+IncludeBlocks: Regroup
 IncludeCategories:
-  - Regex: ^"(llvm|llvm-c|clang|clang-c)/
+  - Regex: ^<ext/.*\.h>
     Priority: 2
     SortPriority: 0
     CaseSensitive: false
-  - Regex: ^(<|"(gtest|gmock|isl|json)/)
-    Priority: 3
-    SortPriority: 0
-    CaseSensitive: false
-  - Regex: .*
+  - Regex: ^<.*\.h>
     Priority: 1
     SortPriority: 0
     CaseSensitive: false
-IncludeIsMainRegex: (Test)?$
+  - Regex: ^<.*
+    Priority: 2
+    SortPriority: 0
+    CaseSensitive: false
+  - Regex: .*
+    Priority: 3
+    SortPriority: 0
+    CaseSensitive: false
+IncludeIsMainRegex: ([-_](test|unittest))?$
 IncludeIsMainSourceRegex: ""
 IndentAccessModifiers: false
 IndentCaseBlocks: false
@@ -173,7 +177,7 @@ JavaScriptQuotes: Leave
 JavaScriptWrapImports: true
 KeepEmptyLines:
   AtEndOfFile: false
-  AtStartOfBlock: true
+  AtStartOfBlock: false
   AtStartOfFile: true
 LambdaBodyIndentation: Signature
 LineEnding: DeriveLF
@@ -182,15 +186,15 @@ MacroBlockEnd: ""
 MainIncludeChar: Quote
 MaxEmptyLinesToKeep: 1
 NamespaceIndentation: None
-ObjCBinPackProtocolList: Auto
+ObjCBinPackProtocolList: Never
 ObjCBlockIndentWidth: 2
 ObjCBreakBeforeNestedBlockParam: true
-ObjCSpaceAfterProperty: true
-ObjCSpaceBeforeProtocolList: false
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: true
 PPIndentWidth: -1
-PackConstructorInitializers: BinPack
+PackConstructorInitializers: NextLine
 PenaltyBreakAssignment: 2
-PenaltyBreakBeforeFirstCallParameter: 19
+PenaltyBreakBeforeFirstCallParameter: 1
 PenaltyBreakComment: 300
 PenaltyBreakFirstLessLess: 120
 PenaltyBreakOpenParenthesis: 0
@@ -202,6 +206,36 @@ PenaltyIndentedWhitespace: 0
 PenaltyReturnTypeOnItsOwnLine: 200
 PointerAlignment: Left
 QualifierAlignment: Leave
+RawStringFormats:
+  - Language: Cpp
+    Delimiters:
+      - cc
+      - CC
+      - cpp
+      - Cpp
+      - CPP
+      - c++
+      - C++
+    CanonicalDelimiter: ""
+    BasedOnStyle: google
+  - Language: TextProto
+    Delimiters:
+      - pb
+      - PB
+      - proto
+      - PROTO
+    EnclosingFunctions:
+      - EqualsProto
+      - EquivToProto
+      - PARSE_PARTIAL_TEXT_PROTO
+      - PARSE_TEST_PROTO
+      - PARSE_TEXT_PROTO
+      - ParseTextOrDie
+      - ParseTextProtoOrDie
+      - ParseTestProto
+      - ParsePartialTestProto
+    CanonicalDelimiter: pb
+    BasedOnStyle: google
 ReferenceAlignment: Pointer
 ReflowComments: true
 RemoveBracesLLVM: false
@@ -217,7 +251,7 @@ SortJavaStaticImport: Before
 SortUsingDeclarations: LexicographicNumeric
 SpaceAfterCStyleCast: false
 SpaceAfterLogicalNot: false
-SpaceAfterTemplateKeyword: false
+SpaceAfterTemplateKeyword: true
 SpaceAroundPointerQualifiers: Default
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeCaseColon: false
@@ -240,7 +274,7 @@ SpaceBeforeParensOptions:
 SpaceBeforeRangeBasedForLoopColon: true
 SpaceBeforeSquareBrackets: false
 SpaceInEmptyBlock: false
-SpacesBeforeTrailingComments: 1
+SpacesBeforeTrailingComments: 2
 SpacesInAngles: Never
 SpacesInContainerLiterals: true
 SpacesInLineCommentPrefix:
@@ -254,7 +288,7 @@ SpacesInParensOptions:
   InEmptyParentheses: false
   Other: false
 SpacesInSquareBrackets: false
-Standard: Latest
+Standard: Auto
 StatementAttributeLikeMacros:
   - Q_EMIT
 StatementMacros:

@@ -117,7 +117,7 @@ const unsigned short EXPO_Profile::gettCCD_L_WR() {
   return expoProfileStruct.tCCD_L_WR;
 }
 
-void EXPO_Profile::settCCD_L_WR(unsigned short value) {
+void EXPO_Profile::settCCD_L_WR(const unsigned short value) {
   expoProfileStruct.tCCD_L_WR = value;
 }
 
@@ -133,7 +133,7 @@ const unsigned short EXPO_Profile::gettCCD_L_WTR() {
   return expoProfileStruct.tCCD_L_WTR;
 }
 
-void EXPO_Profile::settCCD_L_WTR(unsigned short value) {
+void EXPO_Profile::settCCD_L_WTR(const unsigned short value) {
   expoProfileStruct.tCCD_L_WTR = value;
 }
 
@@ -141,7 +141,7 @@ const unsigned short EXPO_Profile::gettCCD_S_WTR() {
   return expoProfileStruct.tCCD_S_WTR;
 }
 
-void EXPO_Profile::settCCD_S_WTR(unsigned short value) {
+void EXPO_Profile::settCCD_S_WTR(const unsigned short value) {
   expoProfileStruct.tCCD_S_WTR = value;
 }
 
@@ -165,12 +165,136 @@ void EXPO_Profile::settFAW(const unsigned short value) {
   expoProfileStruct.tFAW = value;
 }
 
+const unsigned short EXPO_Profile::gettAA_tick() {
+  return utilities::TimeToTicksDDR5(gettAA(), getMinCycleTime());
+}
+
+void EXPO_Profile::settAA_tick(const unsigned short tick) {
+  settAA(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short EXPO_Profile::gettRCD_tick() {
+  return utilities::TimeToTicksDDR5(gettRCD(), getMinCycleTime());
+}
+
+void EXPO_Profile::settRCD_tick(const unsigned short tick) {
+  settRCD(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short EXPO_Profile::gettRP_tick() {
+  return utilities::TimeToTicksDDR5(gettRP(), getMinCycleTime());
+}
+
+void EXPO_Profile::settRP_tick(const unsigned short tick) {
+  settRP(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short EXPO_Profile::gettRAS_tick() {
+  return utilities::TimeToTicksDDR5(gettRAS(), getMinCycleTime());
+}
+
+void EXPO_Profile::settRAS_tick(const unsigned short tick) {
+  settRAS(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short EXPO_Profile::gettRC_tick() {
+  return utilities::TimeToTicksDDR5(gettRC(), getMinCycleTime());
+}
+
+void EXPO_Profile::settRC_tick(const unsigned short tick) {
+  settRC(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+const unsigned short EXPO_Profile::gettWR_tick() {
+  return utilities::TimeToTicksDDR5(gettWR(), getMinCycleTime());
+}
+void EXPO_Profile::settWR_tick(const unsigned short tick) {
+  settWR(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+const unsigned short EXPO_Profile::gettRFC1_tick() {
+  return utilities::TimeToTicksDDR5(gettRFC1() * 1000, getMinCycleTime());
+}
+void EXPO_Profile::settRFC1_tick(const unsigned short tick) {
+  settRFC1(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+}
+const unsigned short EXPO_Profile::gettRFC2_tick() {
+  return utilities::TimeToTicksDDR5(gettRFC2() * 1000, getMinCycleTime());
+}
+void EXPO_Profile::settRFC2_tick(const unsigned short tick) {
+  settRFC2(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+}
+const unsigned short EXPO_Profile::gettRFC_tick() {
+  return utilities::TimeToTicksDDR5(gettRFC() * 1000, getMinCycleTime());
+}
+void EXPO_Profile::settRFC_tick(const unsigned short tick) {
+  settRFC(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
+}
+const unsigned short EXPO_Profile::gettRRD_L_tick() {
+  return utilities::TimeToTicksDDR5(gettRRD_L(), getMinCycleTime());
+}
+void EXPO_Profile::settRRD_L_tick(const unsigned short tick) {
+  settRRD_L(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+const unsigned short EXPO_Profile::gettCCD_L_WR_tick() {
+  return utilities::TimeToTicksDDR5(gettCCD_L(), getMinCycleTime());
+}
+void EXPO_Profile::settCCD_L_WR_tick(const unsigned short tick) {
+  settCCD_L_WR(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short EXPO_Profile::gettCCD_L_WR2_tick() {
+  return utilities::TimeToTicksDDR5(gettCCD_L_WR2(), getMinCycleTime());
+}
+
+void EXPO_Profile::settCCD_L_WR2_tick(const unsigned short tick) {
+  settCCD_L_WR2(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short EXPO_Profile::gettCCD_L_WTR_tick() {
+  return utilities::TimeToTicksDDR5(gettCCD_L_WTR(), getMinCycleTime());
+}
+
+void EXPO_Profile::settCCD_L_WTR_tick(const unsigned short tick) {
+  settCCD_L_WTR(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short EXPO_Profile::gettCCD_S_WTR_tick() {
+  return utilities::TimeToTicksDDR5(gettCCD_S_WTR(), getMinCycleTime());
+}
+
+void EXPO_Profile::settCCD_S_WTR_tick(const unsigned short tick) {
+  settCCD_S_WTR(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short EXPO_Profile::gettCCD_L_tick() {
+  return utilities::TimeToTicksDDR5(gettCCD_L(), getMinCycleTime());
+}
+
+void EXPO_Profile::settCCD_L_tick(const unsigned short tick) {
+  settCCD_L(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short EXPO_Profile::gettRTP_tick() {
+  return utilities::TimeToTicksDDR5(gettRTP(), getMinCycleTime());
+}
+
+void EXPO_Profile::settRTP_tick(const unsigned short tick) {
+  settRTP(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
+const unsigned short EXPO_Profile::gettFAW_tick() {
+  return utilities::TimeToTicksDDR5(gettFAW(), getMinCycleTime());
+}
+
+void EXPO_Profile::settFAW_tick(const unsigned short tick) {
+  settFAW(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+}
+
 const unsigned short EXPO_Profile::getDimmsChannel() {
   // TODO
   return 1;
 }
 
-void EXPO_Profile::setDimmsChannel(unsigned short value) {
+void EXPO_Profile::setDimmsChannel(const unsigned short value) {
   // TODO
 }
 

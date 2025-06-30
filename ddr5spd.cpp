@@ -486,7 +486,7 @@ const unsigned short DDR5SPD::gettRFC1_slr_tick() {
 }
 
 void DDR5SPD::settRFC1_slr_tick(const unsigned short tick) {
-  settRFC1_slr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+  settRFC1_slr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
 }
 
 const unsigned short DDR5SPD::gettRFC2_slr_tick() {
@@ -494,7 +494,7 @@ const unsigned short DDR5SPD::gettRFC2_slr_tick() {
 }
 
 void DDR5SPD::settRFC2_slr_tick(const unsigned short tick) {
-  settRFC2_slr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+  settRFC2_slr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
 }
 
 const unsigned short DDR5SPD::gettRFCsb_slr_tick() {
@@ -502,7 +502,7 @@ const unsigned short DDR5SPD::gettRFCsb_slr_tick() {
 }
 
 void DDR5SPD::settRFCsb_slr_tick(const unsigned short tick) {
-  settRFCsb_slr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+  settRFCsb_slr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
 }
 
 const unsigned short DDR5SPD::gettRFC1_dlr_tick() {
@@ -510,7 +510,7 @@ const unsigned short DDR5SPD::gettRFC1_dlr_tick() {
 }
 
 void DDR5SPD::settRFC1_dlr_tick(const unsigned short tick) {
-  settRFC1_dlr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+  settRFC1_dlr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
 }
 
 const unsigned short DDR5SPD::gettRFC2_dlr_tick() {
@@ -518,7 +518,7 @@ const unsigned short DDR5SPD::gettRFC2_dlr_tick() {
 }
 
 void DDR5SPD::settRFC2_dlr_tick(const unsigned short tick) {
-  settRFC2_dlr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+  settRFC2_dlr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
 }
 
 const unsigned short DDR5SPD::gettRFCsb_dlr_tick() {
@@ -526,7 +526,7 @@ const unsigned short DDR5SPD::gettRFCsb_dlr_tick() {
 }
 
 void DDR5SPD::settRFCsb_dlr_tick(const unsigned short tick) {
-  settRFCsb_dlr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
+  settRFCsb_dlr(utilities::TicksToTimeDDR5(tick, getMinCycleTime()) / 1000);
 }
 
 const unsigned short DDR5SPD::gettRRD_L_tick() {

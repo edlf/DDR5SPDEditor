@@ -69,9 +69,9 @@ public:
   void settRRD_L_lowerLimit(const unsigned short);
 
   const unsigned short gettCCD_L_WR();
-  void settCCD_L_WR(unsigned short);
+  void settCCD_L_WR(const unsigned short);
   const unsigned short gettCCD_L_WR_lowerLimit();
-  void settCCD_L_WR_lowerLimit(unsigned short);
+  void settCCD_L_WR_lowerLimit(const unsigned short);
 
   const unsigned short gettCCD_L_WR2();
   void settCCD_L_WR2(const unsigned short);
@@ -79,14 +79,14 @@ public:
   void settCCD_L_WR2_lowerLimit(const unsigned short);
 
   const unsigned short gettCCD_L_WTR();
-  void settCCD_L_WTR(unsigned short);
+  void settCCD_L_WTR(const unsigned short);
   const unsigned short gettCCD_L_WTR_lowerLimit();
-  void settCCD_L_WTR_lowerLimit(unsigned short);
+  void settCCD_L_WTR_lowerLimit(const unsigned short);
 
   const unsigned short gettCCD_S_WTR();
-  void settCCD_S_WTR(unsigned short);
+  void settCCD_S_WTR(const unsigned short);
   const unsigned short gettCCD_S_WTR_lowerLimit();
-  void settCCD_S_WTR_lowerLimit(unsigned short);
+  void settCCD_S_WTR_lowerLimit(const unsigned short);
 
   const unsigned short gettCCD_L();
   void settCCD_L(const unsigned short);
@@ -102,6 +102,57 @@ public:
   void settFAW(const unsigned short);
   const unsigned short gettFAW_lowerLimit();
   void settFAW_lowerLimit(const unsigned short);
+
+  const unsigned short gettAA_tick();
+  void settAA_tick(const unsigned short);
+
+  const unsigned short gettRCD_tick();
+  void settRCD_tick(const unsigned short);
+
+  const unsigned short gettRP_tick();
+  void settRP_tick(const unsigned short);
+
+  const unsigned short gettRAS_tick();
+  void settRAS_tick(const unsigned short);
+
+  const unsigned short gettRC_tick();
+  void settRC_tick(const unsigned short);
+
+  const unsigned short gettWR_tick();
+  void settWR_tick(const unsigned short);
+
+  const unsigned short gettRFC1_tick();
+  void settRFC1_tick(const unsigned short);
+
+  const unsigned short gettRFC2_tick();
+  void settRFC2_tick(const unsigned short);
+
+  const unsigned short gettRFC_tick();
+  void settRFC_tick(const unsigned short);
+
+  const unsigned short gettRRD_L_tick();
+  void settRRD_L_tick(const unsigned short);
+
+  const unsigned short gettCCD_L_WR_tick();
+  void settCCD_L_WR_tick(const unsigned short);
+
+  const unsigned short gettCCD_L_WR2_tick();
+  void settCCD_L_WR2_tick(const unsigned short);
+
+  const unsigned short gettCCD_L_WTR_tick();
+  void settCCD_L_WTR_tick(const unsigned short);
+
+  const unsigned short gettCCD_S_WTR_tick();
+  void settCCD_S_WTR_tick(const unsigned short);
+
+  const unsigned short gettCCD_L_tick();
+  void settCCD_L_tick(const unsigned short);
+
+  const unsigned short gettRTP_tick();
+  void settRTP_tick(const unsigned short);
+
+  const unsigned short gettFAW_tick();
+  void settFAW_tick(const unsigned short);
 
   // Unkown byte 07 (0x00)
   // Unkown byte 08 (0x00)
