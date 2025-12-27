@@ -30,7 +30,7 @@ EXPO support
 - Add default JEDEC profiles
 - Figure out some bits that are still missing (like DIMMs per channel)
 - CUDIMM support, or at least testing to make sure it doesn't corrupt the SPD.
-- Fix the windows build provided by Github actions
 
 # Acknowledgements
 - N-Storm (https://github.com/N-Storm) for the Github actions
+- Tony/tonylu00 (https://github.com/tonylu00) for fixing the windows Github action
