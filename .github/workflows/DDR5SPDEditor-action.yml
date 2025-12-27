@@ -9,6 +9,9 @@ on:
     branches: [ main, ci-test ]
   workflow_dispatch:
 
+env:
+  binary_orig: 'DDR5SPDEditor'
+  msys_system: 'ucrt64'
 jobs:
   build:
     permissions:
@@ -18,14 +21,12 @@ jobs:
     container: ${{ matrix.sys.container }}
 
     strategy:
-      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
-      fail-fast: true
-
+      fail-fast: false
       matrix:
         sys:
           - { os: ubuntu-latest , shell: bash           , cxx: g++-13, release_name: DDR5SPDEditor-linux-x86_64-qt6 }
           - { os: ubuntu-latest , shell: 'alpine.sh {0}', cxx: g++   , release_name: DDR5SPDEditor-linux-x86_64-qt6-alpine }
-          - { os: windows-latest, shell: 'msys2 {0}'    , cxx: g++   , release_name: DDR5SPDEditor-win-x86_64-qt6.7z }
+          - { os: windows-latest, shell: 'msys2 {0}'    , cxx: g++   , release_name: DDR5SPDEditor-win-x86_64-qt6.zip }
         build_type: [Release]
 
     defaults:
@@ -33,27 +34,26 @@ jobs:
         shell: ${{ matrix.sys.shell }}
 
     steps:
-
     - name: Install packages required for the workflow and build deps
       uses: ConorMacBride/install-package@v1
       with:
-        apt: build-essential cmake file gcc make ninja-build pkgconf sudo ${{ env.QT_PACKAGE }}
+        apt: build-essential cmake file gcc make ninja-build pkgconf sudo curl wget ${{ env.QT_PACKAGE }} qt6-tools-dev
       env:
-        QT_PACKAGE: ${{ matrix.sys.os == 'ubuntu-20.04' && 'qt5-default qtbase5-dev qt5-qmake libqt5widgets5 libqt5opengl5 libqt5opengl5-dev libqt5gui5 libgl1-mesa-dev libglvnd-dev' || 'qt6-base-dev qt6-base-dev-tools qmake6 libqt6openglwidgets6 libqt6opengl6 libqt6opengl6-dev libqt6gui6 libgl1-mesa-dev libglvnd-dev' }}
+        QT_PACKAGE: ${{ matrix.sys.os == 'ubuntu-20.04' && 'qt5-default qtbase5-dev qt5-qmake libqt5widgets5 libqt5opengl5 libqt5opengl5-dev libqt5gui5 libgl1-mesa-dev libglvnd-dev' || 'qt6-base-dev qt6-base-private-dev' }}
 
     - name: Install & configure Alpine Linux build environment
       uses: jirutka/setup-alpine@v1
       if: matrix.sys.shell == 'alpine.sh {0}'
       with:
-        packages: build-base cmake curl dialog eudev eudev-dev eudev-libs git libusb-dev linux-headers make ninja-build pkgconf pkgconf-dev py3-pip py3-setuptools python3 samurai sudo wget qt6-qtbase qt6-qtbase-dev qt6-qttools qt6-qttools-dev qt6-qttools-libs mesa mesa-gl mesa-dev
+        packages: build-base cmake curl dialog eudev eudev-dev eudev-libs git libusb-dev linux-headers make ninja-build pkgconf pkgconf-dev py3-pip py3-setuptools python3 samurai sudo wget qt6-qtbase qt6-qtbase-dev qt6-qttools-dev
 
     - name: Setup MSYS2 UCRT64
       if: matrix.sys.shell == 'msys2 {0}'
       uses: msys2/setup-msys2@v2
       with:
-        msystem: UCRT64
+        msystem: ${{env.msys_system}}
         update: true
-        install: git make mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-qt6-base mingw-w64-ucrt-x86_64-7zip
+        install: git make mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-qt6-base mingw-w64-ucrt-x86_64-qt6-tools mingw-w64-ucrt-x86_64-qt-creator zip
         pacboy: cmake:p ninja:p toolchain:p
 
     - name: Setup 'Toolchain test builds' PPA & install GCC 13
@@ -61,7 +61,7 @@ jobs:
       run: |
         sudo add-apt-repository ppa:ubuntu-toolchain-r/test
         sudo apt update
-        sudo apt install gcc-13-base gcc-13 g++-13 libstdc++-13-dev libstdc++6
+        sudo apt install -y gcc-13-base gcc-13 g++-13 libstdc++-13-dev libstdc++6
 
     - name: Checkout repo
       uses: actions/checkout@v4
@@ -78,22 +78,38 @@ jobs:
     - name: Build CMake project
       run: cmake --build build
 
-    - name: Prepare binaries and make Windows archive with libs
+    - name: Deploy Qt runtime (Windows)
+      if: matrix.sys.shell == 'msys2 {0}'
+      run: |
+        mkdir -p dist
+        /${{env.msys_system}}/bin/windeployqt6.exe --verbose 2 --dir dist "build/${{ env.binary_orig }}.exe"
+        ldd build/${{ env.binary_orig }}.exe |grep ${{env.msys_system}} |awk -F '>' '{print $2}' |awk '{print $1}' | xargs -I {} cp {} dist/
+        cp build/${{ env.binary_orig }}.exe dist/
+
+    - name: Prepare binaries and make archive with libs
       if: matrix.sys.release_name != ''
       run: |
         if [[ "${{ env.is_windows_build}}" == "true" ]]; then
-          7z -mx=9 a build/${{ matrix.sys.release_name }} ./build/${{ env.binary_orig }}.exe "/ucrt64/bin/Qt6Core.dll" "/ucrt64/bin/Qt6Widgets.dll" "/ucrt64/bin/Qt6Gui.dll"
+          zip -r dist/${{ matrix.sys.release_name }} dist/*
         else
-          mv build/${{ env.binary_orig }} build/${{ matrix.sys.release_name }}
+          mkdir -p dist
+          mv build/${{ env.binary_orig }} dist/${{ matrix.sys.release_name }}
         fi
       env:
-        binary_orig: 'DDR5SPDEditor'
         is_windows_build: ${{ startsWith( matrix.sys.os, 'windows' ) && 'true' || 'false' }}
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.sys.release_name }}
+        path: dist/${{ matrix.sys.release_name }}
+        if-no-files-found: error
+        retention-days: 90
 
     - name: Make and upload release
       uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/') && matrix.sys.release_name != ''
       with:
         fail_on_unmatched_files: false
-        generate_release_notes: true        
-        files: build/${{ matrix.sys.release_name }}
+        generate_release_notes: true
+        files: dist/${{ matrix.sys.release_name }}
