@@ -185,7 +185,7 @@ unsigned short ConvertByteToVoltageDDR5(unsigned char val) {
   return (ones * 100 + hundredths * 5);
 }
 
-unsigned char ConvertVoltageToByteDDR5(unsigned char voltage) {
+unsigned char ConvertVoltageToByteDDR5(const unsigned short voltage) {
   unsigned short ones = (voltage / 100);
   unsigned short hundredths = (voltage % 100);
 

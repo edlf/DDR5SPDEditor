@@ -31,7 +31,7 @@ bool IsCLSupportedDDR5(const ddr5_structs::CAS &, unsigned short cl);
 
 unsigned short ConvertByteToVoltageDDR5(unsigned char val);
 
-unsigned char ConvertVoltageToByteDDR5(unsigned char voltage);
+unsigned char ConvertVoltageToByteDDR5(const unsigned short voltage);
 
 void SetBit(unsigned char &bits, const unsigned short bitNumber, const bool value);
 

@@ -2481,7 +2481,7 @@ void MainWindow::on_sbVPP_XMP1_valueChanged(int value) {
 }
 
 void MainWindow::on_sbVmemctrl_XMP1_valueChanged(int value) {
-  spd->xmpBundle.profile1.setVDD(value);
+  spd->xmpBundle.profile1.setVMEMCtrl(value);
 }
 
 void MainWindow::on_spinMinCycleTime_XMP1_valueChanged(int value) {
@@ -2929,7 +2929,7 @@ void MainWindow::on_sbVPP_XMP2_valueChanged(int value) {
 }
 
 void MainWindow::on_sbVmemctrl_XMP2_valueChanged(int value) {
-  spd->xmpBundle.profile2.setVDD(value);
+  spd->xmpBundle.profile2.setVMEMCtrl(value);
 }
 
 void MainWindow::on_spinMinCycleTime_XMP2_valueChanged(int value) {
@@ -3377,7 +3377,7 @@ void MainWindow::on_sbVPP_XMP3_valueChanged(int value) {
 }
 
 void MainWindow::on_sbVmemctrl_XMP3_valueChanged(int value) {
-  spd->xmpBundle.profile3.setVDD(value);
+  spd->xmpBundle.profile3.setVMEMCtrl(value);
 }
 
 void MainWindow::on_spinMinCycleTime_XMP3_valueChanged(int value) {
@@ -3817,7 +3817,7 @@ void MainWindow::on_sbVPP_XMPU1_valueChanged(int value) {
 }
 
 void MainWindow::on_sbVmemctrl_XMPU1_valueChanged(int value) {
-  spd->xmpBundle.profileUser1.setVDD(value);
+  spd->xmpBundle.profileUser1.setVMEMCtrl(value);
 }
 
 void MainWindow::on_spinMinCycleTime_XMPU1_valueChanged(int value) {
@@ -4257,7 +4257,7 @@ void MainWindow::on_sbVPP_XMPU2_valueChanged(int value) {
 }
 
 void MainWindow::on_sbVmemctrl_XMPU2_valueChanged(int value) {
-  spd->xmpBundle.profileUser2.setVDD(value);
+  spd->xmpBundle.profileUser2.setVMEMCtrl(value);
 }
 
 void MainWindow::on_spinMinCycleTime_XMPU2_valueChanged(int value) {
