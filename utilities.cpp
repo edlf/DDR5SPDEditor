@@ -178,7 +178,7 @@ bool IsCLSupportedDDR5(const ddr5_structs::CAS &clSupported, unsigned short cl) 
   return false;
 }
 
-unsigned short ConvertByteToVoltageDDR5(unsigned char val) {
+unsigned short ConvertByteToVoltageDDR5(const unsigned char val) {
   unsigned short ones = (val >> 5);
   unsigned short hundredths = (val & 0x1F);
 

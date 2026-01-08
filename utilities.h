@@ -29,7 +29,7 @@ void SetCLSupportedDDR5(ddr5_structs::CAS &, unsigned short cl, bool supported);
 
 bool IsCLSupportedDDR5(const ddr5_structs::CAS &, unsigned short cl);
 
-unsigned short ConvertByteToVoltageDDR5(unsigned char val);
+unsigned short ConvertByteToVoltageDDR5(const unsigned char val);
 
 unsigned char ConvertVoltageToByteDDR5(const unsigned short voltage);
 
