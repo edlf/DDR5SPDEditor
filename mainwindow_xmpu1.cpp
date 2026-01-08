@@ -3,6 +3,16 @@
 #include "./ui_mainwindow.h"
 #include "ddr5spd_structs.h"
 
+void MainWindow::wipeXMPProfileU1() {
+  spd->xmpBundle.profileUser1.wipeProfile();
+  reloadXMPU1Tab();
+}
+
+void MainWindow::loadSampleXMPProfileU1() {
+  spd->xmpBundle.profileUser1.resetProfile();
+  reloadXMPU1Tab();
+}
+
 void MainWindow::importXMPProfileU1() {
   if ((spd == nullptr) || (spd->isEXPOPresent())) {
     return;
@@ -10,6 +20,12 @@ void MainWindow::importXMPProfileU1() {
 
   spd->xmpBundle.profileUser1.import(importXMPProfile());
   reloadXMPU1Tab();
+}
+
+void MainWindow::exportXMPProfileU1() {
+  if ((spd != nullptr) && (!spd->isEXPOPresent())) {
+    exportXMPProfile(spd->xmpBundle.profileUser1.getCopy());
+  }
 }
 
 void MainWindow::reloadXMPU1Tab() {

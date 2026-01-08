@@ -3,6 +3,18 @@
 #include "./ui_mainwindow.h"
 #include "ddr5spd_structs.h"
 
+void MainWindow::wipeXMPProfile3() {
+  spd->xmpBundle.setXMP3Enabled(false);
+  spd->xmpBundle.profile3.wipeProfile();
+  reloadXMP3Tab();
+}
+
+void MainWindow::loadSampleXMPProfile3() {
+  spd->xmpBundle.setXMP3Enabled(true);
+  spd->xmpBundle.profile3.resetProfile();
+  reloadXMP3Tab();
+}
+
 void MainWindow::importXMPProfile3() {
   if ((spd == nullptr) || (spd->isEXPOPresent())) {
     return;
@@ -10,6 +22,12 @@ void MainWindow::importXMPProfile3() {
 
   spd->xmpBundle.profile3.import(importXMPProfile());
   reloadXMP3Tab();
+}
+
+void MainWindow::exportXMPProfile3() {
+  if ((spd != nullptr) && (!spd->isEXPOPresent())) {
+    exportXMPProfile(spd->xmpBundle.profile3.getCopy());
+  }
 }
 
 void MainWindow::reloadXMP3Tab() {

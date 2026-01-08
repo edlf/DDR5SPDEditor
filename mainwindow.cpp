@@ -391,92 +391,6 @@ void MainWindow::importEXPOProfile2FromXMPU2() {
   reloadUI();
 }
 
-void MainWindow::exportEXPOProfile1() {
-  if (spd != nullptr) {
-    exportEXPOProfile(spd->expoBundle.profile1.getCopy());
-  }
-}
-
-void MainWindow::exportEXPOProfile2() {
-  if (spd != nullptr) {
-    exportEXPOProfile(spd->expoBundle.profile2.getCopy());
-  }
-}
-
-void MainWindow::importEXPOProfile1() {
-  if (spd == nullptr) {
-    return;
-  }
-
-  spd->expoBundle.profile1.import(importEXPOProfile());
-  reloadEXPO1Tab();
-}
-
-void MainWindow::importEXPOProfile2() {
-  if (spd == nullptr) {
-    return;
-  }
-
-  spd->expoBundle.profile2.import(importEXPOProfile());
-  reloadEXPO2Tab();
-}
-
-void MainWindow::wipeXMPProfile1() {
-  spd->xmpBundle.setXMP1Enabled(false);
-  spd->xmpBundle.profile1.wipeProfile();
-  reloadXMP1Tab();
-}
-
-void MainWindow::wipeXMPProfile2() {
-  spd->xmpBundle.setXMP2Enabled(false);
-  spd->xmpBundle.profile2.wipeProfile();
-  reloadXMP2Tab();
-}
-
-void MainWindow::wipeXMPProfile3() {
-  spd->xmpBundle.setXMP3Enabled(false);
-  spd->xmpBundle.profile3.wipeProfile();
-  reloadXMP3Tab();
-}
-
-void MainWindow::wipeXMPProfileU1() {
-  spd->xmpBundle.profileUser1.wipeProfile();
-  reloadXMPU1Tab();
-}
-
-void MainWindow::wipeXMPProfileU2() {
-  spd->xmpBundle.profileUser2.wipeProfile();
-  reloadXMPU2Tab();
-}
-
-void MainWindow::loadSampleXMPProfile1() {
-  spd->xmpBundle.setXMP1Enabled(true);
-  spd->xmpBundle.profile1.resetProfile();
-  reloadXMP1Tab();
-}
-
-void MainWindow::loadSampleXMPProfile2() {
-  spd->xmpBundle.setXMP2Enabled(true);
-  spd->xmpBundle.profile2.resetProfile();
-  reloadXMP2Tab();
-}
-
-void MainWindow::loadSampleXMPProfile3() {
-  spd->xmpBundle.setXMP3Enabled(true);
-  spd->xmpBundle.profile3.resetProfile();
-  reloadXMP3Tab();
-}
-
-void MainWindow::loadSampleXMPProfileU1() {
-  spd->xmpBundle.profileUser1.resetProfile();
-  reloadXMPU1Tab();
-}
-
-void MainWindow::loadSampleXMPProfileU2() {
-  spd->xmpBundle.profileUser2.resetProfile();
-  reloadXMP2Tab();
-}
-
 void MainWindow::exportXMPProfile(const XMP_ProfileStruct &xmpProfile) {
   // Actually save
   QString fileName = QFileDialog::getSaveFileName(this, "Save XMP File", QDir::currentPath(), "XMP Files (*.xmp *.bin);;All Files (*.*)");
@@ -495,36 +409,6 @@ void MainWindow::exportXMPProfile(const XMP_ProfileStruct &xmpProfile) {
     } else {
       QMessageBox::critical(this, appName, tr("Failed to save file (read only?)."));
     }
-  }
-}
-
-void MainWindow::exportXMPProfile1() {
-  if (spd != nullptr) {
-    exportXMPProfile(spd->xmpBundle.profile1.getCopy());
-  }
-}
-
-void MainWindow::exportXMPProfile2() {
-  if (spd != nullptr) {
-    exportXMPProfile(spd->xmpBundle.profile2.getCopy());
-  }
-}
-
-void MainWindow::exportXMPProfile3() {
-  if ((spd != nullptr) && (!spd->isEXPOPresent())) {
-    exportXMPProfile(spd->xmpBundle.profile3.getCopy());
-  }
-}
-
-void MainWindow::exportXMPProfileU1() {
-  if ((spd != nullptr) && (!spd->isEXPOPresent())) {
-    exportXMPProfile(spd->xmpBundle.profileUser1.getCopy());
-  }
-}
-
-void MainWindow::exportXMPProfileU2() {
-  if (spd != nullptr) {
-    exportXMPProfile(spd->xmpBundle.profileUser2.getCopy());
   }
 }
 
@@ -852,5 +736,3 @@ XMP_ProfileStruct MainWindow::importXMPProfileFromEXPO(const EXPO_ProfileStruct 
 
   return result;
 }
-
-// Misc

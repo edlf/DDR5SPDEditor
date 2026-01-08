@@ -2,6 +2,21 @@
 
 #include "./ui_mainwindow.h"
 
+void MainWindow::exportEXPOProfile2() {
+  if (spd != nullptr) {
+    exportEXPOProfile(spd->expoBundle.profile2.getCopy());
+  }
+}
+
+void MainWindow::importEXPOProfile2() {
+  if (spd == nullptr) {
+    return;
+  }
+
+  spd->expoBundle.profile2.import(importEXPOProfile());
+  reloadEXPO2Tab();
+}
+
 void MainWindow::reloadEXPO2Tab() {
   EXPO_Profile dummy;
 
