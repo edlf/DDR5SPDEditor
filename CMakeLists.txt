@@ -34,6 +34,15 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ddr5spd_structs.h
         expo.h
         expo.cpp
+        mainwindow_jedec.cpp
+        mainwindow_xmp1.cpp
+        mainwindow_xmp2.cpp
+        mainwindow_xmp3.cpp
+        mainwindow_xmpu1.cpp
+        mainwindow_xmpu2.cpp
+        mainwindow_expo1.cpp
+        mainwindow_expo2.cpp
+        mainwindow_misc.cpp
     )
 else()
     add_executable(DDR5SPDEditor
