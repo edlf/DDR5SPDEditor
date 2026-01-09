@@ -111,5 +111,5 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/') && matrix.sys.release_name != ''
       with:
         fail_on_unmatched_files: false
-        generate_release_notes: true
+        generate_release_notes: ${{ startsWith( matrix.sys.os, 'windows' ) && 'true' || 'false' }}
         files: dist/${{ matrix.sys.release_name }}
