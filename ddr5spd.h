@@ -168,6 +168,9 @@ class DDR5SPD {
   const unsigned short getVDDQ();
   void setVDDQ(const unsigned short);
 
+  const bool isStandardTimings();
+  void setStandardTimings(const bool);
+
   const unsigned short calculateJedecCRC();
   const unsigned short getCRC();
   void setCRC(const unsigned short);

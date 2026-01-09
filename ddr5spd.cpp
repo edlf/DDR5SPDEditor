@@ -705,6 +705,19 @@ void DDR5SPD::setVDDQ(const unsigned short vddq) {
   spdStruct.voltageVDDQ = utilities::ConvertVoltageToByteDDR5(vddq);
 }
 
+const bool DDR5SPD::isStandardTimings() {
+  return spdStruct.sdramTimming == 0x0;
+}
+
+void DDR5SPD::setStandardTimings(const bool val) {
+  if (val) {
+    spdStruct.sdramTimming = 0x0;
+  } else {
+    spdStruct.sdramTimming = 0x1;
+  }
+}
+
+
 // Static methods
 bool DDR5SPD::isXMPPresentStatic(const SPD_Struct &spd) {
   return (spd.xmpExpoBlock.xmpOnly.header.magic1 == XMPHeaderMagic[0] && spd.xmpExpoBlock.xmpOnly.header.magic2 == XMPHeaderMagic[1]);
