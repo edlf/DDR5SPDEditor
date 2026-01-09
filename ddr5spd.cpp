@@ -675,6 +675,30 @@ void DDR5SPD::settCCD_M_WTR_tick(const unsigned short tick) {
   settCCD_M_WTR(utilities::TicksToTimeDDR5(tick, getMinCycleTime()));
 }
 
+const unsigned short DDR5SPD::getVPP() {
+  return utilities::ConvertByteToVoltageDDR5(spdStruct.voltageVPP);
+}
+
+void DDR5SPD::setVPP(const unsigned short vpp) {
+  spdStruct.voltageVPP = utilities::ConvertVoltageToByteDDR5(vpp);
+}
+
+const unsigned short DDR5SPD::getVDD() {
+  return utilities::ConvertByteToVoltageDDR5(spdStruct.voltageVDD);
+}
+
+void DDR5SPD::setVDD(const unsigned short vdd) {
+  spdStruct.voltageVDD = utilities::ConvertVoltageToByteDDR5(vdd);
+}
+
+const unsigned short DDR5SPD::getVDDQ() {
+  return utilities::ConvertByteToVoltageDDR5(spdStruct.voltageVDDQ);
+}
+
+void DDR5SPD::setVDDQ(const unsigned short vddq) {
+  spdStruct.voltageVDDQ = utilities::ConvertVoltageToByteDDR5(vddq);
+}
+
 // Static methods
 bool DDR5SPD::isXMPPresentStatic(const SPD_Struct &spd) {
   return (spd.xmpExpoBlock.xmpOnly.header.magic1 == XMPHeaderMagic[0] && spd.xmpExpoBlock.xmpOnly.header.magic2 == XMPHeaderMagic[1]);

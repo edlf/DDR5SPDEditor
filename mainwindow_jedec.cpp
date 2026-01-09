@@ -94,6 +94,9 @@ void MainWindow::reloadJEDECTab() {
   ui->spinBoxtRTP->setValue(spd->gettRTP());
   ui->spinBoxtRTP_LCLK->setValue(spd->gettRTP_lowerLimit());
   ui->spinBoxtRTP_Ticks->setValue(spd->gettRTP_tick());
+  ui->sbVDD_JEDEC->setValue(spd->getVDD());
+  ui->sbVDDQ_JEDEC->setValue(spd->getVDDQ());
+  ui->sbVPP_JEDEC->setValue(spd->getVPP());
 }
 
 void MainWindow::on_spinMinCycleTime_valueChanged(int value) {
@@ -829,4 +832,28 @@ void MainWindow::on_spinBoxtRTP_LCLK_Ticks_valueChanged(int value) {
   }
 
   spd->settRTP_lowerLimit(value);
+}
+
+void MainWindow::on_sbVDD_JEDEC_valueChanged(int value) {
+  spd->setVDD(value);
+}
+
+void MainWindow::on_sbVDDQ_JEDEC_valueChanged(int value) {
+  spd->setVDDQ(value);
+}
+
+void MainWindow::on_sbVPP_JEDEC_valueChanged(int value) {
+  spd->setVPP(value);
+}
+
+void MainWindow::on_sbVDD_JEDEC_editingFinished() {
+  ui->sbVDD_JEDEC->setValue(spd->getVDD());
+}
+
+void MainWindow::on_sbVDDQ_JEDEC_editingFinished() {
+  ui->sbVDDQ_JEDEC->setValue(spd->getVDDQ());
+}
+
+void MainWindow::on_sbVPP_JEDEC_editingFinished() {
+  ui->sbVPP_JEDEC->setValue(spd->getVPP());
 }

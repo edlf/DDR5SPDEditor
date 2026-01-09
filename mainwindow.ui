@@ -1885,6 +1885,91 @@
            </layout>
           </widget>
          </widget>
+         <widget class="QGroupBox" name="groupBoxVoltages_JEDEC">
+          <property name="geometry">
+           <rect>
+            <x>610</x>
+            <y>180</y>
+            <width>591</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Voltages</string>
+          </property>
+          <widget class="QWidget" name="gridLayoutWidget_19">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>571</width>
+             <height>34</height>
+            </rect>
+           </property>
+           <layout class="QGridLayout" name="gridLayoutVoltages_XMP1_2">
+            <item row="0" column="0">
+             <widget class="QLabel" name="lVDD_JEDEC">
+              <property name="text">
+               <string>VDD</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QSpinBox" name="sbVPP_JEDEC">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QSpinBox" name="sbVDDQ_JEDEC">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="lVDDQ_JEDEC">
+              <property name="text">
+               <string>VDDQ</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QLabel" name="lVPP_JEDEC">
+              <property name="text">
+               <string>VPP</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QSpinBox" name="sbVDD_JEDEC">
+              <property name="minimum">
+               <number>110</number>
+              </property>
+              <property name="maximum">
+               <number>200</number>
+              </property>
+              <property name="singleStep">
+               <number>5</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
         </widget>
         <widget class="QWidget" name="tabXMPP1">
          <attribute name="title">

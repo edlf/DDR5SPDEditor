@@ -236,6 +236,14 @@ class MainWindow : public QMainWindow {
   void on_spinBoxtWR_Ticks_editingFinished();
   void on_spinBoxtWR_editingFinished();
 
+  void on_sbVDD_JEDEC_valueChanged(int);
+  void on_sbVDDQ_JEDEC_valueChanged(int);
+  void on_sbVPP_JEDEC_valueChanged(int);
+
+  void on_sbVDD_JEDEC_editingFinished();
+  void on_sbVDDQ_JEDEC_editingFinished();
+  void on_sbVPP_JEDEC_editingFinished();
+
   // Slots XMP1
   void on_leProfileName_XMP1_editingFinished();
   void on_cbEnabled_XMP1_toggled(bool);

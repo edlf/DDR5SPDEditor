@@ -159,6 +159,15 @@ class DDR5SPD {
   const unsigned short gettCCD_M_WTR_tick();
   void settCCD_M_WTR_tick(const unsigned short);
 
+  const unsigned short getVPP();
+  void setVPP(const unsigned short);
+
+  const unsigned short getVDD();
+  void setVDD(const unsigned short);
+
+  const unsigned short getVDDQ();
+  void setVDDQ(const unsigned short);
+
   const unsigned short calculateJedecCRC();
   const unsigned short getCRC();
   void setCRC(const unsigned short);
