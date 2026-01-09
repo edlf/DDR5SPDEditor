@@ -300,7 +300,7 @@ struct SPD_Struct {
   // Byte 16-18 (Voltages, 1.1v)
   unsigned char voltageVDD;   // 0x00 -> 1.1v
   unsigned char voltageVDDQ;  // 0x00 -> 1.1v
-  unsigned char voltageVPP;   // 0x00 -> 1.1v
+  unsigned char voltageVPP;   // 0x00 -> 1.8v Bits 7-4 Nominal, 3-2 Operable, 1-0 Endurant
   // Byte 19
   unsigned char sdramTimming;  // Should be 0x00 for JEDEC standard timmings
   // Byte 20-21

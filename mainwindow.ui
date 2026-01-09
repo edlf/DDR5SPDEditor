@@ -1916,6 +1916,9 @@
             </item>
             <item row="0" column="5">
              <widget class="QSpinBox" name="sbVPP_JEDEC">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="minimum">
                <number>110</number>
               </property>

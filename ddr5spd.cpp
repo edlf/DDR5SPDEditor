@@ -676,11 +676,17 @@ void DDR5SPD::settCCD_M_WTR_tick(const unsigned short tick) {
 }
 
 const unsigned short DDR5SPD::getVPP() {
-  return utilities::ConvertByteToVoltageDDR5(spdStruct.voltageVPP);
+  if (spdStruct.voltageVPP == 0x00) {
+    return 180;
+  }
+
+  return 0;
 }
 
 void DDR5SPD::setVPP(const unsigned short vpp) {
-  spdStruct.voltageVPP = utilities::ConvertVoltageToByteDDR5(vpp);
+  if (vpp == 180) {
+    spdStruct.voltageVPP = 0x00;
+  }
 }
 
 const unsigned short DDR5SPD::getVDD() {
