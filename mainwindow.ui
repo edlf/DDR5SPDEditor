@@ -1932,6 +1932,9 @@
             </item>
             <item row="0" column="3">
              <widget class="QSpinBox" name="sbVDDQ_JEDEC">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="minimum">
                <number>110</number>
               </property>
@@ -1959,6 +1962,9 @@
             </item>
             <item row="0" column="1">
              <widget class="QSpinBox" name="sbVDD_JEDEC">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="minimum">
                <number>110</number>
               </property>

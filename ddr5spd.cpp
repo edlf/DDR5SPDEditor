@@ -690,19 +690,31 @@ void DDR5SPD::setVPP(const unsigned short vpp) {
 }
 
 const unsigned short DDR5SPD::getVDD() {
-  return utilities::ConvertByteToVoltageDDR5(spdStruct.voltageVDD);
+  if (spdStruct.voltageVDD == 0x00) {
+    return 110;
+  }
+
+  return 0;
 }
 
 void DDR5SPD::setVDD(const unsigned short vdd) {
-  spdStruct.voltageVDD = utilities::ConvertVoltageToByteDDR5(vdd);
+  if (vdd == 110) {
+    spdStruct.voltageVDD = 0x00;
+  }
 }
 
 const unsigned short DDR5SPD::getVDDQ() {
-  return utilities::ConvertByteToVoltageDDR5(spdStruct.voltageVDDQ);
+  if (spdStruct.voltageVDDQ == 0x00) {
+    return 110;
+  }
+
+  return 0;
 }
 
 void DDR5SPD::setVDDQ(const unsigned short vddq) {
-  spdStruct.voltageVDDQ = utilities::ConvertVoltageToByteDDR5(vddq);
+  if (vddq == 110) {
+    spdStruct.voltageVDDQ = 0x00;
+  }
 }
 
 const bool DDR5SPD::isStandardTimings() {
