@@ -225,4 +225,8 @@ unsigned char convert_to_date_byte(const unsigned short value) {
   return std::stoul(temp.c_str(), nullptr, 16);
 }
 
+unsigned int round_frequency(const unsigned int frequency) {
+  return frequency - (frequency % 100);
+}
+
 }  // namespace utilities

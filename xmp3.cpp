@@ -54,7 +54,8 @@ void XMP3_Profile::setMinCycleTime(const unsigned short value) {
 }
 
 const unsigned int XMP3_Profile::getFrequency() {
-  return static_cast<unsigned int>(1.0 / (getMinCycleTime() / 1000000.0));
+  unsigned int frequency = static_cast<unsigned int>(1.0 / (getMinCycleTime() / utilities::S10E6));
+  return utilities::round_frequency(frequency);
 }
 
 const unsigned int XMP3_Profile::getMT() {

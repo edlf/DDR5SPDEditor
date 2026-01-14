@@ -43,6 +43,8 @@ unsigned short convert_date_byte(const unsigned char);
 
 unsigned char convert_to_date_byte(const unsigned short);
 
+unsigned int round_frequency(const unsigned int frequency);
+
 }  // namespace utilities
 
 #endif  // UTILITIES_H

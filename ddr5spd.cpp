@@ -32,7 +32,8 @@ void DDR5SPD::setMaxCycleTime(const unsigned short value) {
 }
 
 const unsigned int DDR5SPD::getFrequency() {
-  return static_cast<unsigned int>(1.0 / (getMinCycleTime() / utilities::S10E6));
+  unsigned int frequency = static_cast<unsigned int>(1.0 / (getMinCycleTime() / utilities::S10E6));
+  return utilities::round_frequency(frequency);
 }
 
 const unsigned int DDR5SPD::getMT() {
